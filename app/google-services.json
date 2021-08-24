@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "122811210408",
+    "project_id": "cpp-fundamentals",
+    "storage_bucket": "cpp-fundamentals.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122811210408:android:98b02219fb1541445a809d",
+        "android_client_info": {
+          "package_name": "com.edpub.cpp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "122811210408-k5pi6eq0tmjc7mtu6f36rjkh5533b3k2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHcuT7bHyWBytFXjhi1QNgU3uBo4gxcgc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "122811210408-k5pi6eq0tmjc7mtu6f36rjkh5533b3k2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
