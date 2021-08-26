@@ -21,11 +21,4 @@ class FavouritesFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_favourites, container, false)
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FavouritesFragment().apply {
-
-            }
-    }
 }

@@ -23,12 +23,4 @@ class ExamplesFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_examples, container, false)
     }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() =
-            ExamplesFragment().apply {
-
-            }
-    }
 }

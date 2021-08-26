@@ -22,11 +22,4 @@ class ChaptersFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_chapters, container, false)
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance() =
-            ChaptersFragment().apply {
-
-            }
-    }
 }
