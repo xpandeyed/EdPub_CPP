@@ -56,9 +56,6 @@ class SignUpActivity : AppCompatActivity() {
         }
 
 
-
-
-
     }
     private fun registerUser(name:String, password:String, email:String) = CoroutineScope(Dispatchers.IO).launch{
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this@SignUpActivity) { task ->

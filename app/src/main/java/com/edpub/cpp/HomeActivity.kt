@@ -2,10 +2,37 @@ package com.edpub.cpp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        val homeFragment = HomeFragment()
+        val chaptersFragment = ChaptersFragment()
+        val examplesFragment = ExamplesFragment()
+        val favouritesFragment = FavouritesFragment()
+
+        setCurrentFragment(homeFragment)
+
+        val bnvHomeFragmentNavigator = findViewById<BottomNavigationView>(R.id.bnvHomeFragmentNavigator)
+        bnvHomeFragmentNavigator.setOnNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.miHome->{setCurrentFragment(homeFragment)}
+                R.id.miChapters->{setCurrentFragment(chaptersFragment)}
+                R.id.miExamples->{setCurrentFragment(examplesFragment)}
+                R.id.miFavourites->{setCurrentFragment(favouritesFragment)}
+            }
+            true
+        }
     }
+    private fun setCurrentFragment(fragment: Fragment){
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.flFragmentContainer, fragment)
+            commit()
+        }
+    }
+
 }
