@@ -10,16 +10,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CFundamentals">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ExampleActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ChapterActivity"
+            android:exported="true" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true"
-            android:noHistory="true"/>
+            android:noHistory="true" />
         <activity
             android:name=".HomeActivity"
             android:exported="true" />
         <activity
             android:name=".SignUpActivity"
             android:exported="true"
-            android:noHistory="true"/>
+            android:noHistory="true" />
         <activity
             android:name=".LauncherActivity"
             android:exported="true"
