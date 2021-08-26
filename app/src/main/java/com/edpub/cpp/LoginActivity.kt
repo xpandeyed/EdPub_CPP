@@ -29,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
             }
             else
             {
-
+                logIn(etEmail.text.toString(), etPassword.text.toString())
             }
         }
 

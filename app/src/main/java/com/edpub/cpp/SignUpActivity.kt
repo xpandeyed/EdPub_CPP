@@ -48,6 +48,17 @@ class SignUpActivity : AppCompatActivity() {
                 registerUser(etUserName.text.toString(), etPasswordOne.text.toString(), etUserEmail.text.toString())
             }
         }
+
+        val bToLoginScreen = findViewById<Button>(R.id.bToLogInScreen)
+        bToLoginScreen.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
+
+
+
+
+
     }
     private fun registerUser(name:String, password:String, email:String) = CoroutineScope(Dispatchers.IO).launch{
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this@SignUpActivity) { task ->
