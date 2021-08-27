@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/ablHomeScreenAppBar"
         android:layout_width="match_parent"
@@ -12,9 +13,11 @@
         android:elevation="4dp"
         app:layout_constraintTop_toTopOf="parent">
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tbHomeToolBar"
             app:title="@string/app_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:menu="@menu/home_activity_appbar"
             android:background="@color/white"/>
     </com.google.android.material.appbar.AppBarLayout>
 
