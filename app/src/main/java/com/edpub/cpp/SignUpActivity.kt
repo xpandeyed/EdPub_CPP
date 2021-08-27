@@ -49,12 +49,6 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
 
-        val bToLoginScreen = findViewById<Button>(R.id.bToLogInScreen)
-        bToLoginScreen.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }
-
 
     }
     private fun registerUser(name:String, password:String, email:String) = CoroutineScope(Dispatchers.IO).launch{

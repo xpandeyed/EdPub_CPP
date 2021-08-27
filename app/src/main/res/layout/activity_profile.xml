@@ -6,4 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/ablProfileScreenAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        app:layout_constraintTop_toTopOf="parent">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tbHomeToolBar"
+            app:title="Profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

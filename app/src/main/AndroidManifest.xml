@@ -11,7 +11,12 @@
         android:theme="@style/Theme.CFundamentals">
         <activity
             android:name=".ProfileActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
         <activity
             android:name=".ExampleActivity"
             android:exported="true" />

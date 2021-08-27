@@ -70,13 +70,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPasswordTwo" />
 
-    <Button
-        android:id="@+id/bToLogInScreen"
-        android:layout_width="wrap_content"
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Log in"
-        app:layout_constraintBaseline_toBaselineOf="@+id/bSignUp"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginTop="20dp"
+        android:textSize="16sp"
+        android:text="Already a learner on EdPub. Log In."
+        app:layout_constraintTop_toBottomOf="@+id/bSignUp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
