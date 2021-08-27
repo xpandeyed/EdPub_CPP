@@ -24,6 +24,5 @@ class LauncherActivity : AppCompatActivity() {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
-
     }
 }
