@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -49,6 +50,10 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
 
+        findViewById<TextView>(R.id.tvToLoginScreen).setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
 
     }
     private fun registerUser(name:String, password:String, email:String) = CoroutineScope(Dispatchers.IO).launch{
