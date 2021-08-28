@@ -40,13 +40,11 @@ class LauncherActivity : AppCompatActivity() {
         }
 
         val auth: FirebaseAuth = Firebase.auth
-        if(auth.currentUser==null)
-        {
+        if(auth.currentUser==null) {
             val intent = Intent(this@LauncherActivity, SignUpActivity::class.java)
             startActivity(intent)
         }
-        else
-        {
+        else {
             val intent = Intent(this@LauncherActivity, HomeActivity::class.java)
             startActivity(intent)
         }
