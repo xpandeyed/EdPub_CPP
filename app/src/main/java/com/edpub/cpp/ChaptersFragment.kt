@@ -28,7 +28,6 @@ class ChaptersFragment : Fragment() {
         rvChapters.layoutManager = LinearLayoutManager(activity)
         val adapter = ChapterRVAdapter(ObjectsCollection.chaptersList)
         rvChapters.adapter = adapter
-        rvChapters.setHasFixedSize(true)
         adapter.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
                 val title = ObjectsCollection.chaptersList[position].TITLE

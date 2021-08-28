@@ -20,7 +20,6 @@ class LauncherActivity : AppCompatActivity() {
 
 
         CoroutineScope(Dispatchers.IO).launch {
-            async{
                 val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("CHAPTERS")
                 databaseReference.addValueEventListener(object: ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
@@ -35,7 +34,6 @@ class LauncherActivity : AppCompatActivity() {
                         Toast.makeText(this@LauncherActivity, "$error", Toast.LENGTH_SHORT).show()
                     }
                 })
-            }.await()
             val auth: FirebaseAuth = Firebase.auth
             if(auth.currentUser==null)
             {
@@ -48,9 +46,5 @@ class LauncherActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-
-
-
-
     }
 }

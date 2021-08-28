@@ -10,8 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CFundamentals">
         <activity
+            android:parentActivityName=".HomeActivity"
             android:name=".ProfileActivity"
-            android:exported="true"/>
+            android:launchMode="singleInstance"
+            android:exported="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity"/>
+        </activity>
         <activity
             android:name=".ExampleActivity"
             android:exported="true" />
@@ -23,6 +29,7 @@
             android:exported="true"
             android:noHistory="true" />
         <activity
+            android:launchMode="singleInstance"
             android:name=".HomeActivity"
             android:exported="true" />
         <activity
