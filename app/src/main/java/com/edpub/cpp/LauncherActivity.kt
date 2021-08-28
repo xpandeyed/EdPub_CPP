@@ -18,7 +18,6 @@ class LauncherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_launcher)
 
-
         CoroutineScope(Dispatchers.IO).launch {
                 val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("CHAPTERS")
                 databaseReference.addValueEventListener(object: ValueEventListener {
