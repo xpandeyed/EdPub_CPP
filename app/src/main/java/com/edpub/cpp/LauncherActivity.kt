@@ -16,8 +16,6 @@ import kotlinx.coroutines.launch
 class LauncherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_launcher)
-
         if(!ObjectsCollection.isDataLoaded){
             ObjectsCollection.isDataLoaded = true
             CoroutineScope(Dispatchers.IO).launch {
@@ -48,5 +46,6 @@ class LauncherActivity : AppCompatActivity() {
             val intent = Intent(this@LauncherActivity, HomeActivity::class.java)
             startActivity(intent)
         }
+        setContentView(R.layout.activity_launcher)
     }
 }
