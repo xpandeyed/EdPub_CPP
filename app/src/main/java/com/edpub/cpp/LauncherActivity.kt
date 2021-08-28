@@ -18,7 +18,9 @@ class LauncherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_launcher)
 
-        CoroutineScope(Dispatchers.IO).launch {
+        if(!ObjectsCollection.isDataLoaded){
+            ObjectsCollection.isDataLoaded = true
+            CoroutineScope(Dispatchers.IO).launch {
                 val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("CHAPTERS")
                 databaseReference.addValueEventListener(object: ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
@@ -30,20 +32,23 @@ class LauncherActivity : AppCompatActivity() {
                         }
                     }
                     override fun onCancelled(error: DatabaseError) {
+                        ObjectsCollection.isDataLoaded= false
                         Toast.makeText(this@LauncherActivity, "$error", Toast.LENGTH_SHORT).show()
                     }
                 })
-            val auth: FirebaseAuth = Firebase.auth
-            if(auth.currentUser==null)
-            {
-                val intent = Intent(this@LauncherActivity, SignUpActivity::class.java)
-                startActivity(intent)
             }
-            else
-            {
-                val intent = Intent(this@LauncherActivity, HomeActivity::class.java)
-                startActivity(intent)
-            }
+        }
+
+        val auth: FirebaseAuth = Firebase.auth
+        if(auth.currentUser==null)
+        {
+            val intent = Intent(this@LauncherActivity, SignUpActivity::class.java)
+            startActivity(intent)
+        }
+        else
+        {
+            val intent = Intent(this@LauncherActivity, HomeActivity::class.java)
+            startActivity(intent)
         }
     }
 }
