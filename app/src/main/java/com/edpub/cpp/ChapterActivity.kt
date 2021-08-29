@@ -1,18 +1,19 @@
 package com.edpub.cpp
 
-import android.graphics.Color.red
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
+
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
-import com.google.firebase.auth.FirebaseAuth
+
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.FirebaseDatabase
+
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -40,9 +41,14 @@ class ChapterActivity : AppCompatActivity() {
         else{
             DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.browser_actions_bg_grey))
         }
-
+        /* when chapter is added to favourites the chapter key is added twice to the favouriteChapterList.
+        * that is why we are removing the key twice
+        * reason of chapter being added twice is not known.
+        * Don't delete this comment until problem is not solved.*/
         ivFavourites.setOnClickListener {
-            if(ObjectsCollection.favouriteChaptersList.contains(key)){
+            if(ObjectsCollection.favouriteChaptersList.indexOf(key)!=-1){
+                Toast.makeText(this, "${ObjectsCollection.favouriteChaptersList}", Toast.LENGTH_SHORT).show()
+                ObjectsCollection.favouriteChaptersList.remove(key)
                 ObjectsCollection.favouriteChaptersList.remove(key)
                 val database = Firebase.database
                 val myRef = database.getReference("USERS")
@@ -50,6 +56,7 @@ class ChapterActivity : AppCompatActivity() {
                 DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.browser_actions_bg_grey))
             }
             else{
+                Toast.makeText(this, "${ObjectsCollection.favouriteChaptersList}", Toast.LENGTH_SHORT).show()
                 ObjectsCollection.favouriteChaptersList.add(key!!)
                 val database = Firebase.database
                 val myRef = database.getReference("USERS")

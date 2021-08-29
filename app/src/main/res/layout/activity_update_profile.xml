@@ -20,4 +20,30 @@
             android:background="@color/white"/>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <Button
+        android:id="@+id/bToChangeName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:layout_constraintTop_toBottomOf="@id/ablUpdateProfileScreenAppBar"
+        android:text="Change Name"/>
+    <Button
+        android:id="@+id/bToChangePassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:layout_constraintTop_toBottomOf="@id/bToChangeName"
+        android:text="Change Password"/>
+    <Button
+        android:id="@+id/bToDeleteAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:layout_constraintTop_toBottomOf="@id/bToChangePassword"
+        android:text="Delete Account"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
