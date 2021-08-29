@@ -4,4 +4,6 @@ object ObjectsCollection {
     var isDataLoaded = false
     var chaptersList = arrayListOf<Chapter>()
     var examplesList = arrayListOf<Example>()
+    var favouriteChaptersList = arrayListOf<String>()
+    var favouriteExamplesList = arrayListOf<String>()
 }

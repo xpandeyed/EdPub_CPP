@@ -16,6 +16,10 @@ import kotlinx.coroutines.launch
 class LauncherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val auth: FirebaseAuth = Firebase.auth
+
+
         if(!ObjectsCollection.isDataLoaded){
             ObjectsCollection.isDataLoaded = true
             CoroutineScope(Dispatchers.IO).launch {
@@ -35,9 +39,25 @@ class LauncherActivity : AppCompatActivity() {
                     }
                 })
             }
+            CoroutineScope(Dispatchers.IO).launch {
+                val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("USERS")
+                val favChapterReference = databaseReference.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP")
+                favChapterReference.addValueEventListener(object: ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if(snapshot.exists()){
+                            for(chapter in snapshot.children){
+                                val currChapter = chapter.getValue(String::class.java)
+                                ObjectsCollection.favouriteChaptersList.add(currChapter!!)
+                            }
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                        ObjectsCollection.isDataLoaded= false
+                        Toast.makeText(this@LauncherActivity, "$error", Toast.LENGTH_SHORT).show()
+                    }
+                })
+            }
         }
-
-        val auth: FirebaseAuth = Firebase.auth
         if(auth.currentUser==null) {
             val intent = Intent(this@LauncherActivity, SignUpActivity::class.java)
             startActivity(intent)

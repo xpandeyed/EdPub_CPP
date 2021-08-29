@@ -36,10 +36,10 @@ class SignUpActivity : AppCompatActivity() {
 
         val bSignUp = findViewById<Button>(R.id.bSignUp)
 
-        val etUserName= findViewById<EditText>(R.id.etUserName)
+        val etUserName = findViewById<EditText>(R.id.etUserName)
         val etUserEmail = findViewById<EditText>(R.id.etUserEmail)
-        val etPasswordOne= findViewById<EditText>(R.id.etPasswordOne)
-        val etPasswordTwo= findViewById<EditText>(R.id.etPasswordTwo)
+        val etPasswordOne = findViewById<EditText>(R.id.etPasswordOne)
+        val etPasswordTwo = findViewById<EditText>(R.id.etPasswordTwo)
 
         bSignUp.setOnClickListener {
             if(etUserName.text.toString().isEmpty() || etUserEmail.text.toString().isEmpty() || etPasswordOne.text.toString().isEmpty() || etPasswordTwo.text.toString().isEmpty())
