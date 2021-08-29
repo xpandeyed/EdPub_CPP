@@ -10,17 +10,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CFundamentals">
         <activity
-            android:name=".ProfileActivity"
-            android:parentActivityName=".HomeActivity"
-            android:launchMode="singleInstance"
-            android:exported="true">
+            android:parentActivityName=".ProfileActivity"
+            android:name=".UpdateProfileActivity"
+            android:exported="true" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity"/>
+                android:value=".ProfileActivity" />
+        </activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="true"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
         </activity>
         <activity
             android:name=".ExampleActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ChapterActivity"
             android:exported="true" />
@@ -29,9 +37,9 @@
             android:exported="true"
             android:noHistory="true" />
         <activity
-            android:launchMode="singleInstance"
             android:name=".HomeActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:launchMode="singleInstance" />
         <activity
             android:name=".SignUpActivity"
             android:exported="true"

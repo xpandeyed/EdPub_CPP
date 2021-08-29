@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 
@@ -11,6 +12,11 @@ class ChapterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chapter)
+        findViewById<TextView>(R.id.tvTitle).text = intent.getStringExtra("TITLE")
+        findViewById<TextView>(R.id.tvChapterText).text = intent.getStringExtra("TEXT")
+        findViewById<TextView>(R.id.tvCode).text = intent.getStringExtra("CODE")
+
+
         val ivShare = findViewById<ImageView>(R.id.ivShare)
         ivShare.setOnClickListener {
             Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show()
