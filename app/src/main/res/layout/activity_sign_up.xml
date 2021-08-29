@@ -76,9 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:textSize="16sp"
-        android:text="Already a learner on EdPub. Log In."
-        android:textColor="@color/purple_200"
-        android:clickable="true"
+        android:textColorLink="@color/purple_200"
         app:layout_constraintTop_toBottomOf="@+id/bSignUp" />
 
 

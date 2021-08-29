@@ -3,6 +3,12 @@ package com.edpub.cpp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -50,10 +56,21 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
 
-        findViewById<TextView>(R.id.tvToLoginScreen).setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+        val tvToLoginScreen = findViewById<TextView>(R.id.tvToLoginScreen)
+        val clickableSpan = object : ClickableSpan(){
+            override fun onClick(p0: View) {
+                val intent = Intent(this@SignUpActivity, LoginActivity::class.java)
+                startActivity(intent)
+            }
+            override fun updateDrawState(ds: TextPaint) {
+                ds.isUnderlineText = false
+                ds.color = ds.linkColor
+            }
         }
+        val logInMessage = SpannableString("Already a user. Log In.")
+        logInMessage.setSpan(clickableSpan,16, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE )
+        tvToLoginScreen.setText(logInMessage, TextView.BufferType.SPANNABLE)
+        tvToLoginScreen.movementMethod = LinkMovementMethod.getInstance()
 
     }
     private fun registerUser(name:String, password:String, email:String) = CoroutineScope(Dispatchers.IO).launch{
