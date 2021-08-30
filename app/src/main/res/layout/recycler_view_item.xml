@@ -8,14 +8,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp">
+        android:padding="0dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvRVItem"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:elevation="0dp"
             android:layout_marginLeft="16dp"
-            app:cardBackgroundColor="@color/purple_200"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:cardBackgroundColor="@color/light_blue_background"
             app:cardCornerRadius="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

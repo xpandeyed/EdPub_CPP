@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:padding="20dp"
+    android:background="@color/major_background"
     android:layout_height="match_parent"
     tools:context=".SignUpActivity">
 
@@ -63,6 +64,7 @@
         android:id="@+id/bSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:text="Sign Up"
         android:minHeight="48dp"
@@ -76,6 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:textSize="16sp"
+        android:text="Go to Log In."
         android:textColorLink="@color/purple_200"
         app:layout_constraintTop_toBottomOf="@+id/bSignUp" />
 

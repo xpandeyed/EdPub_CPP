@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CFundamentals">
         <activity
+            android:launchMode="singleInstance"
             android:parentActivityName=".ProfileActivity"
             android:name=".UpdateProfileActivity"
             android:exported="true" >
@@ -27,30 +28,37 @@
                 android:value=".HomeActivity" />
         </activity>
         <activity
+            android:launchMode="singleInstance"
             android:name=".ExampleActivity"
             android:exported="true" />
         <activity
+            android:launchMode="singleInstance"
             android:name=".ChapterActivity"
             android:exported="true" />
         <activity
+            android:clearTaskOnLaunch="true"
+            android:launchMode="singleInstance"
             android:name=".LoginActivity"
             android:exported="true"
             android:noHistory="true" />
         <activity
             android:name=".HomeActivity"
             android:exported="true"
+            android:rotationAnimation=""
             android:launchMode="singleInstance" />
         <activity
+            android:clearTaskOnLaunch="true"
+            android:launchMode="singleInstance"
             android:name=".SignUpActivity"
             android:exported="true"
             android:noHistory="true" />
         <activity
+            android:clearTaskOnLaunch="true"
             android:name=".LauncherActivity"
             android:exported="true"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
