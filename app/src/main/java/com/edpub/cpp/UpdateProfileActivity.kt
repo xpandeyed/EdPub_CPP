@@ -53,10 +53,12 @@ class UpdateProfileActivity : AppCompatActivity() {
 
 
         findViewById<Button>(R.id.bToChangeName).setOnClickListener {
-
+            val intent = Intent(this, ChangeNameActivity::class.java)
+            startActivity(intent)
         }
         findViewById<Button>(R.id.bToChangePassword).setOnClickListener {
-
+            val intent = Intent(this, ChangePasswordActivity::class.java)
+            startActivity(intent)
         }
         findViewById<Button>(R.id.bToDeleteAccount).setOnClickListener {
             deleteAlertDialogBox.show()

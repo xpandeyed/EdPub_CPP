@@ -10,9 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CFundamentals">
         <activity
-            android:parentActivityName=".ProfileActivity"
+            android:name=".ChangeNameActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:exported="true"
+            android:parentActivityName=".UpdateProfileActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".UpdateProfileActivity" />
+        </activity>
+        <activity
             android:name=".UpdateProfileActivity"
-            android:exported="true" >
+            android:exported="true"
+            android:parentActivityName=".ProfileActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ProfileActivity" />
@@ -29,29 +40,30 @@
             android:name=".ExampleActivity"
             android:exported="true" />
         <activity
-            android:launchMode="singleInstance"
             android:name=".ChapterActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:launchMode="singleInstance" />
         <activity
-            android:clearTaskOnLaunch="true"
             android:name=".LoginActivity"
+            android:clearTaskOnLaunch="true"
             android:exported="true"
             android:noHistory="true" />
         <activity
             android:name=".HomeActivity"
             android:exported="true" />
         <activity
-            android:clearTaskOnLaunch="true"
             android:name=".SignUpActivity"
+            android:clearTaskOnLaunch="true"
             android:exported="true"
             android:noHistory="true" />
         <activity
-            android:clearTaskOnLaunch="true"
             android:name=".LauncherActivity"
+            android:clearTaskOnLaunch="true"
             android:exported="true"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
