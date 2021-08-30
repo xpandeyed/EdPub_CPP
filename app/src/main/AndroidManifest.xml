@@ -44,7 +44,6 @@
         <activity
             android:name=".HomeActivity"
             android:exported="true"
-            android:rotationAnimation=""
             android:launchMode="singleInstance" />
         <activity
             android:clearTaskOnLaunch="true"

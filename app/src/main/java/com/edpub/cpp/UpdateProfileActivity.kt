@@ -42,7 +42,6 @@ class UpdateProfileActivity : AppCompatActivity() {
         findViewById<Button>(R.id.bLogOut).setOnClickListener {
             Firebase.auth.signOut()
             val intent = Intent(this, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
             startActivity(intent)
         }
 
