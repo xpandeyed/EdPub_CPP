@@ -26,6 +26,7 @@ class UpdateProfileActivity : AppCompatActivity() {
                             if (task.isSuccessful) {
                                 Toast.makeText(this@UpdateProfileActivity, "We are sad to see you going.", Toast.LENGTH_LONG).show()
                                 val intent = Intent(this@UpdateProfileActivity, SignUpActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 startActivity(intent)
                             }
                             else{
@@ -41,7 +42,12 @@ class UpdateProfileActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.bLogOut).setOnClickListener {
             Firebase.auth.signOut()
+            /*as soon as the user signs out we must clear the favourites list
+            * because if there are some elements in list and users logs in immediately
+            * the previously fetched data will be there and new data will be added
+            * this will cause trouble*/
             val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
 
