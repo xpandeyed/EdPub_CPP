@@ -17,8 +17,8 @@ class ChapterRVAdapter(private var chaptersList : ArrayList<Chapter>) : Recycler
         mListener = listener
     }
     class ViewHolder(itemView : View, listener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
-        var tvIndex:TextView = itemView.findViewById<TextView>(R.id.tvIndex)
-        var tvTitle:TextView = itemView.findViewById<TextView>(R.id.tvTitle)
+        var tvIndex:TextView = itemView.findViewById(R.id.tvIndex)
+        var tvTitle:TextView = itemView.findViewById(R.id.tvTitle)
         init {
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)

@@ -39,7 +39,7 @@ class ChapterActivity : AppCompatActivity() {
             DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.purple_200))
         }
         else{
-            DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.browser_actions_bg_grey))
+            DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
         }
         /* when chapter is added to favourites the chapter key is added twice to the favouriteChapterList.
         * that is why we are removing the key twice
@@ -47,16 +47,14 @@ class ChapterActivity : AppCompatActivity() {
         * Don't delete this comment until problem is not solved.*/
         ivFavourites.setOnClickListener {
             if(ObjectsCollection.favouriteChaptersList.indexOf(key)!=-1){
-                Toast.makeText(this, "${ObjectsCollection.favouriteChaptersList}", Toast.LENGTH_SHORT).show()
                 ObjectsCollection.favouriteChaptersList.remove(key)
                 ObjectsCollection.favouriteChaptersList.remove(key)
                 val database = Firebase.database
                 val myRef = database.getReference("USERS")
                 myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP").child(key!!).setValue(null)
-                DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.browser_actions_bg_grey))
+                DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
             }
             else{
-                Toast.makeText(this, "${ObjectsCollection.favouriteChaptersList}", Toast.LENGTH_SHORT).show()
                 ObjectsCollection.favouriteChaptersList.add(key!!)
                 val database = Firebase.database
                 val myRef = database.getReference("USERS")

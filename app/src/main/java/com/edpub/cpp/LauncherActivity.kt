@@ -21,7 +21,6 @@ class LauncherActivity : AppCompatActivity() {
 
 
         if(!ObjectsCollection.isDataLoaded){
-            ObjectsCollection.isDataLoaded = true
             CoroutineScope(Dispatchers.IO).launch {
                 val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("CHAPTERS")
                 databaseReference.addValueEventListener(object: ValueEventListener {
@@ -32,6 +31,7 @@ class LauncherActivity : AppCompatActivity() {
                                 ObjectsCollection.chaptersList.add(currChapter!!)
                             }
                         }
+                        ObjectsCollection.isDataLoaded = true
                     }
                     override fun onCancelled(error: DatabaseError) {
                         ObjectsCollection.isDataLoaded= false
@@ -39,6 +39,13 @@ class LauncherActivity : AppCompatActivity() {
                     }
                 })
             }
+        }
+        if(auth.currentUser==null) {
+            val intent = Intent(this@LauncherActivity, SignUpActivity::class.java)
+            startActivity(intent)
+        }
+        else {
+
             CoroutineScope(Dispatchers.IO).launch {
                 val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("USERS")
                 val favChapterReference = databaseReference.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP")
@@ -54,15 +61,10 @@ class LauncherActivity : AppCompatActivity() {
                     override fun onCancelled(error: DatabaseError) {
                         ObjectsCollection.isDataLoaded= false
                         Toast.makeText(this@LauncherActivity, "$error", Toast.LENGTH_SHORT).show()
+                        //error toast is never shown, reason unknown!!
                     }
-                })
-            }
-        }
-        if(auth.currentUser==null) {
-            val intent = Intent(this@LauncherActivity, SignUpActivity::class.java)
-            startActivity(intent)
-        }
-        else {
+                })}
+
             val intent = Intent(this@LauncherActivity, HomeActivity::class.java)
             startActivity(intent)
         }
