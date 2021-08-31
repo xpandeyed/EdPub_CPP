@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CFundamentals">
         <activity
+            android:name=".DeleteAccountActivity"
+            android:exported="true" />
+        <activity
             android:name=".ChangeNameActivity"
             android:exported="true" />
         <activity

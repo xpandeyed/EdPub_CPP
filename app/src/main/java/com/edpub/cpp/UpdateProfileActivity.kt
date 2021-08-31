@@ -21,18 +21,7 @@ class UpdateProfileActivity : AppCompatActivity() {
             .setTitle("Are you sure you want to delete your account?")
             .setMessage("Deleting your account will delete all of your data stored with us.")
             .setPositiveButton("Delete Account") { _, _ ->
-                    Firebase.auth.currentUser!!.delete()
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                Toast.makeText(this@UpdateProfileActivity, "We are sad to see you going.", Toast.LENGTH_LONG).show()
-                                val intent = Intent(this@UpdateProfileActivity, SignUpActivity::class.java)
-                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                startActivity(intent)
-                            }
-                            else{
-                                Toast.makeText(this@UpdateProfileActivity, "${task.exception?.message}", Toast.LENGTH_LONG).show()
-                            }
-                        }
+
 
             }
             .setNegativeButton("Cancel") { _, _ ->
@@ -61,7 +50,7 @@ class UpdateProfileActivity : AppCompatActivity() {
             startActivity(intent)
         }
         findViewById<Button>(R.id.bToDeleteAccount).setOnClickListener {
-            deleteAlertDialogBox.show()
+
         }
     }
 }
