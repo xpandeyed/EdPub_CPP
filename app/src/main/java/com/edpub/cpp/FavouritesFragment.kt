@@ -1,5 +1,6 @@
 package com.edpub.cpp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,12 +12,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 
 class FavouritesFragment : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-    }
-
-    override fun onCreateView(
+        override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
@@ -29,10 +26,42 @@ class FavouritesFragment : Fragment() {
         val adapterChapters = ChapterRVAdapter(ObjectsCollection.chaptersList)
         val adapterExamples = ChapterRVAdapter(ObjectsCollection.chaptersList)
 
+        adapterChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
+            override fun onItemClick(position: Int) {
+                val title = ObjectsCollection.chaptersList[position].TITLE
+                val text = ObjectsCollection.chaptersList[position].TEXT
+                val code = ObjectsCollection.chaptersList[position].CODE
+                val key = ObjectsCollection.chaptersList[position].KEY
+                val intent = Intent(activity, ChapterActivity::class.java).apply {
+                    putExtra("TITLE", title)
+                    putExtra("TEXT", text)
+                    putExtra("CODE", code)
+                    putExtra("KEY", key)
+                }
+                startActivity(intent)
+            }
+        })
+        adapterExamples.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
+            override fun onItemClick(position: Int) {
+                val title = ObjectsCollection.chaptersList[position].TITLE
+                val text = ObjectsCollection.chaptersList[position].TEXT
+                val code = ObjectsCollection.chaptersList[position].CODE
+                val key = ObjectsCollection.chaptersList[position].KEY
+                val intent = Intent(activity, ChapterActivity::class.java).apply {
+                    putExtra("TITLE", title)
+                    putExtra("TEXT", text)
+                    putExtra("CODE", code)
+                    putExtra("KEY", key)
+                }
+                startActivity(intent)
+            }
+        })
+
+
         val adapterList  = listOf(adapterChapters, adapterExamples)
-        val adapter = FavouritesAdapterViewPager(adapterList)
+        val viewPagerAdapter = FavouritesAdapterViewPager(adapterList)
         val viewPager = view.findViewById<ViewPager2>(R.id.vp2Favourites)
-        viewPager.adapter = adapter
+        viewPager.adapter = viewPagerAdapter
 
 
         val tabLayout = view.findViewById<TabLayout>(R.id.tlFavourites)
