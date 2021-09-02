@@ -48,6 +48,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 android:text="Name"/>
             <TextView
+                android:id="@+id/tvEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
@@ -69,13 +70,13 @@
         app:layout_constraintTop_toBottomOf="@+id/cvUserDetails"
         android:textSize="16sp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:text="About"/>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/tvAbout"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="15dp">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">

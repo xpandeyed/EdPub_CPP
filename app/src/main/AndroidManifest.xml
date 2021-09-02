@@ -13,9 +13,6 @@
             android:name=".DeleteAccountActivity"
             android:exported="true" />
         <activity
-            android:name=".ChangeNameActivity"
-            android:exported="true" />
-        <activity
             android:name=".UpdateProfileActivity"
             android:exported="true"
             android:parentActivityName=".ProfileActivity">

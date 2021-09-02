@@ -6,27 +6,29 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthCredential
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
+
+
 class UpdateProfileActivity : AppCompatActivity() {
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_profile)
         setSupportActionBar(findViewById(R.id.tbUpdateProfileToolBar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val deleteAlertDialogBox = AlertDialog.Builder(this)
-            .setTitle("Are you sure you want to delete your account?")
-            .setMessage("Deleting your account will delete all of your data stored with us.")
-            .setPositiveButton("Delete Account") { _, _ ->
-
-
-            }
-            .setNegativeButton("Cancel") { _, _ ->
-                Toast.makeText(this, "Account deletion cancelled.", Toast.LENGTH_SHORT).show()
-            }.create()
 
 
         findViewById<Button>(R.id.bLogOut).setOnClickListener {
@@ -41,7 +43,9 @@ class UpdateProfileActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.bToDeleteAccount).setOnClickListener {
-
+            val intent = Intent(this, DeleteAccountActivity::class.java)
+            startActivity(intent)
         }
     }
+
 }
