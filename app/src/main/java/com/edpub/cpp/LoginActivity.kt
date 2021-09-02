@@ -40,23 +40,7 @@ class LoginActivity : AppCompatActivity() {
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this@LoginActivity){task->
             if(task.isSuccessful)
             {
-                CoroutineScope(Dispatchers.IO).launch {
-                    val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("USERS")
-                    val favChapterReference = databaseReference.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP")
-                    favChapterReference.addValueEventListener(object: ValueEventListener {
-                        override fun onDataChange(snapshot: DataSnapshot) {
-                            if(snapshot.exists()){
-                                for(chapter in snapshot.children){
-                                    val currChapter = chapter.getValue(String::class.java)
-                                    ObjectsCollection.favouriteChaptersList.add(currChapter!!)
-                                }
-                            }
-                        }
-                        override fun onCancelled(error: DatabaseError) {
-                            ObjectsCollection.isDataLoaded= false
-                            Toast.makeText(this@LoginActivity, "$error", Toast.LENGTH_SHORT).show()
-                        }
-                    })}
+
 
                 val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                 startActivity(intent)

@@ -13,77 +13,109 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+
+private const val RC_SIGN_IN = 0
 
 class SignUpActivity : AppCompatActivity() {
 
-    private lateinit var firebaseAuth : FirebaseAuth
-
-    private val database = Firebase.database
-    private val myRef = database.getReference("USERS")
+    private lateinit var auth: FirebaseAuth
+    private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
-        firebaseAuth = Firebase.auth
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.web_client_id))
+            .requestEmail()
+            .build()
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+        auth = FirebaseAuth.getInstance()
 
-        val bSignUp = findViewById<Button>(R.id.bSignUp)
-
-        val etUserName = findViewById<EditText>(R.id.etUserName)
-        val etUserEmail = findViewById<EditText>(R.id.etUserEmail)
-        val etPasswordOne = findViewById<EditText>(R.id.etPasswordOne)
-        val etPasswordTwo = findViewById<EditText>(R.id.etPasswordTwo)
-
-        bSignUp.setOnClickListener {
-            if(etUserName.text.toString().isEmpty() || etUserEmail.text.toString().isEmpty() || etPasswordOne.text.toString().isEmpty() || etPasswordTwo.text.toString().isEmpty())
-            {
-                Toast.makeText(this, "Any of the fields can not be empty.", Toast.LENGTH_SHORT).show()
-            }
-            else if(etPasswordOne.text.toString()!=etPasswordTwo.text.toString())
-            {
-                Toast.makeText(this, "Passwords do no match.", Toast.LENGTH_SHORT).show()
-            }
-            else
-            {
-                registerUser(etUserName.text.toString(), etPasswordOne.text.toString(), etUserEmail.text.toString())
-            }
+        val cvSignIn = findViewById<CardView>(R.id.cvSignIn)
+        cvSignIn.setOnClickListener {
+            signIn()
         }
-
-        val tvToLoginScreen = findViewById<TextView>(R.id.tvToLoginScreen)
-        val clickableSpan = object : ClickableSpan(){
-            override fun onClick(p0: View) {
-                val intent = Intent(this@SignUpActivity, LoginActivity::class.java)
-                startActivity(intent)
-            }
-            override fun updateDrawState(ds: TextPaint) {
-                ds.isUnderlineText = false
-                ds.color = ds.linkColor
-            }
-        }
-        val logInMessage = SpannableString("Already a user. Log In.")
-        logInMessage.setSpan(clickableSpan,16, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE )
-        tvToLoginScreen.setText(logInMessage, TextView.BufferType.SPANNABLE)
-        tvToLoginScreen.movementMethod = LinkMovementMethod.getInstance()
 
     }
-    private fun registerUser(name:String, password:String, email:String) = CoroutineScope(Dispatchers.IO).launch{
-        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this@SignUpActivity) { task ->
-            if (task.isSuccessful) {
-                val uidCurrUser = firebaseAuth.currentUser!!.uid
-                myRef.child(uidCurrUser).child("NAME").setValue(name)
-                myRef.child(uidCurrUser).child("EMAIL").setValue(email)
-                val intent = Intent(this@SignUpActivity, HomeActivity::class.java)
-                startActivity(intent)
+    private fun signIn() {
+        val signInIntent = googleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        CoroutineScope(Dispatchers.Main).launch {
+            super.onActivityResult(requestCode, resultCode, data)
+            if (requestCode == RC_SIGN_IN) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+                if(task.isSuccessful){
+                    try {
+                        val account = task.getResult(ApiException::class.java)!!
+                        Toast.makeText(this@SignUpActivity, "Authenticating with Google.", Toast.LENGTH_SHORT).show()
+                        firebaseAuthWithGoogle(account.idToken!!)
+                    } catch (e: ApiException) {
+                        Toast.makeText(this@SignUpActivity, "${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
             }
-            else {
-                Toast.makeText(this@SignUpActivity, "${task.exception?.message}", Toast.LENGTH_LONG).show()
+        }
+
+    }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this@SignUpActivity){ task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(
+                        this@SignUpActivity,
+                        "Sign in with credential is successful",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val user = auth.currentUser
+                        val uid = user?.uid
+                        val firebaseDatabase = FirebaseDatabase.getInstance().getReference("USERS")
+                        firebaseDatabase.child(uid!!).child("NAME").setValue(user.displayName)
+                        firebaseDatabase.child(uid).child("EMAIL").setValue(user.email)
+                            val favChapterReference = firebaseDatabase.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP")
+                            favChapterReference.addValueEventListener(object: ValueEventListener {
+                                override fun onDataChange(snapshot: DataSnapshot) {
+                                    if(snapshot.exists()){
+                                        for(chapter in snapshot.children){
+                                            val currChapter = chapter.getValue(String::class.java)
+                                            ObjectsCollection.favouriteChaptersList.add(currChapter!!)
+                                        }
+                                    }
+                                }
+                                override fun onCancelled(error: DatabaseError) {
+                                    ObjectsCollection.isDataLoaded= false
+                                    Toast.makeText(this@SignUpActivity, "$error", Toast.LENGTH_SHORT).show()
+                                }
+                            })
+                        val intent = Intent(this@SignUpActivity, HomeActivity::class.java)
+                        startActivity(intent)
+                    }
+                } else {
+                    Toast.makeText(this@SignUpActivity, "${task.exception}", Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
         }
     }
