@@ -35,20 +35,11 @@ class UpdateProfileActivity : AppCompatActivity() {
             * because if there are some elements in list and users logs in immediately
             * the previously fetched data will be there and new data will be added
             * this will cause trouble*/
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, SignUpActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
 
-
-        findViewById<Button>(R.id.bToChangeName).setOnClickListener {
-            val intent = Intent(this, ChangeNameActivity::class.java)
-            startActivity(intent)
-        }
-        findViewById<Button>(R.id.bToChangePassword).setOnClickListener {
-            val intent = Intent(this, ChangePasswordActivity::class.java)
-            startActivity(intent)
-        }
         findViewById<Button>(R.id.bToDeleteAccount).setOnClickListener {
 
         }

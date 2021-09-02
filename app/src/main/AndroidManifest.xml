@@ -16,14 +16,6 @@
             android:name=".ChangeNameActivity"
             android:exported="true" />
         <activity
-            android:name=".ChangePasswordActivity"
-            android:exported="true"
-            android:parentActivityName=".UpdateProfileActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".UpdateProfileActivity" />
-        </activity>
-        <activity
             android:name=".UpdateProfileActivity"
             android:exported="true"
             android:parentActivityName=".ProfileActivity">
@@ -46,11 +38,6 @@
             android:name=".ChapterActivity"
             android:exported="true"
             android:launchMode="singleInstance" />
-        <activity
-            android:name=".LoginActivity"
-            android:clearTaskOnLaunch="true"
-            android:exported="true"
-            android:noHistory="true" />
         <activity
             android:name=".HomeActivity"
             android:exported="true" />
