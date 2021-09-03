@@ -18,7 +18,6 @@ class LauncherActivity : AppCompatActivity() {
 
         val auth: FirebaseAuth = Firebase.auth
 
-
         if(!ObjectsCollection.isDataLoaded){
             CoroutineScope(Dispatchers.IO).launch {
                 val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("CHAPTERS")
@@ -44,26 +43,27 @@ class LauncherActivity : AppCompatActivity() {
             startActivity(intent)
         }
         else {
-
-            CoroutineScope(Dispatchers.IO).launch {
-                val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("USERS")
-                val favChapterReference = databaseReference.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP")
-                favChapterReference.addValueEventListener(object: ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        if(snapshot.exists()){
-                            for(chapter in snapshot.children){
-                                val currChapter = chapter.getValue(String::class.java)
-                                ObjectsCollection.favouriteChaptersList.add(currChapter!!)
+            if(!ObjectsCollection.isFavouriteChapterListLoaded){
+                CoroutineScope(Dispatchers.IO).launch {
+                    val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("USERS")
+                    val favChapterReference = databaseReference.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP")
+                    favChapterReference.addValueEventListener(object: ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            if(snapshot.exists()){
+                                for(chapter in snapshot.children){
+                                    val currChapter = chapter.getValue(String::class.java)
+                                    ObjectsCollection.favouriteChaptersList.add(currChapter!!)
+                                }
                             }
+                            ObjectsCollection.isFavouriteChapterListLoaded = true
                         }
-                    }
-                    override fun onCancelled(error: DatabaseError) {
-                        ObjectsCollection.isDataLoaded= false
-                        Toast.makeText(this@LauncherActivity, "$error", Toast.LENGTH_SHORT).show()
-                        //error toast is never shown, reason unknown!!
-                    }
-                })}
-
+                        override fun onCancelled(error: DatabaseError) {
+                            ObjectsCollection.isFavouriteChapterListLoaded= false
+                            Toast.makeText(this@LauncherActivity, "$error", Toast.LENGTH_SHORT).show()
+                            //error toast is never shown, reason unknown!!
+                        }
+                    })}
+            }
             val intent = Intent(this@LauncherActivity, HomeActivity::class.java)
             startActivity(intent)
         }
