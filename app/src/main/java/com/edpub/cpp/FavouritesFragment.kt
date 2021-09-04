@@ -31,30 +31,16 @@ class FavouritesFragment : Fragment() {
 
         adapterChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
-                val title = ObjectsCollection.chaptersList[position].TITLE
-                val text = ObjectsCollection.chaptersList[position].TEXT
-                val code = ObjectsCollection.chaptersList[position].CODE
-                val key = ObjectsCollection.chaptersList[position].KEY
                 val intent = Intent(activity, ChapterActivity::class.java).apply {
-                    putExtra("TITLE", title)
-                    putExtra("TEXT", text)
-                    putExtra("CODE", code)
-                    putExtra("KEY", key)
+                    putExtra("POSITION", position)
                 }
                 startActivity(intent)
             }
         })
         adapterExamples.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
-                val title = ObjectsCollection.chaptersList[position].TITLE
-                val text = ObjectsCollection.chaptersList[position].TEXT
-                val code = ObjectsCollection.chaptersList[position].CODE
-                val key = ObjectsCollection.chaptersList[position].KEY
                 val intent = Intent(activity, ChapterActivity::class.java).apply {
-                    putExtra("TITLE", title)
-                    putExtra("TEXT", text)
-                    putExtra("CODE", code)
-                    putExtra("KEY", key)
+                    putExtra("POSITION", position)
                 }
                 startActivity(intent)
             }

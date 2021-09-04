@@ -1,6 +1,7 @@
 package com.edpub.cpp
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import kotlinx.coroutines.*
 
@@ -19,27 +20,35 @@ object ObjectsCollection {
     var favouriteExamples = arrayListOf<Chapter>()
 
     fun copyFavChaptersFromChapters(context: Context) {
-        CoroutineScope(Dispatchers.Main).launch {
-            var counter = 9
-            while(counter>=0){
-                if (isDataLoaded && isFavouriteChapterKeysListLoaded) {
-                    var n = 0
-                    while (n < chaptersList.size){
-                        if (chaptersList[n].KEY == favouriteChapterKeysList[n]) {
-                            favouriteChapters.add(chaptersList[n])
+        if(!areFavouriteChaptersCopied) {
+            CoroutineScope(Dispatchers.Main).launch {
+                var counter = 9
+                while (counter >= 0) {
+                    if (isDataLoaded && isFavouriteChapterKeysListLoaded) {
+                        var n = 0
+                        while (n < chaptersList.size) {
+                            var index = favouriteChapterKeysList.indexOf(chaptersList[n].KEY)
+                            Log.i("FavouritesChapterKeysList", "${favouriteChapterKeysList}")
+                            if (index != -1) {
+                                favouriteChapters.add(chaptersList[n])
+                            }
+                            n++
                         }
-                        n++
+                        break
+                    } else {
+                        delay(500)
                     }
-                    break
+                    counter--
                 }
-                else{
-                    delay(500)
+                if (counter == -1) {
+                    Toast.makeText(
+                        context,
+                        "Time limit exceed.You can try again in a moment.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
-                counter--
-            }
-            if(counter==-1){
-                Toast.makeText(context, "Time limit exceed.You can try again in a moment.", Toast.LENGTH_SHORT).show()
             }
         }
+        areFavouriteChaptersCopied = true
     }
 }
