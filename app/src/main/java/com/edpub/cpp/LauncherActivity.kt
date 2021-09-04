@@ -43,7 +43,7 @@ class LauncherActivity : AppCompatActivity() {
             startActivity(intent)
         }
         else {
-            if(!ObjectsCollection.isFavouriteChapterListLoaded){
+            if(!ObjectsCollection.isFavouriteChapterKeysListLoaded){
                 CoroutineScope(Dispatchers.IO).launch {
                     val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("USERS")
                     val favChapterReference = databaseReference.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP")
@@ -52,13 +52,13 @@ class LauncherActivity : AppCompatActivity() {
                             if(snapshot.exists()){
                                 for(chapter in snapshot.children){
                                     val currChapter = chapter.getValue(String::class.java)
-                                    ObjectsCollection.favouriteChaptersList.add(currChapter!!)
+                                    ObjectsCollection.favouriteChapterKeysList.add(currChapter!!)
                                 }
                             }
-                            ObjectsCollection.isFavouriteChapterListLoaded = true
+                            ObjectsCollection.isFavouriteChapterKeysListLoaded = true
                         }
                         override fun onCancelled(error: DatabaseError) {
-                            ObjectsCollection.isFavouriteChapterListLoaded= false
+                            ObjectsCollection.isFavouriteChapterKeysListLoaded= false
                             Toast.makeText(this@LauncherActivity, "$error", Toast.LENGTH_SHORT).show()
                             //error toast is never shown, reason unknown!!
                         }

@@ -22,20 +22,23 @@ class ChapterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chapter)
 
-        findViewById<TextView>(R.id.tvTitle).text = intent.getStringExtra("TITLE")
-        findViewById<TextView>(R.id.tvChapterText).text = intent.getStringExtra("TEXT")
-        findViewById<TextView>(R.id.tvCode).text = intent.getStringExtra("CODE")
-        val key = intent.getStringExtra("KEY")
+        var position = intent.getIntExtra("POSITION", 0)
+        var key= ObjectsCollection.chaptersList[position].KEY
+        findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.chaptersList[position].TITLE
+        findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.chaptersList[position].TEXT
+        findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.chaptersList[position].CODE
 
         val ivShare = findViewById<ImageView>(R.id.ivShare)
         val ivFavourites = findViewById<ImageView>(R.id.ivFavourite)
         val bToNextChapter = findViewById<Button>(R.id.bToNextChapter)
 
+
+
         ivShare.setOnClickListener {
 
         }
 
-        if(ObjectsCollection.favouriteChaptersList.contains(key)){
+        if(ObjectsCollection.favouriteChapterKeysList.contains(key)){
             DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.purple_200))
         }
         else{
@@ -46,25 +49,33 @@ class ChapterActivity : AppCompatActivity() {
         * reason of chapter being added twice is not known.
         * Don't delete this comment until problem is not solved.*/
         ivFavourites.setOnClickListener {
-            if(ObjectsCollection.favouriteChaptersList.indexOf(key)!=-1){
-                ObjectsCollection.favouriteChaptersList.remove(key)
-                ObjectsCollection.favouriteChaptersList.remove(key)
+            if(ObjectsCollection.favouriteChapterKeysList.indexOf(key)!=-1){
+                ObjectsCollection.favouriteChapterKeysList.remove(key)
+                ObjectsCollection.favouriteChapterKeysList.remove(key)
                 val database = Firebase.database
                 val myRef = database.getReference("USERS")
                 myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP").child(key!!).setValue(null)
                 DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
             }
             else{
-                ObjectsCollection.favouriteChaptersList.add(key!!)
+                ObjectsCollection.favouriteChapterKeysList.add(key!!)
                 val database = Firebase.database
                 val myRef = database.getReference("USERS")
-                myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP").child(key).setValue(key)
+                myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP").child(key!!).setValue(key)
                 DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.purple_200))
             }
         }
-
         bToNextChapter.setOnClickListener {
-            Toast.makeText(this, "Next Chapter", Toast.LENGTH_SHORT).show()
+            if(position==ObjectsCollection.chaptersList.size-1){
+                Toast.makeText(this, "This is the last Chapter.", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                position += 1
+                key = ObjectsCollection.chaptersList[position].KEY
+                findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.chaptersList[position].TITLE
+                findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.chaptersList[position].TEXT
+                findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.chaptersList[position].CODE
+            }
         }
     }
 }

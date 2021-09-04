@@ -3,15 +3,6 @@ package com.edpub.cpp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.TextPaint
-import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -22,11 +13,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
-import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 private const val RC_SIGN_IN = 0
@@ -100,7 +89,7 @@ class SignUpActivity : AppCompatActivity() {
                                     if(snapshot.exists()){
                                         for(chapter in snapshot.children){
                                             val currChapter = chapter.getValue(String::class.java)
-                                            ObjectsCollection.favouriteChaptersList.add(currChapter!!)
+                                            ObjectsCollection.favouriteChapterKeysList.add(currChapter!!)
                                         }
                                     }
                                 }

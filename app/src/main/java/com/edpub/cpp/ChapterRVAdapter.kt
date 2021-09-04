@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class ChapterRVAdapter(private var chaptersList : ArrayList<Chapter>) : RecyclerView.Adapter<ChapterRVAdapter.ViewHolder>() {
+class ChapterRVAdapter(private var contentList : ArrayList<Chapter>) : RecyclerView.Adapter<ChapterRVAdapter.ViewHolder>() {
     private lateinit var mListener: OnItemClickListener
 
     interface OnItemClickListener{
@@ -32,12 +32,12 @@ class ChapterRVAdapter(private var chaptersList : ArrayList<Chapter>) : Recycler
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentChapter = chaptersList[position]
-        holder.tvIndex.text = currentChapter.INDEX
+        val currentChapter = contentList[position]
+        holder.tvIndex.text = (position+1).toString()
         holder.tvTitle.text = currentChapter.TITLE
     }
 
     override fun getItemCount(): Int {
-        return chaptersList.size
+        return contentList.size
     }
 }

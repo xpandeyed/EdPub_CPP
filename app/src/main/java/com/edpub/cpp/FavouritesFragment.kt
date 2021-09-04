@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import java.io.ObjectStreamException
 
 
 class FavouritesFragment : Fragment() {
@@ -23,8 +24,10 @@ class FavouritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapterChapters = ChapterRVAdapter(ObjectsCollection.chaptersList)
-        val adapterExamples = ChapterRVAdapter(ObjectsCollection.chaptersList)
+        ObjectsCollection.copyFavChaptersFromChapters(activity?.applicationContext!!)
+
+        val adapterChapters = ChapterRVAdapter(ObjectsCollection.favouriteChapters)
+        val adapterExamples = ChapterRVAdapter(ObjectsCollection.favouriteExamples)
 
         adapterChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
