@@ -26,7 +26,8 @@ object ObjectsCollection {
         if(!areFavouriteChaptersCopied) {
             favouriteChapters.clear()
             CoroutineScope(Dispatchers.Main).launch {
-                var counter = 10
+                Toast.makeText(context, "Just a Moment...", Toast.LENGTH_SHORT).show()
+                var counter = 9
                 while (counter >= 0) {
                     if (isDataLoaded && isFavouriteChapterKeysListLoaded) {
                         var n = 0
@@ -37,21 +38,21 @@ object ObjectsCollection {
                             }
                             n++
                         }
+                        areFavouriteChaptersCopied = true
                         break
                     } else {
-                        delay(500)
+                        delay(1000)
                     }
                     counter--
                 }
                 if (counter == -1) {
                     Toast.makeText(
                         context,
-                        "Time limit exceed.You can try again in a moment.",
+                        "Time limit exceeded.You can try again in a moment.",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
             }
         }
-        areFavouriteChaptersCopied = true
     }
 }

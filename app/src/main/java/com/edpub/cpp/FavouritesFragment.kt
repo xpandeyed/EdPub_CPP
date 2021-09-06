@@ -18,6 +18,7 @@ class FavouritesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.fragment_favourites, container, false)
     }
 
@@ -25,9 +26,6 @@ class FavouritesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         ObjectsCollection.copyFavChaptersFromChapters(activity?.applicationContext!!)
-
-
-
         ObjectsCollection.adapterChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
                 val intent = Intent(activity, ChapterActivity::class.java).apply {
@@ -46,7 +44,6 @@ class FavouritesFragment : Fragment() {
                 startActivity(intent)
             }
         })
-
 
         val adapterList  = listOf(ObjectsCollection.adapterChapters, ObjectsCollection.adapterExamples)
         val viewPagerAdapter = FavouritesAdapterViewPager(adapterList)
