@@ -6,9 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.ObjectStreamException
 
 
@@ -25,55 +30,72 @@ class FavouritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ObjectsCollection.copyFavChaptersFromChapters(activity?.applicationContext!!)
-        ObjectsCollection.adapterChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
-            override fun onItemClick(position: Int) {
-                val intent = Intent(activity, ChapterActivity::class.java).apply {
-                    putExtra("POSITION", position)
-                    putExtra("IS_FROM_FAV", true)
+        CoroutineScope(Dispatchers.Main).launch {
+            ObjectsCollection.adapterChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
+                override fun onItemClick(position: Int) {
+                    val intent = Intent(activity, ChapterActivity::class.java).apply {
+                        putExtra("POSITION", position)
+                        putExtra("IS_FROM_FAV", true)
+                    }
+                    startActivity(intent)
                 }
-                startActivity(intent)
-            }
-        })
-        ObjectsCollection.adapterExamples.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
-            override fun onItemClick(position: Int) {
-                val intent = Intent(activity, ChapterActivity::class.java).apply {
-                    putExtra("POSITION", position)
-                    putExtra("IS_FROM_FAV", true)
+            })
+            ObjectsCollection.adapterExamples.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
+                override fun onItemClick(position: Int) {
+                    val intent = Intent(activity, ChapterActivity::class.java).apply {
+                        putExtra("POSITION", position)
+                        putExtra("IS_FROM_FAV", true)
+                    }
+                    startActivity(intent)
                 }
-                startActivity(intent)
+            })
+
+            val adapterList  = listOf(ObjectsCollection.adapterChapters, ObjectsCollection.adapterExamples)
+            val viewPagerAdapter = FavouritesAdapterViewPager(adapterList)
+            val viewPager = view.findViewById<ViewPager2>(R.id.vp2Favourites)
+
+            var n = 20
+            while(n>0){
+                if(ObjectsCollection.areFavouriteChaptersCopied){
+                    viewPager.adapter = viewPagerAdapter
+
+                    val tabLayout = view.findViewById<TabLayout>(R.id.tlFavourites)
+
+                    TabLayoutMediator(tabLayout, viewPager){tab, position->
+                        when(position){
+                            0->tab.text = "Chapters"
+                            1->tab.text = "Examples"
+                        }
+                    }.attach()
+                    tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
+                        override fun onTabSelected(tab: TabLayout.Tab?) {
+
+                        }
+
+                        override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+                        }
+
+                        override fun onTabReselected(tab: TabLayout.Tab?) {
+
+                        }
+                    })
+                    break
+                }
+                else{
+                    delay(250)
+                    n--
+                }
+                if(n==0){
+                    Toast.makeText(activity, "Time limit exceeded. You can try again in a moment.", Toast.LENGTH_SHORT).show()
+                }
+
             }
-        })
-
-        val adapterList  = listOf(ObjectsCollection.adapterChapters, ObjectsCollection.adapterExamples)
-        val viewPagerAdapter = FavouritesAdapterViewPager(adapterList)
-        val viewPager = view.findViewById<ViewPager2>(R.id.vp2Favourites)
-        viewPager.adapter = viewPagerAdapter
 
 
-        val tabLayout = view.findViewById<TabLayout>(R.id.tlFavourites)
 
 
-        TabLayoutMediator(tabLayout, viewPager){tab, position->
-            when(position){
-                0->tab.text = "Chapters"
-                1->tab.text = "Examples"
-            }
-        }.attach()
-
-        tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-
-            }
-        })
+        }
 
     }
 }

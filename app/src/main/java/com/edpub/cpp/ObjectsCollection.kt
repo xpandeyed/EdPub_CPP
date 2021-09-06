@@ -26,7 +26,6 @@ object ObjectsCollection {
         if(!areFavouriteChaptersCopied) {
             favouriteChapters.clear()
             CoroutineScope(Dispatchers.Main).launch {
-                Toast.makeText(context, "Just a Moment...", Toast.LENGTH_SHORT).show()
                 var counter = 9
                 while (counter >= 0) {
                     if (isDataLoaded && isFavouriteChapterKeysListLoaded) {
@@ -40,7 +39,8 @@ object ObjectsCollection {
                         }
                         areFavouriteChaptersCopied = true
                         break
-                    } else {
+                    }
+                    else {
                         delay(1000)
                     }
                     counter--

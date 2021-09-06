@@ -64,6 +64,7 @@ class LauncherActivity : AppCompatActivity() {
                         }
                     })}
             }
+            ObjectsCollection.copyFavChaptersFromChapters(this@LauncherActivity)
             val intent = Intent(this@LauncherActivity, HomeActivity::class.java)
             startActivity(intent)
         }
