@@ -72,6 +72,12 @@ class ChapterActivity : AppCompatActivity() {
             else{
                 position += 1
                 key = ObjectsCollection.chaptersList[position].KEY
+                if(ObjectsCollection.favouriteChapterKeysList.contains(key)){
+                    DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.purple_200))
+                }
+                else{
+                    DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
+                }
                 findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.chaptersList[position].TITLE
                 findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.chaptersList[position].TEXT
                 findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.chaptersList[position].CODE

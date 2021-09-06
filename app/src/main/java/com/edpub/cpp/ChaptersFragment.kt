@@ -65,12 +65,6 @@ class ChaptersFragment : Fragment() {
         }
 
 
-
-
-
-
-
-
     }
 
 
