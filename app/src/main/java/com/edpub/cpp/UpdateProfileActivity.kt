@@ -37,6 +37,11 @@ class UpdateProfileActivity : AppCompatActivity() {
             * because if there are some elements in list and users logs in immediately
             * the previously fetched data will be there and new data will be added
             * this will cause trouble*/
+            //hope this makes the lists empty
+            ObjectsCollection.favouriteChapters.clear()
+            ObjectsCollection.favouriteChapterKeysList.clear()
+            ObjectsCollection.favouriteExampleKeysList.clear()
+            ObjectsCollection.favouriteExamples.clear()
             val intent = Intent(this, SignUpActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)

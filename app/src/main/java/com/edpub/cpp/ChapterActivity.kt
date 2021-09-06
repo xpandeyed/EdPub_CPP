@@ -22,11 +22,23 @@ class ChapterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chapter)
 
+        lateinit var key : String
+
         var position = intent.getIntExtra("POSITION", 0)
-        var key= ObjectsCollection.chaptersList[position].KEY
-        findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.chaptersList[position].TITLE
-        findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.chaptersList[position].TEXT
-        findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.chaptersList[position].CODE
+        val isFromFavourites = intent.getBooleanExtra("IS_FROM_FAV", false)
+        if(isFromFavourites){
+            key = ObjectsCollection.favouriteChapters[position].KEY!!
+            findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteChapters[position].TITLE
+            findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.favouriteChapters[position].TEXT
+            findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.favouriteChapters[position].CODE
+        }
+        else{
+            key = ObjectsCollection.chaptersList[position].KEY!!
+            findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.chaptersList[position].TITLE
+            findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.chaptersList[position].TEXT
+            findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.chaptersList[position].CODE
+        }
+
 
         val ivShare = findViewById<ImageView>(R.id.ivShare)
         val ivFavourites = findViewById<ImageView>(R.id.ivFavourite)
@@ -50,38 +62,78 @@ class ChapterActivity : AppCompatActivity() {
         * Don't delete this comment until problem is not solved.*/
         ivFavourites.setOnClickListener {
             if(ObjectsCollection.favouriteChapterKeysList.indexOf(key)!=-1){
+                ObjectsCollection.areFavouriteChaptersCopied = false
                 ObjectsCollection.favouriteChapterKeysList.remove(key)
                 ObjectsCollection.favouriteChapterKeysList.remove(key)
+                ObjectsCollection.copyFavChaptersFromChapters(this)
                 val database = Firebase.database
                 val myRef = database.getReference("USERS")
-                myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP").child(key!!).setValue(null)
+                myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP").child(key).setValue(null)
                 DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
             }
             else{
+                ObjectsCollection.areFavouriteChaptersCopied = false
                 ObjectsCollection.favouriteChapterKeysList.add(key!!)
+                ObjectsCollection.copyFavChaptersFromChapters(this)
                 val database = Firebase.database
                 val myRef = database.getReference("USERS")
-                myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP").child(key!!).setValue(key)
+                myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP").child(key).setValue(key)
                 DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.purple_200))
             }
         }
         bToNextChapter.setOnClickListener {
-            if(position==ObjectsCollection.chaptersList.size-1){
-                Toast.makeText(this, "This is the last Chapter.", Toast.LENGTH_SHORT).show()
-            }
-            else{
-                position += 1
-                key = ObjectsCollection.chaptersList[position].KEY
-                if(ObjectsCollection.favouriteChapterKeysList.contains(key)){
-                    DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.purple_200))
+                if(isFromFavourites){
+                    if(position==ObjectsCollection.favouriteChapters.size-1){
+                        Toast.makeText(this, "This is the last Chapter.", Toast.LENGTH_SHORT).show()
+                    }
+                    else {
+                        position += 1
+                        key = ObjectsCollection.favouriteChapters[position].KEY!!
+                        if (ObjectsCollection.favouriteChapterKeysList.contains(key)) {
+                            DrawableCompat.setTint(
+                                ivFavourites.drawable,
+                                ContextCompat.getColor(this, R.color.purple_200)
+                            )
+                        } else {
+                            DrawableCompat.setTint(
+                                ivFavourites.drawable,
+                                ContextCompat.getColor(this, R.color.icon_inactive)
+                            )
+                        }
+                        findViewById<TextView>(R.id.tvTitle).text =
+                            ObjectsCollection.favouriteChapters[position].TITLE
+                        findViewById<TextView>(R.id.tvChapterText).text =
+                            ObjectsCollection.favouriteChapters[position].TEXT
+                        findViewById<TextView>(R.id.tvCode).text =
+                            ObjectsCollection.favouriteChapters[position].CODE
+                    }
                 }
                 else{
-                    DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
+                    if(position==ObjectsCollection.chaptersList.size-1){
+                        Toast.makeText(this, "This is the last Chapter.", Toast.LENGTH_SHORT).show()
+                    }
+                    else {
+                        position += 1
+                        key = ObjectsCollection.chaptersList[position].KEY!!
+                        if (ObjectsCollection.favouriteChapterKeysList.contains(key)) {
+                            DrawableCompat.setTint(
+                                ivFavourites.drawable,
+                                ContextCompat.getColor(this, R.color.purple_200)
+                            )
+                        } else {
+                            DrawableCompat.setTint(
+                                ivFavourites.drawable,
+                                ContextCompat.getColor(this, R.color.icon_inactive)
+                            )
+                        }
+                        findViewById<TextView>(R.id.tvTitle).text =
+                            ObjectsCollection.chaptersList[position].TITLE
+                        findViewById<TextView>(R.id.tvChapterText).text =
+                            ObjectsCollection.chaptersList[position].TEXT
+                        findViewById<TextView>(R.id.tvCode).text =
+                            ObjectsCollection.chaptersList[position].CODE
+                    }
                 }
-                findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.chaptersList[position].TITLE
-                findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.chaptersList[position].TEXT
-                findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.chaptersList[position].CODE
-            }
         }
     }
 }

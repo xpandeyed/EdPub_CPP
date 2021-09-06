@@ -26,28 +26,29 @@ class FavouritesFragment : Fragment() {
 
         ObjectsCollection.copyFavChaptersFromChapters(activity?.applicationContext!!)
 
-        val adapterChapters = ChapterRVAdapter(ObjectsCollection.favouriteChapters)
-        val adapterExamples = ChapterRVAdapter(ObjectsCollection.favouriteExamples)
 
-        adapterChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
+
+        ObjectsCollection.adapterChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
                 val intent = Intent(activity, ChapterActivity::class.java).apply {
                     putExtra("POSITION", position)
+                    putExtra("IS_FROM_FAV", true)
                 }
                 startActivity(intent)
             }
         })
-        adapterExamples.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
+        ObjectsCollection.adapterExamples.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
                 val intent = Intent(activity, ChapterActivity::class.java).apply {
                     putExtra("POSITION", position)
+                    putExtra("IS_FROM_FAV", true)
                 }
                 startActivity(intent)
             }
         })
 
 
-        val adapterList  = listOf(adapterChapters, adapterExamples)
+        val adapterList  = listOf(ObjectsCollection.adapterChapters, ObjectsCollection.adapterExamples)
         val viewPagerAdapter = FavouritesAdapterViewPager(adapterList)
         val viewPager = view.findViewById<ViewPager2>(R.id.vp2Favourites)
         viewPager.adapter = viewPagerAdapter

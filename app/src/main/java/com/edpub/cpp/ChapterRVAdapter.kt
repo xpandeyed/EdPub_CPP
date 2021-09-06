@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class ChapterRVAdapter(private var contentList : ArrayList<Chapter>) : RecyclerView.Adapter<ChapterRVAdapter.ViewHolder>() {
+class ChapterRVAdapter(private var contentList : List<Chapter>) : RecyclerView.Adapter<ChapterRVAdapter.ViewHolder>() {
     private lateinit var mListener: OnItemClickListener
 
     interface OnItemClickListener{

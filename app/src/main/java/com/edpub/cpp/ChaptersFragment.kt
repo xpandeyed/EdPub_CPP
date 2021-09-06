@@ -46,6 +46,7 @@ class ChaptersFragment : Fragment() {
                         override fun onItemClick(position: Int) {
                             val intent = Intent(activity, ChapterActivity::class.java).apply {
                                 putExtra("POSITION", position)
+                                putExtra("IS_FROM_FAV", false)
                             }
                             startActivity(intent)
                         }
