@@ -16,7 +16,16 @@ import com.google.firebase.auth.ktx.auth
 
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
+
+//Entry Points
+//1. From Current Chapter
+//2. From Chapters List
+//3. From Favourite Chapters
 class ChapterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,10 +47,6 @@ class ChapterActivity : AppCompatActivity() {
             "fromChapter" -> {
                 key = ObjectsCollection.chaptersList[position].KEY!!
 
-                //setting current chapter
-                ObjectsCollection.currentChapterKey = key
-                myRef.child(Firebase.auth.currentUser!!.uid).child("CURR_CHAP").setValue(key)
-
                 findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.chaptersList[position].TITLE
                 findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.chaptersList[position].TEXT
                 findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.chaptersList[position].CODE
@@ -49,9 +54,10 @@ class ChapterActivity : AppCompatActivity() {
             "fromCurrChap" -> {
                 key = ObjectsCollection.chaptersList[position].KEY!!
 
-                findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteChapters[position].TITLE
-                findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.favouriteChapters[position].TEXT
-                findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.favouriteChapters[position].CODE
+                findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.chaptersList[position].TITLE
+                findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.chaptersList[position].TEXT
+                findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.chaptersList[position].CODE
+
             }
         }
 
@@ -133,7 +139,7 @@ class ChapterActivity : AppCompatActivity() {
                         if (ObjectsCollection.favouriteChapterKeysList.contains(key)) {
                             DrawableCompat.setTint(
                                 ivFavourites.drawable,
-                                ContextCompat.getColor(this, R.color.purple_200)
+                                ContextCompat.getColor(this, R.color.primaryColor)
                             )
                         } else {
                             DrawableCompat.setTint(

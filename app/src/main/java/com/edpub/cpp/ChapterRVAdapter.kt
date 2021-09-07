@@ -28,7 +28,7 @@ class ChapterRVAdapter(private var contentList : List<Chapter>) : RecyclerView.A
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recycler_view_item, parent, false)
-
+        //mListener is producing null pointer exception next line //null pointer exception
         return ViewHolder(itemView, mListener!!)
     }
 

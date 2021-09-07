@@ -7,7 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class HomeFragment : Fragment() {
@@ -23,10 +28,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val bToCurrentChapter = view.findViewById<Button>(R.id.bToCurrentChapter)
         bToCurrentChapter.setOnClickListener {
-            val intent = Intent(activity, ChapterActivity::class.java).apply {
-                putExtra("INVOKER", "")
-            }
-            startActivity(intent)
+
         }
         val bToRandomExample = view.findViewById<Button>(R.id.bToRandomExample)
         bToRandomExample.setOnClickListener {

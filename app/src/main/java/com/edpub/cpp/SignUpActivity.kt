@@ -78,38 +78,32 @@ class SignUpActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                     CoroutineScope(Dispatchers.IO).launch {
+                        //checking if it is new user
                         ObjectsCollection.isNewUser = task.result.additionalUserInfo!!.isNewUser
+
                         val user = auth.currentUser
                         val uid = user?.uid
                         val firebaseDatabase = FirebaseDatabase.getInstance().getReference("USERS")
                         firebaseDatabase.child(uid!!).child("NAME").setValue(user.displayName)
                         firebaseDatabase.child(uid).child("EMAIL").setValue(user.email)
 
-                        //get current fav chapter
-                        if(ObjectsCollection.isNewUser){
-                            firebaseDatabase.child(uid).child("CURR_CHAP").setValue("C111")
-                        }
-                        else{
-                            firebaseDatabase.child(uid).child("CURR_CHAP").get().addOnSuccessListener {
-                                ObjectsCollection.currentChapterKey = it.value.toString()
-                            }
-                        }
-
-                            val favChapterReference = firebaseDatabase.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP")
-                            favChapterReference.addValueEventListener(object: ValueEventListener {
-                                override fun onDataChange(snapshot: DataSnapshot) {
-                                    if(snapshot.exists()){
-                                        for(chapter in snapshot.children){
-                                            val currChapter = chapter.getValue(String::class.java)
-                                            ObjectsCollection.favouriteChapterKeysList.add(currChapter!!)
-                                        }
+                        //loading favourite chapters
+                        val favChapterReference = firebaseDatabase.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP")
+                        favChapterReference.addValueEventListener(object: ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                if(snapshot.exists()){
+                                    for(chapter in snapshot.children){
+                                        val currChapter = chapter.getValue(String::class.java)
+                                        ObjectsCollection.favouriteChapterKeysList.add(currChapter!!)
                                     }
                                 }
-                                override fun onCancelled(error: DatabaseError) {
-                                    ObjectsCollection.isDataLoaded= false
-                                    Toast.makeText(this@SignUpActivity, "$error", Toast.LENGTH_SHORT).show()
-                                }
-                            })
+                            }
+                            override fun onCancelled(error: DatabaseError) {
+                                ObjectsCollection.isDataLoaded= false
+                                Toast.makeText(this@SignUpActivity, "$error", Toast.LENGTH_SHORT).show()
+                            }
+                        })
+                        //favourite chapters loaded
 
                         val intent = Intent(this@SignUpActivity, HomeActivity::class.java)
                         startActivity(intent)
