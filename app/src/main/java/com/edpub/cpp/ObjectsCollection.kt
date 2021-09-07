@@ -12,6 +12,9 @@ object ObjectsCollection {
     var areFavouriteChaptersCopied = false
     var areFavouriteExamplesCopied = false
 
+    var isNewUser = false
+    var currentChapterKey = "C111"
+    var currentChapterPosition = 0
     var chaptersList = mutableListOf<Chapter>()
     var examplesList = mutableListOf<Chapter>()
     var favouriteChapterKeysList = mutableListOf<String>()

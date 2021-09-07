@@ -30,12 +30,27 @@ class FavouritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var adapterList  = listOf(ObjectsCollection.adapterChapters, ObjectsCollection.adapterExamples)
+        var viewPagerAdapter = FavouritesAdapterViewPager(adapterList)
+        var viewPager = view.findViewById<ViewPager2>(R.id.vp2Favourites)
+
+        viewPager.adapter = viewPagerAdapter
+
+        val tabLayout = view.findViewById<TabLayout>(R.id.tlFavourites)
+
+        TabLayoutMediator(tabLayout, viewPager){tab, position->
+            when(position){
+                0->tab.text = "Chapters"
+                1->tab.text = "Examples"
+            }
+        }.attach()
+
         CoroutineScope(Dispatchers.Main).launch {
             ObjectsCollection.adapterChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
                 override fun onItemClick(position: Int) {
                     val intent = Intent(activity, ChapterActivity::class.java).apply {
                         putExtra("POSITION", position)
-                        putExtra("IS_FROM_FAV", true)
+                        putExtra("INVOKER", "fromFav")
                     }
                     startActivity(intent)
                 }
@@ -50,11 +65,11 @@ class FavouritesFragment : Fragment() {
                 }
             })
 
-            val adapterList  = listOf(ObjectsCollection.adapterChapters, ObjectsCollection.adapterExamples)
-            val viewPagerAdapter = FavouritesAdapterViewPager(adapterList)
-            val viewPager = view.findViewById<ViewPager2>(R.id.vp2Favourites)
+            adapterList  = listOf(ObjectsCollection.adapterChapters, ObjectsCollection.adapterExamples)
+            viewPagerAdapter = FavouritesAdapterViewPager(adapterList)
+            viewPager = view.findViewById(R.id.vp2Favourites)
 
-            var n = 20
+            var n = 40
             while(n>0){
                 if(ObjectsCollection.areFavouriteChaptersCopied){
                     viewPager.adapter = viewPagerAdapter
@@ -83,6 +98,10 @@ class FavouritesFragment : Fragment() {
                     break
                 }
                 else{
+                    when(n){
+                        35-> Toast.makeText(activity, "Just a moment, we are loading data.", Toast.LENGTH_SHORT).show()
+                        20-> Toast.makeText(activity, "Poor internet connection, We are still loading.", Toast.LENGTH_SHORT).show()
+                    }
                     delay(250)
                     n--
                 }

@@ -19,9 +19,10 @@
                 android:id="@+id/cvSignIn"
                 android:clickable="true"
                 android:focusable="true"
+                app:cardBackgroundColor="@color/primaryColor"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_margin="25dp"
                 app:cardCornerRadius="4dp"
                 app:layout_constraintTop_toTopOf="parent">
@@ -30,19 +31,23 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
                     <ImageView
+                        android:layout_marginLeft="10dp"
                         android:id="@+id/ivGoogleIcon"
                         android:layout_width="48dp"
+                        android:padding="10dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/ic_launcher_foreground"
+                        android:src="@drawable/ic_google__g__logo"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"/>
                     <TextView
                         android:layout_width="0dp"
+                        android:textColor="@color/white"
                         android:layout_height="match_parent"
                         app:layout_constraintLeft_toRightOf="@+id/ivGoogleIcon"
                         app:layout_constraintTop_toTopOf="parent"
                         android:textSize="18sp"
+                        android:gravity="center_vertical"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginLeft="25dp"
                         android:text="Continue with Google"/>

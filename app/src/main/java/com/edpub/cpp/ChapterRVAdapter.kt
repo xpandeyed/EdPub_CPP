@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 class ChapterRVAdapter(private var contentList : List<Chapter>) : RecyclerView.Adapter<ChapterRVAdapter.ViewHolder>() {
-    private lateinit var mListener: OnItemClickListener
-
+    //sometime app crashes due to mListener
+    private var mListener: OnItemClickListener? = null
     interface OnItemClickListener{
         fun onItemClick(position: Int)
     }
-    fun setOnItemClickListener(listener: OnItemClickListener) {
+    fun setOnItemClickListener(listener: OnItemClickListener?) {
         mListener = listener
     }
     class ViewHolder(itemView : View, listener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
@@ -28,7 +28,8 @@ class ChapterRVAdapter(private var contentList : List<Chapter>) : RecyclerView.A
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recycler_view_item, parent, false)
-        return ViewHolder(itemView, mListener)
+
+        return ViewHolder(itemView, mListener!!)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

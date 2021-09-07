@@ -23,13 +23,14 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val bToCurrentChapter = view.findViewById<Button>(R.id.bToCurrentChapter)
         bToCurrentChapter.setOnClickListener {
-            val intent = Intent(activity, ChapterActivity::class.java)
+            val intent = Intent(activity, ChapterActivity::class.java).apply {
+                putExtra("INVOKER", "")
+            }
             startActivity(intent)
         }
         val bToRandomExample = view.findViewById<Button>(R.id.bToRandomExample)
         bToRandomExample.setOnClickListener {
-            val intent = Intent(activity, ExampleActivity::class.java)
-            startActivity(intent)
+            Toast.makeText(activity, "Random Example will be shown.", Toast.LENGTH_SHORT).show()
         }
 
     }

@@ -22,21 +22,37 @@ class ChapterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chapter)
 
+        val database = Firebase.database
+        val myRef = database.getReference("USERS")
+
         lateinit var key : String
 
-        var position = intent.getIntExtra("POSITION", 0)
-        val isFromFavourites = intent.getBooleanExtra("IS_FROM_FAV", false)
-        if(isFromFavourites){
-            key = ObjectsCollection.favouriteChapters[position].KEY!!
-            findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteChapters[position].TITLE
-            findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.favouriteChapters[position].TEXT
-            findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.favouriteChapters[position].CODE
-        }
-        else{
-            key = ObjectsCollection.chaptersList[position].KEY!!
-            findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.chaptersList[position].TITLE
-            findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.chaptersList[position].TEXT
-            findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.chaptersList[position].CODE
+        var position = intent.getIntExtra("POSITION", ObjectsCollection.currentChapterPosition)
+        when (intent.getStringExtra("INVOKER")) {
+            "fromFav" -> {
+                key = ObjectsCollection.favouriteChapters[position].KEY!!
+                findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteChapters[position].TITLE
+                findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.favouriteChapters[position].TEXT
+                findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.favouriteChapters[position].CODE
+            }
+            "fromChapter" -> {
+                key = ObjectsCollection.chaptersList[position].KEY!!
+
+                //setting current chapter
+                ObjectsCollection.currentChapterKey = key
+                myRef.child(Firebase.auth.currentUser!!.uid).child("CURR_CHAP").setValue(key)
+
+                findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.chaptersList[position].TITLE
+                findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.chaptersList[position].TEXT
+                findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.chaptersList[position].CODE
+            }
+            "fromCurrChap" -> {
+                key = ObjectsCollection.chaptersList[position].KEY!!
+
+                findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteChapters[position].TITLE
+                findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.favouriteChapters[position].TEXT
+                findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.favouriteChapters[position].CODE
+            }
         }
 
 
@@ -66,8 +82,7 @@ class ChapterActivity : AppCompatActivity() {
                 ObjectsCollection.favouriteChapterKeysList.remove(key)
                 ObjectsCollection.favouriteChapterKeysList.remove(key)
                 ObjectsCollection.copyFavChaptersFromChapters(this)
-                val database = Firebase.database
-                val myRef = database.getReference("USERS")
+
                 myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP").child(key).setValue(null)
                 DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
             }
@@ -82,7 +97,7 @@ class ChapterActivity : AppCompatActivity() {
             }
         }
         bToNextChapter.setOnClickListener {
-                if(isFromFavourites){
+                if(intent.getStringExtra("INVOKER")=="fromFav"){
                     if(position==ObjectsCollection.favouriteChapters.size-1){
                         Toast.makeText(this, "This is the last Chapter.", Toast.LENGTH_SHORT).show()
                     }
