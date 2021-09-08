@@ -81,9 +81,20 @@ class SignUpActivity : AppCompatActivity() {
                         //checking if it is new user
                         ObjectsCollection.isNewUser = task.result.additionalUserInfo!!.isNewUser
 
+
+
                         val user = auth.currentUser
                         val uid = user?.uid
                         val firebaseDatabase = FirebaseDatabase.getInstance().getReference("USERS")
+
+                        if(ObjectsCollection.isNewUser){
+                            firebaseDatabase.child(uid!!).child("CURR_CHAP").setValue("C111")
+                        }
+                        else{
+                            firebaseDatabase.child(uid!!).child("CURR_CHAP").get().addOnSuccessListener {
+                                ObjectsCollection.currentChapterPosition=it.value.toString().toInt()
+                            }
+                        }
                         firebaseDatabase.child(uid!!).child("NAME").setValue(user.displayName)
                         firebaseDatabase.child(uid).child("EMAIL").setValue(user.email)
 

@@ -47,12 +47,6 @@ class ChaptersFragment : Fragment() {
                     startActivity(intent)
                 }
             })
-
-
         }
-
-
     }
-
-
 }

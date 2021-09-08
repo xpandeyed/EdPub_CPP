@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -64,6 +65,9 @@ class LauncherActivity : AppCompatActivity() {
                             //error toast is never shown, reason unknown!!
                         }
                     })}
+            }
+            Firebase.database.getReference("USERS").child(Firebase.auth.currentUser?.uid!!).child("CURR_CHAP").get().addOnSuccessListener {
+                ObjectsCollection.currentChapterPosition=it.value.toString().toInt()
             }
             ObjectsCollection.copyFavChaptersFromChapters(this@LauncherActivity)
             val intent = Intent(this@LauncherActivity, HomeActivity::class.java)
