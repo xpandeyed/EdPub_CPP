@@ -32,7 +32,7 @@ object ObjectsCollection {
         if(!areFavouriteChaptersCopied) {
             favouriteChapters.clear()
             CoroutineScope(Dispatchers.Main).launch {
-                var counter = 9
+                var counter = 15
                 while (counter >= 0) {
                     if (isDataLoaded && isFavouriteChapterKeysListLoaded) {
                         var n = 0
@@ -40,6 +40,7 @@ object ObjectsCollection {
                             var index = favouriteChapterKeysList.indexOf(chaptersList[n].KEY)
                             if (index != -1) {
                                 favouriteChapters.add(chaptersList[n])
+                                adapterFavouriteChapters.notifyItemInserted(favouriteChapters.size-1)
                             }
                             n++
                         }

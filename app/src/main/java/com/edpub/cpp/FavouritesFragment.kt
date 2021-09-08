@@ -29,9 +29,9 @@ class FavouritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var adapterList  = listOf(ObjectsCollection.adapterFavouriteChapters, ObjectsCollection.adapterFavouriteExamples)
-        var viewPagerAdapter = FavouritesAdapterViewPager(adapterList)
-        var viewPager = view.findViewById<ViewPager2>(R.id.vp2Favourites)
+        val adapterList  = listOf(ObjectsCollection.adapterFavouriteChapters, ObjectsCollection.adapterFavouriteExamples)
+        val viewPagerAdapter = FavouritesAdapterViewPager(adapterList)
+        val viewPager = view.findViewById<ViewPager2>(R.id.vp2Favourites)
 
         viewPager.adapter = viewPagerAdapter
 
@@ -44,7 +44,6 @@ class FavouritesFragment : Fragment() {
             }
         }.attach()
 
-        CoroutineScope(Dispatchers.Main).launch {
             ObjectsCollection.adapterFavouriteChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
                 override fun onItemClick(position: Int) {
                     val intent = Intent(activity, ChapterActivity::class.java).apply {
@@ -63,57 +62,6 @@ class FavouritesFragment : Fragment() {
                     startActivity(intent)
                 }
             })
-
-            adapterList  = listOf(ObjectsCollection.adapterFavouriteChapters, ObjectsCollection.adapterFavouriteExamples)
-            viewPagerAdapter = FavouritesAdapterViewPager(adapterList)
-            viewPager = view.findViewById(R.id.vp2Favourites)
-
-            var n = 40
-            while(n>0){
-                if(ObjectsCollection.areFavouriteChaptersCopied){
-                    viewPager.adapter = viewPagerAdapter
-
-                    val tabLayout = view.findViewById<TabLayout>(R.id.tlFavourites)
-
-                    TabLayoutMediator(tabLayout, viewPager){tab, position->
-                        when(position){
-                            0->tab.text = "Chapters"
-                            1->tab.text = "Examples"
-                        }
-                    }.attach()
-                    tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
-                        override fun onTabSelected(tab: TabLayout.Tab?) {
-
-                        }
-
-                        override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-                        }
-
-                        override fun onTabReselected(tab: TabLayout.Tab?) {
-
-                        }
-                    })
-                    break
-                }
-                else{
-                    when(n){
-                        35-> Toast.makeText(activity, "Just a moment, we are loading data.", Toast.LENGTH_SHORT).show()
-                        20-> Toast.makeText(activity, "Poor internet connection, We are still loading.", Toast.LENGTH_SHORT).show()
-                    }
-                    delay(250)
-                    n--
-                }
-                if(n==0){
-                    Toast.makeText(activity, "Time limit exceeded. You can try again in a moment.", Toast.LENGTH_SHORT).show()
-                }
-
-            }
-
-
-
-
-        }
 
     }
 }
