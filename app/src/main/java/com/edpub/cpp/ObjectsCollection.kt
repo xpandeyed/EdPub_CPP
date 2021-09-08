@@ -22,8 +22,11 @@ object ObjectsCollection {
     var favouriteChapters = mutableListOf<Chapter>()
     var favouriteExamples = mutableListOf<Chapter>()
 
-    var adapterChapters = ChapterRVAdapter(favouriteChapters)
-    var adapterExamples = ChapterRVAdapter(favouriteExamples)
+    var adapterFavouriteChapters = ChapterRVAdapter(favouriteChapters)
+    var adapterFavouriteExamples = ChapterRVAdapter(favouriteExamples)
+
+    var adapterChapters = ChapterRVAdapter(chaptersList)
+    var adapterExamples = ChapterRVAdapter(examplesList)
 
     fun copyFavChaptersFromChapters(context: Context) {
         if(!areFavouriteChaptersCopied) {

@@ -39,10 +39,9 @@ class ChaptersFragment : Fragment() {
             while(n>=0){
                 if(ObjectsCollection.isDataLoaded){
 
-                    val adapter = ChapterRVAdapter(ObjectsCollection.chaptersList)
-                    rvChapters.adapter = adapter
+                    rvChapters.adapter = ObjectsCollection.adapterChapters
 
-                    adapter.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
+                    ObjectsCollection.adapterChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
                         override fun onItemClick(position: Int) {
                             val intent = Intent(activity, ChapterActivity::class.java).apply {
                                 putExtra("POSITION", position)

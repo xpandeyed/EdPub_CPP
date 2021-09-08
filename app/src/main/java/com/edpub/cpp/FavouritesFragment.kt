@@ -14,7 +14,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.io.ObjectStreamException
 
 
 class FavouritesFragment : Fragment() {
@@ -30,7 +29,7 @@ class FavouritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var adapterList  = listOf(ObjectsCollection.adapterChapters, ObjectsCollection.adapterExamples)
+        var adapterList  = listOf(ObjectsCollection.adapterFavouriteChapters, ObjectsCollection.adapterFavouriteExamples)
         var viewPagerAdapter = FavouritesAdapterViewPager(adapterList)
         var viewPager = view.findViewById<ViewPager2>(R.id.vp2Favourites)
 
@@ -46,7 +45,7 @@ class FavouritesFragment : Fragment() {
         }.attach()
 
         CoroutineScope(Dispatchers.Main).launch {
-            ObjectsCollection.adapterChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
+            ObjectsCollection.adapterFavouriteChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
                 override fun onItemClick(position: Int) {
                     val intent = Intent(activity, ChapterActivity::class.java).apply {
                         putExtra("POSITION", position)
@@ -55,7 +54,7 @@ class FavouritesFragment : Fragment() {
                     startActivity(intent)
                 }
             })
-            ObjectsCollection.adapterExamples.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
+            ObjectsCollection.adapterFavouriteExamples.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
                 override fun onItemClick(position: Int) {
                     val intent = Intent(activity, ChapterActivity::class.java).apply {
                         putExtra("POSITION", position)
@@ -65,7 +64,7 @@ class FavouritesFragment : Fragment() {
                 }
             })
 
-            adapterList  = listOf(ObjectsCollection.adapterChapters, ObjectsCollection.adapterExamples)
+            adapterList  = listOf(ObjectsCollection.adapterFavouriteChapters, ObjectsCollection.adapterFavouriteExamples)
             viewPagerAdapter = FavouritesAdapterViewPager(adapterList)
             viewPager = view.findViewById(R.id.vp2Favourites)
 

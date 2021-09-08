@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 class ChapterRVAdapter(private var contentList : List<Chapter>) : RecyclerView.Adapter<ChapterRVAdapter.ViewHolder>() {
-    //sometime app crashes due to mListener
     private var mListener: OnItemClickListener? = null
     interface OnItemClickListener{
         fun onItemClick(position: Int)

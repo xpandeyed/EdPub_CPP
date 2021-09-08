@@ -27,6 +27,7 @@ class LauncherActivity : AppCompatActivity() {
                             for(chapter in snapshot.children){
                                 val currChapter = chapter.getValue(Chapter::class.java)
                                 ObjectsCollection.chaptersList.add(currChapter!!)
+                                ObjectsCollection.adapterChapters.notifyItemInserted(ObjectsCollection.chaptersList.size-1)
                             }
                         }
                         ObjectsCollection.isDataLoaded = true
