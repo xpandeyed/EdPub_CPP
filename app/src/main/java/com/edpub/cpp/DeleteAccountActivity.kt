@@ -14,6 +14,7 @@ import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -44,6 +45,8 @@ class DeleteAccountActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.bDeleteAccount).setOnClickListener {
             val user = auth.currentUser
+            val reason = findViewById<EditText>(R.id.etDeleteReason).text.toString()
+            Firebase.database.getReference("USERS").child(user!!.uid).child("ACCOUNT_DELETE_REASON").setValue(reason)
             user!!.delete()
                 .addOnCompleteListener(this) { task->
                     if (task.isSuccessful){
@@ -53,7 +56,7 @@ class DeleteAccountActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
                     else{
-                        Toast.makeText(this, "Re-authentication Required.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Authenticating User.", Toast.LENGTH_SHORT).show()
                         signIn()
                     }
                 }

@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:gravity="center"
-                    android:text="Current Lesson Name"
+                    android:text="Loading Data . . . "
                     app:layout_constraintBottom_toTopOf="@+id/bToCurrentChapter"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
