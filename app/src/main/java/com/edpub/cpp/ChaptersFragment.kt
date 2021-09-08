@@ -35,32 +35,19 @@ class ChaptersFragment : Fragment() {
 
 
         CoroutineScope(Dispatchers.Main).launch{
-            var n = 9
-            while(n>=0){
-                if(ObjectsCollection.isDataLoaded){
 
-                    rvChapters.adapter = ObjectsCollection.adapterChapters
+            rvChapters.adapter = ObjectsCollection.adapterChapters
 
-                    ObjectsCollection.adapterChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
-                        override fun onItemClick(position: Int) {
-                            val intent = Intent(activity, ChapterActivity::class.java).apply {
-                                putExtra("POSITION", position)
-                                putExtra("INVOKER", "fromChapter")
-                            }
-                            startActivity(intent)
-                        }
-                    })
-                    break
-                }//end of if
-                else{
-                    if(n==9){Toast.makeText(activity, "Just A Moment. Loading data...", Toast.LENGTH_SHORT).show()}
-                    delay(500)
-                    n--
+            ObjectsCollection.adapterChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
+                override fun onItemClick(position: Int) {
+                    val intent = Intent(activity, ChapterActivity::class.java).apply {
+                        putExtra("POSITION", position)
+                        putExtra("INVOKER", "fromChapter")
+                    }
+                    startActivity(intent)
                 }
-            }//end of while
-            if(n==-1){
-                Toast.makeText(activity, "Could not load data withing time!!", Toast.LENGTH_SHORT).show()
-            }
+            })
+
 
         }
 
