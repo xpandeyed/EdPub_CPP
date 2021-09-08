@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -21,9 +22,32 @@ class ProfileActivity : AppCompatActivity() {
 
         setSupportActionBar(findViewById(R.id.tbProfileToolBar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         findViewById<CardView>(R.id.cvUserDetails).setOnClickListener {
             val intent = Intent(this, UpdateProfileActivity::class.java)
             startActivity(intent)
+        }
+
+        findViewById<TextView>(R.id.tvTermsConditions).setOnClickListener {
+            val intent = Intent(this, TermsAndConditionsActivity::class.java)
+            startActivity(intent)
+        }
+        findViewById<TextView>(R.id.tvPrivacyPolicy).setOnClickListener {
+            val intent = Intent(this, PrivacyPolicyActivity::class.java)
+            startActivity(intent)
+        }
+        findViewById<TextView>(R.id.tvFeedback).setOnClickListener {
+            val intent = Intent(this, FeedbackActivity::class.java)
+            startActivity(intent)
+        }
+        findViewById<TextView>(R.id.tvShare).setOnClickListener {
+            Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show()
+        }
+        findViewById<TextView>(R.id.tvRateUs).setOnClickListener {
+            Toast.makeText(this, "Rate Us", Toast.LENGTH_SHORT).show()
+        }
+        findViewById<TextView>(R.id.tvVersion).setOnClickListener {
+            Toast.makeText(this, "Version", Toast.LENGTH_SHORT).show()
         }
     }
 }
