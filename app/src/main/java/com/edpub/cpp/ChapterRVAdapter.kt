@@ -16,12 +16,12 @@ class ChapterRVAdapter(private var contentList : List<Chapter>) : RecyclerView.A
     fun setOnItemClickListener(listener: OnItemClickListener?) {
         mListener = listener
     }
-    class ViewHolder(itemView : View, listener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
+    class ViewHolder(itemView : View, listener: OnItemClickListener?) : RecyclerView.ViewHolder(itemView){
         var tvIndex:TextView = itemView.findViewById(R.id.tvIndex)
         var tvTitle:TextView = itemView.findViewById(R.id.tvTitle)
         init {
             itemView.setOnClickListener {
-                listener.onItemClick(adapterPosition)
+                listener?.onItemClick(adapterPosition)
             }
         }
     }
@@ -29,7 +29,7 @@ class ChapterRVAdapter(private var contentList : List<Chapter>) : RecyclerView.A
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recycler_view_item, parent, false)
         //mListener is producing null pointer exception next line //null pointer exception
-        return ViewHolder(itemView, mListener!!)
+        return ViewHolder(itemView, mListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
