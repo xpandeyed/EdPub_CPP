@@ -92,6 +92,7 @@ class SignUpActivity : AppCompatActivity() {
                             firebaseDatabase.child(uid).child("EMAIL").setValue(user.email)
                         }
                         else{
+                            FunctionCollection.loadFavouriteChapterKeys()
                             firebaseDatabase.child(uid!!).child("CURR_CHAP").get().addOnSuccessListener {
                                 ObjectsCollection.currentChapterPosition=it.value.toString().toInt()
                             }

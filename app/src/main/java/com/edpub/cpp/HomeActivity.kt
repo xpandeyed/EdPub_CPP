@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -28,7 +29,15 @@ class HomeActivity : AppCompatActivity() {
                 R.id.miHome->{setCurrentFragment(homeFragment)}
                 R.id.miChapters->{setCurrentFragment(chaptersFragment)}
                 R.id.miExamples->{setCurrentFragment(examplesFragment)}
-                R.id.miFavourites->{setCurrentFragment(favouritesFragment)}
+                R.id.miFavourites->{
+                    if(ObjectsCollection.isDataLoaded && ObjectsCollection.isFavouriteChapterKeysListLoaded){
+                        FunctionCollection.copyFavouriteChapters()
+                        setCurrentFragment(favouritesFragment)
+                    }
+                    else{
+                        Toast.makeText(this, "Loading Data... Try again in a moment.", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
             true
         }

@@ -24,7 +24,8 @@ class LauncherActivity : AppCompatActivity() {
             startActivity(intent)
         }
         else {
-            CoroutineScope(Dispatchers.Main).launch {FunctionCollection.loadChapters()}
+            FunctionCollection.loadChapters()
+            FunctionCollection.loadFavouriteChapterKeys()
             Firebase.database.getReference("USERS").child(Firebase.auth.currentUser?.uid!!).child("CURR_CHAP").get().addOnSuccessListener {
                 ObjectsCollection.currentChapterPosition=it.value.toString().toInt()
             }
