@@ -80,8 +80,7 @@ class SignUpActivity : AppCompatActivity() {
                     CoroutineScope(Dispatchers.IO).launch {
                         //checking if it is new user
                         ObjectsCollection.isNewUser = task.result.additionalUserInfo!!.isNewUser
-
-
+                        FunctionCollection.loadChapters()
 
                         val user = auth.currentUser
                         val uid = user?.uid
@@ -89,33 +88,14 @@ class SignUpActivity : AppCompatActivity() {
 
                         if(ObjectsCollection.isNewUser){
                             firebaseDatabase.child(uid!!).child("CURR_CHAP").setValue("C111")
+                            firebaseDatabase.child(uid).child("NAME").setValue(user.displayName)
+                            firebaseDatabase.child(uid).child("EMAIL").setValue(user.email)
                         }
                         else{
                             firebaseDatabase.child(uid!!).child("CURR_CHAP").get().addOnSuccessListener {
                                 ObjectsCollection.currentChapterPosition=it.value.toString().toInt()
                             }
                         }
-                        firebaseDatabase.child(uid!!).child("NAME").setValue(user.displayName)
-                        firebaseDatabase.child(uid).child("EMAIL").setValue(user.email)
-
-                        //loading favourite chapters
-                        val favChapterReference = firebaseDatabase.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP")
-                        favChapterReference.addValueEventListener(object: ValueEventListener {
-                            override fun onDataChange(snapshot: DataSnapshot) {
-                                if(snapshot.exists()){
-                                    for(chapter in snapshot.children){
-                                        val currChapter = chapter.getValue(String::class.java)
-                                        ObjectsCollection.favouriteChapterKeysList.add(currChapter!!)
-                                    }
-                                }
-                            }
-                            override fun onCancelled(error: DatabaseError) {
-                                ObjectsCollection.isDataLoaded= false
-                                Toast.makeText(this@SignUpActivity, "$error", Toast.LENGTH_SHORT).show()
-                            }
-                        })
-                        //favourite chapters loaded
-
                         val intent = Intent(this@SignUpActivity, HomeActivity::class.java)
                         startActivity(intent)
                     }

@@ -28,38 +28,4 @@ object ObjectsCollection {
     var adapterChapters = ChapterRVAdapter(chaptersList)
     var adapterExamples = ChapterRVAdapter(examplesList)
 
-    fun copyFavChaptersFromChapters(context: Context) {
-        if(!areFavouriteChaptersCopied) {
-            favouriteChapters.clear()
-            CoroutineScope(Dispatchers.Main).launch {
-                var counter = 15
-                while (counter >= 0) {
-                    if (isDataLoaded && isFavouriteChapterKeysListLoaded) {
-                        var n = 0
-                        while (n < chaptersList.size) {
-                            var index = favouriteChapterKeysList.indexOf(chaptersList[n].KEY)
-                            if (index != -1) {
-                                favouriteChapters.add(chaptersList[n])
-                                adapterFavouriteChapters.notifyItemInserted(favouriteChapters.size-1)
-                            }
-                            n++
-                        }
-                        areFavouriteChaptersCopied = true
-                        break
-                    }
-                    else {
-                        delay(1000)
-                    }
-                    counter--
-                }
-                if (counter == -1) {
-                    Toast.makeText(
-                        context,
-                        "Time limit exceeded.You can try again in a moment.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        }
-    }
 }

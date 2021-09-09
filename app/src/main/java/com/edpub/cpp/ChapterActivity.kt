@@ -86,19 +86,23 @@ class ChapterActivity : AppCompatActivity() {
         * Don't delete this comment until problem is not solved.*/
         ivFavourites.setOnClickListener {
             if(ObjectsCollection.favouriteChapterKeysList.indexOf(key)!=-1){
-                ObjectsCollection.areFavouriteChaptersCopied = false
-                ObjectsCollection.favouriteChapterKeysList.remove(key)
-                ObjectsCollection.favouriteChapterKeysList.remove(key)
-                ObjectsCollection.copyFavChaptersFromChapters(this)
+
+                CoroutineScope(Dispatchers.Main).launch {
+                    ObjectsCollection.areFavouriteChaptersCopied = false
+                    ObjectsCollection.favouriteChapterKeysList.remove(key)
+                    ObjectsCollection.favouriteChapterKeysList.remove(key)
+                    FunctionCollection.copyFavouriteChapters()
+                }
 
                 myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP").child(key!!).setValue(null)
                 DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
             }
             else{
-                ObjectsCollection.areFavouriteChaptersCopied = false
-                ObjectsCollection.favouriteChapterKeysList.add(key!!)
-                ObjectsCollection.copyFavChaptersFromChapters(this)
-
+                CoroutineScope(Dispatchers.Main).launch {
+                    ObjectsCollection.areFavouriteChaptersCopied = false
+                    ObjectsCollection.favouriteChapterKeysList.add(key!!)
+                    FunctionCollection.copyFavouriteChapters()
+                }
                 myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP").child(key.toString()).setValue(key)
                 DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.purple_200))
             }
