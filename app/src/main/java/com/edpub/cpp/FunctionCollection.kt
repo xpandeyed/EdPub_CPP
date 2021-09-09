@@ -1,5 +1,6 @@
 package com.edpub.cpp
 
+import android.content.Context
 import android.widget.Toast
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -9,6 +10,7 @@ import kotlinx.coroutines.*
 
 object FunctionCollection {
     suspend fun copyFavouriteChapters () {
+
         ObjectsCollection.favouriteChapters.clear()
         val job = CoroutineScope(Dispatchers.Main).async {
             var n = 0
@@ -23,8 +25,10 @@ object FunctionCollection {
             ObjectsCollection.areFavouriteChaptersCopied = true
         }
         job.await()
+
     }
     suspend fun loadChapters () {
+
         val job = CoroutineScope(Dispatchers.IO).async {
             val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("CHAPTERS")
             databaseReference.addValueEventListener(object: ValueEventListener {
@@ -49,6 +53,7 @@ object FunctionCollection {
         }
     }
     private suspend fun loadFavouriteChapterKeys (){
+
         val job = CoroutineScope(Dispatchers.IO).async {
             val favChapterReference = Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP")
             favChapterReference.addValueEventListener(object: ValueEventListener {
@@ -58,7 +63,6 @@ object FunctionCollection {
                             val currChapter = chapter.getValue(String::class.java)
                             ObjectsCollection.favouriteChapterKeysList.add(currChapter!!)
                         }
-
                     }
                     ObjectsCollection.isFavouriteChapterKeysListLoaded = true
                 }
@@ -68,6 +72,7 @@ object FunctionCollection {
             })
         }
         job.await()
+
         copyFavouriteChapters()
     }
 
