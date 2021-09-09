@@ -7,9 +7,38 @@
     android:layout_height="match_parent"
     tools:context=".SignUpActivity">
 
+    <TextView
+        android:id="@+id/tvSmallChapters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Small and Precise Chapters"
+        android:textSize="25sp"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="40dp"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvExamples"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Practice Examples"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        app:layout_constraintTop_toBottomOf="@id/tvSmallChapters"/>
+    <TextView
+        android:id="@+id/tvFavourites"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mark Chapters as Favourites"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        app:layout_constraintTop_toBottomOf="@id/tvExamples"/>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent">
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,8 +51,10 @@
                 app:cardBackgroundColor="@color/primaryColor"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_margin="25dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
                 app:cardCornerRadius="4dp"
                 app:layout_constraintTop_toTopOf="parent">
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,6 +78,7 @@
                         app:layout_constraintLeft_toRightOf="@+id/ivGoogleIcon"
                         app:layout_constraintTop_toTopOf="parent"
                         android:textSize="18sp"
+                        android:textStyle="bold"
                         android:gravity="center_vertical"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginLeft="25dp"
@@ -55,6 +87,19 @@
 
             </androidx.cardview.widget.CardView>
 
+            <TextView
+                android:id="@+id/tvTermsConditionsAndPrivacyPolicy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginBottom="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColorLink="@color/primaryColor"
+                android:lineSpacingExtra="5dp"
+                android:layout_marginRight="25dp"
+                app:layout_constraintTop_toBottomOf="@id/cvSignIn"
+                android:text="By Signing In you agree to our Terms and Conditions and Privacy Policy."/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
