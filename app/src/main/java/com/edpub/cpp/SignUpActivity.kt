@@ -3,6 +3,11 @@ package com.edpub.cpp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.*
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -28,6 +33,25 @@ class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
+
+        val privacyPolicyMessage = "By Signing In you agree to our Terms and Conditions and Privacy Policy."
+        val spannable = SpannableString(privacyPolicyMessage)
+        val span1 = object : ClickableSpan(){
+            override fun onClick(p0: View) {
+                Toast.makeText(this@SignUpActivity, "Privacy", Toast.LENGTH_SHORT).show()
+            }
+        }
+        val span2 = object : ClickableSpan(){
+            override fun onClick(p0: View) {
+                Toast.makeText(this@SignUpActivity, "Terms", Toast.LENGTH_SHORT).show()
+            }
+        }
+        spannable.setSpan(span1, 31, 51, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannable.setSpan(span2, 56, 70, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        findViewById<TextView>(R.id.tvTermsConditionsAndPrivacyPolicy).movementMethod = LinkMovementMethod.getInstance()
+        findViewById<TextView>(R.id.tvTermsConditionsAndPrivacyPolicy).text = spannable
+
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.web_client_id))
