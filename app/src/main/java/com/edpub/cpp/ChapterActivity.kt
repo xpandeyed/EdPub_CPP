@@ -35,11 +35,12 @@ class ChapterActivity : AppCompatActivity() {
         val database = Firebase.database
         val myRef = database.getReference("USERS")
 
-        var key = ObjectsCollection.chaptersList[ObjectsCollection.currentChapterPosition].KEY
-        var position = intent.getIntExtra("POSITION", ObjectsCollection.currentChapterPosition)
+        var key:String? = "C111"
+        var position = intent.getIntExtra("POSITION", 0)
         when (intent.getStringExtra("INVOKER")) {
             "fromFav" -> {
-                key = ObjectsCollection.favouriteChapters[position].KEY!!
+                key = ObjectsCollection.favouriteChapters[position].KEY
+
                 findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteChapters[position].TITLE
                 findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.favouriteChapters[position].TEXT
                 findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.favouriteChapters[position].CODE
@@ -49,8 +50,6 @@ class ChapterActivity : AppCompatActivity() {
 
                 ObjectsCollection.currentChapterPosition = position
 
-                myRef.child(Firebase.auth.currentUser?.uid!!).child("CURR_CHAP").setValue(position)
-
                 findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.chaptersList[position].TITLE
                 findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.chaptersList[position].TEXT
                 findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.chaptersList[position].CODE
@@ -59,7 +58,6 @@ class ChapterActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.chaptersList[position].TITLE
                 findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.chaptersList[position].TEXT
                 findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.chaptersList[position].CODE
-
             }
         }
 
@@ -75,7 +73,7 @@ class ChapterActivity : AppCompatActivity() {
         }
 
         if(ObjectsCollection.favouriteChapterKeysList.contains(key)){
-            DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.purple_200))
+            DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.primaryColor))
         }
         else{
             DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
@@ -86,25 +84,20 @@ class ChapterActivity : AppCompatActivity() {
         * Don't delete this comment until problem is not solved.*/
         ivFavourites.setOnClickListener {
             if(ObjectsCollection.favouriteChapterKeysList.indexOf(key)!=-1){
-
-                CoroutineScope(Dispatchers.Main).launch {
-                    ObjectsCollection.areFavouriteChaptersCopied = false
-                    ObjectsCollection.favouriteChapterKeysList.remove(key)
-                    ObjectsCollection.favouriteChapterKeysList.remove(key)
-                    FunctionCollection.copyFavouriteChapters()
-                }
+                ObjectsCollection.areFavouriteChaptersCopied = false
+                ObjectsCollection.favouriteChapterKeysList.remove(key)
+                ObjectsCollection.favouriteChapterKeysList.remove(key)
+                FunctionCollection.copyFavouriteChapters()
 
                 myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP").child(key!!).setValue(null)
                 DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
             }
             else{
-                CoroutineScope(Dispatchers.Main).launch {
-                    ObjectsCollection.areFavouriteChaptersCopied = false
-                    ObjectsCollection.favouriteChapterKeysList.add(key!!)
-                    FunctionCollection.copyFavouriteChapters()
-                }
+                ObjectsCollection.areFavouriteChaptersCopied = false
+                ObjectsCollection.favouriteChapterKeysList.add(key!!)
+                FunctionCollection.copyFavouriteChapters()
                 myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP").child(key.toString()).setValue(key)
-                DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.purple_200))
+                DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.primaryColor))
             }
         }
         bToNextChapter.setOnClickListener {
@@ -118,7 +111,7 @@ class ChapterActivity : AppCompatActivity() {
                         if (ObjectsCollection.favouriteChapterKeysList.contains(key)) {
                             DrawableCompat.setTint(
                                 ivFavourites.drawable,
-                                ContextCompat.getColor(this, R.color.purple_200)
+                                ContextCompat.getColor(this, R.color.primaryColor)
                             )
                         } else {
                             DrawableCompat.setTint(
@@ -142,8 +135,6 @@ class ChapterActivity : AppCompatActivity() {
                         position += 1
 
                         ObjectsCollection.currentChapterPosition = position
-
-                        myRef.child(Firebase.auth.currentUser?.uid!!).child("CURR_CHAP").setValue(position)
 
                         key = ObjectsCollection.chaptersList[position].KEY!!
                         if (ObjectsCollection.favouriteChapterKeysList.contains(key)) {

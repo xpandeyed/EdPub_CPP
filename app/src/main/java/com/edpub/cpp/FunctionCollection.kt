@@ -9,6 +9,7 @@ import kotlinx.coroutines.*
 
 object FunctionCollection {
     fun copyFavouriteChapters () {
+        Log.i("FAV", "copyFavouriteChapters started.")
         ObjectsCollection.favouriteChapters.clear()
         CoroutineScope(Dispatchers.Main).launch {
             var n = 0
@@ -64,6 +65,8 @@ object FunctionCollection {
 
                 }
             })
+            //load current chapter
+
         }
     }
 

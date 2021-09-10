@@ -19,15 +19,18 @@ class LauncherActivity : AppCompatActivity() {
 
         val auth: FirebaseAuth = Firebase.auth
 
+
+        if(!ObjectsCollection.isDataLoaded){
+            FunctionCollection.loadChapters()
+        }
+
         if(auth.currentUser==null) {
             val intent = Intent(this@LauncherActivity, SignUpActivity::class.java)
             startActivity(intent)
         }
         else {
-            FunctionCollection.loadChapters()
-            FunctionCollection.loadFavouriteChapterKeys()
-            Firebase.database.getReference("USERS").child(Firebase.auth.currentUser?.uid!!).child("CURR_CHAP").get().addOnSuccessListener {
-                ObjectsCollection.currentChapterPosition=it.value.toString().toInt()
+            if(!ObjectsCollection.isFavouriteChapterKeysListLoaded){
+                FunctionCollection.loadFavouriteChapterKeys()
             }
             val intent = Intent(this@LauncherActivity, HomeActivity::class.java)
             startActivity(intent)

@@ -29,15 +29,7 @@ class HomeActivity : AppCompatActivity() {
                 R.id.miHome->{setCurrentFragment(homeFragment)}
                 R.id.miChapters->{setCurrentFragment(chaptersFragment)}
                 R.id.miExamples->{setCurrentFragment(examplesFragment)}
-                R.id.miFavourites->{
-                    if(ObjectsCollection.isDataLoaded && ObjectsCollection.isFavouriteChapterKeysListLoaded){
-                        FunctionCollection.copyFavouriteChapters()
-                        setCurrentFragment(favouritesFragment)
-                    }
-                    else{
-                        Toast.makeText(this, "Loading Data... Try again in a moment.", Toast.LENGTH_SHORT).show()
-                    }
-                }
+                R.id.miFavourites->{ setCurrentFragment(favouritesFragment) }
             }
             true
         }

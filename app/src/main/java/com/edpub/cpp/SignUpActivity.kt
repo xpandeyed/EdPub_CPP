@@ -104,22 +104,17 @@ class SignUpActivity : AppCompatActivity() {
                     CoroutineScope(Dispatchers.IO).launch {
                         //checking if it is new user
                         ObjectsCollection.isNewUser = task.result.additionalUserInfo!!.isNewUser
-                        FunctionCollection.loadChapters()
 
                         val user = auth.currentUser
                         val uid = user?.uid
                         val firebaseDatabase = FirebaseDatabase.getInstance().getReference("USERS")
 
                         if(ObjectsCollection.isNewUser){
-                            firebaseDatabase.child(uid!!).child("CURR_CHAP").setValue("C111")
-                            firebaseDatabase.child(uid).child("NAME").setValue(user.displayName)
+                            firebaseDatabase.child(uid!!).child("NAME").setValue(user.displayName)
                             firebaseDatabase.child(uid).child("EMAIL").setValue(user.email)
                         }
                         else{
                             FunctionCollection.loadFavouriteChapterKeys()
-                            firebaseDatabase.child(uid!!).child("CURR_CHAP").get().addOnSuccessListener {
-                                ObjectsCollection.currentChapterPosition=it.value.toString().toInt()
-                            }
                         }
                         val intent = Intent(this@SignUpActivity, HomeActivity::class.java)
                         startActivity(intent)

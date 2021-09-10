@@ -28,7 +28,7 @@ class FavouritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapterList  = listOf(ObjectsCollection.adapterFavouriteChapters, ObjectsCollection.adapterFavouriteExamples)
+        val adapterList  = mutableListOf(ObjectsCollection.adapterFavouriteChapters, ObjectsCollection.adapterFavouriteExamples)
         val viewPagerAdapter = FavouritesAdapterViewPager(adapterList)
         val viewPager = view.findViewById<ViewPager2>(R.id.vp2Favourites)
 

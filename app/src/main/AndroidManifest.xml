@@ -12,6 +12,7 @@
         <activity
             android:name=".FeedbackActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:parentActivityName=".ProfileActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -55,13 +56,25 @@
         </activity>
         <activity
             android:name=".ExampleActivity"
-            android:exported="true" />
+            android:launchMode="singleInstance"
+            android:parentActivityName=".HomeActivity"
+            android:exported="true" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity"/>
+        </activity>
         <activity
             android:name=".ChapterActivity"
             android:exported="true"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleInstance"
+            android:parentActivityName=".HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
         <activity
             android:name=".HomeActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".SignUpActivity"
@@ -72,6 +85,7 @@
             android:name=".LauncherActivity"
             android:clearTaskOnLaunch="true"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

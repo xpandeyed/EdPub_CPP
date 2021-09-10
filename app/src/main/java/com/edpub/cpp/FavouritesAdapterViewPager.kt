@@ -23,6 +23,8 @@ class FavouritesAdapterViewPager(private var adapterList : List<ChapterRVAdapter
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currAdapter = adapterList[position]
         holder.rvFavouritesViewPager.layoutManager = LinearLayoutManager(context)
+        holder.rvFavouritesViewPager.itemAnimator = null
+
         holder.rvFavouritesViewPager.adapter = currAdapter
     }
 

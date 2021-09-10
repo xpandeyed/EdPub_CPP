@@ -32,21 +32,16 @@ class ChaptersFragment : Fragment() {
 
         rvChapters = view.findViewById(R.id.rvChapters)
         rvChapters.layoutManager = LinearLayoutManager(activity)
+        rvChapters.adapter = ObjectsCollection.adapterChapters
 
-
-        CoroutineScope(Dispatchers.Main).launch{
-
-            rvChapters.adapter = ObjectsCollection.adapterChapters
-
-            ObjectsCollection.adapterChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
-                override fun onItemClick(position: Int) {
-                    val intent = Intent(activity, ChapterActivity::class.java).apply {
-                        putExtra("POSITION", position)
-                        putExtra("INVOKER", "fromChapter")
-                    }
-                    startActivity(intent)
+        ObjectsCollection.adapterChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
+            override fun onItemClick(position: Int) {
+                val intent = Intent(activity, ChapterActivity::class.java).apply {
+                    putExtra("POSITION", position)
+                    putExtra("INVOKER", "fromChapter")
                 }
-            })
-        }
+                startActivity(intent)
+            }
+        })
     }
 }

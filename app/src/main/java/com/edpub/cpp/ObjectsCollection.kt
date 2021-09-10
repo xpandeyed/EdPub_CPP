@@ -1,14 +1,9 @@
 package com.edpub.cpp
 
-import android.content.Context
-import android.util.Log
-import android.widget.Toast
-import kotlinx.coroutines.*
-
 object ObjectsCollection {
-    var isDataLoaded = false//for chapters and examples
+    var isDataLoaded = false//for chapters and examples and current chapter
     var isFavouriteExampleListLoaded = false
-    var isFavouriteChapterKeysListLoaded = false
+    var isFavouriteChapterKeysListLoaded = false //for favourite chapter keys and current chapter
     var areFavouriteChaptersCopied = false
     var areFavouriteExamplesCopied = false
 

@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/feedback_background.xml" value="0.22864583333333333" />
+        <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.22864583333333333" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_outline_share_24.xml" value="0.22864583333333333" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_change_name.xml" value="0.2125" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_change_password.xml" value="0.2125" />
@@ -16,7 +17,7 @@
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_login.xml" value="0.1984375" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_privacy_policy.xml" value="0.2125" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_profile.xml" value="0.2125" />
-        <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_sign_up.xml" value="0.33" />
+        <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_sign_up.xml" value="0.2" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_terms_and_conditions.xml" value="0.2125" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_update_profile.xml" value="0.2125" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_update_profle.xml" value="0.2125" />
