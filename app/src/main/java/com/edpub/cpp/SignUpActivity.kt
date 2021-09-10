@@ -1,6 +1,7 @@
 package com.edpub.cpp
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.*
@@ -38,12 +39,18 @@ class SignUpActivity : AppCompatActivity() {
         val spannable = SpannableString(privacyPolicyMessage)
         val span1 = object : ClickableSpan(){
             override fun onClick(p0: View) {
-                Toast.makeText(this@SignUpActivity, "Privacy", Toast.LENGTH_SHORT).show()
+                val url = "https://edpubweb.blogspot.com/2021/09/Terms%20And%20Conditions.html"
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(url)
+                startActivity(intent)
             }
         }
         val span2 = object : ClickableSpan(){
             override fun onClick(p0: View) {
-                Toast.makeText(this@SignUpActivity, "Terms", Toast.LENGTH_SHORT).show()
+                val url = "https://edpubweb.blogspot.com/2021/09/Privacy%20Policy.html"
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(url)
+                startActivity(intent)
             }
         }
         spannable.setSpan(span1, 31, 51, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)

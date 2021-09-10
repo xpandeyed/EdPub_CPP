@@ -1,6 +1,7 @@
 package com.edpub.cpp
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
@@ -29,10 +30,16 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         findViewById<TextView>(R.id.tvTermsConditions).setOnClickListener {
-
+            val url = "https://edpubweb.blogspot.com/2021/09/Terms%20And%20Conditions.html"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
         }
         findViewById<TextView>(R.id.tvPrivacyPolicy).setOnClickListener {
-
+            val url = "https://edpubweb.blogspot.com/2021/09/Privacy%20Policy.html"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
         }
         findViewById<TextView>(R.id.tvFeedback).setOnClickListener {
             val intent = Intent(this, FeedbackActivity::class.java)
