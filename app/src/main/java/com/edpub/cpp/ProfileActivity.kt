@@ -29,12 +29,10 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         findViewById<TextView>(R.id.tvTermsConditions).setOnClickListener {
-            val intent = Intent(this, TermsAndConditionsActivity::class.java)
-            startActivity(intent)
+
         }
         findViewById<TextView>(R.id.tvPrivacyPolicy).setOnClickListener {
-            val intent = Intent(this, PrivacyPolicyActivity::class.java)
-            startActivity(intent)
+
         }
         findViewById<TextView>(R.id.tvFeedback).setOnClickListener {
             val intent = Intent(this, FeedbackActivity::class.java)

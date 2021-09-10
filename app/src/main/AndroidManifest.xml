@@ -18,20 +18,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ProfileActivity" /></activity>
         <activity
-            android:name=".PrivacyPolicyActivity"
-            android:exported="true"
-            android:parentActivityName=".ProfileActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ProfileActivity" /></activity>
-        <activity
-            android:name=".TermsAndConditionsActivity"
-            android:exported="true"
-            android:parentActivityName=".ProfileActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ProfileActivity" /></activity>
-        <activity
             android:name=".DeleteAccountActivity"
             android:exported="true"
             android:parentActivityName=".ProfileActivity">
