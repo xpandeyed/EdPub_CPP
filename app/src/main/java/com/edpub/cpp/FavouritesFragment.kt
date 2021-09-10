@@ -2,6 +2,7 @@ package com.edpub.cpp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,15 +19,29 @@ import kotlinx.coroutines.launch
 
 class FavouritesFragment : Fragment() {
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
+
+    override fun onResume() {
+        FunctionCollection.copyFavouriteChapters()
+        super.onResume()
+    }
+
         override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+            Log.i("Fragment", "OnCreateView Called")
         return inflater.inflate(R.layout.fragment_favourites, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Log.i("Fragment", "OnViewCreated Called")
 
         val adapterList  = mutableListOf(ObjectsCollection.adapterFavouriteChapters, ObjectsCollection.adapterFavouriteExamples)
         val viewPagerAdapter = FavouritesAdapterViewPager(adapterList)
@@ -42,6 +57,20 @@ class FavouritesFragment : Fragment() {
                 1->tab.text = "Examples"
             }
         }.attach()
+
+        tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+        })
+
+
 
             ObjectsCollection.adapterFavouriteChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
                 override fun onItemClick(position: Int) {

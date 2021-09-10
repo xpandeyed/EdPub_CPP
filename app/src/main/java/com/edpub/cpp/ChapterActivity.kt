@@ -1,8 +1,10 @@
 package com.edpub.cpp
 
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 
 import android.widget.Button
 import android.widget.ImageView
@@ -21,6 +23,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 
 //Entry Points
@@ -28,6 +31,9 @@ import kotlinx.coroutines.launch
 //2. From Chapters List
 //3. From Favourite Chapters
 class ChapterActivity : AppCompatActivity() {
+
+    private var invoker = "fromChapter"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chapter)
@@ -35,26 +41,42 @@ class ChapterActivity : AppCompatActivity() {
         val database = Firebase.database
         val myRef = database.getReference("USERS")
 
-        var key:String? = "C111"
+        var key:String? = ObjectsCollection.currentChapterKey
         var position = intent.getIntExtra("POSITION", 0)
-        when (intent.getStringExtra("INVOKER")) {
+        invoker = intent.getStringExtra("INVOKER")!!
+        when (invoker) {
             "fromFav" -> {
-                key = ObjectsCollection.favouriteChapters[position].KEY
+                try{
+                    key = ObjectsCollection.favouriteChapters[position].KEY
 
-                findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteChapters[position].TITLE
-                findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.favouriteChapters[position].TEXT
-                findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.favouriteChapters[position].CODE
+                    findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteChapters[position].TITLE
+                    findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.favouriteChapters[position].TEXT
+                    findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.favouriteChapters[position].CODE
+                }
+                catch (exception : Exception){
+                    Log.i("FAV", "$exception")
+                    //this toast is never shown reason unknown
+                    Toast.makeText(this, "Favourite Chapter List Is Empty Now.", Toast.LENGTH_SHORT).show()
+                }
+
             }
             "fromChapter" -> {
                 key = ObjectsCollection.chaptersList[position].KEY!!
 
                 ObjectsCollection.currentChapterPosition = position
+                ObjectsCollection.currentChapterKey = key
+
+
+
+                Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_CHAP").setValue(key)
 
                 findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.chaptersList[position].TITLE
                 findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.chaptersList[position].TEXT
                 findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.chaptersList[position].CODE
             }
             "fromCurrChap" -> {
+
+
                 findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.chaptersList[position].TITLE
                 findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.chaptersList[position].TEXT
                 findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.chaptersList[position].CODE
@@ -72,42 +94,44 @@ class ChapterActivity : AppCompatActivity() {
 
         }
 
-        if(ObjectsCollection.favouriteChapterKeysList.contains(key)){
+        if(ObjectsCollection.favouriteChapterKeysList.indexOf(key)!=-1){
             DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.primaryColor))
         }
         else{
             DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
         }
-        /* when chapter is added to favourites the chapter key is added twice to the favouriteChapterList.
-        * that is why we are removing the key twice
-        * reason of chapter being added twice is not known.
-        * Don't delete this comment until problem is not solved.*/
+
+
         ivFavourites.setOnClickListener {
             if(ObjectsCollection.favouriteChapterKeysList.indexOf(key)!=-1){
-                ObjectsCollection.areFavouriteChaptersCopied = false
-                ObjectsCollection.favouriteChapterKeysList.remove(key)
-                ObjectsCollection.favouriteChapterKeysList.remove(key)
-                FunctionCollection.copyFavouriteChapters()
 
+                ObjectsCollection.favouriteChapters.removeAt(position)
+                ObjectsCollection.adapterFavouriteChapters.notifyItemRemoved(position)
+                Log.i("FR", "${ObjectsCollection.favouriteChapters}")
+                Log.i("KEYS", "Before Removal ${ObjectsCollection.favouriteChapterKeysList}")
+                ObjectsCollection.favouriteChapterKeysList.remove(key)
+                Log.i("KEYS", "After Removal ${ObjectsCollection.favouriteChapterKeysList}")
                 myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP").child(key!!).setValue(null)
                 DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
             }
             else{
-                ObjectsCollection.areFavouriteChaptersCopied = false
+                Log.i("KEYS", "Before Addition ${ObjectsCollection.favouriteChapterKeysList}")
                 ObjectsCollection.favouriteChapterKeysList.add(key!!)
-                FunctionCollection.copyFavouriteChapters()
+                Log.i("KEYS", "After Addition ${ObjectsCollection.favouriteChapterKeysList}")
+                Log.i("Fav", "CHAPS ${ObjectsCollection.favouriteChapters}")
                 myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP").child(key.toString()).setValue(key)
                 DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.primaryColor))
             }
         }
         bToNextChapter.setOnClickListener {
-                if(intent.getStringExtra("INVOKER")=="fromFav"){
+                if(invoker=="fromFav"){
                     if(position==ObjectsCollection.favouriteChapters.size-1){
                         Toast.makeText(this, "This is the last Chapter.", Toast.LENGTH_SHORT).show()
                     }
                     else {
                         position += 1
                         key = ObjectsCollection.favouriteChapters[position].KEY!!
+
                         if (ObjectsCollection.favouriteChapterKeysList.contains(key)) {
                             DrawableCompat.setTint(
                                 ivFavourites.drawable,
@@ -133,10 +157,13 @@ class ChapterActivity : AppCompatActivity() {
                     }
                     else {
                         position += 1
+                        key = ObjectsCollection.chaptersList[position].KEY!!
 
                         ObjectsCollection.currentChapterPosition = position
+                        ObjectsCollection.currentChapterKey = key.toString()
 
-                        key = ObjectsCollection.chaptersList[position].KEY!!
+                        Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_CHAP").setValue(key)
+
                         if (ObjectsCollection.favouriteChapterKeysList.contains(key)) {
                             DrawableCompat.setTint(
                                 ivFavourites.drawable,
@@ -157,5 +184,10 @@ class ChapterActivity : AppCompatActivity() {
                     }
                 }
         }
+    }
+
+    override fun onRestart() {
+        Log.i("Chapter Activity", "In onRestart")
+        super.onRestart()
     }
 }

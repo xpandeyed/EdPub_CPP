@@ -112,6 +112,8 @@ class SignUpActivity : AppCompatActivity() {
                         if(ObjectsCollection.isNewUser){
                             firebaseDatabase.child(uid!!).child("NAME").setValue(user.displayName)
                             firebaseDatabase.child(uid).child("EMAIL").setValue(user.email)
+                            firebaseDatabase.child(uid).child("CURR_CHAP").setValue("C111")
+
                         }
                         else{
                             FunctionCollection.loadFavouriteChapterKeys()

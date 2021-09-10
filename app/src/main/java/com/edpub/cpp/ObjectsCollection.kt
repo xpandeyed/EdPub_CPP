@@ -10,10 +10,12 @@ object ObjectsCollection {
     var isNewUser = false
 
     var currentChapterPosition = 0
+    var currentChapterKey = "C111"
+
     var chaptersList = mutableListOf<Chapter>()
     var examplesList = mutableListOf<Chapter>()
-    var favouriteChapterKeysList = mutableListOf<String>()
-    var favouriteExampleKeysList = mutableListOf<String>()
+    var favouriteChapterKeysList = mutableSetOf<String>()
+    var favouriteExampleKeysList = mutableSetOf<String>()
     var favouriteChapters = mutableListOf<Chapter>()
     var favouriteExamples = mutableListOf<Chapter>()
 

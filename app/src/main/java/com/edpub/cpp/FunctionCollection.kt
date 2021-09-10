@@ -9,7 +9,6 @@ import kotlinx.coroutines.*
 
 object FunctionCollection {
     fun copyFavouriteChapters () {
-        Log.i("FAV", "copyFavouriteChapters started.")
         ObjectsCollection.favouriteChapters.clear()
         CoroutineScope(Dispatchers.Main).launch {
             var n = 0
@@ -22,6 +21,7 @@ object FunctionCollection {
                 n++
             }
             ObjectsCollection.areFavouriteChaptersCopied = true
+            Log.i("Fav", "${ObjectsCollection.favouriteChapters}")
         }
 
     }
@@ -65,8 +65,17 @@ object FunctionCollection {
 
                 }
             })
-            //load current chapter
-
+            //load current chapter key
+            Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_CHAP").get()
+            var n = 0
+            while(n<ObjectsCollection.chaptersList.size){
+                if(ObjectsCollection.currentChapterKey == ObjectsCollection.chaptersList[n].KEY)
+                {
+                    ObjectsCollection.currentChapterPosition = n
+                    break
+                }
+                n++
+            }
         }
     }
 

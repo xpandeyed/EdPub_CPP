@@ -3,6 +3,7 @@ package com.edpub.cpp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -16,12 +17,16 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         setSupportActionBar(findViewById(R.id.tbHomeToolBar))
 
+        val invoker = intent.getStringExtra("INVOKER")
+
         val homeFragment = HomeFragment()
         val chaptersFragment = ChaptersFragment()
         val examplesFragment = ExamplesFragment()
         val favouritesFragment = FavouritesFragment()
 
+
         setCurrentFragment(homeFragment)
+
 
         val bnvHomeFragmentNavigator = findViewById<BottomNavigationView>(R.id.bnvHomeFragmentNavigator)
         bnvHomeFragmentNavigator.setOnNavigationItemSelectedListener {
@@ -29,7 +34,7 @@ class HomeActivity : AppCompatActivity() {
                 R.id.miHome->{setCurrentFragment(homeFragment)}
                 R.id.miChapters->{setCurrentFragment(chaptersFragment)}
                 R.id.miExamples->{setCurrentFragment(examplesFragment)}
-                R.id.miFavourites->{ setCurrentFragment(favouritesFragment) }
+                R.id.miFavourites->{ setCurrentFragment(favouritesFragment)}
             }
             true
         }
