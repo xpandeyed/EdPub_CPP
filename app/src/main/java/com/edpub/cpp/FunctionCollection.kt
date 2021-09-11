@@ -25,6 +25,23 @@ object FunctionCollection {
         }
 
     }
+    fun copyFavouriteExamples () {
+        ObjectsCollection.favouriteExamples.clear()
+        CoroutineScope(Dispatchers.Main).launch {
+            var n = 0
+            while (n < ObjectsCollection.examplesList.size) {
+                var index = ObjectsCollection.favouriteExampleKeysList.indexOf(ObjectsCollection.examplesList[n].KEY)
+                if (index != -1) {
+                    ObjectsCollection.favouriteExamples.add(ObjectsCollection.examplesList[n])
+                    ObjectsCollection.adapterFavouriteExamples.notifyItemInserted(ObjectsCollection.favouriteExamples.size-1)
+                }
+                n++
+            }
+            ObjectsCollection.areFavouriteExamplesCopied = true
+            Log.i("Fav", "${ObjectsCollection.favouriteExamples}")
+        }
+
+    }
     fun loadChapters () {
         CoroutineScope(Dispatchers.IO).launch{
             val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("CHAPTERS")
@@ -36,6 +53,28 @@ object FunctionCollection {
                             ObjectsCollection.chaptersList.add(currChapter!!)
                             Log.i("FAV", "${ObjectsCollection.chaptersList}")
                             ObjectsCollection.adapterChapters.notifyItemInserted(ObjectsCollection.chaptersList.size-1)
+                        }
+                    }
+                    ObjectsCollection.isDataLoaded = true
+                }
+                override fun onCancelled(error: DatabaseError) {
+                    ObjectsCollection.isDataLoaded= false
+                }
+            })
+
+        }
+    }
+    fun loadExamples () {
+        CoroutineScope(Dispatchers.IO).launch{
+            val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("EXAMPLES")
+            databaseReference.addValueEventListener(object: ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot.exists()){
+                        for(example in snapshot.children){
+                            val currExample = example.getValue(Chapter::class.java)
+                            ObjectsCollection.examplesList.add(currExample!!)
+                            Log.i("FAV", "${ObjectsCollection.examplesList}")
+                            ObjectsCollection.adapterExamples.notifyItemInserted(ObjectsCollection.examplesList.size-1)
                         }
                     }
                     ObjectsCollection.isDataLoaded = true
@@ -78,5 +117,35 @@ object FunctionCollection {
             }
         }
     }
+    fun loadFavouriteExampleKeys (){
+        CoroutineScope(Dispatchers.IO).launch{
+            val favChapterReference = Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("FAV_EXAM")
+            favChapterReference.addValueEventListener(object: ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot.exists()){
+                        for(example in snapshot.children){
+                            val currExample = example.getValue(String::class.java)
+                            ObjectsCollection.favouriteExampleKeysList.add(currExample!!)
+                            Log.i("FAV", "${ObjectsCollection.favouriteExampleKeysList}")
+                        }
+                    }
+                    ObjectsCollection.isFavouriteExampleKeysListLoaded = true
+                }
+                override fun onCancelled(error: DatabaseError) {
 
+                }
+            })
+            //load current example key
+            Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_EXAM").get()
+            var n = 0
+            while(n<ObjectsCollection.examplesList.size){
+                if(ObjectsCollection.currentExampleKey == ObjectsCollection.examplesList[n].KEY)
+                {
+                    ObjectsCollection.currentExamplePosition = n
+                    break
+                }
+                n++
+            }
+        }
+    }
 }

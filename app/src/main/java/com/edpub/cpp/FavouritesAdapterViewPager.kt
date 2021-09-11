@@ -24,7 +24,6 @@ class FavouritesAdapterViewPager(private var adapterList : List<ChapterRVAdapter
         val currAdapter = adapterList[position]
         holder.rvFavouritesViewPager.layoutManager = LinearLayoutManager(context)
         holder.rvFavouritesViewPager.itemAnimator = null
-
         holder.rvFavouritesViewPager.adapter = currAdapter
     }
 

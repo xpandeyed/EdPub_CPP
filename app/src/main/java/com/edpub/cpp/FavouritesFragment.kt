@@ -27,6 +27,7 @@ class FavouritesFragment : Fragment() {
 
     override fun onResume() {
         FunctionCollection.copyFavouriteChapters()
+        FunctionCollection.copyFavouriteExamples()
         super.onResume()
     }
 
@@ -83,9 +84,9 @@ class FavouritesFragment : Fragment() {
             })
             ObjectsCollection.adapterFavouriteExamples.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
                 override fun onItemClick(position: Int) {
-                    val intent = Intent(activity, ChapterActivity::class.java).apply {
+                    val intent = Intent(activity, ExampleActivity::class.java).apply {
                         putExtra("POSITION", position)
-                        putExtra("IS_FROM_FAV", true)
+                        putExtra("INVOKER", "fromFav")
                     }
                     startActivity(intent)
                 }

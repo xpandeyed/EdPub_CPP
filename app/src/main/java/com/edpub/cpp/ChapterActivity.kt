@@ -186,8 +186,5 @@ class ChapterActivity : AppCompatActivity() {
         }
     }
 
-    override fun onRestart() {
-        Log.i("Chapter Activity", "In onRestart")
-        super.onRestart()
-    }
+
 }

@@ -22,6 +22,7 @@ class LauncherActivity : AppCompatActivity() {
 
         if(!ObjectsCollection.isDataLoaded){
             FunctionCollection.loadChapters()
+            FunctionCollection.loadExamples()
         }
 
         if(auth.currentUser==null) {
@@ -31,6 +32,9 @@ class LauncherActivity : AppCompatActivity() {
         else {
             if(!ObjectsCollection.isFavouriteChapterKeysListLoaded){
                 FunctionCollection.loadFavouriteChapterKeys()
+            }
+            if(!ObjectsCollection.isFavouriteExampleKeysListLoaded){
+                FunctionCollection.loadFavouriteExampleKeys()
             }
             val intent = Intent(this@LauncherActivity, HomeActivity::class.java)
             startActivity(intent)

@@ -4,6 +4,7 @@ object ObjectsCollection {
     var isDataLoaded = false//for chapters and examples and current chapter
     var isFavouriteExampleListLoaded = false
     var isFavouriteChapterKeysListLoaded = false //for favourite chapter keys and current chapter
+    var isFavouriteExampleKeysListLoaded = false //for favourite chapter keys and current chapter
     var areFavouriteChaptersCopied = false
     var areFavouriteExamplesCopied = false
 
@@ -11,6 +12,9 @@ object ObjectsCollection {
 
     var currentChapterPosition = 0
     var currentChapterKey = "C111AAA"
+
+    var currentExamplePosition = 0
+    var currentExampleKey = "E111AAA"
 
     var chaptersList = mutableListOf<Chapter>()
     var examplesList = mutableListOf<Chapter>()

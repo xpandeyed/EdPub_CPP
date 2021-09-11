@@ -124,6 +124,7 @@ class SignUpActivity : AppCompatActivity() {
                         }
                         else{
                             FunctionCollection.loadFavouriteChapterKeys()
+                            FunctionCollection.loadFavouriteExampleKeys()
                         }
                         val intent = Intent(this@SignUpActivity, HomeActivity::class.java)
                         startActivity(intent)
