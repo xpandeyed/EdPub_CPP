@@ -86,26 +86,26 @@ class ExampleActivity : AppCompatActivity() {
 
                 ObjectsCollection.favouriteExamples.removeAt(position)
                 ObjectsCollection.adapterFavouriteExamples.notifyItemRemoved(position)
-                Log.i("FR", "${ObjectsCollection.favouriteExamples}")
-                Log.i("KEYS", "Before Removal ${ObjectsCollection.favouriteExampleKeysList}")
                 ObjectsCollection.favouriteExampleKeysList.remove(key)
-                Log.i("KEYS", "After Removal ${ObjectsCollection.favouriteExampleKeysList}")
+
                 myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_EXAM").child(key!!).setValue(null)
+
                 DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
             }
             else{
-                Log.i("KEYS", "Before Addition ${ObjectsCollection.favouriteExampleKeysList}")
+
                 ObjectsCollection.favouriteExampleKeysList.add(key!!)
-                Log.i("KEYS", "After Addition ${ObjectsCollection.favouriteExampleKeysList}")
-                Log.i("Fav", "CHAPS ${ObjectsCollection.favouriteExamples}")
+                ObjectsCollection.favouriteExamples.add(ObjectsCollection.examplesList[position])
+                ObjectsCollection.adapterFavouriteExamples.notifyItemInserted(ObjectsCollection.favouriteExamples.size-1)
+
                 myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_EXAM").child(key.toString()).setValue(key)
                 DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.primaryColor))
             }
         }
         bToNextExample.setOnClickListener {
             if(invoker=="fromFav"){
-                if(position==ObjectsCollection.favouriteExamples.size-1){
-                    Toast.makeText(this, "This is the last Example.", Toast.LENGTH_SHORT).show()
+                if(position>=ObjectsCollection.favouriteExamples.size-1){
+                    Toast.makeText(this, "No more Favourite Examples Found.", Toast.LENGTH_SHORT).show()
                 }
                 else {
 
@@ -136,8 +136,8 @@ class ExampleActivity : AppCompatActivity() {
                 }
             }
             else{
-                if(position==ObjectsCollection.examplesList.size-1){
-                    Toast.makeText(this, "This is the last Example.", Toast.LENGTH_SHORT).show()
+                if(position>=ObjectsCollection.examplesList.size-1){
+                    Toast.makeText(this, "No more Examples found", Toast.LENGTH_SHORT).show()
                 }
                 else {
                     position += 1

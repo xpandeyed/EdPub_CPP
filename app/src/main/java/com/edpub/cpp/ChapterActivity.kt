@@ -106,27 +106,29 @@ class ChapterActivity : AppCompatActivity() {
             if(ObjectsCollection.favouriteChapterKeysList.indexOf(key)!=-1){
 
                 ObjectsCollection.favouriteChapters.removeAt(position)
-                ObjectsCollection.adapterFavouriteChapters.notifyItemRemoved(position)
-                Log.i("FR", "${ObjectsCollection.favouriteChapters}")
-                Log.i("KEYS", "Before Removal ${ObjectsCollection.favouriteChapterKeysList}")
                 ObjectsCollection.favouriteChapterKeysList.remove(key)
-                Log.i("KEYS", "After Removal ${ObjectsCollection.favouriteChapterKeysList}")
+                ObjectsCollection.adapterFavouriteChapters.notifyItemRemoved(position)
+
                 myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP").child(key!!).setValue(null)
+
                 DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
             }
             else{
-                Log.i("KEYS", "Before Addition ${ObjectsCollection.favouriteChapterKeysList}")
+
                 ObjectsCollection.favouriteChapterKeysList.add(key!!)
-                Log.i("KEYS", "After Addition ${ObjectsCollection.favouriteChapterKeysList}")
-                Log.i("Fav", "CHAPS ${ObjectsCollection.favouriteChapters}")
+                ObjectsCollection.favouriteChapters.add(ObjectsCollection.chaptersList[position])
+                ObjectsCollection.adapterFavouriteChapters.notifyItemInserted(ObjectsCollection.favouriteChapters.size-1)
+
+
                 myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP").child(key.toString()).setValue(key)
+
                 DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.primaryColor))
             }
         }
         bToNextChapter.setOnClickListener {
                 if(invoker=="fromFav"){
-                    if(position==ObjectsCollection.favouriteChapters.size-1){
-                        Toast.makeText(this, "This is the last Chapter.", Toast.LENGTH_SHORT).show()
+                    if(position>=ObjectsCollection.favouriteChapters.size-1){
+                        Toast.makeText(this, "No more Favourite Chapters found.", Toast.LENGTH_SHORT).show()
                     }
                     else {
                         position += 1
@@ -152,8 +154,8 @@ class ChapterActivity : AppCompatActivity() {
                     }
                 }
                 else{
-                    if(position==ObjectsCollection.chaptersList.size-1){
-                        Toast.makeText(this, "This is the last Chapter.", Toast.LENGTH_SHORT).show()
+                    if(position>=ObjectsCollection.chaptersList.size-1){
+                        Toast.makeText(this, "No more Chapters found.", Toast.LENGTH_SHORT).show()
                     }
                     else {
                         position += 1
