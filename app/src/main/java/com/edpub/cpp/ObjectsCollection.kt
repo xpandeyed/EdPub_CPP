@@ -7,6 +7,8 @@ object ObjectsCollection {
     var isFavouriteExampleKeysListLoaded = false //for favourite chapter keys and current chapter
     var areFavouriteChaptersCopied = false
     var areFavouriteExamplesCopied = false
+    var isCurrChapterLoaded = false
+    var isCurrExampleLoaded = false
 
     var isNewUser = false
 

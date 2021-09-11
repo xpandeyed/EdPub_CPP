@@ -42,7 +42,7 @@ class ChapterActivity : AppCompatActivity() {
         val myRef = database.getReference("USERS")
 
         var key:String? = ObjectsCollection.currentChapterKey
-        var position = intent.getIntExtra("POSITION", 0)
+        var position = intent.getIntExtra("POSITION", ObjectsCollection.currentChapterPosition)
         var currChapter = ObjectsCollection.chaptersList[position]
         invoker = intent.getStringExtra("INVOKER")!!
         when (invoker) {

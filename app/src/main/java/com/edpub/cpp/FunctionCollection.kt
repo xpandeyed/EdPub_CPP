@@ -111,10 +111,12 @@ object FunctionCollection {
                 if(ObjectsCollection.currentChapterKey == ObjectsCollection.chaptersList[n].KEY)
                 {
                     ObjectsCollection.currentChapterPosition = n
+                    ObjectsCollection.isCurrChapterLoaded = true
                     break
                 }
                 n++
             }
+
         }
     }
     fun loadFavouriteExampleKeys (){
