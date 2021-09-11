@@ -10,4 +10,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="icon_inactive">#676667</color>
     <color name="major_background">#F5F5F5</color>
+    <color name="chapter_text">#63658c</color>
+    <color name="chapter_background">#f9f8fb</color>
+    <color name="chapter_title">#24265f</color>
+
 </resources>

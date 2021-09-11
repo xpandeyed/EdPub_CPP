@@ -6,11 +6,12 @@
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/feedback_background.xml" value="0.22864583333333333" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.22864583333333333" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_outline_share_24.xml" value="0.22864583333333333" />
+        <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/splash_image.xml" value="0.22864583333333333" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_change_name.xml" value="0.2125" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_change_password.xml" value="0.2125" />
-        <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_chapter.xml" value="0.5" />
+        <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_chapter.xml" value="0.22" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_delete_account.xml" value="0.2125" />
-        <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_example.xml" value="0.2125" />
+        <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_example.xml" value="0.25" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_feedback.xml" value="0.1984375" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_home.xml" value="0.15" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_launcher.xml" value="0.2125" />
