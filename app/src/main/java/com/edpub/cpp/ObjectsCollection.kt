@@ -10,7 +10,7 @@ object ObjectsCollection {
     var isNewUser = false
 
     var currentChapterPosition = 0
-    var currentChapterKey = "C111"
+    var currentChapterKey = "C111AAA"
 
     var chaptersList = mutableListOf<Chapter>()
     var examplesList = mutableListOf<Chapter>()
