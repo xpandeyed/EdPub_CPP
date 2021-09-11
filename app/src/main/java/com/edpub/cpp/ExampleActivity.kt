@@ -22,17 +22,19 @@ class ExampleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_example)
 
-
         val database = Firebase.database
         val myRef = database.getReference("USERS")
 
         var key:String? = ObjectsCollection.currentExampleKey
         var position = intent.getIntExtra("POSITION", 0)
+        var currExample = ObjectsCollection.examplesList[position]
         invoker = intent.getStringExtra("INVOKER")!!
         when (invoker) {
             "fromFav" -> {
                 try{
                     key = ObjectsCollection.favouriteExamples[position].KEY
+
+                    currExample = ObjectsCollection.favouriteExamples[position]
 
                     findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteExamples[position].TITLE
                     findViewById<TextView>(R.id.tvExampleText).text = ObjectsCollection.favouriteExamples[position].TEXT
@@ -48,6 +50,8 @@ class ExampleActivity : AppCompatActivity() {
             "fromExample" -> {
                 key = ObjectsCollection.examplesList[position].KEY!!
 
+                currExample = ObjectsCollection.examplesList[position]
+
                 ObjectsCollection.currentExamplePosition = position
                 ObjectsCollection.currentExampleKey = key
 
@@ -58,6 +62,9 @@ class ExampleActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.examplesList[position].CODE
             }
             "fromCurrExam" -> {
+
+                currExample = ObjectsCollection.examplesList[ObjectsCollection.currentExamplePosition]
+
                 findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.examplesList[position].TITLE
                 findViewById<TextView>(R.id.tvExampleText).text = ObjectsCollection.examplesList[position].TEXT
                 findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.examplesList[position].CODE
@@ -83,9 +90,9 @@ class ExampleActivity : AppCompatActivity() {
 
         ivFavourites.setOnClickListener {
             if(ObjectsCollection.favouriteExampleKeysList.indexOf(key)!=-1){
-
-                ObjectsCollection.favouriteExamples.removeAt(position)
-                ObjectsCollection.adapterFavouriteExamples.notifyItemRemoved(position)
+                val positionCurrExample = ObjectsCollection.favouriteExamples.indexOf(currExample)
+                ObjectsCollection.favouriteExamples.remove(currExample)
+                ObjectsCollection.adapterFavouriteExamples.notifyItemRemoved(positionCurrExample)
                 ObjectsCollection.favouriteExampleKeysList.remove(key)
 
                 myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_EXAM").child(key!!).setValue(null)
@@ -95,7 +102,7 @@ class ExampleActivity : AppCompatActivity() {
             else{
 
                 ObjectsCollection.favouriteExampleKeysList.add(key!!)
-                ObjectsCollection.favouriteExamples.add(ObjectsCollection.examplesList[position])
+                ObjectsCollection.favouriteExamples.add(currExample)
                 ObjectsCollection.adapterFavouriteExamples.notifyItemInserted(ObjectsCollection.favouriteExamples.size-1)
 
                 myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_EXAM").child(key.toString()).setValue(key)
@@ -109,8 +116,10 @@ class ExampleActivity : AppCompatActivity() {
                 }
                 else {
 
-                    try{position += 1
+                    try{
+                        position += 1
                         key = ObjectsCollection.favouriteExamples[position].KEY!!
+                        currExample = ObjectsCollection.favouriteExamples[position]
 
                         if (ObjectsCollection.favouriteExampleKeysList.contains(key)) {
                             DrawableCompat.setTint(
@@ -142,6 +151,7 @@ class ExampleActivity : AppCompatActivity() {
                 else {
                     position += 1
                     key = ObjectsCollection.examplesList[position].KEY!!
+                    currExample = ObjectsCollection.examplesList[position]
 
                     ObjectsCollection.currentExamplePosition = position
                     ObjectsCollection.currentExampleKey = key.toString()
