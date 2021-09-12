@@ -153,20 +153,21 @@ object FunctionCollection {
     fun loadCurrentChapterKey(){
         Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_CHAP").get().addOnSuccessListener {
             ObjectsCollection.currentChapterKey = it.value.toString()
-        }
-        var n = 0
-        while(n<ObjectsCollection.chaptersList.size){
-            if(ObjectsCollection.currentChapterKey == ObjectsCollection.chaptersList[n].KEY)
-            {
-                ObjectsCollection.currentChapterPosition = n
-                ObjectsCollection.currentChapter.clear()
-                ObjectsCollection.currentChapter.add(ObjectsCollection.chaptersList[ObjectsCollection.currentChapterPosition])
-                ObjectsCollection.adapterCurrentChapter.notifyItemInserted(ObjectsCollection.currentChapter.size-1)
-                ObjectsCollection.isCurrChapterLoaded = true
-                break
+            var n = 0
+            while(n<ObjectsCollection.chaptersList.size){
+                if(ObjectsCollection.currentChapterKey == ObjectsCollection.chaptersList[n].KEY)
+                {
+                    ObjectsCollection.currentChapterPosition = n
+                    ObjectsCollection.currentChapter.clear()
+                    ObjectsCollection.currentChapter.add(ObjectsCollection.chaptersList[ObjectsCollection.currentChapterPosition])
+                    ObjectsCollection.adapterCurrentChapter.notifyItemInserted(ObjectsCollection.currentChapter.size-1)
+                    ObjectsCollection.isCurrChapterLoaded = true
+                    break
+                }
+                n++
             }
-            n++
         }
+
     }
 
     private fun loadCurrentExampleKey(){

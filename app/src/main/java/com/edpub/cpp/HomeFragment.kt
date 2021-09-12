@@ -43,12 +43,17 @@ class HomeFragment : Fragment() {
 
         ObjectsCollection.adapterCurrentChapter.setOnItemClickListener(object : CurrentChapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
-                val intent = Intent(activity, ChapterActivity::class.java).apply {
-                    val positionOfCurrChapter = ObjectsCollection.chaptersList.indexOf(ObjectsCollection.currentChapter[position])
-                    putExtra("POSITION", positionOfCurrChapter)
-                    putExtra("INVOKER", "fromChapter")
+                if(ObjectsCollection.isDataLoaded){
+                    val intent = Intent(activity, ChapterActivity::class.java).apply {
+                        val positionOfCurrChapter = ObjectsCollection.chaptersList.indexOf(ObjectsCollection.currentChapter[position])
+                        putExtra("POSITION", positionOfCurrChapter)
+                        putExtra("INVOKER", "fromChapter")
+                    }
+                    startActivity(intent)
                 }
-                startActivity(intent)
+                else{
+                    Toast.makeText(activity, "Loading Data...", Toast.LENGTH_SHORT).show()
+                }
             }
         })
 
