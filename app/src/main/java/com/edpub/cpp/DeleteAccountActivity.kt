@@ -32,6 +32,9 @@ class DeleteAccountActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_delete_account)
 
+        setSupportActionBar(findViewById(R.id.tbDeleteAccount))
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.web_client_id))

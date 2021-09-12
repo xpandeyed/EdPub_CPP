@@ -41,6 +41,9 @@ class ProfileActivity : AppCompatActivity() {
             intent.data = Uri.parse(url)
             startActivity(intent)
         }
+        findViewById<TextView>(R.id.tvReport).setOnClickListener {
+
+        }
         findViewById<TextView>(R.id.tvFeedback).setOnClickListener {
             val intent = Intent(this, FeedbackActivity::class.java)
             startActivity(intent)

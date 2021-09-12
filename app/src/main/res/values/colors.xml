@@ -13,5 +13,7 @@
     <color name="chapter_text">#63658c</color>
     <color name="chapter_background">#f9f8fb</color>
     <color name="chapter_title">#24265f</color>
+    <color name="grey_text_background">#eeeef0</color>
+    <color name="grey_text">#6e6f6e</color>
 
 </resources>

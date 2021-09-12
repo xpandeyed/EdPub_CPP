@@ -28,6 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lines="10"
+            android:textColor="@color/grey_text"
             android:padding="20dp"
             android:gravity="top|left"
             app:layout_constraintTop_toBottomOf="@id/ablDeleteAccount"

@@ -2,6 +2,7 @@ package com.edpub.cpp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
@@ -21,6 +22,7 @@ class ExampleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_example)
+
 
         val database = Firebase.database
         val myRef = database.getReference("USERS")

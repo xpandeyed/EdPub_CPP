@@ -1,6 +1,7 @@
 package com.edpub.cpp
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -86,6 +87,14 @@ class HomeFragment : Fragment() {
             else{
                 Toast.makeText(activity, "Examples not loaded yet. Wait a moment...", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        val tvContribute = view.findViewById<TextView>(R.id.tvContribute)
+        tvContribute.setOnClickListener {
+            val url = "https://edpubweb.blogspot.com/2021/09/contribute.html"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
         }
 
     }
