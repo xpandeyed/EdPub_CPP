@@ -10,229 +10,235 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cvChapterCard"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvChapterCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="4dp"
+                android:elevation="5dp"
+                app:cardCornerRadius="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/clContainer">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tvPickUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"
+                        android:text="Pick Up where you left off"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/tvYourCurrentChapter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:gravity="center"
+                        android:text="Your Current Chapter"
+                        app:layout_constraintTop_toBottomOf="@+id/tvPickUp" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clCurrChapter"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_margin="10dp"
+                        android:background="@color/chapter_background"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvYourCurrentChapter">
+
+                        <TextView
+                            android:id="@+id/tvLoadingChapters"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Loading Chapters . . ." />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvCurrentChapter"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/tvYourCurrentExample"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:gravity="center"
+                        android:text="Your Current Example"
+                        app:layout_constraintTop_toBottomOf="@id/clCurrChapter" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_margin="10dp"
+                        android:background="@color/chapter_background"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvYourCurrentExample">
+
+                        <TextView
+                            android:id="@+id/tvLoadingExamples"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Loading Examples . . ." />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvCurrentExample"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="4dp"
+                app:cardCornerRadius="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_icons8_bookmark" />
+            </androidx.cardview.widget.CardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvRandomExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
             android:elevation="5dp"
             app:cardCornerRadius="5dp"
-            android:layout_marginBottom="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="50dp"
-            app:layout_constraintTop_toTopOf="@+id/clContainer"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clContainer">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <ImageView
+                    android:id="@+id/cvExampleImage"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/ic_code_example"
+                    app:cardCornerRadius="24dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                </ImageView>
+
                 <TextView
-                    android:id="@+id/tvPickUp"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tvTestYourLearning"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginBottom="5dp"
-                    android:gravity="center"
-                    android:layout_marginTop="50dp"
-                    android:text="Pick Up where you left off"
+                    android:text="Test Your Learning"
                     android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/cvExampleImage"
                     app:layout_constraintTop_toTopOf="parent" />
 
-
                 <TextView
-                    android:id="@+id/tvYourCurrentChapter"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tvRandomExample"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_margin="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPickUp"
-                    android:text="Your Current Chapter"/>
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center_vertical"
+                    android:text="Try a random example"
+                    app:layout_constraintLeft_toRightOf="@+id/cvExampleImage"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTestYourLearning" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/clCurrChapter"
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/bToRandomExample"
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="See Example"
+                    android:textAllCaps="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:layout_margin="10dp"
-                    android:background="@color/chapter_background"
-                    app:layout_constraintTop_toBottomOf="@+id/tvYourCurrentChapter"
-                    android:layout_height="60dp">
-                    <TextView
-                        android:id="@+id/tvLoadingChapters"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="Loading Chapters . . ."/>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvCurrentChapter"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <TextView
-                    android:id="@+id/tvYourCurrentExample"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Your Current Example"
-                    android:layout_margin="8dp"
-                    android:gravity="center"
-                    app:layout_constraintTop_toBottomOf="@id/clCurrChapter"/>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_margin="10dp"
-                    android:background="@color/chapter_background"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvYourCurrentExample">
-                    <TextView
-                        android:id="@+id/tvLoadingExamples"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="Loading Examples . . ."/>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvCurrentExample"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
-
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
+                    app:layout_constraintTop_toBottomOf="@id/tvRandomExample" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:cardCornerRadius="50dp"
-            android:layout_marginTop="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_icons8_bookmark"/>
-        </androidx.cardview.widget.CardView>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvRandomExample"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="5dp"
-        android:layout_margin="25dp"
-        app:cardCornerRadius="5dp"
-        app:layout_constraintTop_toBottomOf="@id/clContainer"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/cvExampleImage"
-                android:layout_width="48dp"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
-                android:src="@drawable/ic_code_example"
-                app:cardCornerRadius="24dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_height="48dp">
-
-
-            </ImageView>
-
-            <TextView
-                android:id="@+id/tvTestYourLearning"
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="15dp"
-                android:text="Test Your Learning"
-                android:textSize="20sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/cvExampleImage"
-                 />
-
-            <TextView
-                android:id="@+id/tvRandomExample"
-                android:layout_width="0dp"
-                android:layout_marginLeft="20dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:gravity="center_vertical"
-                app:layout_constraintLeft_toRightOf="@+id/cvExampleImage"
-                android:text="Try a random example"
-                app:layout_constraintTop_toBottomOf="@+id/tvTestYourLearning" />
-
-            <Button
-                android:id="@+id/bToRandomExample"
-                android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:textAllCaps="false"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginBottom="4dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:minHeight="55dp"
-                android:text="See Example"
-                app:layout_constraintTop_toBottomOf="@id/tvRandomExample" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
 
         <ImageView
             android:id="@+id/ivWrite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_write"
-            app:layout_constraintTop_toBottomOf="@+id/cvRandomExample"
-            app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="25dp"
-            app:layout_constraintRight_toRightOf="parent"/>
+            android:src="@drawable/ic_write"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cvRandomExample" />
+
         <TextView
             android:id="@+id/tvWrite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Contribute by WRITING"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivWrite"
-            android:text="Contribute by WRITING"/>
+            app:layout_constraintTop_toBottomOf="@id/ivWrite" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
             android:layout_marginTop="5dp"
-            android:textColor="@color/primaryColor"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="5dp"
+            android:layout_marginRight="20dp"
+
+            android:layout_marginBottom="15dp"
             android:background="@drawable/contribute_background"
-            android:textSize="25sp"
             android:gravity="center"
             android:text="CONTRIBUTE"
-            app:layout_constraintTop_toBottomOf="@id/tvWrite"/>
+            android:textColor="@color/primaryColor"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvWrite" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
