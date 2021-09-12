@@ -33,6 +33,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:id="@+id/tvPickUp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -40,35 +41,30 @@
                     android:layout_marginTop="50dp"
                     android:text="Pick Up where you left off"
                     android:textSize="20sp"
-                    app:layout_constraintBottom_toTopOf="@+id/tvCurrentLessonName"
+                    app:layout_constraintBottom_toTopOf="@+id/clCurrChapter"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/tvCurrentLessonName"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clCurrChapter"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:gravity="center"
-                    android:text="Loading Data . . . "
-                    app:layout_constraintBottom_toTopOf="@+id/bToCurrentChapter"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <Button
-                    android:id="@+id/bToCurrentChapter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:textAllCaps="false"
-                    android:layout_marginBottom="4dp"
-                    android:minHeight="55dp"
-                    android:text="Keep Learning"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent" />
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_margin="10dp"
+                    android:background="@color/chapter_background"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPickUp"
+                    android:layout_height="60dp">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvCurrentChapter"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView

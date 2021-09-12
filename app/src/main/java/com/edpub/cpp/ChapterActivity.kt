@@ -45,48 +45,40 @@ class ChapterActivity : AppCompatActivity() {
         var position = intent.getIntExtra("POSITION", ObjectsCollection.currentChapterPosition)
         var currChapter = ObjectsCollection.chaptersList[position]
         invoker = intent.getStringExtra("INVOKER")!!
-        when (invoker) {
-            "fromFav" -> {
-                try{
-                    key = ObjectsCollection.favouriteChapters[position].KEY
+        if (invoker == "fromFav") {
+            try{
+                key = ObjectsCollection.favouriteChapters[position].KEY
 
-                    currChapter = ObjectsCollection.favouriteChapters[position]
+                currChapter = ObjectsCollection.favouriteChapters[position]
 
-                    findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteChapters[position].TITLE
-                    findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.favouriteChapters[position].TEXT
-                    findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.favouriteChapters[position].CODE
-                }
-                catch (exception : Exception){
-                    Log.i("FAV", "$exception")
-                    //this toast is never shown reason unknown
-                    Toast.makeText(this, "Favourite Chapter List Is Empty Now.", Toast.LENGTH_SHORT).show()
-                }
-
+                findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteChapters[position].TITLE
+                findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.favouriteChapters[position].TEXT
+                findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.favouriteChapters[position].CODE
+            } catch (exception : Exception){
+                Log.i("FAV", "$exception")
+                //this toast is never shown reason unknown
+                Toast.makeText(this, "Favourite Chapter List Is Empty Now.", Toast.LENGTH_SHORT).show()
             }
-            "fromChapter" -> {
-                key = ObjectsCollection.chaptersList[position].KEY!!
 
-                currChapter = ObjectsCollection.chaptersList[position]
-
-                ObjectsCollection.currentChapterPosition = position
-                ObjectsCollection.currentChapterKey = key
-
-                Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_CHAP").setValue(key)
-
-                findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.chaptersList[position].TITLE
-                findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.chaptersList[position].TEXT
-                findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.chaptersList[position].CODE
-            }
-            "fromCurrChap" -> {
-
-                currChapter = ObjectsCollection.chaptersList[ObjectsCollection.currentChapterPosition]
-
-                findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.chaptersList[position].TITLE
-                findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.chaptersList[position].TEXT
-                findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.chaptersList[position].CODE
-            }
         }
+        else {
+            key = ObjectsCollection.chaptersList[position].KEY!!
 
+            currChapter = ObjectsCollection.chaptersList[position]
+
+            ObjectsCollection.currentChapterPosition = position
+            ObjectsCollection.currentChapterKey = key
+
+            ObjectsCollection.currentChapter.clear()
+            ObjectsCollection.adapterCurrentChapter.notifyItemRangeRemoved(0, 1)
+            ObjectsCollection.currentChapter.add(currChapter)
+            ObjectsCollection.adapterCurrentChapter.notifyItemInserted(0)
+            Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_CHAP").setValue(key)
+
+            findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.chaptersList[position].TITLE
+            findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.chaptersList[position].TEXT
+            findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.chaptersList[position].CODE
+        }
 
         val ivShare = findViewById<ImageView>(R.id.ivShare)
         val ivFavourites = findViewById<ImageView>(R.id.ivFavourite)
@@ -165,9 +157,12 @@ class ChapterActivity : AppCompatActivity() {
                         key = ObjectsCollection.chaptersList[position].KEY!!
                         currChapter = ObjectsCollection.chaptersList[position]
 
-                        ObjectsCollection.currentChapterPosition = position
+                        ObjectsCollection.currentChapter.clear()
+                        ObjectsCollection.adapterCurrentChapter.notifyItemRangeRemoved(0, 1)
                         ObjectsCollection.currentChapterKey = key.toString()
-
+                        ObjectsCollection.currentChapterPosition = position
+                        ObjectsCollection.currentChapter.add(currChapter)
+                        ObjectsCollection.adapterCurrentChapter.notifyItemInserted(0)
                         Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_CHAP").setValue(key)
 
                         if (ObjectsCollection.favouriteChapterKeysList.contains(key)) {

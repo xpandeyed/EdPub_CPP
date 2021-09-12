@@ -72,7 +72,6 @@ class FavouritesFragment : Fragment() {
         })
 
 
-
             ObjectsCollection.adapterFavouriteChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
                 override fun onItemClick(position: Int) {
                     val intent = Intent(activity, ChapterActivity::class.java).apply {

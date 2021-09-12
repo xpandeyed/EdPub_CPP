@@ -17,25 +17,16 @@ class LauncherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val auth: FirebaseAuth = Firebase.auth
-
-
         if(!ObjectsCollection.isDataLoaded){
             FunctionCollection.loadChapters()
             FunctionCollection.loadExamples()
         }
 
-        if(auth.currentUser==null) {
+        if(Firebase.auth.currentUser==null) {
             val intent = Intent(this@LauncherActivity, SignUpActivity::class.java)
             startActivity(intent)
         }
         else {
-            if(!ObjectsCollection.isFavouriteChapterKeysListLoaded){
-                FunctionCollection.loadFavouriteChapterKeys()
-            }
-            if(!ObjectsCollection.isFavouriteExampleKeysListLoaded){
-                FunctionCollection.loadFavouriteExampleKeys()
-            }
             val intent = Intent(this@LauncherActivity, HomeActivity::class.java)
             startActivity(intent)
         }

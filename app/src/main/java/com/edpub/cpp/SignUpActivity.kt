@@ -119,10 +119,13 @@ class SignUpActivity : AppCompatActivity() {
                         if(ObjectsCollection.isNewUser){
                             firebaseDatabase.child(uid!!).child("NAME").setValue(user.displayName)
                             firebaseDatabase.child(uid).child("EMAIL").setValue(user.email)
-                            firebaseDatabase.child(uid).child("CURR_CHAP").setValue("C111")
-
+                            firebaseDatabase.child(uid).child("CURR_CHAP").setValue("C111AAA")
+                            firebaseDatabase.child(uid).child("CURR_EXAM").setValue("E111AAA")
+                            FunctionCollection.loadCurrentChapterKey()
                         }
                         else{
+                            ObjectsCollection.isFavouriteChapterKeysListLoaded = false
+                            ObjectsCollection.isFavouriteExampleKeysListLoaded = false
                             FunctionCollection.loadFavouriteChapterKeys()
                             FunctionCollection.loadFavouriteExampleKeys()
                         }
