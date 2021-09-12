@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:isScrollContainer="true"
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
@@ -41,10 +42,19 @@
                     android:layout_marginTop="50dp"
                     android:text="Pick Up where you left off"
                     android:textSize="20sp"
-                    app:layout_constraintBottom_toTopOf="@+id/clCurrChapter"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/tvYourCurrentChapter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_margin="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPickUp"
+                    android:text="Your Current Chapter"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/clCurrChapter"
@@ -53,17 +63,51 @@
                     app:layout_constraintRight_toRightOf="parent"
                     android:layout_margin="10dp"
                     android:background="@color/chapter_background"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPickUp"
+                    app:layout_constraintTop_toBottomOf="@+id/tvYourCurrentChapter"
                     android:layout_height="60dp">
+                    <TextView
+                        android:id="@+id/tvLoadingChapters"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Loading Chapters . . ."/>
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvCurrentChapter"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <TextView
+                    android:id="@+id/tvYourCurrentExample"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Your Current Example"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    app:layout_constraintTop_toBottomOf="@id/clCurrChapter"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:background="@color/chapter_background"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvYourCurrentExample">
+                    <TextView
+                        android:id="@+id/tvLoadingExamples"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Loading Examples . . ."/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvCurrentExample"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
 
 
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
