@@ -7,55 +7,88 @@
     android:layout_height="match_parent"
     tools:context=".SignUpActivity">
 
-    <TextView
-        android:id="@+id/tvSmallChapters"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Small and Precise Chapters"
-        android:gravity="center_vertical"
-        android:drawableLeft="@drawable/ic_star"
-        android:drawablePadding="10dp"
-        android:textSize="25sp"
-        android:layout_marginTop="200dp"
-        android:layout_marginLeft="20dp"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/cvSignInContainer">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvExamples"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Practice Examples"
-        android:drawableLeft="@drawable/ic_star"
-        android:drawablePadding="10dp"
-        android:textSize="25sp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        app:layout_constraintTop_toBottomOf="@id/tvSmallChapters"/>
-    <TextView
-        android:id="@+id/tvFavourites"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Mark Chapters as Favourites"
-        android:textSize="25sp"
-        android:drawableLeft="@drawable/ic_star"
-        android:drawablePadding="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        app:layout_constraintTop_toBottomOf="@id/tvExamples"/>
-    <TextView
-        android:id="@+id/tvAdFree"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ad Free"
-        android:textSize="25sp"
-        android:drawableLeft="@drawable/ic_star"
-        android:drawablePadding="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        app:layout_constraintTop_toBottomOf="@id/tvFavourites"/>
+            <ImageView
+                android:id="@+id/ivAppIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="60dp"
+                app:layout_constraintRight_toRightOf="parent"
+                android:src="@drawable/ic_app_icon"/>
+
+            <TextView
+                android:id="@+id/tvSmallChapters"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Small and Precise Chapters"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/ic_star"
+                android:drawablePadding="10dp"
+                android:textSize="25sp"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/ivAppIcon"/>
+            <TextView
+                android:id="@+id/tvExamples"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Practice Examples"
+                android:drawableLeft="@drawable/ic_star"
+                android:drawablePadding="10dp"
+                android:textSize="25sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintTop_toBottomOf="@id/tvSmallChapters"/>
+            <TextView
+                android:id="@+id/tvFavourites"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mark Chapters as Favourites"
+                android:textSize="25sp"
+                android:drawableLeft="@drawable/ic_star"
+                android:drawablePadding="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintTop_toBottomOf="@id/tvExamples"/>
+            <TextView
+                android:id="@+id/tvAdFree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ad Free"
+                android:textSize="25sp"
+                android:drawableLeft="@drawable/ic_star"
+                android:drawablePadding="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintTop_toBottomOf="@id/tvFavourites"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sign In and start learning now."
+                android:layout_marginTop="30dp"
+                app:layout_constraintTop_toBottomOf="@id/tvAdFree"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:textSize="30sp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cvSignInContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="10dp"
