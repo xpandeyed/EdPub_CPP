@@ -1,5 +1,6 @@
 package com.edpub.cpp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -31,6 +32,7 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
 
+    @SuppressLint("CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
@@ -122,6 +124,7 @@ class SignUpActivity : AppCompatActivity() {
                             firebaseDatabase.child(uid).child("CURR_CHAP").setValue("C111AAA")
                             firebaseDatabase.child(uid).child("CURR_EXAM").setValue("E111AAA")
                             FunctionCollection.loadCurrentChapterKey()
+                            FunctionCollection.loadCurrentExampleKey()
                         }
                         else{
                             ObjectsCollection.isFavouriteChapterKeysListLoaded = false

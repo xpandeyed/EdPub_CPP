@@ -88,6 +88,9 @@ object FunctionCollection {
                         }
                         ObjectsCollection.isDataLoaded = true
                     }
+                    if(Firebase.auth.currentUser!=null){
+                        loadFavouriteExampleKeys()
+                    }
 
                 }
                 override fun onCancelled(error: DatabaseError) {
@@ -110,7 +113,6 @@ object FunctionCollection {
                         for(chapter in snapshot.children){
                             val currChapter = chapter.getValue(String::class.java)
                             ObjectsCollection.favouriteChapterKeysList.add(currChapter!!)
-
                         }
                     }
                     ObjectsCollection.isFavouriteChapterKeysListLoaded = true
@@ -125,7 +127,7 @@ object FunctionCollection {
 
 
     fun loadFavouriteExampleKeys (){
-        ObjectsCollection.favouriteChapterKeysList.clear()
+        ObjectsCollection.favouriteExampleKeysList.clear()
         CoroutineScope(Dispatchers.IO).launch{
             val favExampleReference = Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("FAV_EXAM")
             favExampleReference.addValueEventListener(object: ValueEventListener {
@@ -138,6 +140,7 @@ object FunctionCollection {
                         }
                     }
                     ObjectsCollection.isFavouriteExampleKeysListLoaded = true
+                    loadCurrentExampleKey()
                 }
                 override fun onCancelled(error: DatabaseError) {
 
@@ -170,16 +173,22 @@ object FunctionCollection {
 
     }
 
-    private fun loadCurrentExampleKey(){
-        Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_EXAM").get()
-        var n = 0
-        while(n<ObjectsCollection.examplesList.size){
-            if(ObjectsCollection.currentExampleKey == ObjectsCollection.examplesList[n].KEY)
-            {
-                ObjectsCollection.currentExamplePosition = n
-                break
+    fun loadCurrentExampleKey(){
+        Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_EXAM").get().addOnSuccessListener {
+            ObjectsCollection.currentExampleKey = it.value.toString()
+            var n = 0
+            while(n<ObjectsCollection.examplesList.size){
+                if(ObjectsCollection.currentExampleKey == ObjectsCollection.examplesList[n].KEY)
+                {
+                    ObjectsCollection.currentExamplePosition = n
+                    ObjectsCollection.currentExample.clear()
+                    ObjectsCollection.currentExample.add(ObjectsCollection.examplesList[ObjectsCollection.currentExamplePosition])
+                    ObjectsCollection.adapterCurrentExample.notifyItemInserted(ObjectsCollection.currentExample.size-1)
+                    ObjectsCollection.isCurrExampleLoaded = true
+                    break
+                }
+                n++
             }
-            n++
         }
     }
 }

@@ -30,10 +30,12 @@ object ObjectsCollection {
     var favouriteExamples = mutableListOf<Chapter>()
 
     var currentChapter = mutableListOf<Chapter>()
+    var currentExample = mutableListOf<Chapter>()
 
     var adapterFavouriteChapters = ChapterRVAdapter(favouriteChapters)
     var adapterFavouriteExamples = ChapterRVAdapter(favouriteExamples)
     var adapterCurrentChapter = CurrentChapter(currentChapter)
+    var adapterCurrentExample = CurrentChapter(currentExample)
 
     var adapterChapters = ChapterRVAdapter(chaptersList)
     var adapterExamples = ChapterRVAdapter(examplesList)

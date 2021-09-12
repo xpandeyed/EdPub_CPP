@@ -29,46 +29,39 @@ class ExampleActivity : AppCompatActivity() {
         var position = intent.getIntExtra("POSITION", 0)
         var currExample = ObjectsCollection.examplesList[position]
         invoker = intent.getStringExtra("INVOKER")!!
-        when (invoker) {
-            "fromFav" -> {
-                try{
-                    key = ObjectsCollection.favouriteExamples[position].KEY
+        if (invoker == "fromFav") {
+            try{
+                key = ObjectsCollection.favouriteExamples[position].KEY
 
-                    currExample = ObjectsCollection.favouriteExamples[position]
+                currExample = ObjectsCollection.favouriteExamples[position]
 
-                    findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteExamples[position].TITLE
-                    findViewById<TextView>(R.id.tvExampleText).text = ObjectsCollection.favouriteExamples[position].TEXT
-                    findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.favouriteExamples[position].CODE
-                }
-                catch (exception : Exception){
-                    Log.i("FAV", "$exception")
-                    //this toast is never shown reason unknown
-                    Toast.makeText(this, "Favourite Example List Is Empty Now.", Toast.LENGTH_SHORT).show()
-                }
-
+                findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteExamples[position].TITLE
+                findViewById<TextView>(R.id.tvExampleText).text = ObjectsCollection.favouriteExamples[position].TEXT
+                findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.favouriteExamples[position].CODE
+            } catch (exception : Exception){
+                Log.i("FAV", "$exception")
+                //this toast is never shown reason unknown
+                Toast.makeText(this, "Favourite Example List Is Empty Now.", Toast.LENGTH_SHORT).show()
             }
-            "fromExample" -> {
-                key = ObjectsCollection.examplesList[position].KEY!!
 
-                currExample = ObjectsCollection.examplesList[position]
+        }
+        else {
+            key = ObjectsCollection.examplesList[position].KEY!!
 
-                ObjectsCollection.currentExamplePosition = position
-                ObjectsCollection.currentExampleKey = key
+            currExample = ObjectsCollection.examplesList[position]
 
-                Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_EXAM").setValue(key)
+            ObjectsCollection.currentExamplePosition = position
+            ObjectsCollection.currentExampleKey = key
 
-                findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.examplesList[position].TITLE
-                findViewById<TextView>(R.id.tvExampleText).text = ObjectsCollection.examplesList[position].TEXT
-                findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.examplesList[position].CODE
-            }
-            "fromCurrExam" -> {
+            ObjectsCollection.currentExample.clear()
+            ObjectsCollection.adapterCurrentExample.notifyItemRangeRemoved(0, 1)
+            ObjectsCollection.currentExample.add(currExample)
+            ObjectsCollection.adapterCurrentExample.notifyItemInserted(0)
+            Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_EXAM").setValue(key)
 
-                currExample = ObjectsCollection.examplesList[ObjectsCollection.currentExamplePosition]
-
-                findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.examplesList[position].TITLE
-                findViewById<TextView>(R.id.tvExampleText).text = ObjectsCollection.examplesList[position].TEXT
-                findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.examplesList[position].CODE
-            }
+            findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.examplesList[position].TITLE
+            findViewById<TextView>(R.id.tvExampleText).text = ObjectsCollection.examplesList[position].TEXT
+            findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.examplesList[position].CODE
         }
 
         val ivShare = findViewById<ImageView>(R.id.ivShare)
@@ -139,7 +132,7 @@ class ExampleActivity : AppCompatActivity() {
                         findViewById<TextView>(R.id.tvCode).text =
                             ObjectsCollection.favouriteExamples[position].CODE
                     }catch (exception:Exception){
-                        Toast.makeText(this, "$exception", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "${exception.message}", Toast.LENGTH_SHORT).show()
                     }
 
                 }
@@ -153,9 +146,13 @@ class ExampleActivity : AppCompatActivity() {
                     key = ObjectsCollection.examplesList[position].KEY!!
                     currExample = ObjectsCollection.examplesList[position]
 
-                    ObjectsCollection.currentExamplePosition = position
-                    ObjectsCollection.currentExampleKey = key.toString()
 
+                    ObjectsCollection.currentExample.clear()
+                    ObjectsCollection.adapterCurrentExample.notifyItemRangeRemoved(0, 1)
+                    ObjectsCollection.currentExampleKey = key.toString()
+                    ObjectsCollection.currentExamplePosition = position
+                    ObjectsCollection.currentExample.add(currExample)
+                    ObjectsCollection.adapterCurrentExample.notifyItemInserted(0)
                     Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_EXAM").setValue(key)
 
                     if (ObjectsCollection.favouriteExampleKeysList.contains(key)) {

@@ -20,6 +20,7 @@ import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
     private lateinit var rvCurrentChapter: RecyclerView
+    private lateinit var rvCurrentExample: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +39,11 @@ class HomeFragment : Fragment() {
         rvCurrentChapter.itemAnimator = null
         rvCurrentChapter.adapter = ObjectsCollection.adapterCurrentChapter
 
+        rvCurrentExample = view.findViewById(R.id.rvCurrentExample)
+        rvCurrentExample.layoutManager = LinearLayoutManager(activity)
+        rvCurrentExample.itemAnimator = null
+        rvCurrentExample.adapter = ObjectsCollection.adapterCurrentExample
+
         ObjectsCollection.adapterCurrentChapter.setOnItemClickListener(object : CurrentChapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
                 if(ObjectsCollection.isDataLoaded){
@@ -53,6 +59,20 @@ class HomeFragment : Fragment() {
                 }
             }
         })
+
+        ObjectsCollection.adapterCurrentExample.setOnItemClickListener(object : CurrentChapter.OnItemClickListener{
+            override fun onItemClick(position: Int) {
+                if(ObjectsCollection.isDataLoaded){
+                    val intent = Intent(activity, ExampleActivity::class.java).apply {
+                        val positionOfCurrentExample = ObjectsCollection.examplesList.indexOf(ObjectsCollection.currentExample[position])
+                        putExtra("POSITION", positionOfCurrentExample)
+                        putExtra("INVOKER", "fromExample")
+                    }
+                    startActivity(intent)
+                }
+            }
+        })
+
 
         val bToRandomExample = view.findViewById<Button>(R.id.bToRandomExample)
         bToRandomExample.setOnClickListener {
