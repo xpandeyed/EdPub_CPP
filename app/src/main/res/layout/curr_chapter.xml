@@ -3,12 +3,14 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="5dp"
-    android:layout_height="60dp">
+    android:layout_height="50dp">
     <TextView
         android:id="@+id/tvCurrentChapter"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="20sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.02"
         android:background="@color/primaryColor"
         android:textColor="@color/white"
         android:gravity="center"

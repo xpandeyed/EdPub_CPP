@@ -1,10 +1,13 @@
 package com.edpub.cpp
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -43,7 +46,18 @@ class DeleteAccountActivity : AppCompatActivity() {
         googleSignInClient = GoogleSignIn.getClient(this, gso)
         auth = FirebaseAuth.getInstance()
 
-
+        findViewById<TextView>(R.id.bReport).setOnClickListener {
+            try{
+                val intent = Intent(Intent.ACTION_SENDTO).apply {
+                    data = Uri.parse("mailto:")
+                    putExtra(Intent.EXTRA_EMAIL, arrayOf("lalbiharipandeyg@gmail.com")) // recipients
+                    putExtra(Intent.EXTRA_SUBJECT, "Report regarding EdPub C++")
+                }
+                startActivity(intent)
+            }catch(exception : ActivityNotFoundException) {
+                Toast.makeText(this, "No Email Client Found.\nSend an mail on lalbiharipandeyg@gmail.com", Toast.LENGTH_LONG).show()
+            }
+        }
 
 
         findViewById<Button>(R.id.bDeleteAccount).setOnClickListener {

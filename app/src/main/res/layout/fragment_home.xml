@@ -43,26 +43,37 @@
                         android:layout_marginTop="50dp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center"
-                        android:text="Pick Up where you left off"
+                        android:text="Continue from where you left off"
                         android:textSize="20sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/vPickUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/grey_text_background"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintTop_toBottomOf="@+id/tvPickUp"
+                        />
 
 
                     <TextView
                         android:id="@+id/tvYourCurrentChapter"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
+                        android:layout_margin="10dp"
                         android:gravity="center"
                         android:text="Your Current Chapter"
-                        app:layout_constraintTop_toBottomOf="@+id/tvPickUp" />
+                        app:layout_constraintTop_toBottomOf="@+id/vPickUp" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/clCurrChapter"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_height="50dp"
                         android:layout_margin="10dp"
                         android:background="@color/chapter_background"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -81,19 +92,29 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
+                    <View
+                        android:id="@+id/vCurrChapter"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/grey_text_background"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintTop_toBottomOf="@+id/clCurrChapter"
+                        />
 
                     <TextView
                         android:id="@+id/tvYourCurrentExample"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
+                        android:layout_margin="10dp"
                         android:gravity="center"
                         android:text="Your Current Example"
-                        app:layout_constraintTop_toBottomOf="@id/clCurrChapter" />
+                        app:layout_constraintTop_toBottomOf="@id/vCurrChapter" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_height="50dp"
                         android:layout_margin="10dp"
                         android:background="@color/chapter_background"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -191,7 +212,7 @@
                 <Button
                     android:id="@+id/bToRandomExample"
                     android:layout_width="0dp"
-                    android:layout_height="70dp"
+                    android:layout_height="60dp"
                     android:textSize="20sp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -201,6 +222,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginTop="10dp"
                     app:layout_constraintTop_toBottomOf="@id/tvRandomExample" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

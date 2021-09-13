@@ -51,19 +51,19 @@ class ProfileActivity : AppCompatActivity() {
                 }
                 startActivity(intent)
             }catch(exception : ActivityNotFoundException) {
-                Toast.makeText(this, "No Email Client Found.\nSend an mail on lalbiharipandeyg@gmail.com", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "No Email Client Found.\nSend an mail on lalbiharipandeyg@gmail.com", Toast.LENGTH_LONG).show()
             }
         }
         findViewById<TextView>(R.id.tvFeedback).setOnClickListener {
             try{
                 val intent = Intent(Intent.ACTION_SENDTO).apply {
                     data = Uri.parse("mailto:")
-                    putExtra(Intent.EXTRA_EMAIL, arrayOf("lalbiharipandeyg@gmail.com")) // recipients
+                    putExtra(Intent.EXTRA_EMAIL, arrayOf("lalbiharipandeyg@gmail.com"))
                     putExtra(Intent.EXTRA_SUBJECT, "Feedback for EdPub C++")
                 }
                 startActivity(intent)
             }catch(exception : ActivityNotFoundException) {
-                Toast.makeText(this, "No Email Client Found.\nSend an mail on lalbiharipandeyg@gmail.com", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "No Email Client Found.\nSend an mail on lalbiharipandeyg@gmail.com", Toast.LENGTH_LONG).show()
             }
 
         }

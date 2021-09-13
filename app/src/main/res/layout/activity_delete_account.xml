@@ -36,7 +36,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/feedback_background"
-            android:hint="Let us know why are you leaving.\nWe will try to improve." />
+            android:hint="You can Report Something Wrong.\n\nWe will surely solve that as early as possible.\n\nIf you have made your mind to Go, Please let us know why are you leaving." />
 
     <Button
         android:id="@+id/bDeleteAccount"
@@ -47,5 +47,16 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etDeleteReason"
         android:text="Delete Account" />
+    <Button
+        android:id="@+id/bReport"
+        android:layout_width="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:layout_margin="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etDeleteReason"
+        android:text="Report" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
