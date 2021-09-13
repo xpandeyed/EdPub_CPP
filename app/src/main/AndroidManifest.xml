@@ -10,13 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CFundamentals">
         <activity
-            android:name=".FeedbackActivity"
-            android:exported="true"
-            android:parentActivityName=".ProfileActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ProfileActivity" /></activity>
-        <activity
             android:name=".DeleteAccountActivity"
             android:exported="true"
             android:parentActivityName=".ProfileActivity">

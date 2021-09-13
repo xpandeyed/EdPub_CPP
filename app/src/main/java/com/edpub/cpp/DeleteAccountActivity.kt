@@ -48,11 +48,15 @@ class DeleteAccountActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.bDeleteAccount).setOnClickListener {
             val user = auth.currentUser
+            val uid = user!!.uid
             val reason = findViewById<EditText>(R.id.etDeleteReason).text.toString()
-            Firebase.database.getReference("USERS").child(user!!.uid).child("ACCOUNT_DELETE_REASON").setValue(reason)
+
             user!!.delete()
                 .addOnCompleteListener(this) { task->
                     if (task.isSuccessful){
+                        Firebase.database.getReference("USERS").child(uid).child("ACCOUNT_DELETE_REASON").setValue(reason)
+                        Firebase.database.getReference("USERS").child(uid).child("EMAIL").setValue(null)
+                        Firebase.database.getReference("USERS").child(uid).child("NAME").setValue(null)
                         Toast.makeText(this, "User Deleted Successfully.", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, SignUpActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

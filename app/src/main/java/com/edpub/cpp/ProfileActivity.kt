@@ -1,5 +1,6 @@
 package com.edpub.cpp
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -42,11 +43,29 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(intent)
         }
         findViewById<TextView>(R.id.tvReport).setOnClickListener {
-
+            try{
+                val intent = Intent(Intent.ACTION_SENDTO).apply {
+                    data = Uri.parse("mailto:")
+                    putExtra(Intent.EXTRA_EMAIL, arrayOf("lalbiharipandeyg@gmail.com")) // recipients
+                    putExtra(Intent.EXTRA_SUBJECT, "Report regarding EdPub C++")
+                }
+                startActivity(intent)
+            }catch(exception : ActivityNotFoundException) {
+                Toast.makeText(this, "No Email Client Found.\nSend an mail on lalbiharipandeyg@gmail.com", Toast.LENGTH_SHORT).show()
+            }
         }
         findViewById<TextView>(R.id.tvFeedback).setOnClickListener {
-            val intent = Intent(this, FeedbackActivity::class.java)
-            startActivity(intent)
+            try{
+                val intent = Intent(Intent.ACTION_SENDTO).apply {
+                    data = Uri.parse("mailto:")
+                    putExtra(Intent.EXTRA_EMAIL, arrayOf("lalbiharipandeyg@gmail.com")) // recipients
+                    putExtra(Intent.EXTRA_SUBJECT, "Feedback for EdPub C++")
+                }
+                startActivity(intent)
+            }catch(exception : ActivityNotFoundException) {
+                Toast.makeText(this, "No Email Client Found.\nSend an mail on lalbiharipandeyg@gmail.com", Toast.LENGTH_SHORT).show()
+            }
+
         }
         findViewById<TextView>(R.id.tvShare).setOnClickListener {
             Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show()

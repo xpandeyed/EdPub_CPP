@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="60dp"
                 app:layout_constraintRight_toRightOf="parent"
                 android:src="@drawable/ic_app_icon"/>
 
@@ -35,7 +35,7 @@
                 android:drawableLeft="@drawable/ic_star"
                 android:drawablePadding="10dp"
                 android:textSize="25sp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="60dp"
                 android:layout_marginLeft="20dp"
                 app:layout_constraintTop_toBottomOf="@+id/ivAppIcon"/>
             <TextView
@@ -71,6 +71,17 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
                 app:layout_constraintTop_toBottomOf="@id/tvFavourites"/>
+            <TextView
+                android:id="@+id/tvFrequentUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Frequent Content Update"
+                android:textSize="25sp"
+                android:drawableLeft="@drawable/ic_star"
+                android:drawablePadding="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintTop_toBottomOf="@id/tvAdFree"/>
 
 
 
