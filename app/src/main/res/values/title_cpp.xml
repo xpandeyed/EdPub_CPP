@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="cpp_title">
+
+        <item name="android:fontFamily">@font/origin_tech</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">#007DF9</item>
+    </style>
+</resources>

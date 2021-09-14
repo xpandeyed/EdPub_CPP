@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
+        android:scrollbars="none"
         app:layout_constraintBottom_toTopOf="@id/cvBottomItems"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -19,10 +20,12 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:textColor="#2d3e50"
                 android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:fontFamily="@font/milliard_semibold"
                 android:layout_marginTop="25dp"
                 android:layout_marginRight="20dp"
                 android:hint="Example Title"
@@ -32,6 +35,7 @@
 
             <TextView
                 android:id="@+id/tvExampleText"
+                android:fontFamily="@font/milliard_book"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -54,13 +58,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
+                    android:scrollbars="none"
                     android:fillViewport="true">
                     <TextView
                         android:id="@+id/tvCode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Example Code"
-                        android:paddingBottom="5dp"
                         android:scrollHorizontally="true"
                         android:textSize="20sp"
                         />

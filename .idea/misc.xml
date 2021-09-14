@@ -5,8 +5,11 @@
       <map>
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/contribute_background.xml" value="0.22864583333333333" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/feedback_background.xml" value="0.22864583333333333" />
+        <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_app_icon.xml" value="0.22864583333333333" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.22864583333333333" />
+        <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_icon.xml" value="0.22864583333333333" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_outline_share_24.xml" value="0.22864583333333333" />
+        <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_star.xml" value="0.22864583333333333" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_write.xml" value="0.22864583333333333" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/splash_image.xml" value="0.22864583333333333" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_change_name.xml" value="0.2125" />
@@ -24,7 +27,7 @@
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_terms_and_conditions.xml" value="0.2125" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_update_profile.xml" value="0.2125" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_update_profle.xml" value="0.2125" />
-        <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/curr_chapter.xml" value="0.6196403872752421" />
+        <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/curr_chapter.xml" value="0.4633781763826607" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/curr_chapter_button.xml" value="0.2125" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/favourites_view_pager.xml" value="0.9" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/fragment_chapters.xml" value="0.2125" />

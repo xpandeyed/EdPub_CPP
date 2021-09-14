@@ -61,6 +61,8 @@
             <TextView
                 android:id="@+id/tvUserName"
                 android:layout_width="0dp"
+                android:textColor="#2d3e50"
+                android:fontFamily="@font/milliard_semibold"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="20dp"
@@ -77,6 +79,7 @@
                 android:layout_marginLeft="20dp"
                 android:textSize="16sp"
                 android:textStyle="italic"
+                android:fontFamily="@font/milliard_book"
                 android:layout_marginBottom="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvUserName"
@@ -89,6 +92,7 @@
 
     <TextView
         android:id="@+id/tvAbout"
+        android:fontFamily="@font/milliard_semibold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/cvUserDetails"
@@ -107,6 +111,8 @@
             <TextView
                 android:id="@+id/tvTermsConditions"
                 android:layout_width="match_parent"
+                android:fontFamily="@font/milliard_book"
+                android:textColor="#2d3e50"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 android:padding="20dp"
@@ -121,8 +127,10 @@
                 android:layout_height="1dp"/>
             <TextView
                 android:id="@+id/tvPrivacyPolicy"
+                android:fontFamily="@font/milliard_book"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#2d3e50"
                 app:layout_constraintTop_toBottomOf="@id/vTerms"
                 android:padding="20dp"
                 android:text="Privacy Policy"/>
@@ -138,6 +146,8 @@
                 android:id="@+id/tvReport"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#2d3e50"
+                android:fontFamily="@font/milliard_book"
                 app:layout_constraintTop_toBottomOf="@+id/vPrivacy"
                 android:padding="20dp"
                 android:text="Report"/>
@@ -153,6 +163,8 @@
             <TextView
                 android:id="@+id/tvFeedback"
                 android:layout_width="match_parent"
+                android:fontFamily="@font/milliard_book"
+                android:textColor="#2d3e50"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/vReport"
                 android:padding="20dp"
@@ -169,6 +181,8 @@
                 android:id="@+id/tvShare"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#2d3e50"
+                android:fontFamily="@font/milliard_book"
                 app:layout_constraintTop_toBottomOf="@id/vFeedback"
                 android:padding="20dp"
                 android:text="Share"/>
@@ -184,6 +198,8 @@
                 android:id="@+id/tvRateUs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#2d3e50"
+                android:fontFamily="@font/milliard_book"
                 app:layout_constraintTop_toBottomOf="@+id/vShare"
                 android:padding="20dp"
                 android:text="Rate"/>
@@ -198,6 +214,8 @@
             <TextView
                 android:id="@+id/tvVersion"
                 android:layout_width="match_parent"
+                android:fontFamily="@font/milliard_book"
+                android:textColor="#2d3e50"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/tvRateUs"
                 android:padding="20dp"
