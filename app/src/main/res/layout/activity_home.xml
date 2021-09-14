@@ -12,6 +12,9 @@
         android:id="@+id/ablHomeScreenAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:background="@color/white"
         android:elevation="4dp"
         app:layout_constraintTop_toTopOf="parent">
         <androidx.appcompat.widget.Toolbar
