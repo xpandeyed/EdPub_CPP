@@ -11,7 +11,7 @@
         <activity
             android:name=".DeleteAccountActivity"
             android:exported="true"
-            android:parentActivityName=".ProfileActivity">
+            android:parentActivityName=".UpdateProfileActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ProfileActivity" /></activity>
