@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#f2f6f7"
+
     tools:context=".SignUpActivity">
 
     <ScrollView
@@ -20,10 +21,10 @@
 
             <ImageView
                 android:id="@+id/ivAppIcon"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                android:src="@drawable/ic_app_icon"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_signuplogo"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -34,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginRight="20dp"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/milliard_semibold"
@@ -107,6 +108,18 @@
                 android:textSize="25sp"
                 app:layout_constraintTop_toBottomOf="@id/tvAdFree"
                 app:drawableLeftCompat="@drawable/ic_star" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_made_with_love"
+                app:layout_constraintTop_toBottomOf="@+id/tvFrequentUpdate"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -119,7 +132,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="10dp"
-        app:cardBackgroundColor="@android:color/transparent"
+        app:cardBackgroundColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -162,6 +175,7 @@
                         android:gravity="center"
                         android:letterSpacing="0.02"
                         android:text="Continue with Google"
+                        android:fontFamily="@font/milliard_book"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold"

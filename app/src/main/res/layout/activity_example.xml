@@ -30,7 +30,7 @@
                 android:layout_marginRight="20dp"
                 android:hint="Example Title"
                 android:padding="10dp"
-                android:textSize="20sp"
+                android:textSize="26sp"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -39,8 +39,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
+                android:textColor="@color/grey_text"
                 android:hint="Example Text"
                 android:padding="10dp"
                 android:textSize="20sp"

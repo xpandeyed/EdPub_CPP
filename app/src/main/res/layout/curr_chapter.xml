@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:foreground="?android:attr/selectableItemBackground"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="5dp"
     android:layout_height="50dp">
@@ -11,6 +12,7 @@
         android:textSize="20sp"
         android:fontFamily="@font/milliard_semibold"
         android:letterSpacing="0.02"
+        android:foreground="?android:attr/selectableItemBackground"
         android:background="@drawable/button_background"
         android:textColor="@color/primaryColor"
         android:gravity="center"
