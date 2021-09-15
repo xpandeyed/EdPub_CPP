@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/chapter_background"
+    android:background="#f2f6f7"
     tools:context=".ChapterActivity">
 
     <ScrollView
@@ -28,7 +28,7 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginRight="20dp"
                 android:hint="Chapter Title"
-                android:textSize="20sp"
+                android:textSize="26sp"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -36,7 +36,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
                 android:padding="10dp"
                 android:fontFamily="@font/milliard_book"
                 android:layout_marginRight="20dp"
@@ -49,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/feedback_background"
+                android:background="@drawable/white_corner_background"
                 android:layout_marginRight="20dp"
                 app:layout_constraintTop_toBottomOf="@id/tvChapterText">
                 <HorizontalScrollView
