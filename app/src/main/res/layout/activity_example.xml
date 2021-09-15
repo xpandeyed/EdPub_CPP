@@ -65,6 +65,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Example Code"
+                        android:fontFamily="@font/consolas"
                         android:scrollHorizontally="true"
                         android:textSize="20sp"
                         />
@@ -120,13 +121,16 @@
                 app:layout_constraintLeft_toRightOf="@+id/ivShare"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/bToNextExample"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginRight="20dp"
+                android:textSize="16sp"
+                android:textColor="@color/primaryColor"
                 android:text="Next"
+                android:fontFamily="@font/milliard_book"
+                android:background="@drawable/button_background"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

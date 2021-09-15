@@ -25,7 +25,7 @@ class ProfileActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.tbProfileToolBar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        findViewById<CardView>(R.id.cvUserDetails).setOnClickListener {
+        findViewById<android.view.View>(R.id.clUserDetails).setOnClickListener {
             val intent = Intent(this, UpdateProfileActivity::class.java)
             startActivity(intent)
         }
@@ -77,4 +77,5 @@ class ProfileActivity : AppCompatActivity() {
             Toast.makeText(this, "Version", Toast.LENGTH_SHORT).show()
         }
     }
+
 }

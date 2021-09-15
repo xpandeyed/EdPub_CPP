@@ -19,6 +19,8 @@
             android:layout_height="match_parent">
             <TextView
                 android:id="@+id/tvTitle"
+                android:fontFamily="@font/milliard_semibold"
+                android:textColor="#2d3e50"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -36,6 +38,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:padding="10dp"
+                android:fontFamily="@font/milliard_book"
                 android:layout_marginRight="20dp"
                 android:hint="Chapter Text"
                 android:textSize="20sp"
@@ -60,6 +63,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Example Code"
+                        android:fontFamily="@font/consolas"
                         android:scrollHorizontally="true"
                         android:textSize="20sp"
                         />
@@ -117,13 +121,16 @@
                 app:layout_constraintLeft_toRightOf="@+id/ivShare"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/bToNextChapter"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:fontFamily="@font/milliard_book"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginRight="20dp"
                 android:text="Next"
+                android:textColor="@color/primaryColor"
+                android:textSize="16sp"
+                android:background="@drawable/button_background"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

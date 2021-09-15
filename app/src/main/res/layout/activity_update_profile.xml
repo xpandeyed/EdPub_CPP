@@ -22,25 +22,29 @@
             android:background="@color/white"/>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bLogOut"
         android:layout_width="match_parent"
-        android:backgroundTint="@color/white"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
         android:layout_margin="20dp"
+        android:textColor="@color/primaryColor"
         android:textAllCaps="false"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:fontFamily="@font/milliard_book"
+        android:background="@drawable/button_background"
         app:layout_constraintTop_toBottomOf="@id/ablUpdateProfileScreenAppBar"
         android:text="Log Out"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bToDeleteAccount"
+        android:textSize="16sp"
+        android:fontFamily="@font/milliard_book"
+        android:textColor="@color/primaryColor"
         android:layout_width="match_parent"
-        android:backgroundTint="@color/white"
+        android:background="@drawable/button_background"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:textAllCaps="false"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         app:layout_constraintTop_toBottomOf="@id/bLogOut"
         android:text="Delete Account"/>
 

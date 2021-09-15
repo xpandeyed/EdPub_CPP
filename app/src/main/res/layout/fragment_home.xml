@@ -70,6 +70,7 @@
                         android:layout_margin="10dp"
                         android:fontFamily="@font/milliard_book"
                         android:gravity="center"
+                        android:textColor="@color/primaryColor"
                         android:text="Your Current Chapter"
                         app:layout_constraintTop_toBottomOf="@+id/vPickUp" />
 
@@ -112,6 +113,7 @@
                         android:id="@+id/tvYourCurrentExample"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/primaryColor"
                         android:fontFamily="@font/milliard_book"
                         android:layout_margin="10dp"
                         android:gravity="center"
@@ -220,14 +222,16 @@
                     app:layout_constraintLeft_toRightOf="@+id/cvExampleImage"
                     app:layout_constraintTop_toBottomOf="@+id/tvTestYourLearning" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/bToRandomExample"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     android:textSize="20sp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="11dp"
+                    android:textColor="@color/primaryColor"
+                    android:background="@drawable/button_background"
                     android:fontFamily="@font/milliard_semibold"
                     android:text="See Example"
                     android:textAllCaps="false"
@@ -253,7 +257,6 @@
             android:id="@+id/tvWrite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
             android:text="Contribute by WRITING"
             android:fontFamily="@font/milliard_book"
             app:layout_constraintLeft_toLeftOf="parent"
