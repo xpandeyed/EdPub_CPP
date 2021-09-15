@@ -17,16 +17,14 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         setSupportActionBar(findViewById(R.id.tbHomeToolBar))
 
-        val invoker = intent.getStringExtra("INVOKER")
-
         val homeFragment = HomeFragment()
         val chaptersFragment = ChaptersFragment()
         val examplesFragment = ExamplesFragment()
         val favouritesFragment = FavouritesFragment()
 
-
-        setCurrentFragment(homeFragment)
-
+        if(savedInstanceState==null){
+            setCurrentFragment(homeFragment)
+        }
 
         val bnvHomeFragmentNavigator = findViewById<BottomNavigationView>(R.id.bnvHomeFragmentNavigator)
         bnvHomeFragmentNavigator.setOnNavigationItemSelectedListener {
@@ -58,6 +56,15 @@ class HomeActivity : AppCompatActivity() {
             }
         }
         return true
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+
     }
 
 }

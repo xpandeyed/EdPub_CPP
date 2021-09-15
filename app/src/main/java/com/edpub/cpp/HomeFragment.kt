@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -27,13 +28,13 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         rvCurrentChapter = view.findViewById(R.id.rvCurrentChapter)
         rvCurrentChapter.layoutManager = LinearLayoutManager(activity)
@@ -96,6 +97,10 @@ class HomeFragment : Fragment() {
             intent.data = Uri.parse(url)
             startActivity(intent)
         }
+
+    }
+    override fun onResume() {
+        super.onResume()
 
     }
 }

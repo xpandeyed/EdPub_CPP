@@ -186,6 +186,4 @@ class ChapterActivity : AppCompatActivity() {
                 }
         }
     }
-
-
 }
