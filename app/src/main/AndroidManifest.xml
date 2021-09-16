@@ -33,7 +33,6 @@
         </activity>
         <activity
             android:name=".ExampleActivity"
-            android:launchMode="singleInstance"
             android:parentActivityName=".HomeActivity"
             android:exported="true" >
             <meta-data
@@ -43,7 +42,6 @@
         <activity
             android:name=".ChapterActivity"
             android:exported="true"
-            android:launchMode="singleInstance"
             android:parentActivityName=".HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
