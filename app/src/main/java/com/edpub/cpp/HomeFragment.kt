@@ -90,14 +90,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-        val tvContribute = view.findViewById<TextView>(R.id.tvContribute)
-        tvContribute.setOnClickListener {
-            val url = "https://edpubweb.blogspot.com/2021/09/contribute.html"
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse(url)
-            startActivity(intent)
-        }
-
     }
     override fun onResume() {
         super.onResume()
