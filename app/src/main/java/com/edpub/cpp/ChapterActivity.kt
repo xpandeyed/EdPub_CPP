@@ -91,7 +91,7 @@ class ChapterActivity : AppCompatActivity() {
         }
 
         if(ObjectsCollection.favouriteChapterKeysList.indexOf(key)!=-1){
-            DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.primaryColor))
+            DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.pure_red))
         }
         else{
             DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
@@ -116,7 +116,7 @@ class ChapterActivity : AppCompatActivity() {
 
                 myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP").child(key.toString()).setValue(key)
 
-                DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.primaryColor))
+                DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.pure_red))
             }
         }
         bToNextChapter.setOnClickListener {
@@ -132,7 +132,7 @@ class ChapterActivity : AppCompatActivity() {
                         if (ObjectsCollection.favouriteChapterKeysList.contains(key)) {
                             DrawableCompat.setTint(
                                 ivFavourites.drawable,
-                                ContextCompat.getColor(this, R.color.primaryColor)
+                                ContextCompat.getColor(this, R.color.pure_red)
                             )
                         } else {
                             DrawableCompat.setTint(
@@ -168,7 +168,7 @@ class ChapterActivity : AppCompatActivity() {
                         if (ObjectsCollection.favouriteChapterKeysList.contains(key)) {
                             DrawableCompat.setTint(
                                 ivFavourites.drawable,
-                                ContextCompat.getColor(this, R.color.primaryColor)
+                                ContextCompat.getColor(this, R.color.pure_red)
                             )
                         } else {
                             DrawableCompat.setTint(

@@ -77,7 +77,7 @@ class ExampleActivity : AppCompatActivity() {
         }
 
         if(ObjectsCollection.favouriteExampleKeysList.indexOf(key)!=-1){
-            DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.primaryColor))
+            DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.pure_red))
         }
         else{
             DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
@@ -101,7 +101,7 @@ class ExampleActivity : AppCompatActivity() {
                 ObjectsCollection.adapterFavouriteExamples.notifyItemInserted(ObjectsCollection.favouriteExamples.size-1)
 
                 myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_EXAM").child(key.toString()).setValue(key)
-                DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.primaryColor))
+                DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.pure_red))
             }
         }
         bToNextExample.setOnClickListener {
@@ -119,7 +119,7 @@ class ExampleActivity : AppCompatActivity() {
                         if (ObjectsCollection.favouriteExampleKeysList.contains(key)) {
                             DrawableCompat.setTint(
                                 ivFavourites.drawable,
-                                ContextCompat.getColor(this, R.color.primaryColor)
+                                ContextCompat.getColor(this, R.color.pure_red)
                             )
                         } else {
                             DrawableCompat.setTint(
@@ -160,7 +160,7 @@ class ExampleActivity : AppCompatActivity() {
                     if (ObjectsCollection.favouriteExampleKeysList.contains(key)) {
                         DrawableCompat.setTint(
                             ivFavourites.drawable,
-                            ContextCompat.getColor(this, R.color.primaryColor)
+                            ContextCompat.getColor(this, R.color.pure_red)
                         )
                     } else {
                         DrawableCompat.setTint(
