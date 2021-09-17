@@ -13,6 +13,12 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.lang.Exception
+import androidx.core.text.HtmlCompat
+
+import android.text.Spanned
+
+
+
 
 class ExampleActivity : AppCompatActivity() {
 
@@ -36,9 +42,13 @@ class ExampleActivity : AppCompatActivity() {
 
                 currExample = ObjectsCollection.favouriteExamples[position]
 
+                val htmlCode = ObjectsCollection.favouriteExamples[position].CODE
+                val spannedCode = HtmlCompat.fromHtml(htmlCode!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
+
                 findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteExamples[position].TITLE
                 findViewById<TextView>(R.id.tvExampleText).text = ObjectsCollection.favouriteExamples[position].TEXT
-                findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.favouriteExamples[position].CODE
+                findViewById<TextView>(R.id.tvCode).text = spannedCode
             } catch (exception : Exception){
                 Log.i("FAV", "$exception")
                 //this toast is never shown reason unknown
@@ -60,9 +70,12 @@ class ExampleActivity : AppCompatActivity() {
             ObjectsCollection.adapterCurrentExample.notifyItemInserted(0)
             Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_EXAM").setValue(key)
 
+            val htmlCode = ObjectsCollection.examplesList[position].CODE
+            val spannedCode = HtmlCompat.fromHtml(htmlCode!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
             findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.examplesList[position].TITLE
             findViewById<TextView>(R.id.tvExampleText).text = ObjectsCollection.examplesList[position].TEXT
-            findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.examplesList[position].CODE
+            findViewById<TextView>(R.id.tvCode).text = spannedCode
         }
 
         val ivShare = findViewById<ImageView>(R.id.ivShare)
@@ -121,17 +134,16 @@ class ExampleActivity : AppCompatActivity() {
                                 ContextCompat.getColor(this, R.color.pure_red)
                             )
                         } else {
-                            DrawableCompat.setTint(
-                                ivFavourites.drawable,
-                                ContextCompat.getColor(this, R.color.icon_inactive)
-                            )
+                            DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
                         }
-                        findViewById<TextView>(R.id.tvTitle).text =
-                            ObjectsCollection.favouriteExamples[position].TITLE
-                        findViewById<TextView>(R.id.tvExampleText).text =
-                            ObjectsCollection.favouriteExamples[position].TEXT
-                        findViewById<TextView>(R.id.tvCode).text =
-                            ObjectsCollection.favouriteExamples[position].CODE
+
+                        val htmlCode = ObjectsCollection.favouriteExamples[position].CODE
+                        val spannedCode = HtmlCompat.fromHtml(htmlCode!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
+
+                        findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteExamples[position].TITLE
+                        findViewById<TextView>(R.id.tvExampleText).text = ObjectsCollection.favouriteExamples[position].TEXT
+                        findViewById<TextView>(R.id.tvCode).text = spannedCode
                     }catch (exception:Exception){
                         Toast.makeText(this, "${exception.message}", Toast.LENGTH_SHORT).show()
                     }
@@ -167,12 +179,13 @@ class ExampleActivity : AppCompatActivity() {
                             ContextCompat.getColor(this, R.color.icon_inactive)
                         )
                     }
-                    findViewById<TextView>(R.id.tvTitle).text =
-                        ObjectsCollection.examplesList[position].TITLE
-                    findViewById<TextView>(R.id.tvExampleText).text =
-                        ObjectsCollection.examplesList[position].TEXT
-                    findViewById<TextView>(R.id.tvCode).text =
-                        ObjectsCollection.examplesList[position].CODE
+
+                    val htmlCode = ObjectsCollection.examplesList[position].CODE
+                    val spannedCode = HtmlCompat.fromHtml(htmlCode!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
+                    findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.examplesList[position].TITLE
+                    findViewById<TextView>(R.id.tvExampleText).text = ObjectsCollection.examplesList[position].TEXT
+                    findViewById<TextView>(R.id.tvCode).text = spannedCode
                 }
             }
         }

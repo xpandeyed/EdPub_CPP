@@ -12,6 +12,7 @@ import android.widget.Toast
 
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.text.HtmlCompat
 
 import com.google.firebase.auth.ktx.auth
 
@@ -45,9 +46,12 @@ class ChapterActivity : AppCompatActivity() {
 
                 currChapter = ObjectsCollection.favouriteChapters[position]
 
+                val htmlCode = ObjectsCollection.favouriteChapters[position].CODE
+                val spannedCode = HtmlCompat.fromHtml(htmlCode!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
                 findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteChapters[position].TITLE
                 findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.favouriteChapters[position].TEXT
-                findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.favouriteChapters[position].CODE
+                findViewById<TextView>(R.id.tvCode).text = spannedCode
             } catch (exception : Exception){
                 Log.i("FAV", "$exception")
                 //this toast is never shown reason unknown
@@ -69,9 +73,12 @@ class ChapterActivity : AppCompatActivity() {
             ObjectsCollection.adapterCurrentChapter.notifyItemInserted(0)
             Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_CHAP").setValue(key)
 
+            val htmlCode = ObjectsCollection.chaptersList[position].CODE
+            val spannedCode = HtmlCompat.fromHtml(htmlCode!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
             findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.chaptersList[position].TITLE
             findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.chaptersList[position].TEXT
-            findViewById<TextView>(R.id.tvCode).text = ObjectsCollection.chaptersList[position].CODE
+            findViewById<TextView>(R.id.tvCode).text = spannedCode
         }
 
         val ivShare = findViewById<ImageView>(R.id.ivShare)
@@ -113,6 +120,8 @@ class ChapterActivity : AppCompatActivity() {
                 DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.pure_red))
             }
         }
+
+
         bToNextChapter.setOnClickListener {
                 if(invoker=="fromFav"){
                     if(position>=ObjectsCollection.favouriteChapters.size-1){
@@ -134,12 +143,13 @@ class ChapterActivity : AppCompatActivity() {
                                 ContextCompat.getColor(this, R.color.icon_inactive)
                             )
                         }
-                        findViewById<TextView>(R.id.tvTitle).text =
-                            ObjectsCollection.favouriteChapters[position].TITLE
-                        findViewById<TextView>(R.id.tvChapterText).text =
-                            ObjectsCollection.favouriteChapters[position].TEXT
-                        findViewById<TextView>(R.id.tvCode).text =
-                            ObjectsCollection.favouriteChapters[position].CODE
+
+                        val htmlCode = ObjectsCollection.favouriteChapters[position].CODE
+                        val spannedCode = HtmlCompat.fromHtml(htmlCode!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
+                        findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteChapters[position].TITLE
+                        findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.favouriteChapters[position].TEXT
+                        findViewById<TextView>(R.id.tvCode).text = spannedCode
                     }
                 }
                 else{
@@ -170,12 +180,13 @@ class ChapterActivity : AppCompatActivity() {
                                 ContextCompat.getColor(this, R.color.icon_inactive)
                             )
                         }
-                        findViewById<TextView>(R.id.tvTitle).text =
-                            ObjectsCollection.chaptersList[position].TITLE
-                        findViewById<TextView>(R.id.tvChapterText).text =
-                            ObjectsCollection.chaptersList[position].TEXT
-                        findViewById<TextView>(R.id.tvCode).text =
-                            ObjectsCollection.chaptersList[position].CODE
+
+                        val htmlCode = ObjectsCollection.chaptersList[position].CODE
+                        val spannedCode = HtmlCompat.fromHtml(htmlCode!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
+                        findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.chaptersList[position].TITLE
+                        findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.chaptersList[position].TEXT
+                        findViewById<TextView>(R.id.tvCode).text = spannedCode
                     }
                 }
         }
