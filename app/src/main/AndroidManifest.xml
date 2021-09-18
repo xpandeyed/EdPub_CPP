@@ -34,6 +34,7 @@
         <activity
             android:name=".ExampleActivity"
             android:parentActivityName=".HomeActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -42,6 +43,7 @@
         <activity
             android:name=".ChapterActivity"
             android:exported="true"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:parentActivityName=".HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
