@@ -49,8 +49,11 @@ class ChapterActivity : AppCompatActivity() {
                 val htmlCode = ObjectsCollection.favouriteChapters[position].CODE
                 val spannedCode = HtmlCompat.fromHtml(htmlCode!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
 
+                val htmlText = ObjectsCollection.favouriteChapters[position].TEXT
+                val spannedText = HtmlCompat.fromHtml(htmlText!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
                 findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteChapters[position].TITLE
-                findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.favouriteChapters[position].TEXT
+                findViewById<TextView>(R.id.tvChapterText).text = spannedText
                 findViewById<TextView>(R.id.tvCode).text = spannedCode
             } catch (exception : Exception){
                 Log.i("FAV", "$exception")
@@ -76,16 +79,17 @@ class ChapterActivity : AppCompatActivity() {
             val htmlCode = ObjectsCollection.chaptersList[position].CODE
             val spannedCode = HtmlCompat.fromHtml(htmlCode!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
 
+            val htmlText = ObjectsCollection.chaptersList[position].TEXT
+            val spannedText = HtmlCompat.fromHtml(htmlText!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
             findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.chaptersList[position].TITLE
-            findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.chaptersList[position].TEXT
+            findViewById<TextView>(R.id.tvChapterText).text = spannedText
             findViewById<TextView>(R.id.tvCode).text = spannedCode
         }
 
         val ivShare = findViewById<ImageView>(R.id.ivShare)
         val ivFavourites = findViewById<ImageView>(R.id.ivFavourite)
         val bToNextChapter = findViewById<Button>(R.id.bToNextChapter)
-
-
 
         ivShare.setOnClickListener {
 
@@ -147,8 +151,11 @@ class ChapterActivity : AppCompatActivity() {
                         val htmlCode = ObjectsCollection.favouriteChapters[position].CODE
                         val spannedCode = HtmlCompat.fromHtml(htmlCode!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
 
+                        val htmlText = ObjectsCollection.favouriteChapters[position].TEXT
+                        val spannedText = HtmlCompat.fromHtml(htmlText!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
                         findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteChapters[position].TITLE
-                        findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.favouriteChapters[position].TEXT
+                        findViewById<TextView>(R.id.tvChapterText).text = spannedText
                         findViewById<TextView>(R.id.tvCode).text = spannedCode
                     }
                 }
@@ -184,8 +191,11 @@ class ChapterActivity : AppCompatActivity() {
                         val htmlCode = ObjectsCollection.chaptersList[position].CODE
                         val spannedCode = HtmlCompat.fromHtml(htmlCode!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
 
+                        val htmlText = ObjectsCollection.chaptersList[position].TEXT
+                        val spannedText = HtmlCompat.fromHtml(htmlText!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
                         findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.chaptersList[position].TITLE
-                        findViewById<TextView>(R.id.tvChapterText).text = ObjectsCollection.chaptersList[position].TEXT
+                        findViewById<TextView>(R.id.tvChapterText).text = spannedText
                         findViewById<TextView>(R.id.tvCode).text = spannedCode
                     }
                 }

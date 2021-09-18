@@ -46,8 +46,11 @@ class ExampleActivity : AppCompatActivity() {
                 val spannedCode = HtmlCompat.fromHtml(htmlCode!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
 
 
+                val htmlText = ObjectsCollection.favouriteExamples[position].TEXT
+                val spannedText = HtmlCompat.fromHtml(htmlText!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
                 findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteExamples[position].TITLE
-                findViewById<TextView>(R.id.tvExampleText).text = ObjectsCollection.favouriteExamples[position].TEXT
+                findViewById<TextView>(R.id.tvExampleText).text = spannedText
                 findViewById<TextView>(R.id.tvCode).text = spannedCode
             } catch (exception : Exception){
                 Log.i("FAV", "$exception")
@@ -73,8 +76,11 @@ class ExampleActivity : AppCompatActivity() {
             val htmlCode = ObjectsCollection.examplesList[position].CODE
             val spannedCode = HtmlCompat.fromHtml(htmlCode!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
 
+            val htmlText = ObjectsCollection.examplesList[position].TEXT
+            val spannedText = HtmlCompat.fromHtml(htmlText!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
             findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.examplesList[position].TITLE
-            findViewById<TextView>(R.id.tvExampleText).text = ObjectsCollection.examplesList[position].TEXT
+            findViewById<TextView>(R.id.tvExampleText).text = spannedText
             findViewById<TextView>(R.id.tvCode).text = spannedCode
         }
 
@@ -140,9 +146,11 @@ class ExampleActivity : AppCompatActivity() {
                         val htmlCode = ObjectsCollection.favouriteExamples[position].CODE
                         val spannedCode = HtmlCompat.fromHtml(htmlCode!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
 
+                        val htmlText = ObjectsCollection.favouriteExamples[position].TEXT
+                        val spannedText = HtmlCompat.fromHtml(htmlText!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
 
                         findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteExamples[position].TITLE
-                        findViewById<TextView>(R.id.tvExampleText).text = ObjectsCollection.favouriteExamples[position].TEXT
+                        findViewById<TextView>(R.id.tvExampleText).text = spannedText
                         findViewById<TextView>(R.id.tvCode).text = spannedCode
                     }catch (exception:Exception){
                         Toast.makeText(this, "${exception.message}", Toast.LENGTH_SHORT).show()
@@ -183,8 +191,11 @@ class ExampleActivity : AppCompatActivity() {
                     val htmlCode = ObjectsCollection.examplesList[position].CODE
                     val spannedCode = HtmlCompat.fromHtml(htmlCode!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
 
+                    val htmlText = ObjectsCollection.examplesList[position].TEXT
+                    val spannedText= HtmlCompat.fromHtml(htmlText!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
                     findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.examplesList[position].TITLE
-                    findViewById<TextView>(R.id.tvExampleText).text = ObjectsCollection.examplesList[position].TEXT
+                    findViewById<TextView>(R.id.tvExampleText).text = spannedText
                     findViewById<TextView>(R.id.tvCode).text = spannedCode
                 }
             }
