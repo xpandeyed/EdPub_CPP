@@ -54,6 +54,7 @@ object FunctionCollection {
         CoroutineScope(Dispatchers.IO).launch{
             val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("CHAPTERS")
             databaseReference.addValueEventListener(object: ValueEventListener {
+
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if(snapshot.exists()){
                         for(chapter in snapshot.children){
@@ -149,8 +150,6 @@ object FunctionCollection {
 
         }
     }
-
-
 
 
     fun loadCurrentChapterKey(){

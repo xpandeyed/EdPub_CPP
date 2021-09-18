@@ -119,9 +119,7 @@ class SignUpActivity : AppCompatActivity() {
                         val firebaseDatabase = FirebaseDatabase.getInstance().getReference("USERS")
 
                         if(ObjectsCollection.isNewUser){
-                            firebaseDatabase.child(uid!!).child("NAME").setValue(user.displayName)
-                            firebaseDatabase.child(uid).child("EMAIL").setValue(user.email)
-                            firebaseDatabase.child(uid).child("CURR_CHAP").setValue("C111AAA")
+                            firebaseDatabase.child(uid!!).child("CURR_CHAP").setValue("C111AAA")
                             firebaseDatabase.child(uid).child("CURR_EXAM").setValue("E111AAA")
                             FunctionCollection.loadCurrentChapterKey()
                             FunctionCollection.loadCurrentExampleKey()

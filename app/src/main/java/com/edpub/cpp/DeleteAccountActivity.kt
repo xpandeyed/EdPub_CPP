@@ -70,8 +70,6 @@ class DeleteAccountActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task->
                     if (task.isSuccessful){
                         Firebase.database.getReference("USERS").child(uid).child("ACCOUNT_DELETE_REASON").setValue(reason)
-                        Firebase.database.getReference("USERS").child(uid).child("EMAIL").setValue(null)
-                        Firebase.database.getReference("USERS").child(uid).child("NAME").setValue(null)
                         Firebase.database.getReference("USERS").child(uid).child("CURR_CHAP").setValue(null)
                         Firebase.database.getReference("USERS").child(uid).child("CURR_EXAM").setValue(null)
                         Firebase.database.getReference("USERS").child(uid).child("FAV_CHAP").setValue(null)
@@ -117,8 +115,6 @@ class DeleteAccountActivity : AppCompatActivity() {
                         .addOnCompleteListener { task->
                             if(task.isSuccessful){
                                 Firebase.database.getReference("USERS").child(uid).child("ACCOUNT_DELETE_REASON").setValue(reason)
-                                Firebase.database.getReference("USERS").child(uid).child("EMAIL").setValue(null)
-                                Firebase.database.getReference("USERS").child(uid).child("NAME").setValue(null)
                                 Firebase.database.getReference("USERS").child(uid).child("CURR_CHAP").setValue(null)
                                 Firebase.database.getReference("USERS").child(uid).child("CURR_EXAM").setValue(null)
                                 Firebase.database.getReference("USERS").child(uid).child("FAV_CHAP").setValue(null)
