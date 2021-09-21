@@ -107,12 +107,13 @@ object FunctionCollection {
 
 
     fun loadFavouriteChapterKeys (){
-        ObjectsCollection.favouriteExampleKeysList.clear()
+
         CoroutineScope(Dispatchers.IO).launch{
             val favChapterReference = Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP")
             favChapterReference.addValueEventListener(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if(snapshot.exists()){
+                        ObjectsCollection.favouriteExampleKeysList.clear()
                         for(chapter in snapshot.children){
                             val currChapter = chapter.getValue(String::class.java)
                             ObjectsCollection.favouriteChapterKeysList.add(currChapter!!)
@@ -130,13 +131,13 @@ object FunctionCollection {
 
 
     fun loadFavouriteExampleKeys (){
-        ObjectsCollection.favouriteExampleKeysList.clear()
+
         CoroutineScope(Dispatchers.IO).launch{
             val favExampleReference = Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("FAV_EXAM")
             favExampleReference.addValueEventListener(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if(snapshot.exists()){
-
+                        ObjectsCollection.favouriteExampleKeysList.clear()
                         for(example in snapshot.children){
                             val currExample = example.getValue(String::class.java)
                             ObjectsCollection.favouriteExampleKeysList.add(currExample!!)
