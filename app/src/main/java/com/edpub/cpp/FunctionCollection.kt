@@ -57,6 +57,7 @@ object FunctionCollection {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if(snapshot.exists()){
+                        ObjectsCollection.chaptersList.clear()
                         for(chapter in snapshot.children){
                             val currChapter = chapter.getValue(Chapter::class.java)
                             ObjectsCollection.chaptersList.add(currChapter!!)
@@ -82,6 +83,7 @@ object FunctionCollection {
             databaseReference.addValueEventListener(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if(snapshot.exists()){
+                        ObjectsCollection.examplesList.clear()
                         for(example in snapshot.children){
                             val currExample = example.getValue(Chapter::class.java)
                             ObjectsCollection.examplesList.add(currExample!!)
