@@ -21,10 +21,7 @@ import com.google.firebase.ktx.Firebase
 import java.lang.Exception
 
 
-//Entry Points
-//1. From Current Chapter
-//2. From Chapters List
-//3. From Favourite Chapters
+
 class ChapterActivity : AppCompatActivity() {
 
     private var invoker = "fromChapter"
