@@ -45,6 +45,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
             <LinearLayout
+                android:id="@+id/llCodeContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="25dp"
@@ -57,21 +58,31 @@
                     android:fillViewport="true"
                     android:padding="10dp"
                     android:scrollbars="none">
-
                     <TextView
                         android:id="@+id/tvCode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/consolas"
-                        android:hint="Example Code"
+                        android:hint="Chapter Code"
                         android:scrollHorizontally="true"
                         android:textSize="20sp" />
                 </HorizontalScrollView>
 
             </LinearLayout>
+            <TextView
+                android:id="@+id/tvExplanation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:layout_marginTop="35dp"
+                android:fontFamily="@font/milliard_book"
+                android:hint="Explanation Text is loading."
+                android:lineSpacingExtra="12dp"
+                android:textColor="@color/grey_text"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@id/llCodeContainer"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </ScrollView>
 

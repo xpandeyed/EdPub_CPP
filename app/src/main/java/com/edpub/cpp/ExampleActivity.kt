@@ -49,9 +49,15 @@ class ExampleActivity : AppCompatActivity() {
                 val htmlText = ObjectsCollection.favouriteExamples[position].TEXT
                 val spannedText = HtmlCompat.fromHtml(htmlText!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
 
+                val htmlExplanation = ObjectsCollection.favouriteExamples[position].EXPLANATION
+                val spannedExplanation= HtmlCompat.fromHtml(htmlExplanation!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
                 findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteExamples[position].TITLE
                 findViewById<TextView>(R.id.tvExampleText).text = spannedText
                 findViewById<TextView>(R.id.tvCode).text = spannedCode
+                findViewById<TextView>(R.id.tvExplanation).text = spannedExplanation
+
+
             } catch (exception : Exception){
                 Log.i("FAV", "$exception")
                 //this toast is never shown reason unknown
@@ -79,9 +85,13 @@ class ExampleActivity : AppCompatActivity() {
             val htmlText = ObjectsCollection.examplesList[position].TEXT
             val spannedText = HtmlCompat.fromHtml(htmlText!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
 
+            val htmlExplanation = ObjectsCollection.examplesList[position].EXPLANATION
+            val spannedExplanation= HtmlCompat.fromHtml(htmlExplanation!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
             findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.examplesList[position].TITLE
             findViewById<TextView>(R.id.tvExampleText).text = spannedText
             findViewById<TextView>(R.id.tvCode).text = spannedCode
+            findViewById<TextView>(R.id.tvExplanation).text = spannedExplanation
         }
 
         val ivShare = findViewById<ImageView>(R.id.ivShare)
@@ -149,9 +159,14 @@ class ExampleActivity : AppCompatActivity() {
                         val htmlText = ObjectsCollection.favouriteExamples[position].TEXT
                         val spannedText = HtmlCompat.fromHtml(htmlText!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
 
+                        val htmlExplanation = ObjectsCollection.favouriteExamples[position].EXPLANATION
+                        val spannedExplanation= HtmlCompat.fromHtml(htmlExplanation!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
                         findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteExamples[position].TITLE
                         findViewById<TextView>(R.id.tvExampleText).text = spannedText
                         findViewById<TextView>(R.id.tvCode).text = spannedCode
+                        findViewById<TextView>(R.id.tvExplanation).text = spannedExplanation
+
                     }catch (exception:Exception){
                         Toast.makeText(this, "${exception.message}", Toast.LENGTH_SHORT).show()
                     }
@@ -194,9 +209,13 @@ class ExampleActivity : AppCompatActivity() {
                     val htmlText = ObjectsCollection.examplesList[position].TEXT
                     val spannedText= HtmlCompat.fromHtml(htmlText!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
 
+                    val htmlExplanation = ObjectsCollection.examplesList[position].EXPLANATION
+                    val spannedExplanation= HtmlCompat.fromHtml(htmlExplanation!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
                     findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.examplesList[position].TITLE
                     findViewById<TextView>(R.id.tvExampleText).text = spannedText
                     findViewById<TextView>(R.id.tvCode).text = spannedCode
+                    findViewById<TextView>(R.id.tvExplanation).text = spannedExplanation
                 }
             }
         }
