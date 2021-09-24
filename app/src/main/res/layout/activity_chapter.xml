@@ -11,13 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
-        android:paddingBottom="20dp"
         android:scrollbars="none"
         app:layout_constraintBottom_toTopOf="@id/cvBottomItems"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:paddingBottom="20dp"
             android:layout_height="match_parent">
 
             <TextView
@@ -64,6 +64,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/consolas"
                         android:hint="Chapter Code"
+                        android:justificationMode="inter_word"
                         android:scrollHorizontally="true"
                         android:textSize="20sp" />
                 </HorizontalScrollView>
