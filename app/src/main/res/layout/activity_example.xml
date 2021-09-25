@@ -49,7 +49,8 @@
                 android:id="@+id/llCodeContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
                 android:background="@drawable/white_corner_background"
                 app:layout_constraintTop_toBottomOf="@id/tvExampleText">
 
@@ -76,7 +77,8 @@
                 android:id="@+id/tvExplanation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
                 android:justificationMode="inter_word"
                 android:fontFamily="@font/milliard_book"
                 android:lineSpacingExtra="12dp"
