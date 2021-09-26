@@ -3,10 +3,6 @@ package com.edpub.cpp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.google.firebase.auth.ktx.auth
@@ -16,8 +12,7 @@ import java.lang.Exception
 import androidx.core.text.HtmlCompat
 
 import android.text.Spanned
-
-
+import android.widget.*
 
 
 class ExampleActivity : AppCompatActivity() {
@@ -41,6 +36,9 @@ class ExampleActivity : AppCompatActivity() {
                 key = ObjectsCollection.favouriteExamples[position].KEY
 
                 currExample = ObjectsCollection.favouriteExamples[position]
+
+
+                findViewById<ScrollView>(R.id.svContainer).scrollTo(0,0)
 
                 val htmlCode = ObjectsCollection.favouriteExamples[position].CODE
                 val spannedCode = HtmlCompat.fromHtml(htmlCode!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
@@ -78,6 +76,8 @@ class ExampleActivity : AppCompatActivity() {
             ObjectsCollection.currentExample.add(currExample)
             ObjectsCollection.adapterCurrentExample.notifyItemInserted(0)
             Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_EXAM").setValue(key)
+
+            findViewById<ScrollView>(R.id.svContainer).scrollTo(0,0)
 
             val htmlCode = ObjectsCollection.examplesList[position].CODE
             val spannedCode = HtmlCompat.fromHtml(htmlCode!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
@@ -144,6 +144,8 @@ class ExampleActivity : AppCompatActivity() {
                         key = ObjectsCollection.favouriteExamples[position].KEY!!
                         currExample = ObjectsCollection.favouriteExamples[position]
 
+                        findViewById<ScrollView>(R.id.svContainer).scrollTo(0,0)
+
                         if (ObjectsCollection.favouriteExampleKeysList.contains(key)) {
                             DrawableCompat.setTint(
                                 ivFavourites.drawable,
@@ -170,7 +172,6 @@ class ExampleActivity : AppCompatActivity() {
                     }catch (exception:Exception){
                         Toast.makeText(this, "${exception.message}", Toast.LENGTH_SHORT).show()
                     }
-
                 }
             }
             else{
@@ -190,6 +191,8 @@ class ExampleActivity : AppCompatActivity() {
                     ObjectsCollection.currentExample.add(currExample)
                     ObjectsCollection.adapterCurrentExample.notifyItemInserted(0)
                     Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_EXAM").setValue(key)
+
+                    findViewById<ScrollView>(R.id.svContainer).scrollTo(0,0)
 
                     if (ObjectsCollection.favouriteExampleKeysList.contains(key)) {
                         DrawableCompat.setTint(

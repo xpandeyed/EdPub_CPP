@@ -4,11 +4,8 @@ package com.edpub.cpp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
@@ -141,6 +138,8 @@ class ChapterActivity : AppCompatActivity() {
                         key = ObjectsCollection.favouriteChapters[position].KEY!!
                         currChapter = ObjectsCollection.favouriteChapters[position]
 
+                        findViewById<ScrollView>(R.id.svContainer).scrollTo(0,0)
+
                         if (ObjectsCollection.favouriteChapterKeysList.contains(key)) {
                             DrawableCompat.setTint(
                                 ivFavourites.drawable,
@@ -184,6 +183,9 @@ class ChapterActivity : AppCompatActivity() {
                         ObjectsCollection.currentChapter.add(currChapter)
                         ObjectsCollection.adapterCurrentChapter.notifyItemInserted(0)
                         Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_CHAP").setValue(key)
+
+                        findViewById<ScrollView>(R.id.svContainer).scrollTo(0,0)
+
 
                         if (ObjectsCollection.favouriteChapterKeysList.contains(key)) {
                             DrawableCompat.setTint(
