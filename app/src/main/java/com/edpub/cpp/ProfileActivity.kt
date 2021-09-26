@@ -76,6 +76,13 @@ class ProfileActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.tvVersion).setOnClickListener {
             Toast.makeText(this, "Version", Toast.LENGTH_SHORT).show()
         }
+        findViewById<TextView>(R.id.tvAboutUs).setOnClickListener {
+            val url = "https://edpubweb.blogspot.com/2021/09/about-us.html"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
+
     }
 
 }
