@@ -113,7 +113,7 @@ object FunctionCollection {
             favChapterReference.addValueEventListener(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if(snapshot.exists()){
-                        ObjectsCollection.favouriteExampleKeysList.clear()
+                        ObjectsCollection.favouriteChapterKeysList.clear()
                         for(chapter in snapshot.children){
                             val currChapter = chapter.getValue(String::class.java)
                             ObjectsCollection.favouriteChapterKeysList.add(currChapter!!)
