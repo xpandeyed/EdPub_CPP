@@ -68,7 +68,10 @@ class ProfileActivity : AppCompatActivity() {
 
         }
         findViewById<TextView>(R.id.tvShare).setOnClickListener {
-            Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show()
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.putExtra(Intent.EXTRA_TEXT, "Download EdPub")
+            intent.type = "text/plain"
+            startActivity(intent)
         }
         findViewById<TextView>(R.id.tvRateUs).setOnClickListener {
             Toast.makeText(this, "Rate Us", Toast.LENGTH_SHORT).show()

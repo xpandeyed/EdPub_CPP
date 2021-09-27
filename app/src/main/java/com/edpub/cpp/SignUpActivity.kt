@@ -1,6 +1,5 @@
 package com.edpub.cpp
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -32,7 +31,6 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
 
-    @SuppressLint("CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
@@ -58,8 +56,9 @@ class SignUpActivity : AppCompatActivity() {
         spannable.setSpan(span1, 31, 51, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         spannable.setSpan(span2, 56, 70, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
-        findViewById<TextView>(R.id.tvTermsConditionsAndPrivacyPolicy).movementMethod = LinkMovementMethod.getInstance()
-        findViewById<TextView>(R.id.tvTermsConditionsAndPrivacyPolicy).text = spannable
+        val tvTermsConditionsAndPrivacyPolicy = findViewById<TextView>(R.id.tvTermsConditionsAndPrivacyPolicy)
+        tvTermsConditionsAndPrivacyPolicy.movementMethod = LinkMovementMethod.getInstance()
+        tvTermsConditionsAndPrivacyPolicy.text = spannable
 
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

@@ -1,6 +1,7 @@
 package com.edpub.cpp
 
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -94,7 +95,10 @@ class ChapterActivity : AppCompatActivity() {
         val bToNextChapter = findViewById<Button>(R.id.bToNextChapter)
 
         ivShare.setOnClickListener {
-
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.putExtra(Intent.EXTRA_TEXT, "Download EdPub")
+            intent.type = "text/plain"
+            startActivity(intent)
         }
 
         if(ObjectsCollection.favouriteChapterKeysList.indexOf(key)!=-1){

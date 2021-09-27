@@ -1,5 +1,6 @@
 package com.edpub.cpp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -101,7 +102,10 @@ class ExampleActivity : AppCompatActivity() {
 
 
         ivShare.setOnClickListener {
-
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.putExtra(Intent.EXTRA_TEXT, "Download EdPub")
+            intent.type = "text/plain"
+            startActivity(intent)
         }
 
         if(ObjectsCollection.favouriteExampleKeysList.indexOf(key)!=-1){
