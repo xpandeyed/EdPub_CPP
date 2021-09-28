@@ -19,13 +19,12 @@ import kotlinx.coroutines.launch
 
 
 class FavouritesFragment : Fragment() {
-
-
-
     override fun onResume() {
-        FunctionCollection.copyFavouriteChapters()
-        FunctionCollection.copyFavouriteExamples()
         super.onResume()
+        CoroutineScope(Dispatchers.Main).launch {
+            copyFavouriteChapters()
+            copyFavouriteExamples()
+        }
     }
 
         override fun onCreateView(
@@ -58,6 +57,7 @@ class FavouritesFragment : Fragment() {
 
         tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
+
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -89,4 +89,39 @@ class FavouritesFragment : Fragment() {
             })
 
     }
+    private fun copyFavouriteChapters () {
+        ObjectsCollection.favouriteChapters.clear()
+        CoroutineScope(Dispatchers.Main).launch {
+            var n = 0
+            while (n < ObjectsCollection.chaptersList.size) {
+                val index = ObjectsCollection.favouriteChapterKeysList.indexOf(ObjectsCollection.chaptersList[n].KEY)
+                if (index != -1) {
+                    ObjectsCollection.favouriteChapters.add(ObjectsCollection.chaptersList[n])
+                    ObjectsCollection.adapterFavouriteChapters.notifyItemInserted(ObjectsCollection.favouriteChapters.size-1)
+                }
+                n++
+            }
+            ObjectsCollection.areFavouriteChaptersCopied = true
+        }
+
+    }
+
+    private fun copyFavouriteExamples () {
+        ObjectsCollection.favouriteExamples.clear()
+        CoroutineScope(Dispatchers.Main).launch {
+            var n = 0
+            while (n < ObjectsCollection.examplesList.size) {
+                val index = ObjectsCollection.favouriteExampleKeysList.indexOf(ObjectsCollection.examplesList[n].KEY)
+                if (index != -1) {
+                    ObjectsCollection.favouriteExamples.add(ObjectsCollection.examplesList[n])
+                    ObjectsCollection.adapterFavouriteExamples.notifyItemInserted(ObjectsCollection.favouriteExamples.size-1)
+                }
+                n++
+            }
+            ObjectsCollection.areFavouriteExamplesCopied = true
+        }
+
+    }
+
+
 }

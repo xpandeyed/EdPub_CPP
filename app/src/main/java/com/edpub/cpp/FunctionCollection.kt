@@ -9,47 +9,6 @@ import kotlinx.coroutines.*
 
 object FunctionCollection {
 
-
-
-
-    fun copyFavouriteChapters () {
-        ObjectsCollection.favouriteChapters.clear()
-        CoroutineScope(Dispatchers.Main).launch {
-            var n = 0
-            while (n < ObjectsCollection.chaptersList.size) {
-                var index = ObjectsCollection.favouriteChapterKeysList.indexOf(ObjectsCollection.chaptersList[n].KEY)
-                if (index != -1) {
-                    ObjectsCollection.favouriteChapters.add(ObjectsCollection.chaptersList[n])
-                    ObjectsCollection.adapterFavouriteChapters.notifyItemInserted(ObjectsCollection.favouriteChapters.size-1)
-                }
-                n++
-            }
-            ObjectsCollection.areFavouriteChaptersCopied = true
-        }
-
-    }
-
-
-    fun copyFavouriteExamples () {
-        ObjectsCollection.favouriteExamples.clear()
-        CoroutineScope(Dispatchers.Main).launch {
-            var n = 0
-            while (n < ObjectsCollection.examplesList.size) {
-                val index = ObjectsCollection.favouriteExampleKeysList.indexOf(ObjectsCollection.examplesList[n].KEY)
-                if (index != -1) {
-                    ObjectsCollection.favouriteExamples.add(ObjectsCollection.examplesList[n])
-                    ObjectsCollection.adapterFavouriteExamples.notifyItemInserted(ObjectsCollection.favouriteExamples.size-1)
-                }
-                n++
-            }
-            ObjectsCollection.areFavouriteExamplesCopied = true
-        }
-
-    }
-
-
-
-
     fun loadChapters () {
         CoroutineScope(Dispatchers.IO).launch{
             val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("CHAPTERS")
@@ -75,7 +34,6 @@ object FunctionCollection {
             })
         }
     }
-
 
     fun loadExamples () {
         CoroutineScope(Dispatchers.IO).launch{
@@ -128,7 +86,6 @@ object FunctionCollection {
             })
         }
     }
-
 
     fun loadFavouriteExampleKeys (){
 
