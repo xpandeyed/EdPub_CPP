@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+            app:navigationIcon="@drawable/ic_back"
             app:title="Delete Account"
             app:titleTextAppearance="@style/title_default" />
     </com.google.android.material.appbar.AppBarLayout>

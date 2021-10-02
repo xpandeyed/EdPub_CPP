@@ -16,7 +16,7 @@
             android:id="@+id/tbUpdateProfileToolBar"
             app:titleTextAppearance="@style/title_default"
             app:title="Update Profile"
-            app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+            app:navigationIcon="@drawable/ic_back"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"/>

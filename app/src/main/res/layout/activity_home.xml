@@ -18,10 +18,10 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tbHomeToolBar"
             app:title="C++"
-            app:titleTextColor="#007DF9"
-            android:paddingStart="5dp"
-            android:paddingEnd="5dp"
+            android:gravity="center_vertical"
             app:titleTextAppearance="@style/cpp_title"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:menu="@menu/home_activity_appbar"
