@@ -41,6 +41,7 @@
         android:fontFamily="@font/milliard_book"
         android:textColor="@color/primaryColor"
         android:layout_width="match_parent"
+        android:textAlignment="center"
         android:background="@drawable/button_background"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"

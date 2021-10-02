@@ -118,8 +118,11 @@
                     android:id="@+id/tvTermsConditions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:drawablePadding="20dp"
+                    android:drawableLeft="@drawable/outline_privacy_tip_24"
+                    android:gravity="center_vertical"
                     android:fontFamily="@font/milliard_book"
-                    android:padding="20dp"
+                    android:padding="15dp"
                     android:text="Terms and Conditions"
                     android:textColor="#2d3e50"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -138,7 +141,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/milliard_book"
-                    android:padding="20dp"
+                    android:padding="15dp"
+                    android:drawableLeft="@drawable/outline_health_and_safety_24"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="20dp"
                     android:text="Privacy Policy"
                     android:textColor="#2d3e50"
                     app:layout_constraintTop_toBottomOf="@id/vTerms" />
@@ -154,10 +160,13 @@
 
                 <TextView
                     android:id="@+id/tvReport"
+                    android:drawableLeft="@drawable/outline_report_problem_24"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:drawablePadding="20dp"
+                    android:gravity="center_vertical"
                     android:fontFamily="@font/milliard_book"
-                    android:padding="20dp"
+                    android:padding="15dp"
                     android:text="Report"
                     android:textColor="#2d3e50"
                     app:layout_constraintTop_toBottomOf="@+id/vPrivacy" />
@@ -176,8 +185,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/milliard_book"
-                    android:padding="20dp"
+                    android:padding="15dp"
                     android:text="Feedback"
+                    android:drawableLeft="@drawable/baseline_rate_review_24"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="20dp"
                     android:textColor="#2d3e50"
                     app:layout_constraintTop_toBottomOf="@+id/vReport" />
 
@@ -195,8 +207,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/milliard_book"
-                    android:padding="20dp"
+                    android:padding="15dp"
                     android:text="Share"
+                    android:drawableLeft="@drawable/outline_share_24"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="20dp"
                     android:textColor="#2d3e50"
                     app:layout_constraintTop_toBottomOf="@id/vFeedback" />
 
@@ -214,8 +229,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/milliard_book"
-                    android:padding="20dp"
+                    android:padding="15dp"
                     android:text="Rate"
+                    android:drawableLeft="@drawable/outline_star_outline_24"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="20dp"
                     android:textColor="#2d3e50"
                     app:layout_constraintTop_toBottomOf="@+id/vShare" />
 
@@ -233,7 +251,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/milliard_book"
-                    android:padding="20dp"
+                    android:drawableLeft="@drawable/baseline_new_releases_24"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="20dp"
+                    android:padding="15dp"
                     android:text="Version"
                     android:textColor="#2d3e50"
                     app:layout_constraintTop_toBottomOf="@id/tvRateUs" />
@@ -252,7 +273,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/milliard_book"
-                    android:padding="20dp"
+                    android:padding="15dp"
+                    android:drawablePadding="20dp"
+                    android:gravity="center_vertical"
+                    android:drawableLeft="@drawable/outline_info_24"
                     android:text="About Us"
                     android:textColor="#2d3e50"
                     app:layout_constraintTop_toBottomOf="@id/vVersion" />
