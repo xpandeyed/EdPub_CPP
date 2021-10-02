@@ -6,5 +6,5 @@
         android:title="Profile"
         app:showAsAction="always"
         android:iconTint="@color/icon_inactive"
-        android:icon="@drawable/ic_baseline_person_outline_24" />
+        android:icon="@drawable/ic_profile" />
 </menu>
