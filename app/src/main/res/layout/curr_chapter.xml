@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="20sp"
-        android:fontFamily="@font/milliard_semibold"
+        android:fontFamily="@font/metropolis_semi_bold"
         android:letterSpacing="0.02"
         android:foreground="?android:attr/selectableItemBackground"
         android:background="@drawable/button_background"
