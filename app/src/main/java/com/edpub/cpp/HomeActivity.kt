@@ -8,14 +8,29 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class HomeActivity : AppCompatActivity() {
+
+
+    private lateinit var loadData: LoadData
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setSupportActionBar(findViewById(R.id.tbHomeToolBar))
+
+
+        loadData = ViewModelProvider(this).get(LoadData::class.java)
+        if(!loadData.areChaptersLoaded.value!!){
+            loadData.loadChapters()
+        }
+        if(!loadData.areExamplesLoaded.value!!){
+            loadData.loadExamples()
+        }
+
 
         val homeFragment = HomeFragment()
         val chaptersFragment = ChaptersFragment()

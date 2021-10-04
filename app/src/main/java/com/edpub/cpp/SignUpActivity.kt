@@ -120,15 +120,15 @@ class SignUpActivity : AppCompatActivity() {
                         if(ObjectsCollection.isNewUser){
                             firebaseDatabase.child(uid!!).child("CURR_CHAP").setValue("C111AAA")
                             firebaseDatabase.child(uid).child("CURR_EXAM").setValue("E111AAA")
-                            FunctionCollection.loadCurrentChapterKey()
-                            FunctionCollection.loadCurrentExampleKey()
+//                            FunctionCollection.loadCurrentChapterKey()
+//                            FunctionCollection.loadCurrentExampleKey()
                         }
-                        else{
-                            ObjectsCollection.isFavouriteChapterKeysListLoaded = false
-                            ObjectsCollection.isFavouriteExampleKeysListLoaded = false
-                            FunctionCollection.loadFavouriteChapterKeys()
-                            FunctionCollection.loadFavouriteExampleKeys()
-                        }
+//                        else{
+//                            ObjectsCollection.isFavouriteChapterKeysListLoaded = false
+//                            ObjectsCollection.isFavouriteExampleKeysListLoaded = false
+//                            FunctionCollection.loadFavouriteChapterKeys()
+//                            FunctionCollection.loadFavouriteExampleKeys()
+//                        }
                         val intent = Intent(this@SignUpActivity, HomeActivity::class.java)
                         startActivity(intent)
                     }

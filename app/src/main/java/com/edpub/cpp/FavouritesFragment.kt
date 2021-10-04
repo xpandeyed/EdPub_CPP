@@ -69,7 +69,7 @@ class FavouritesFragment : Fragment() {
         })
 
 
-            ObjectsCollection.adapterFavouriteChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
+        ObjectsCollection.adapterFavouriteChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
                 override fun onItemClick(position: Int) {
                     val intent = Intent(activity, ChapterActivity::class.java).apply {
                         putExtra("POSITION", position)
@@ -78,7 +78,7 @@ class FavouritesFragment : Fragment() {
                     startActivity(intent)
                 }
             })
-            ObjectsCollection.adapterFavouriteExamples.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
+        ObjectsCollection.adapterFavouriteExamples.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
                 override fun onItemClick(position: Int) {
                     val intent = Intent(activity, ExampleActivity::class.java).apply {
                         putExtra("POSITION", position)
@@ -89,6 +89,9 @@ class FavouritesFragment : Fragment() {
             })
 
     }
+
+
+
     private fun copyFavouriteChapters () {
         ObjectsCollection.favouriteChapters.clear()
         CoroutineScope(Dispatchers.Main).launch {
@@ -103,7 +106,6 @@ class FavouritesFragment : Fragment() {
             }
             ObjectsCollection.areFavouriteChaptersCopied = true
         }
-
     }
 
     private fun copyFavouriteExamples () {
