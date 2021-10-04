@@ -1,6 +1,5 @@
 package com.edpub.cpp
 
-import android.util.Log
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
