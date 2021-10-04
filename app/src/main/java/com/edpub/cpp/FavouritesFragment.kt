@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayout
@@ -19,12 +21,19 @@ import kotlinx.coroutines.launch
 
 
 class FavouritesFragment : Fragment() {
+
+    private lateinit var loadData: LoadData
+
+
     override fun onResume() {
         super.onResume()
-        CoroutineScope(Dispatchers.Main).launch {
+        loadData = ViewModelProvider(requireActivity()).get(LoadData::class.java)
+        loadData.areFavouriteChapterKeysLoaded.observe(viewLifecycleOwner, Observer {
             copyFavouriteChapters()
+        })
+        loadData.areFavouriteExampleKeysLoaded.observe(viewLifecycleOwner, Observer {
             copyFavouriteExamples()
-        }
+        })
     }
 
         override fun onCreateView(
@@ -93,8 +102,9 @@ class FavouritesFragment : Fragment() {
 
 
     private fun copyFavouriteChapters () {
-        ObjectsCollection.favouriteChapters.clear()
+
         CoroutineScope(Dispatchers.Main).launch {
+            ObjectsCollection.favouriteChapters.clear()
             var n = 0
             while (n < ObjectsCollection.chaptersList.size) {
                 val index = ObjectsCollection.favouriteChapterKeysList.indexOf(ObjectsCollection.chaptersList[n].KEY)
@@ -109,8 +119,9 @@ class FavouritesFragment : Fragment() {
     }
 
     private fun copyFavouriteExamples () {
-        ObjectsCollection.favouriteExamples.clear()
+
         CoroutineScope(Dispatchers.Main).launch {
+            ObjectsCollection.favouriteExamples.clear()
             var n = 0
             while (n < ObjectsCollection.examplesList.size) {
                 val index = ObjectsCollection.favouriteExampleKeysList.indexOf(ObjectsCollection.examplesList[n].KEY)

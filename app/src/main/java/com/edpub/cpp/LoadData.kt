@@ -33,6 +33,7 @@ class LoadData : ViewModel() {
             val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("CHAPTERS")
             databaseReference.addValueEventListener(object: ValueEventListener {
 
+
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if(snapshot.exists()){
                         ObjectsCollection.chaptersList.clear()
@@ -42,11 +43,14 @@ class LoadData : ViewModel() {
                             ObjectsCollection.adapterChapters.notifyItemInserted(ObjectsCollection.chaptersList.size-1)
                         }
                         ObjectsCollection.isDataLoaded = true
+                        areChaptersLoaded.value = true
                     }
                     if(Firebase.auth.currentUser!=null){
                         loadFavouriteChapterKeys()
                     }
                 }
+
+
                 override fun onCancelled(error: DatabaseError) {
                     ObjectsCollection.isDataLoaded= false
                 }
@@ -67,6 +71,7 @@ class LoadData : ViewModel() {
                             ObjectsCollection.adapterExamples.notifyItemInserted(ObjectsCollection.examplesList.size-1)
                         }
                         ObjectsCollection.isDataLoaded = true
+                        areExamplesLoaded.value = true
                     }
                     if(Firebase.auth.currentUser!=null){
                         loadFavouriteExampleKeys()
@@ -95,6 +100,7 @@ class LoadData : ViewModel() {
                         }
                     }
                     ObjectsCollection.isFavouriteChapterKeysListLoaded = true
+                    areFavouriteChapterKeysLoaded.value = true
                     loadCurrentChapterKey()
                 }
                 override fun onCancelled(error: DatabaseError) {
@@ -118,6 +124,7 @@ class LoadData : ViewModel() {
                         }
                     }
                     ObjectsCollection.isFavouriteExampleKeysListLoaded = true
+                    areFavouriteExampleKeysLoaded.value = true
                     loadCurrentExampleKey()
                 }
                 override fun onCancelled(error: DatabaseError) {
@@ -140,6 +147,7 @@ class LoadData : ViewModel() {
                     ObjectsCollection.currentChapter.add(ObjectsCollection.chaptersList[ObjectsCollection.currentChapterPosition])
                     ObjectsCollection.adapterCurrentChapter.notifyItemInserted(ObjectsCollection.currentChapter.size-1)
                     ObjectsCollection.isCurrChapterLoaded = true
+                    isCurrChapterLoaded.value = true
                     break
                 }
                 n++
@@ -160,6 +168,7 @@ class LoadData : ViewModel() {
                     ObjectsCollection.currentExample.add(ObjectsCollection.examplesList[ObjectsCollection.currentExamplePosition])
                     ObjectsCollection.adapterCurrentExample.notifyItemInserted(ObjectsCollection.currentExample.size-1)
                     ObjectsCollection.isCurrExampleLoaded = true
+                    isCurrExampleLoaded.value = true
                     break
                 }
                 n++
