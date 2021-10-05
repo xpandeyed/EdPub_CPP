@@ -4,6 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -21,6 +24,7 @@ class FavouritesAdapterViewPager(private var adapterList : List<ChapterRVAdapter
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         val currAdapter = adapterList[position]
         holder.rvFavouritesViewPager.layoutManager = LinearLayoutManager(context)
         holder.rvFavouritesViewPager.itemAnimator = null

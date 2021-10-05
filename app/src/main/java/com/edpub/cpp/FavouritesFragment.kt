@@ -27,13 +27,7 @@ class FavouritesFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        loadData = ViewModelProvider(requireActivity()).get(LoadData::class.java)
-        loadData.areFavouriteChapterKeysLoaded.observe(viewLifecycleOwner, Observer {
-            copyFavouriteChapters()
-        })
-        loadData.areFavouriteExampleKeysLoaded.observe(viewLifecycleOwner, Observer {
-            copyFavouriteExamples()
-        })
+
     }
 
         override fun onCreateView(
@@ -96,6 +90,14 @@ class FavouritesFragment : Fragment() {
                     startActivity(intent)
                 }
             })
+
+        loadData = ViewModelProvider(requireActivity()).get(LoadData::class.java)
+        loadData.areFavouriteChapterKeysLoaded.observe(viewLifecycleOwner, Observer {
+            copyFavouriteChapters()
+        })
+        loadData.areFavouriteExampleKeysLoaded.observe(viewLifecycleOwner, Observer {
+            copyFavouriteExamples()
+        })
 
     }
 
