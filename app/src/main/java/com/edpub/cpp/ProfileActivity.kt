@@ -43,29 +43,16 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(intent)
         }
         findViewById<TextView>(R.id.tvReport).setOnClickListener {
-            try{
-                val intent = Intent(Intent.ACTION_SENDTO).apply {
-                    data = Uri.parse("mailto:")
-                    putExtra(Intent.EXTRA_EMAIL, arrayOf("lalbiharipandeyg@gmail.com")) // recipients
-                    putExtra(Intent.EXTRA_SUBJECT, "Report regarding EdPub C++")
-                }
-                startActivity(intent)
-            }catch(exception : ActivityNotFoundException) {
-                Toast.makeText(this, "No Email Client Found.\nSend an mail on lalbiharipandeyg@gmail.com", Toast.LENGTH_LONG).show()
-            }
+            val url = "https://forms.gle/9mCk4NMRJNvuHmmd7"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
         }
         findViewById<TextView>(R.id.tvFeedback).setOnClickListener {
-            try{
-                val intent = Intent(Intent.ACTION_SENDTO).apply {
-                    data = Uri.parse("mailto:")
-                    putExtra(Intent.EXTRA_EMAIL, arrayOf("lalbiharipandeyg@gmail.com"))
-                    putExtra(Intent.EXTRA_SUBJECT, "Feedback for EdPub C++")
-                }
-                startActivity(intent)
-            }catch(exception : ActivityNotFoundException) {
-                Toast.makeText(this, "No Email Client Found.\nSend an mail on lalbiharipandeyg@gmail.com", Toast.LENGTH_LONG).show()
-            }
-
+            val url = "https://forms.gle/zepd7NS1MbYcXe8T8"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
         }
         findViewById<TextView>(R.id.tvShare).setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
