@@ -5,8 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f2f6f7"
-
     tools:context=".SignUpActivity">
+
+    <ProgressBar
+        android:id="@+id/pbSignUp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="gone"
+        android:indeterminateTint="@color/primaryColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -119,11 +129,6 @@
                 android:gravity="center"
                 android:textColor="#2d3e50"
                 android:layout_marginRight="20dp"/>
-
-
-
-
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

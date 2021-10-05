@@ -8,6 +8,7 @@ import android.text.*
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
@@ -70,16 +71,18 @@ class SignUpActivity : AppCompatActivity() {
 
         val cvSignIn = findViewById<CardView>(R.id.cvSignIn)
         cvSignIn.setOnClickListener {
+
             signIn()
         }
-
     }
     private fun signIn() {
+        findViewById<ProgressBar>(R.id.pbSignUp).visibility = View.VISIBLE
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         CoroutineScope(Dispatchers.Main).launch {
+            findViewById<ProgressBar>(R.id.pbSignUp).visibility = View.GONE
             super.onActivityResult(requestCode, resultCode, data)
             if (requestCode == RC_SIGN_IN) {
                 val task = GoogleSignIn.getSignedInAccountFromIntent(data)
@@ -92,10 +95,8 @@ class SignUpActivity : AppCompatActivity() {
                         Toast.makeText(this@SignUpActivity, "${e.message}", Toast.LENGTH_SHORT).show()
                     }
                 }
-
             }
         }
-
     }
 
     private fun firebaseAuthWithGoogle(idToken: String) {
