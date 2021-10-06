@@ -102,6 +102,11 @@ class HomeFragment : Fragment() {
             if(loadData.areCompletedChaptersKeysLoaded.value!!){
                 val pbChaptersProgress = view.findViewById<ProgressBar>(R.id.pbChaptersProgress)
                 Log.i("FUCK", "notification arrived")
+                Log.i("FUCK", pbChaptersProgress.visibility.toString())
+                pbChaptersProgress.isIndeterminate = false
+                pbChaptersProgress.max = ObjectsCollection.chaptersList.size
+                pbChaptersProgress.progress = ObjectsCollection.completedChaptersKeysList.size
+
 
             }
 
