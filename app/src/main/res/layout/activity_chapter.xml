@@ -130,6 +130,19 @@
                 app:layout_constraintLeft_toRightOf="@+id/ivShare"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/ivDone"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="25dp"
+                android:clickable="true"
+                android:contentDescription="Mark as done"
+                android:padding="18dp"
+                android:src="@drawable/ic_baseline_check_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/ivFavourite"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/bToNextChapter"
                 android:layout_width="wrap_content"

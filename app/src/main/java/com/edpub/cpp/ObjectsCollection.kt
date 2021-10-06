@@ -26,6 +26,13 @@ object ObjectsCollection {
     var favouriteChapterKeysList = mutableSetOf<String>()
     var favouriteExampleKeysList = mutableSetOf<String>()
 
+    var isCompletedChaptersListLoaded = false
+    var isCompletedExamplesListLoaded = false
+
+
+    var completedChaptersKeysList = mutableSetOf<String>()
+    var completedExamplesKeysList = mutableSetOf<String>()
+
     var favouriteChapters = mutableListOf<Chapter>()
     var favouriteExamples = mutableListOf<Chapter>()
 

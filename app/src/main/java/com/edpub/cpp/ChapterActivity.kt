@@ -28,6 +28,13 @@ class ChapterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chapter)
 
+
+        val ivShare = findViewById<ImageView>(R.id.ivShare)
+        val ivFavourites = findViewById<ImageView>(R.id.ivFavourite)
+        val ivDone = findViewById<ImageView>(R.id.ivDone)
+        val bToNextChapter = findViewById<Button>(R.id.bToNextChapter)
+
+
         val database = Firebase.database
         val myRef = database.getReference("USERS")
 
@@ -36,6 +43,8 @@ class ChapterActivity : AppCompatActivity() {
         var currChapter = ObjectsCollection.chaptersList[position]
         invoker = intent.getStringExtra("INVOKER")!!
         if (invoker == "fromFav") {
+            ivDone.visibility = View.GONE
+
             try{
                 key = ObjectsCollection.favouriteChapters[position].KEY
 
@@ -90,9 +99,7 @@ class ChapterActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.tvExplanation).text = spannedExplanation
         }
 
-        val ivShare = findViewById<ImageView>(R.id.ivShare)
-        val ivFavourites = findViewById<ImageView>(R.id.ivFavourite)
-        val bToNextChapter = findViewById<Button>(R.id.bToNextChapter)
+
 
         ivShare.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
@@ -107,6 +114,8 @@ class ChapterActivity : AppCompatActivity() {
         else{
             DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
         }
+
+        setDoneIconTint(key.toString())
 
 
         ivFavourites.setOnClickListener {
@@ -128,6 +137,18 @@ class ChapterActivity : AppCompatActivity() {
                 myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP").child(key.toString()).setValue(key)
 
                 DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.pure_red))
+            }
+        }
+        ivDone.setOnClickListener {
+            if(ObjectsCollection.completedChaptersKeysList.indexOf(key)!=-1){
+                ObjectsCollection.completedChaptersKeysList.remove(key)
+                myRef.child(Firebase.auth.currentUser!!.uid).child("COMP_CHAP").child(key!!).setValue(null)
+                DrawableCompat.setTint(ivDone.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
+            }
+            else{
+                ObjectsCollection.completedChaptersKeysList.add(key!!)
+                myRef.child(Firebase.auth.currentUser!!.uid).child("COMP_CHAP").child(key.toString()).setValue(key)
+                DrawableCompat.setTint(ivDone.drawable, ContextCompat.getColor(this, R.color.slight_neon_green))
             }
         }
 
@@ -192,16 +213,12 @@ class ChapterActivity : AppCompatActivity() {
 
 
                         if (ObjectsCollection.favouriteChapterKeysList.contains(key)) {
-                            DrawableCompat.setTint(
-                                ivFavourites.drawable,
-                                ContextCompat.getColor(this, R.color.pure_red)
-                            )
+                            DrawableCompat.setTint(ivFavourites.drawable,ContextCompat.getColor(this, R.color.pure_red))
                         } else {
-                            DrawableCompat.setTint(
-                                ivFavourites.drawable,
-                                ContextCompat.getColor(this, R.color.icon_inactive)
-                            )
+                            DrawableCompat.setTint(ivFavourites.drawable,ContextCompat.getColor(this, R.color.icon_inactive))
                         }
+
+                        setDoneIconTint(key.toString())
 
                         val htmlCode = ObjectsCollection.chaptersList[position].CODE
                         val spannedCode = HtmlCompat.fromHtml(htmlCode!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
@@ -222,5 +239,14 @@ class ChapterActivity : AppCompatActivity() {
     }
     fun setText(currChapter:Chapter){
         //TODO
+    }
+    private fun setDoneIconTint(key: String){
+        val ivDone = findViewById<ImageView>(R.id.ivDone)
+        if(ObjectsCollection.completedChaptersKeysList.indexOf(key)!=-1){
+            DrawableCompat.setTint(ivDone.drawable, ContextCompat.getColor(this, R.color.slight_neon_green))
+        }
+        else{
+            DrawableCompat.setTint(ivDone.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
+        }
     }
 }

@@ -27,6 +27,9 @@ class LoadData : ViewModel() {
     var areFavChaptersCopied = MutableLiveData<Boolean>(false)
     var areFavExamplesCopied = MutableLiveData<Boolean>(false)
 
+    var areCompletedChaptersKeysLoaded = MutableLiveData<Boolean>(false)
+    var areCompletedExamplesKeysLoaded = MutableLiveData<Boolean>(false)
+
 
     fun loadChapters () {
         CoroutineScope(Dispatchers.IO).launch{
@@ -47,6 +50,7 @@ class LoadData : ViewModel() {
                     }
                     if(Firebase.auth.currentUser!=null){
                         loadFavouriteChapterKeys()
+                        loadCompletedChaptersKeys()
                     }
                 }
 
@@ -177,5 +181,27 @@ class LoadData : ViewModel() {
     }
 
 
+
+    fun loadCompletedChaptersKeys (){
+        CoroutineScope(Dispatchers.IO).launch{
+            val completedChapterReference = Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("COMP_CHAP")
+            completedChapterReference.addValueEventListener(object: ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot.exists()){
+                        ObjectsCollection.completedChaptersKeysList.clear()
+                        for(chapter in snapshot.children){
+                            val currChapter = chapter.getValue(String::class.java)
+                            ObjectsCollection.completedChaptersKeysList.add(currChapter!!)
+                        }
+                    }
+                    ObjectsCollection.isCompletedChaptersListLoaded = true
+                    areCompletedChaptersKeysLoaded.value = true
+                }
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+            })
+        }
+    }
 
 }
