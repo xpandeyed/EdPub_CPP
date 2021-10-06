@@ -13,6 +13,7 @@ import java.lang.Exception
 import androidx.core.text.HtmlCompat
 
 import android.text.Spanned
+import android.view.View
 import android.widget.*
 
 
@@ -25,14 +26,25 @@ class ExampleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_example)
 
 
+        val ivShare = findViewById<ImageView>(R.id.ivShare)
+        val ivFavourites = findViewById<ImageView>(R.id.ivFavourite)
+        val ivDone = findViewById<ImageView>(R.id.ivDone)
+        val bToNextExample = findViewById<Button>(R.id.bToNextExample)
+
+
         val database = Firebase.database
         val myRef = database.getReference("USERS")
+
 
         var key:String? = ObjectsCollection.currentExampleKey
         var position = intent.getIntExtra("POSITION", 0)
         var currExample = ObjectsCollection.examplesList[position]
+
+
         invoker = intent.getStringExtra("INVOKER")!!
+
         if (invoker == "fromFav") {
+            ivDone.visibility = View.GONE
             try{
                 key = ObjectsCollection.favouriteExamples[position].KEY
 
@@ -95,9 +107,7 @@ class ExampleActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.tvExplanation).text = spannedExplanation
         }
 
-        val ivShare = findViewById<ImageView>(R.id.ivShare)
-        val ivFavourites = findViewById<ImageView>(R.id.ivFavourite)
-        val bToNextExample = findViewById<Button>(R.id.bToNextExample)
+
 
 
 
@@ -114,6 +124,8 @@ class ExampleActivity : AppCompatActivity() {
         else{
             DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
         }
+
+        setDoneIconTint(key.toString())
 
         ivFavourites.setOnClickListener {
             if(ObjectsCollection.favouriteExampleKeysList.indexOf(key)!=-1){
@@ -136,6 +148,21 @@ class ExampleActivity : AppCompatActivity() {
                 DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.pure_red))
             }
         }
+
+        ivDone.setOnClickListener {
+            if(ObjectsCollection.completedExamplesKeysList.indexOf(key)!=-1){
+                ObjectsCollection.completedExamplesKeysList.remove(key)
+                myRef.child(Firebase.auth.currentUser!!.uid).child("COMP_EXAM").child(key!!).setValue(null)
+                DrawableCompat.setTint(ivDone.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
+            }
+            else{
+                ObjectsCollection.completedExamplesKeysList.add(key!!)
+                myRef.child(Firebase.auth.currentUser!!.uid).child("COMP_EXAM").child(key.toString()).setValue(key)
+                DrawableCompat.setTint(ivDone.drawable, ContextCompat.getColor(this, R.color.slight_neon_green))
+            }
+        }
+
+
         bToNextExample.setOnClickListener {
             if(invoker=="fromFav"){
                 if(position>=ObjectsCollection.favouriteExamples.size-1){
@@ -199,16 +226,12 @@ class ExampleActivity : AppCompatActivity() {
                     findViewById<ScrollView>(R.id.svContainer).scrollTo(0,0)
 
                     if (ObjectsCollection.favouriteExampleKeysList.contains(key)) {
-                        DrawableCompat.setTint(
-                            ivFavourites.drawable,
-                            ContextCompat.getColor(this, R.color.pure_red)
-                        )
+                        DrawableCompat.setTint(ivFavourites.drawable,ContextCompat.getColor(this, R.color.pure_red))
                     } else {
-                        DrawableCompat.setTint(
-                            ivFavourites.drawable,
-                            ContextCompat.getColor(this, R.color.icon_inactive)
-                        )
+                        DrawableCompat.setTint(ivFavourites.drawable,ContextCompat.getColor(this, R.color.icon_inactive))
                     }
+
+                    setDoneIconTint(key.toString())
 
                     val htmlCode = ObjectsCollection.examplesList[position].CODE
                     val spannedCode = HtmlCompat.fromHtml(htmlCode!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
@@ -227,5 +250,24 @@ class ExampleActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+
+
+
+    private fun setText(currChapter:Chapter){
+        //TODO
+    }
+
+
+
+    private fun setDoneIconTint(key: String){
+        val ivDone = findViewById<ImageView>(R.id.ivDone)
+        if(ObjectsCollection.completedExamplesKeysList.indexOf(key)!=-1){
+            DrawableCompat.setTint(ivDone.drawable, ContextCompat.getColor(this, R.color.slight_neon_green))
+        }
+        else{
+            DrawableCompat.setTint(ivDone.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
+        }
     }
 }

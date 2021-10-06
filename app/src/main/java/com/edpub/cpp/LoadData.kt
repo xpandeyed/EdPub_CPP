@@ -79,6 +79,7 @@ class LoadData : ViewModel() {
                     }
                     if(Firebase.auth.currentUser!=null){
                         loadFavouriteExampleKeys()
+                        loadCompletedExamplesKeys()
                     }
 
                 }
@@ -203,5 +204,29 @@ class LoadData : ViewModel() {
             })
         }
     }
+
+
+    fun loadCompletedExamplesKeys (){
+        CoroutineScope(Dispatchers.IO).launch{
+            val completedExampleReference = Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("COMP_EXAM")
+            completedExampleReference.addValueEventListener(object: ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot.exists()){
+                        ObjectsCollection.completedExamplesKeysList.clear()
+                        for(example in snapshot.children){
+                            val currExample = example.getValue(String::class.java)
+                            ObjectsCollection.completedExamplesKeysList.add(currExample!!)
+                        }
+                    }
+                    ObjectsCollection.isCompletedExamplesListLoaded = true
+                    areCompletedExamplesKeysLoaded.value = true
+                }
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+            })
+        }
+    }
+
 
 }

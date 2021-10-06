@@ -98,11 +98,10 @@ class HomeFragment : Fragment() {
 
 
         loadData = ViewModelProvider(requireActivity()).get(LoadData::class.java)
+
         loadData.areCompletedChaptersKeysLoaded.observe(viewLifecycleOwner, Observer {
             if(loadData.areCompletedChaptersKeysLoaded.value!!){
                 val pbChaptersProgress = view.findViewById<ProgressBar>(R.id.pbChaptersProgress)
-                Log.i("FUCK", "notification arrived")
-                Log.i("FUCK", pbChaptersProgress.visibility.toString())
                 pbChaptersProgress.isIndeterminate = false
                 pbChaptersProgress.max = ObjectsCollection.chaptersList.size
                 pbChaptersProgress.progress = ObjectsCollection.completedChaptersKeysList.size
@@ -110,7 +109,17 @@ class HomeFragment : Fragment() {
 
             }
 
+        })
 
+        loadData.areCompletedExamplesKeysLoaded.observe(viewLifecycleOwner, Observer {
+            if(loadData.areCompletedExamplesKeysLoaded.value!!){
+                val pbExamplesProgress = view.findViewById<ProgressBar>(R.id.pbExamplesProgress)
+                pbExamplesProgress.isIndeterminate = false
+                pbExamplesProgress.max = ObjectsCollection.examplesList.size
+                pbExamplesProgress.progress = ObjectsCollection.completedExamplesKeysList.size
+
+
+            }
 
         })
 

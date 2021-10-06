@@ -38,10 +38,13 @@ class ChapterActivity : AppCompatActivity() {
         val database = Firebase.database
         val myRef = database.getReference("USERS")
 
+
         var key:String? = ObjectsCollection.currentChapterKey
         var position = intent.getIntExtra("POSITION", ObjectsCollection.currentChapterPosition)
         var currChapter = ObjectsCollection.chaptersList[position]
+
         invoker = intent.getStringExtra("INVOKER")!!
+
         if (invoker == "fromFav") {
             ivDone.visibility = View.GONE
 
@@ -139,6 +142,7 @@ class ChapterActivity : AppCompatActivity() {
                 DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.pure_red))
             }
         }
+
         ivDone.setOnClickListener {
             if(ObjectsCollection.completedChaptersKeysList.indexOf(key)!=-1){
                 ObjectsCollection.completedChaptersKeysList.remove(key)
@@ -237,9 +241,16 @@ class ChapterActivity : AppCompatActivity() {
                 }
         }
     }
-    fun setText(currChapter:Chapter){
+
+
+
+    private fun setText(currChapter:Chapter){
         //TODO
     }
+
+
+
+
     private fun setDoneIconTint(key: String){
         val ivDone = findViewById<ImageView>(R.id.ivDone)
         if(ObjectsCollection.completedChaptersKeysList.indexOf(key)!=-1){
