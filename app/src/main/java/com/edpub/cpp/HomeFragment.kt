@@ -1,9 +1,11 @@
 package com.edpub.cpp
 
 import android.content.Intent
+import android.graphics.Paint
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +23,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.w3c.dom.Text
 
 
 class HomeFragment : Fragment() {
@@ -106,6 +109,14 @@ class HomeFragment : Fragment() {
                 pbChaptersProgress.max = ObjectsCollection.chaptersList.size
                 pbChaptersProgress.progress = ObjectsCollection.completedChaptersKeysList.size
 
+                val tvCompletedChapters = view.findViewById<TextView>(R.id.tvCompletedChapters)
+                tvCompletedChapters.text = ObjectsCollection.completedChaptersKeysList.size.toString()
+                tvCompletedChapters.setTextSize(TypedValue.COMPLEX_UNIT_SP, 55f)
+                tvCompletedChapters.setTextColor(resources.getColor(R.color.primaryColor))
+
+                val tvTotalChapters = view.findViewById<TextView>(R.id.tvTotalChapters)
+                tvTotalChapters.text = "/${ObjectsCollection.chaptersList.size.toString()}"
+
 
             }
 
@@ -113,10 +124,22 @@ class HomeFragment : Fragment() {
 
         loadData.areCompletedExamplesKeysLoaded.observe(viewLifecycleOwner, Observer {
             if(loadData.areCompletedExamplesKeysLoaded.value!!){
+
                 val pbExamplesProgress = view.findViewById<ProgressBar>(R.id.pbExamplesProgress)
+
                 pbExamplesProgress.isIndeterminate = false
                 pbExamplesProgress.max = ObjectsCollection.examplesList.size
                 pbExamplesProgress.progress = ObjectsCollection.completedExamplesKeysList.size
+
+                val tvCompletedExamples = view.findViewById<TextView>(R.id.tvCompletedExamples)
+                tvCompletedExamples.text = ObjectsCollection.completedExamplesKeysList.size.toString()
+                tvCompletedExamples.setTextSize(TypedValue.COMPLEX_UNIT_SP, 55f)
+                tvCompletedExamples.setTextColor(resources.getColor(R.color.primaryColor))
+
+
+                val tvTotalExamples = view.findViewById<TextView>(R.id.tvTotalExamples)
+                tvTotalExamples.text = "/${ObjectsCollection.examplesList.size}"
+
 
 
             }
