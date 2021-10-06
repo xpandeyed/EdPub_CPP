@@ -9,8 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -21,6 +24,9 @@ import kotlinx.coroutines.launch
 
 
 class HomeFragment : Fragment() {
+
+    private lateinit var loadData: LoadData
+
     private lateinit var rvCurrentChapter: RecyclerView
     private lateinit var rvCurrentExample: RecyclerView
 
@@ -89,6 +95,19 @@ class HomeFragment : Fragment() {
                 Toast.makeText(activity, "Examples not loaded yet. Wait a moment...", Toast.LENGTH_SHORT).show()
             }
         }
+
+
+        loadData = ViewModelProvider(requireActivity()).get(LoadData::class.java)
+        loadData.areCompletedChaptersKeysLoaded.observe(viewLifecycleOwner, Observer {
+            if(loadData.areCompletedChaptersKeysLoaded.value!!){
+                val pbChaptersProgress = view.findViewById<ProgressBar>(R.id.pbChaptersProgress)
+                Log.i("FUCK", "notification arrived")
+
+            }
+
+
+
+        })
 
     }
     override fun onResume() {
