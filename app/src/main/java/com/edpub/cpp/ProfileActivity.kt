@@ -43,15 +43,18 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(intent)
         }
         findViewById<TextView>(R.id.tvReport).setOnClickListener {
-            val url = "https://forms.gle/9mCk4NMRJNvuHmmd7"
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse(url)
+            val url = "https://docs.google.com/forms/d/e/1FAIpQLScqWJta8g0dWkZKpe4TKnFf-Ud6PINh2nQoqJZDPfrvX9c7xw/viewform?usp=sf_link"
+            val intent = Intent(this, WebActivity::class.java).apply {
+                putExtra("URL", url)
+            }
             startActivity(intent)
+
         }
         findViewById<TextView>(R.id.tvFeedback).setOnClickListener {
-            val url = "https://forms.gle/zepd7NS1MbYcXe8T8"
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse(url)
+            val url = "https://docs.google.com/forms/d/e/1FAIpQLScBQl72xho71K5f83_ceI5A8KNiBgfNNsvG6gkriEsN454r_Q/viewform?usp=sf_link"
+            val intent = Intent(this, WebActivity::class.java).apply {
+                putExtra("URL", url)
+            }
             startActivity(intent)
         }
         findViewById<TextView>(R.id.tvShare).setOnClickListener {
