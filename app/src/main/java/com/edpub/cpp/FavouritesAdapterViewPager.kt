@@ -7,10 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class FavouritesAdapterViewPager(private var adapterList : List<ChapterRVAdapter>) : RecyclerView.Adapter<FavouritesAdapterViewPager.ViewHolder>(){
+
+    private lateinit var loadData: LoadData
+
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         var rvFavouritesViewPager : RecyclerView = view.findViewById(R.id.rvFavouritesViewPager)
     }
@@ -24,6 +28,7 @@ class FavouritesAdapterViewPager(private var adapterList : List<ChapterRVAdapter
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
 
         val currAdapter = adapterList[position]
         holder.rvFavouritesViewPager.layoutManager = LinearLayoutManager(context)
