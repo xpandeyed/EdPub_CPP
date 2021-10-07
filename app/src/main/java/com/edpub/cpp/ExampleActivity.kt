@@ -21,6 +21,10 @@ class ExampleActivity : AppCompatActivity() {
 
     private var invoker = "fromExample"
 
+    private var key:String? = ObjectsCollection.currentExampleKey
+    private var position = ObjectsCollection.currentExamplePosition
+    private var currExample = ObjectsCollection.examplesList[position]
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_example)
@@ -36,9 +40,9 @@ class ExampleActivity : AppCompatActivity() {
         val myRef = database.getReference("USERS")
 
 
-        var key:String? = ObjectsCollection.currentExampleKey
-        var position = intent.getIntExtra("POSITION", 0)
-        var currExample = ObjectsCollection.examplesList[position]
+        key = ObjectsCollection.currentExampleKey
+        position = intent.getIntExtra("POSITION", ObjectsCollection.currentExamplePosition)
+        currExample = ObjectsCollection.examplesList[position]
 
 
         invoker = intent.getStringExtra("INVOKER")!!
@@ -82,7 +86,7 @@ class ExampleActivity : AppCompatActivity() {
             currExample = ObjectsCollection.examplesList[position]
 
             ObjectsCollection.currentExamplePosition = position
-            ObjectsCollection.currentExampleKey = key
+            ObjectsCollection.currentExampleKey = key.toString()
 
             ObjectsCollection.currentExample.clear()
             ObjectsCollection.adapterCurrentExample.notifyItemRangeRemoved(0, 1)
@@ -214,14 +218,7 @@ class ExampleActivity : AppCompatActivity() {
                     key = ObjectsCollection.examplesList[position].KEY!!
                     currExample = ObjectsCollection.examplesList[position]
 
-
-                    ObjectsCollection.currentExample.clear()
-                    ObjectsCollection.adapterCurrentExample.notifyItemRangeRemoved(0, 1)
-                    ObjectsCollection.currentExampleKey = key.toString()
-                    ObjectsCollection.currentExamplePosition = position
-                    ObjectsCollection.currentExample.add(currExample)
-                    ObjectsCollection.adapterCurrentExample.notifyItemInserted(0)
-                    Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_EXAM").setValue(key)
+                    currExampleHandler()
 
                     findViewById<ScrollView>(R.id.svContainer).scrollTo(0,0)
 
@@ -259,6 +256,17 @@ class ExampleActivity : AppCompatActivity() {
         //TODO
     }
 
+
+    private fun currExampleHandler(){
+        ObjectsCollection.currentExample.clear()
+        ObjectsCollection.adapterCurrentExample.notifyItemRangeRemoved(0, 1)
+        ObjectsCollection.currentExampleKey = key.toString()
+        ObjectsCollection.currentExamplePosition = position
+        ObjectsCollection.currentExample.add(currExample)
+        ObjectsCollection.adapterCurrentExample.notifyItemInserted(0)
+        Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_EXAM").setValue(key)
+
+    }
 
 
     private fun setDoneIconTint(key: String){

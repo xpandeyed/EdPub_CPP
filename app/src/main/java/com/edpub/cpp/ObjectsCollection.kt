@@ -47,4 +47,11 @@ object ObjectsCollection {
     var adapterChapters = ChapterRVAdapter(chaptersList)
     var adapterExamples = ChapterRVAdapter(examplesList)
 
+
+    fun sortMutableStringSet(set: MutableSet<String>):MutableSet<String>{
+        val array = set.toTypedArray()
+        array.sort()
+        return array.toMutableSet()
+    }
+
 }

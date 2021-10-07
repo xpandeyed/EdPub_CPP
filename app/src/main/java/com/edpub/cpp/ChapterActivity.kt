@@ -24,6 +24,11 @@ class ChapterActivity : AppCompatActivity() {
 
     private var invoker = "fromChapter"
 
+    private var key:String? = ObjectsCollection.currentChapterKey
+    private var position = ObjectsCollection.currentChapterPosition
+    private var currChapter = ObjectsCollection.chaptersList[position]
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chapter)
@@ -39,9 +44,9 @@ class ChapterActivity : AppCompatActivity() {
         val myRef = database.getReference("USERS")
 
 
-        var key:String? = ObjectsCollection.currentChapterKey
-        var position = intent.getIntExtra("POSITION", ObjectsCollection.currentChapterPosition)
-        var currChapter = ObjectsCollection.chaptersList[position]
+        key = ObjectsCollection.currentChapterKey
+        position = intent.getIntExtra("POSITION", ObjectsCollection.currentChapterPosition)
+        currChapter = ObjectsCollection.chaptersList[position]
 
         invoker = intent.getStringExtra("INVOKER")!!
 
@@ -79,7 +84,7 @@ class ChapterActivity : AppCompatActivity() {
             currChapter = ObjectsCollection.chaptersList[position]
 
             ObjectsCollection.currentChapterPosition = position
-            ObjectsCollection.currentChapterKey = key
+            ObjectsCollection.currentChapterKey = key.toString()
 
             ObjectsCollection.currentChapter.clear()
             ObjectsCollection.adapterCurrentChapter.notifyItemRangeRemoved(0, 1)
@@ -205,13 +210,9 @@ class ChapterActivity : AppCompatActivity() {
                         key = ObjectsCollection.chaptersList[position].KEY!!
                         currChapter = ObjectsCollection.chaptersList[position]
 
-                        ObjectsCollection.currentChapter.clear()
-                        ObjectsCollection.adapterCurrentChapter.notifyItemRangeRemoved(0, 1)
-                        ObjectsCollection.currentChapterKey = key.toString()
-                        ObjectsCollection.currentChapterPosition = position
-                        ObjectsCollection.currentChapter.add(currChapter)
-                        ObjectsCollection.adapterCurrentChapter.notifyItemInserted(0)
-                        Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_CHAP").setValue(key)
+                        //shift this to somewhere in a function
+                        currChapterHandler()
+
 
                         findViewById<ScrollView>(R.id.svContainer).scrollTo(0,0)
 
@@ -245,11 +246,23 @@ class ChapterActivity : AppCompatActivity() {
 
 
     private fun setText(currChapter:Chapter){
-        //TODO
+        findViewById<TextView>(R.id.tvTitle)
+        findViewById<TextView>(R.id.tvChapterText)
+        findViewById<TextView>(R.id.tvCode)
+        findViewById<TextView>(R.id.tvExplanation)
     }
 
 
+    private fun currChapterHandler(){
+        ObjectsCollection.currentChapter.clear()
+        ObjectsCollection.adapterCurrentChapter.notifyItemRangeRemoved(0, 1)
+        ObjectsCollection.currentChapterKey = key.toString()
+        ObjectsCollection.currentChapterPosition = position
+        ObjectsCollection.currentChapter.add(currChapter)
+        ObjectsCollection.adapterCurrentChapter.notifyItemInserted(0)
+        Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_CHAP").setValue(key)
 
+    }
 
     private fun setDoneIconTint(key: String){
         val ivDone = findViewById<ImageView>(R.id.ivDone)
