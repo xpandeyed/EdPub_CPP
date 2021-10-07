@@ -15,4 +15,12 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/icon_inactive</item>
     </style>
+    <style name="bottomNavigationInactiveText">
+        <item name="android:textColor">@color/icon_inactive</item>
+        <item name="fontFamily">@font/metropolis_regular</item>
+    </style>
+    <style name="bottomNavigationActiveText">
+        <item name="fontFamily">@font/metropolis_semi_bold</item>
+        <item name="android:textColor">@color/primaryColor</item>
+    </style>
 </resources>
