@@ -30,7 +30,6 @@ class DeleteAccountActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
-    private var reason = "No Reason by User"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +37,8 @@ class DeleteAccountActivity : AppCompatActivity() {
 
         setSupportActionBar(findViewById(R.id.tbDeleteAccount))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        findViewById<TextView>(R.id.tvDeleteMessage).text = "If you feel something that must be improved, let us know it. We will surely improve that as soon as possible.\n\nBut if you have made your mind to go, leaving a feedback or a report will help us to improve the app for other users."
 
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -48,48 +49,42 @@ class DeleteAccountActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         findViewById<TextView>(R.id.bReport).setOnClickListener {
-            try{
-                val intent = Intent(Intent.ACTION_SENDTO).apply {
-                    data = Uri.parse("mailto:")
-                    putExtra(Intent.EXTRA_EMAIL, arrayOf("lalbiharipandeyg@gmail.com")) // recipients
-                    putExtra(Intent.EXTRA_SUBJECT, "Report regarding EdPub C++")
-                }
-                startActivity(intent)
-            }catch(exception : ActivityNotFoundException) {
-                Toast.makeText(this, "No Email Client Found.\nSend an mail on lalbiharipandeyg@gmail.com", Toast.LENGTH_LONG).show()
+            val url = "https://docs.google.com/forms/d/e/1FAIpQLScqWJta8g0dWkZKpe4TKnFf-Ud6PINh2nQoqJZDPfrvX9c7xw/viewform?usp=sf_link"
+            val intent = Intent(this, WebActivity::class.java).apply {
+                putExtra("URL", url)
             }
+            startActivity(intent)
         }
 
 
         findViewById<Button>(R.id.bDeleteAccount).setOnClickListener {
-            val user = auth.currentUser
-            val uid = user!!.uid
-            reason = findViewById<EditText>(R.id.etDeleteReason).text.toString()
+            CoroutineScope(Dispatchers.IO).launch {
+                val user = auth.currentUser
+                val uid = user!!.uid
 
-            user!!.delete()
-                .addOnCompleteListener(this) { task->
-                    if (task.isSuccessful){
-                        Firebase.database.getReference("USERS").child(uid).child("ACCOUNT_DELETE_REASON").setValue(reason)
-                        Firebase.database.getReference("USERS").child(uid).child("CURR_CHAP").setValue(null)
-                        Firebase.database.getReference("USERS").child(uid).child("CURR_EXAM").setValue(null)
-                        Firebase.database.getReference("USERS").child(uid).child("FAV_CHAP").setValue(null)
-                        Firebase.database.getReference("USERS").child(uid).child("FAV_EXAM").setValue(null)
-                        Toast.makeText(this, "User Deleted Successfully.", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, SignUpActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        startActivity(intent)
+                user.delete()
+                    .addOnCompleteListener(this@DeleteAccountActivity) { task->
+                        if (task.isSuccessful){
+                            Firebase.database.getReference("USERS").child(uid).setValue(null)
+                            Toast.makeText(this@DeleteAccountActivity, "User Deleted Successfully.", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@DeleteAccountActivity, SignUpActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(intent)
+                        }
+                        else{
+                            Toast.makeText(this@DeleteAccountActivity, "Authenticating User.", Toast.LENGTH_SHORT).show()
+                            signIn()
+                        }
                     }
-                    else{
-                        Toast.makeText(this, "Authenticating User.", Toast.LENGTH_SHORT).show()
-                        signIn()
-                    }
-                }
+            }
+
         }
     }
 
     private fun signIn() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -114,11 +109,7 @@ class DeleteAccountActivity : AppCompatActivity() {
                     user.delete()
                         .addOnCompleteListener { task->
                             if(task.isSuccessful){
-                                Firebase.database.getReference("USERS").child(uid).child("ACCOUNT_DELETE_REASON").setValue(reason)
-                                Firebase.database.getReference("USERS").child(uid).child("CURR_CHAP").setValue(null)
-                                Firebase.database.getReference("USERS").child(uid).child("CURR_EXAM").setValue(null)
-                                Firebase.database.getReference("USERS").child(uid).child("FAV_CHAP").setValue(null)
-                                Firebase.database.getReference("USERS").child(uid).child("FAV_EXAM").setValue(null)
+                                Firebase.database.getReference("USERS").child(uid).setValue(null)
                                 Toast.makeText(this, "User Deleted Successfully.", Toast.LENGTH_SHORT).show()
                                 val intent = Intent(this, SignUpActivity::class.java)
                                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

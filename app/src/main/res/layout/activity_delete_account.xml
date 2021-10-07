@@ -25,20 +25,18 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <EditText
-        android:id="@+id/etDeleteReason"
+    <TextView
+        android:id="@+id/tvDeleteMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:lineSpacingExtra="2dp"
+        android:justificationMode="inter_word"
+        android:fontFamily="@font/metropolis_regular"
+        android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="40dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/white_corner_background"
-        android:fontFamily="@font/metropolis_regular"
-        android:gravity="top|left"
-        android:hint="You can Report Something Wrong.\n\nWe will surely solve that as early as possible.\n\nIf you have made your mind to go,\nplease let us know why are you leaving."
-        android:lines="10"
-        android:padding="20dp"
-        android:textColor="@color/grey_text"
+        android:text=""
         app:layout_constraintTop_toBottomOf="@id/ablDeleteAccount" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -57,7 +55,7 @@
         android:textColor="@color/pure_red"
         android:textSize="16sp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etDeleteReason" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDeleteMessage" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bReport"
@@ -73,7 +71,7 @@
         android:textColor="@color/primaryColor"
         android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etDeleteReason" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDeleteMessage" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
