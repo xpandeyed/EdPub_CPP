@@ -6,14 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class FavouritesAdapterViewPager(private var adapterList : List<ChapterRVAdapter>) : RecyclerView.Adapter<FavouritesAdapterViewPager.ViewHolder>(){
-
-    private lateinit var loadData: LoadData
+class FavouritesAdapterViewPager(private var adapterList : List<ChapterRVAdapter>, private val loadData: LoadData, private val viewLifecycleOwner: LifecycleOwner) : RecyclerView.Adapter<FavouritesAdapterViewPager.ViewHolder>(){
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         var rvFavouritesViewPager : RecyclerView = view.findViewById(R.id.rvFavouritesViewPager)

@@ -43,8 +43,16 @@ class FavouritesFragment : Fragment() {
 
         Log.i("Fragment", "OnViewCreated Called")
 
+        loadData = ViewModelProvider(requireActivity()).get(LoadData::class.java)
+        loadData.areFavouriteChapterKeysLoaded.observe(viewLifecycleOwner, Observer {
+            copyFavouriteChapters()
+        })
+        loadData.areFavouriteExampleKeysLoaded.observe(viewLifecycleOwner, Observer {
+            copyFavouriteExamples()
+        })
+
         val adapterList  = mutableListOf(ObjectsCollection.adapterFavouriteChapters, ObjectsCollection.adapterFavouriteExamples)
-        val viewPagerAdapter = FavouritesAdapterViewPager(adapterList)
+        val viewPagerAdapter = FavouritesAdapterViewPager(adapterList, loadData, viewLifecycleOwner)
         val viewPager = view.findViewById<ViewPager2>(R.id.vp2Favourites)
 
         viewPager.adapter = viewPagerAdapter
@@ -91,13 +99,7 @@ class FavouritesFragment : Fragment() {
                 }
             })
 
-        loadData = ViewModelProvider(requireActivity()).get(LoadData::class.java)
-        loadData.areFavouriteChapterKeysLoaded.observe(viewLifecycleOwner, Observer {
-            copyFavouriteChapters()
-        })
-        loadData.areFavouriteExampleKeysLoaded.observe(viewLifecycleOwner, Observer {
-            copyFavouriteExamples()
-        })
+
 
     }
 
