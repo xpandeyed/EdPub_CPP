@@ -24,12 +24,6 @@ class FavouritesFragment : Fragment() {
 
     private lateinit var loadData: LoadData
 
-
-    override fun onResume() {
-        super.onResume()
-
-    }
-
         override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,6 +47,10 @@ class FavouritesFragment : Fragment() {
         loadData.areFavouriteExampleKeysLoaded.observe(viewLifecycleOwner, Observer {
             copyFavouriteExamples()
         })
+
+        val favouriteChaptersFragment = FavouriteChaptersFragment()
+        val favouriteExamplesFragment = FavouriteExamplesFragment()
+
 
         val adapterList  = mutableListOf(ObjectsCollection.adapterFavouriteChapters, ObjectsCollection.adapterFavouriteExamples)
         val viewPagerAdapter = FavouritesAdapterViewPager(adapterList, loadData, viewLifecycleOwner)
