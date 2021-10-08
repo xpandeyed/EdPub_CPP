@@ -45,7 +45,10 @@ class FavouritesFragment : Fragment() {
 
         loadData = ViewModelProvider(requireActivity()).get(LoadData::class.java)
         loadData.areFavouriteChapterKeysLoaded.observe(viewLifecycleOwner, Observer {
-            copyFavouriteChapters()
+            if(loadData.areFavouriteChapterKeysLoaded.value!!){
+                copyFavouriteChapters()
+            }
+
         })
         loadData.areFavouriteExampleKeysLoaded.observe(viewLifecycleOwner, Observer {
             copyFavouriteExamples()
@@ -106,7 +109,6 @@ class FavouritesFragment : Fragment() {
 
 
     private fun copyFavouriteChapters () {
-
         CoroutineScope(Dispatchers.Main).launch {
             ObjectsCollection.favouriteChapters.clear()
             var n = 0
@@ -119,6 +121,7 @@ class FavouritesFragment : Fragment() {
                 n++
             }
             ObjectsCollection.areFavouriteChaptersCopied = true
+            loadData.areFavChaptersCopied.value = true
         }
     }
 
