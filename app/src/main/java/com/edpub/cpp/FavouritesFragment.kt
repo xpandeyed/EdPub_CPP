@@ -16,7 +16,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
+
 import kotlinx.coroutines.launch
 
 
@@ -70,24 +70,8 @@ class FavouritesFragment : Fragment() {
         })
 
 
-//        ObjectsCollection.adapterFavouriteChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
-//                override fun onItemClick(position: Int) {
-//                    val intent = Intent(activity, ChapterActivity::class.java).apply {
-//                        putExtra("POSITION", position)
-//                        putExtra("INVOKER", "fromFav")
-//                    }
-//                    startActivity(intent)
-//                }
-//            })
-//        ObjectsCollection.adapterFavouriteExamples.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
-//                override fun onItemClick(position: Int) {
-//                    val intent = Intent(activity, ExampleActivity::class.java).apply {
-//                        putExtra("POSITION", position)
-//                        putExtra("INVOKER", "fromFav")
-//                    }
-//                    startActivity(intent)
-//                }
-//            })
+
+
 
 
 
@@ -95,40 +79,9 @@ class FavouritesFragment : Fragment() {
 
 
 
-    private fun copyFavouriteChapters () {
-        CoroutineScope(Dispatchers.Main).launch {
-            ObjectsCollection.favouriteChapters.clear()
-            var n = 0
-            while (n < ObjectsCollection.chaptersList.size) {
-                val index = ObjectsCollection.favouriteChapterKeysList.indexOf(ObjectsCollection.chaptersList[n].KEY)
-                if (index != -1) {
-                    ObjectsCollection.favouriteChapters.add(ObjectsCollection.chaptersList[n])
-                    ObjectsCollection.adapterFavouriteChapters.notifyItemInserted(ObjectsCollection.favouriteChapters.size-1)
-                }
-                n++
-            }
-            ObjectsCollection.areFavouriteChaptersCopied = true
-            loadData.areFavChaptersCopied.value = true
-        }
-    }
 
-    private fun copyFavouriteExamples () {
 
-        CoroutineScope(Dispatchers.Main).launch {
-            ObjectsCollection.favouriteExamples.clear()
-            var n = 0
-            while (n < ObjectsCollection.examplesList.size) {
-                val index = ObjectsCollection.favouriteExampleKeysList.indexOf(ObjectsCollection.examplesList[n].KEY)
-                if (index != -1) {
-                    ObjectsCollection.favouriteExamples.add(ObjectsCollection.examplesList[n])
-                    ObjectsCollection.adapterFavouriteExamples.notifyItemInserted(ObjectsCollection.favouriteExamples.size-1)
-                }
-                n++
-            }
-            ObjectsCollection.areFavouriteExamplesCopied = true
-        }
 
-    }
 
 
 }

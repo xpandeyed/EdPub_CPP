@@ -4,18 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryColor"
     tools:context=".FavouriteExamplesFragment">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_edpub"
-        android:id="@+id/ivFavouriteExamples"
+        android:src="@drawable/ic_empty_folder"
+        android:id="@+id/ivEmptyList"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvEmptyListMessage"
+        android:layout_width="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="20sp"
+        android:fontFamily="@font/metropolis_semi_bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivEmptyList"
+        android:layout_height="wrap_content"
+        android:text="Favourite Examples List is Empty."/>
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:layout_width="wrap_content"
@@ -23,6 +33,7 @@
         android:id="@+id/pbExamplesProgress"
         app:layout_constraintTop_toTopOf="parent"
         android:indeterminate="true"
+        app:trackCornerRadius="2dp"
         app:indicatorColor="@color/primaryColor"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -32,7 +43,5 @@
         android:id="@+id/rvFavouriteExamples"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
