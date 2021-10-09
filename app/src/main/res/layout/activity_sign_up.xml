@@ -7,14 +7,16 @@
     android:background="#f2f6f7"
     tools:context=".SignUpActivity">
 
-    <ProgressBar
+    <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/pbSignUp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:trackCornerRadius="2dp"
         android:visibility="gone"
-        android:indeterminateTint="@color/primaryColor"
+        android:indeterminate="true"
+        app:indicatorColor="@color/primaryColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
