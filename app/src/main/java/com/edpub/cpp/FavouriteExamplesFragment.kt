@@ -34,12 +34,7 @@ class FavouriteExamplesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loadData = ViewModelProvider(requireActivity()).get(LoadData::class.java)
-        loadData.areFavouriteExampleKeysLoaded.observe(viewLifecycleOwner, Observer {
-            if(loadData.areFavouriteExampleKeysLoaded.value!!){
-               copyFavouriteExamples()
-            }
-        })
+
 
         rvFavouriteExamples = view.findViewById(R.id.rvFavouriteExamples)
 
@@ -63,6 +58,25 @@ class FavouriteExamplesFragment : Fragment() {
 
         rvFavouriteExamples.adapter = ObjectsCollection.adapterFavouriteExamples
 
+        loadData = ViewModelProvider(requireActivity()).get(LoadData::class.java)
+        loadData.areFavouriteExampleKeysLoaded.observe(viewLifecycleOwner, Observer {
+            if(loadData.areFavouriteExampleKeysLoaded.value!!){
+                copyFavouriteExamples()
+            }
+        })
+        loadData.areFavExamplesCopied.observe(viewLifecycleOwner, Observer {
+            if(loadData.areFavExamplesCopied.value!!){
+                pbExamplesProgress.visibility = View.GONE
+                if(ObjectsCollection.favouriteExamples.isEmpty()){
+                    ivEmptyList.visibility = View.VISIBLE
+                    tvEmptyListMessage.visibility = View.VISIBLE
+                }
+                else{
+                    rvFavouriteExamples.visibility = View.VISIBLE
+                }
+            }
+        })
+
 
 
     }
@@ -81,6 +95,7 @@ class FavouriteExamplesFragment : Fragment() {
                 n++
             }
             ObjectsCollection.areFavouriteExamplesCopied = true
+            loadData.areFavExamplesCopied.value = true
         }
 
     }

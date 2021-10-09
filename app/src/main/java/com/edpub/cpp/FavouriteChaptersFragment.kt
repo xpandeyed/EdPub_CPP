@@ -37,12 +37,7 @@ class FavouriteChaptersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loadData = ViewModelProvider(requireActivity()).get(LoadData::class.java)
-        loadData.areFavouriteChapterKeysLoaded.observe(viewLifecycleOwner, Observer {
-            if(loadData.areFavouriteChapterKeysLoaded.value!!){
-                copyFavouriteChapters()
-            }
-        })
+
 
         rvFavouriteChapters = view.findViewById(R.id.rvFavouriteChapters)
         rvFavouriteChapters.layoutManager = LinearLayoutManager(activity)
@@ -66,6 +61,26 @@ class FavouriteChaptersFragment : Fragment() {
         })
 
         rvFavouriteChapters.adapter = ObjectsCollection.adapterFavouriteChapters
+
+        loadData = ViewModelProvider(requireActivity()).get(LoadData::class.java)
+        loadData.areFavouriteChapterKeysLoaded.observe(viewLifecycleOwner, Observer {
+            if(loadData.areFavouriteChapterKeysLoaded.value!!){
+                copyFavouriteChapters()
+            }
+        })
+
+        loadData.areFavChaptersCopied.observe(viewLifecycleOwner, Observer {
+            if(loadData.areFavChaptersCopied.value!!){
+                pbFavouriteChapters.visibility = View.GONE
+                if(ObjectsCollection.favouriteChapters.isEmpty()){
+                    ivEmptyList.visibility = View.VISIBLE
+                    tvEmptyListMessage.visibility = View.VISIBLE
+                }
+                else{
+                    rvFavouriteChapters.visibility = View.VISIBLE
+                }
+            }
+        })
 
     }
     private fun copyFavouriteChapters () {

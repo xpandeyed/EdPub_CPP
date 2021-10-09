@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_empty_folder"
         android:id="@+id/ivEmptyList"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,6 +20,7 @@
     <TextView
         android:id="@+id/tvEmptyListMessage"
         android:layout_width="wrap_content"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         android:textSize="20sp"
         android:fontFamily="@font/metropolis_semi_bold"
@@ -42,6 +44,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFavouriteExamples"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="match_parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
