@@ -28,37 +28,26 @@ class FavouritesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-            Log.i("Fragment", "OnCreateView Called")
+
         return inflater.inflate(R.layout.fragment_favourites, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.i("Fragment", "OnViewCreated Called")
-
-        loadData = ViewModelProvider(requireActivity()).get(LoadData::class.java)
-        loadData.areFavouriteChapterKeysLoaded.observe(viewLifecycleOwner, Observer {
-            if(loadData.areFavouriteChapterKeysLoaded.value!!){
-                copyFavouriteChapters()
-            }
-
-        })
-        loadData.areFavouriteExampleKeysLoaded.observe(viewLifecycleOwner, Observer {
-            copyFavouriteExamples()
-        })
 
         val favouriteChaptersFragment = FavouriteChaptersFragment()
         val favouriteExamplesFragment = FavouriteExamplesFragment()
+        val fragments : ArrayList<Fragment> = arrayListOf(favouriteChaptersFragment, favouriteExamplesFragment)
 
-
-        val adapterList  = mutableListOf(ObjectsCollection.adapterFavouriteChapters, ObjectsCollection.adapterFavouriteExamples)
-        val viewPagerAdapter = FavouritesAdapterViewPager(adapterList, loadData, viewLifecycleOwner)
         val viewPager = view.findViewById<ViewPager2>(R.id.vp2Favourites)
-
-        viewPager.adapter = viewPagerAdapter
-
         val tabLayout = view.findViewById<TabLayout>(R.id.tlFavourites)
+
+        val favouriteViewPagerAdapter = FavouritesAdapterViewPager(fragments, this)
+
+        viewPager.isSaveEnabled = false
+        viewPager.adapter = favouriteViewPagerAdapter
+
 
         TabLayoutMediator(tabLayout, viewPager){tab, position->
             when(position){
@@ -81,24 +70,24 @@ class FavouritesFragment : Fragment() {
         })
 
 
-        ObjectsCollection.adapterFavouriteChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
-                override fun onItemClick(position: Int) {
-                    val intent = Intent(activity, ChapterActivity::class.java).apply {
-                        putExtra("POSITION", position)
-                        putExtra("INVOKER", "fromFav")
-                    }
-                    startActivity(intent)
-                }
-            })
-        ObjectsCollection.adapterFavouriteExamples.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
-                override fun onItemClick(position: Int) {
-                    val intent = Intent(activity, ExampleActivity::class.java).apply {
-                        putExtra("POSITION", position)
-                        putExtra("INVOKER", "fromFav")
-                    }
-                    startActivity(intent)
-                }
-            })
+//        ObjectsCollection.adapterFavouriteChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
+//                override fun onItemClick(position: Int) {
+//                    val intent = Intent(activity, ChapterActivity::class.java).apply {
+//                        putExtra("POSITION", position)
+//                        putExtra("INVOKER", "fromFav")
+//                    }
+//                    startActivity(intent)
+//                }
+//            })
+//        ObjectsCollection.adapterFavouriteExamples.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
+//                override fun onItemClick(position: Int) {
+//                    val intent = Intent(activity, ExampleActivity::class.java).apply {
+//                        putExtra("POSITION", position)
+//                        putExtra("INVOKER", "fromFav")
+//                    }
+//                    startActivity(intent)
+//                }
+//            })
 
 
 
