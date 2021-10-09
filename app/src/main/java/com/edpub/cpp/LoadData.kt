@@ -57,6 +57,7 @@ class LoadData : ViewModel() {
 
                 override fun onCancelled(error: DatabaseError) {
                     ObjectsCollection.isDataLoaded= false
+                    areChaptersLoaded.value = false
                 }
             })
         }
@@ -85,6 +86,7 @@ class LoadData : ViewModel() {
                 }
                 override fun onCancelled(error: DatabaseError) {
                     ObjectsCollection.isDataLoaded= false
+                    areExamplesLoaded.value = false
                 }
             })
         }

@@ -26,7 +26,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivEmptyList"
         android:layout_height="wrap_content"
-        android:text="Favourite Chapters List is Empty."/>
+        android:text="Favourite chapters list is empty."/>
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:layout_width="wrap_content"

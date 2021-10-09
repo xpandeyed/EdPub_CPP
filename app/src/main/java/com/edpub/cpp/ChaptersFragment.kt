@@ -8,9 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -20,6 +23,9 @@ import kotlinx.coroutines.launch
 class ChaptersFragment : Fragment() {
 
     private lateinit var rvChapters : RecyclerView
+    private lateinit var pbChaptersProgress : CircularProgressIndicator
+
+    private lateinit var loadData: LoadData
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +37,8 @@ class ChaptersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        pbChaptersProgress = view.findViewById(R.id.pbChaptersProgress)
 
         rvChapters = view.findViewById(R.id.rvChapters)
         rvChapters.layoutManager = LinearLayoutManager(activity)
@@ -45,5 +53,15 @@ class ChaptersFragment : Fragment() {
                 startActivity(intent)
             }
         })
+
+        loadData = ViewModelProvider(requireActivity()).get(LoadData::class.java)
+
+        loadData.areChaptersLoaded.observe(viewLifecycleOwner, Observer {
+            if(loadData.areChaptersLoaded.value!!){
+                pbChaptersProgress.visibility = View.GONE
+            }
+        })
+
+
     }
 }
