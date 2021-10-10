@@ -168,41 +168,18 @@
                         app:layout_constraintTop_toBottomOf="@+id/tvPrivacyPolicy" />
 
                     <TextView
-                        android:id="@+id/tvReport"
-                        android:drawableLeft="@drawable/report"
+                        android:id="@+id/tvFeedback"
+                        android:drawableLeft="@drawable/feedback"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawablePadding="20dp"
                         android:paddingStart="20dp"
                         android:gravity="center_vertical"
-                        android:fontFamily="@font/metropolis_regular"
-                        android:padding="15dp"
-                        android:text="Report"
-                        android:textColor="#2d3e50"
-                        app:layout_constraintTop_toBottomOf="@+id/vPrivacy" />
-
-                    <View
-                        android:id="@+id/vReport"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:background="@color/grey_text_background"
-                        app:layout_constraintTop_toBottomOf="@+id/tvReport" />
-
-                    <TextView
-                        android:id="@+id/tvFeedback"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:fontFamily="@font/metropolis_regular"
                         android:padding="15dp"
                         android:text="Feedback"
-                        android:paddingStart="20dp"
-                        android:drawableLeft="@drawable/feedback"
-                        android:gravity="center_vertical"
-                        android:drawablePadding="20dp"
                         android:textColor="#2d3e50"
-                        app:layout_constraintTop_toBottomOf="@+id/vReport" />
+                        app:layout_constraintTop_toBottomOf="@+id/vPrivacy" />
 
                     <View
                         android:id="@+id/vFeedback"
@@ -212,6 +189,29 @@
                         android:layout_marginRight="20dp"
                         android:background="@color/grey_text_background"
                         app:layout_constraintTop_toBottomOf="@+id/tvFeedback" />
+
+                    <TextView
+                        android:id="@+id/tvReport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/metropolis_regular"
+                        android:padding="15dp"
+                        android:text="Report"
+                        android:paddingStart="20dp"
+                        android:drawableLeft="@drawable/report"
+                        android:gravity="center_vertical"
+                        android:drawablePadding="20dp"
+                        android:textColor="#2d3e50"
+                        app:layout_constraintTop_toBottomOf="@+id/vFeedback" />
+
+                    <View
+                        android:id="@+id/vReport"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@color/grey_text_background"
+                        app:layout_constraintTop_toBottomOf="@+id/tvReport" />
 
                     <TextView
                         android:id="@+id/tvShare"
@@ -225,7 +225,7 @@
                         android:gravity="center_vertical"
                         android:drawablePadding="20dp"
                         android:textColor="#2d3e50"
-                        app:layout_constraintTop_toBottomOf="@id/vFeedback" />
+                        app:layout_constraintTop_toBottomOf="@id/vReport" />
 
                     <View
                         android:id="@+id/vShare"

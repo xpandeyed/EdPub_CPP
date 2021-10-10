@@ -48,6 +48,14 @@ class DeleteAccountActivity : AppCompatActivity() {
         googleSignInClient = GoogleSignIn.getClient(this, gso)
         auth = FirebaseAuth.getInstance()
 
+        findViewById<TextView>(R.id.bFeedback).setOnClickListener {
+            val url = "https://docs.google.com/forms/d/e/1FAIpQLScBQl72xho71K5f83_ceI5A8KNiBgfNNsvG6gkriEsN454r_Q/viewform?usp=sf_link"
+            val intent = Intent(this, WebActivity::class.java).apply {
+                putExtra("URL", url)
+            }
+            startActivity(intent)
+        }
+
         findViewById<TextView>(R.id.bReport).setOnClickListener {
             val url = "https://docs.google.com/forms/d/e/1FAIpQLScqWJta8g0dWkZKpe4TKnFf-Ud6PINh2nQoqJZDPfrvX9c7xw/viewform?usp=sf_link"
             val intent = Intent(this, WebActivity::class.java).apply {
