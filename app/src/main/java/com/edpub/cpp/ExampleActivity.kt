@@ -49,6 +49,7 @@ class ExampleActivity : AppCompatActivity() {
 
         if (invoker == "fromFav") {
             ivDone.visibility = View.GONE
+            ivFavourites.visibility = View.GONE
             try{
                 key = ObjectsCollection.favouriteExamples[position].KEY
 

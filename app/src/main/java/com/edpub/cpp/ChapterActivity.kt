@@ -52,6 +52,7 @@ class ChapterActivity : AppCompatActivity() {
 
         if (invoker == "fromFav") {
             ivDone.visibility = View.GONE
+            ivFavourites.visibility = View.GONE
 
             try{
                 key = ObjectsCollection.favouriteChapters[position].KEY
