@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -39,6 +40,11 @@ class FavouriteChaptersFragment : Fragment() {
 
 
 
+
+        val bnvHomeFragmentNavigator = requireActivity().findViewById<BottomNavigationView>(R.id.bnvHomeFragmentNavigator)
+
+
+
         rvFavouriteChapters = view.findViewById(R.id.rvFavouriteChapters)
         rvFavouriteChapters.layoutManager = LinearLayoutManager(activity)
         rvFavouriteChapters.itemAnimator = null
@@ -48,6 +54,11 @@ class FavouriteChaptersFragment : Fragment() {
         ivEmptyList = view.findViewById(R.id.ivEmptyList)
 
         pbFavouriteChapters = view.findViewById(R.id.pbFavouriteChapters)
+
+
+        ivEmptyList.setOnClickListener {
+            bnvHomeFragmentNavigator.selectedItemId = R.id.miChapters
+        }
 
 
         ObjectsCollection.adapterFavouriteChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{

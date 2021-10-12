@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,6 +35,7 @@ class FavouriteExamplesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val bnvHomeFragmentNavigator = requireActivity().findViewById<BottomNavigationView>(R.id.bnvHomeFragmentNavigator)
 
 
         rvFavouriteExamples = view.findViewById(R.id.rvFavouriteExamples)
@@ -44,6 +46,10 @@ class FavouriteExamplesFragment : Fragment() {
         tvEmptyListMessage = view.findViewById(R.id.tvEmptyListMessage)
         ivEmptyList = view.findViewById(R.id.ivEmptyList)
         pbExamplesProgress = view.findViewById(R.id.pbExamplesProgress)
+
+        ivEmptyList.setOnClickListener {
+            bnvHomeFragmentNavigator.selectedItemId = R.id.miExamples
+        }
 
         ObjectsCollection.adapterFavouriteExamples.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {

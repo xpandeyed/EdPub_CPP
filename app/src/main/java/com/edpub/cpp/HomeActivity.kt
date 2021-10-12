@@ -73,12 +73,15 @@ class HomeActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
+    override fun onBackPressed() {
+        val bnvHomeFragmentNavigator = findViewById<BottomNavigationView>(R.id.bnvHomeFragmentNavigator)
+        if(bnvHomeFragmentNavigator.selectedItemId==R.id.miHome){
+            super.onBackPressed()
+        }
+        else{
+            bnvHomeFragmentNavigator.selectedItemId=R.id.miHome
+        }
 
-    override fun onPause() {
-        super.onPause()
 
     }
 
