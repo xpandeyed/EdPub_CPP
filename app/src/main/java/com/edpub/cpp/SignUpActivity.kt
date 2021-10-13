@@ -124,12 +124,6 @@ class SignUpActivity : AppCompatActivity() {
 //                            FunctionCollection.loadCurrentChapterKey()
 //                            FunctionCollection.loadCurrentExampleKey()
                         }
-//                        else{
-//                            ObjectsCollection.isFavouriteChapterKeysListLoaded = false
-//                            ObjectsCollection.isFavouriteExampleKeysListLoaded = false
-//                            FunctionCollection.loadFavouriteChapterKeys()
-//                            FunctionCollection.loadFavouriteExampleKeys()
-//                        }
                         val intent = Intent(this@SignUpActivity, HomeActivity::class.java)
                         startActivity(intent)
                     }

@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#f2f6f7"
     android:fillViewport="true"
-    android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -99,216 +99,213 @@
             <TextView
                 android:id="@+id/tvChaptersCompletedTitle"
                 android:layout_width="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
                 android:layout_height="wrap_content"
-                android:textColor="#2d3e50"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/metropolis_semi_bold"
+                android:gravity="center"
                 android:text="Chpaters\nCompleted"
+                android:textColor="#2d3e50"
                 app:layout_constraintLeft_toLeftOf="@id/pbChaptersProgress"
                 app:layout_constraintRight_toRightOf="@id/pbChaptersProgress"
                 app:layout_constraintTop_toBottomOf="@id/pbChaptersProgress" />
 
             <TextView
                 android:id="@+id/tvExamplesCompletedTitle"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:textColor="#2d3e50"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/metropolis_semi_bold"
+                android:gravity="center"
+                android:text="Examples\nCompleted"
+                android:textColor="#2d3e50"
                 app:layout_constraintLeft_toLeftOf="@id/pbExamplesProgress"
                 app:layout_constraintRight_toRightOf="@id/pbExamplesProgress"
-                android:layout_height="wrap_content"
-                android:text="Examples\nCompleted"
                 app:layout_constraintTop_toBottomOf="@id/pbExamplesProgress" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/clBookmarkContainer"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clBookmarkContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:background="@drawable/white_background"
+            app:layout_constraintTop_toBottomOf="@id/clProgressContainer">
+
+            <TextView
+                android:id="@+id/tvPickUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/metropolis_semi_bold"
+                android:gravity="center"
+                android:text="Continue from where you left off"
+                android:textColor="#2d3e50"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/vPickUp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/grey_text_background"
+                app:layout_constraintTop_toBottomOf="@+id/tvPickUp" />
+
+
+            <TextView
+                android:id="@+id/tvYourCurrentChapter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/metropolis_regular"
+                android:gravity="center"
+                android:text="Your Current Chapter"
+                android:textColor="@color/primaryColor"
+                app:layout_constraintTop_toBottomOf="@+id/vPickUp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clCurrChapter"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:background="@color/chapter_background"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvYourCurrentChapter">
+
+                <TextView
+                    android:id="@+id/tvLoadingChapters"
                     android:layout_width="match_parent"
-                    android:layout_margin="25dp"
-                    android:background="@drawable/white_background"
-                    app:layout_constraintTop_toBottomOf="@id/clProgressContainer"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/message_background"
+                    android:fontFamily="@font/metropolis_semi_bold"
+                    android:gravity="center"
+                    android:text="Loading Chapters . . ." />
 
-                    <TextView
-                        android:id="@+id/tvPickUp"
-                        android:layout_marginTop="15dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:fontFamily="@font/metropolis_semi_bold"
-                        android:gravity="center"
-                        android:text="Continue from where you left off"
-                        android:textColor="#2d3e50"
-                        android:textSize="20sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCurrentChapter"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <View
-                        android:id="@+id/vPickUp"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginRight="10dp"
-                        android:background="@color/grey_text_background"
-                        app:layout_constraintTop_toBottomOf="@+id/tvPickUp" />
+            <View
+                android:id="@+id/vCurrChapter"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/grey_text_background"
+                app:layout_constraintTop_toBottomOf="@+id/clCurrChapter" />
 
-
-                    <TextView
-                        android:id="@+id/tvYourCurrentChapter"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:fontFamily="@font/metropolis_regular"
-                        android:gravity="center"
-                        android:text="Your Current Chapter"
-                        android:textColor="@color/primaryColor"
-                        app:layout_constraintTop_toBottomOf="@+id/vPickUp" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/clCurrChapter"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:background="@color/chapter_background"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvYourCurrentChapter">
-
-                        <TextView
-                            android:id="@+id/tvLoadingChapters"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/message_background"
-                            android:fontFamily="@font/metropolis_semi_bold"
-                            android:gravity="center"
-                            android:text="Loading Chapters . . ." />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvCurrentChapter"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <View
-                        android:id="@+id/vCurrChapter"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
-                        android:background="@color/grey_text_background"
-                        app:layout_constraintTop_toBottomOf="@+id/clCurrChapter" />
-
-                    <TextView
-                        android:id="@+id/tvYourCurrentExample"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:fontFamily="@font/metropolis_regular"
-                        android:gravity="center"
-                        android:text="Your Current Example"
-                        android:textColor="@color/primaryColor"
-                        app:layout_constraintTop_toBottomOf="@id/vCurrChapter" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:background="@color/chapter_background"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvYourCurrentExample">
-
-                        <TextView
-                            android:id="@+id/tvLoadingExamples"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/message_background"
-                            android:fontFamily="@font/metropolis_semi_bold"
-                            android:gravity="center"
-                            android:text="Loading Examples . . ." />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvCurrentExample"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
+            <TextView
+                android:id="@+id/tvYourCurrentExample"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/metropolis_regular"
+                android:gravity="center"
+                android:text="Your Current Example"
+                android:textColor="@color/primaryColor"
+                app:layout_constraintTop_toBottomOf="@id/vCurrChapter" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:padding="10dp"
-                android:layout_margin="25dp"
-                android:background="@drawable/white_background"
-                app:layout_constraintTop_toBottomOf="@id/clBookmarkContainer"
-                android:layout_height="wrap_content">
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:background="@color/chapter_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvYourCurrentExample">
 
                 <TextView
-                    android:id="@+id/tvCurlyBraces"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvLoadingExamples"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/message_background"
+                    android:fontFamily="@font/metropolis_semi_bold"
                     android:gravity="center"
-                    android:textColor="@color/primaryColor"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="38sp"
-                    android:fontFamily="@font/metropolis_semi_bold"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="{ }"/>
+                    android:text="Loading Examples . . ." />
 
-
-
-                <TextView
-                    android:id="@+id/tvTestYourLearning"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintLeft_toRightOf="@id/tvCurlyBraces"
-                    android:fontFamily="@font/metropolis_semi_bold"
-                    android:text="Test Your Learning"
-                    android:textColor="#2d3e50"
-                    android:textSize="20sp"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tvRandomExample"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    app:layout_constraintLeft_toRightOf="@id/tvCurlyBraces"
-                    android:layout_marginBottom="5dp"
-                    android:fontFamily="@font/metropolis_regular"
-                    android:gravity="center_vertical"
-                    android:text="Try a random example"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTestYourLearning" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/bToRandomExample"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/button_background"
-                    android:fontFamily="@font/metropolis_semi_bold"
-                    android:text="See Example"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:layout_marginTop="15dp"
-                    android:textAllCaps="false"
-                    app:layout_constraintTop_toBottomOf="@id/tvRandomExample"
-                    android:textColor="@color/primaryColor"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCurrentExample"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:background="@drawable/white_background"
+            android:padding="10dp"
+            app:layout_constraintTop_toBottomOf="@id/clBookmarkContainer">
+
+            <TextView
+                android:id="@+id/tvCurlyBraces"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/metropolis_semi_bold"
+                android:gravity="center"
+                android:text="{ }"
+                android:textColor="@color/primaryColor"
+                android:textSize="38sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/tvTestYourLearning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/metropolis_semi_bold"
+                android:text="Test Your Learning"
+                android:textColor="#2d3e50"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toRightOf="@id/tvCurlyBraces"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvRandomExample"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/metropolis_regular"
+                android:gravity="center_vertical"
+                android:text="Try a random example"
+                app:layout_constraintLeft_toRightOf="@id/tvCurlyBraces"
+                app:layout_constraintTop_toBottomOf="@+id/tvTestYourLearning" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bToRandomExample"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/button_background"
+                android:fontFamily="@font/metropolis_semi_bold"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:text="See Example"
+                android:textAllCaps="false"
+                android:textColor="@color/primaryColor"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRandomExample" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
