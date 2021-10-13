@@ -17,10 +17,7 @@ class LauncherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        if(!ObjectsCollection.isDataLoaded){
-//            FunctionCollection.loadChapters()
-//            FunctionCollection.loadExamples()
-//        }
+
 
         if(Firebase.auth.currentUser==null) {
             val intent = Intent(this@LauncherActivity, SignUpActivity::class.java)

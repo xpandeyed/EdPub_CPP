@@ -24,6 +24,7 @@
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_code_example.xml" value="0.18888888888888888" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_edpub.xml" value="0.171484375" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_external_icon.xml" value="0.171484375" />
+        <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_google.xml" value="0.171484375" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_google__g__logo.xml" value="0.171484375" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_icon.xml" value="0.22864583333333333" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_icon_app_bar.xml" value="0.171484375" />
@@ -57,7 +58,7 @@
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_login.xml" value="0.1984375" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_privacy_policy.xml" value="0.2125" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_profile.xml" value="0.2125" />
-        <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_sign_up.xml" value="0.14" />
+        <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_sign_up.xml" value="0.12" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_terms_and_conditions.xml" value="0.2125" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_update_profile.xml" value="0.2125" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/activity_update_profle.xml" value="0.2125" />

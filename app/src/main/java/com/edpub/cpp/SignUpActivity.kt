@@ -71,7 +71,6 @@ class SignUpActivity : AppCompatActivity() {
 
         val cvSignIn = findViewById<CardView>(R.id.cvSignIn)
         cvSignIn.setOnClickListener {
-
             signIn()
         }
     }
@@ -121,8 +120,6 @@ class SignUpActivity : AppCompatActivity() {
                         if(ObjectsCollection.isNewUser){
                             firebaseDatabase.child(uid!!).child("CURR_CHAP").setValue("C111AAA")
                             firebaseDatabase.child(uid).child("CURR_EXAM").setValue("E111AAA")
-//                            FunctionCollection.loadCurrentChapterKey()
-//                            FunctionCollection.loadCurrentExampleKey()
                         }
                         val intent = Intent(this@SignUpActivity, HomeActivity::class.java)
                         startActivity(intent)
