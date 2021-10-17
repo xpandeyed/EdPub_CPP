@@ -17,7 +17,8 @@
             android:id="@+id/clProgressContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:background="@drawable/white_background"
+            android:layout_margin="25dp"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -103,7 +104,9 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/metropolis_semi_bold"
                 android:gravity="center"
-                android:text="Chpaters\nCompleted"
+                android:text="Chapters\nCompleted"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="10dp"
                 android:textColor="#2d3e50"
                 app:layout_constraintLeft_toLeftOf="@id/pbChaptersProgress"
                 app:layout_constraintRight_toRightOf="@id/pbChaptersProgress"
@@ -117,6 +120,8 @@
                 android:fontFamily="@font/metropolis_semi_bold"
                 android:gravity="center"
                 android:text="Examples\nCompleted"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="10dp"
                 android:textColor="#2d3e50"
                 app:layout_constraintLeft_toLeftOf="@id/pbExamplesProgress"
                 app:layout_constraintRight_toRightOf="@id/pbExamplesProgress"
