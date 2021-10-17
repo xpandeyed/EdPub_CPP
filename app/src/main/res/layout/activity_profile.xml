@@ -118,7 +118,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
 
                     <TextView
@@ -131,6 +131,7 @@
                         android:gravity="center_vertical"
                         android:fontFamily="@font/metropolis_regular"
                         android:padding="15dp"
+                        android:textSize="16sp"
                         android:text="Terms and Conditions"
                         android:textColor="#2d3e50"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -150,6 +151,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/metropolis_regular"
                         android:padding="15dp"
+                        android:textSize="16sp"
                         android:drawableLeft="@drawable/privacy_policy"
                         android:gravity="center_vertical"
                         android:drawablePadding="20dp"
@@ -174,6 +176,7 @@
                         android:layout_height="wrap_content"
                         android:drawablePadding="20dp"
                         android:paddingStart="20dp"
+                        android:textSize="16sp"
                         android:gravity="center_vertical"
                         android:fontFamily="@font/metropolis_regular"
                         android:padding="15dp"
@@ -198,6 +201,7 @@
                         android:padding="15dp"
                         android:text="Report"
                         android:paddingStart="20dp"
+                        android:textSize="16sp"
                         android:drawableLeft="@drawable/report"
                         android:gravity="center_vertical"
                         android:drawablePadding="20dp"
@@ -221,6 +225,7 @@
                         android:padding="15dp"
                         android:paddingStart="20dp"
                         android:text="Share"
+                        android:textSize="16sp"
                         android:drawableLeft="@drawable/share"
                         android:gravity="center_vertical"
                         android:drawablePadding="20dp"
@@ -239,6 +244,7 @@
                     <TextView
                         android:id="@+id/tvRateUs"
                         android:layout_width="match_parent"
+                        android:textSize="16sp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/metropolis_regular"
                         android:padding="15dp"
@@ -267,6 +273,7 @@
                         android:drawableLeft="@drawable/version"
                         android:gravity="center_vertical"
                         android:drawablePadding="20dp"
+                        android:textSize="16sp"
                         android:paddingStart="20dp"
                         android:padding="15dp"
                         android:text="Version"
@@ -290,6 +297,7 @@
                         android:padding="15dp"
                         android:drawablePadding="20dp"
                         android:paddingStart="20dp"
+                        android:textSize="16sp"
                         android:gravity="center_vertical"
                         android:drawableLeft="@drawable/about_us"
                         android:text="About Us"
