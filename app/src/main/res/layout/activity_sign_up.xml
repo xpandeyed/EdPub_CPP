@@ -47,7 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="65dp"
+                android:layout_marginTop="55dp"
                 android:layout_marginRight="20dp"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/metropolis_semi_bold"
@@ -209,10 +209,24 @@
                 android:lineSpacingExtra="5dp"
                 android:text="By Signing In you agree to our Terms and Conditions and Privacy Policy."
                 android:textColorLink="@color/primaryColor"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cvSignIn" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:textColorLink="@color/primaryColor"
+                android:id="@+id/tvContact"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="25dp"
+                android:fontFamily="@font/metropolis_regular"
+                app:layout_constraintTop_toBottomOf="@+id/tvTermsConditionsAndPrivacyPolicy"
+                android:text="Having trouble in signing in? Contact Us."
+                android:lineSpacingExtra="5dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
     </androidx.cardview.widget.CardView>

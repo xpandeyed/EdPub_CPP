@@ -1,5 +1,6 @@
 package com.edpub.cpp
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -60,6 +61,28 @@ class SignUpActivity : AppCompatActivity() {
         val tvTermsConditionsAndPrivacyPolicy = findViewById<TextView>(R.id.tvTermsConditionsAndPrivacyPolicy)
         tvTermsConditionsAndPrivacyPolicy.movementMethod = LinkMovementMethod.getInstance()
         tvTermsConditionsAndPrivacyPolicy.text = spannable
+
+
+        val troubleMessage = "Having trouble in signing in? Contact Us."
+        val spannableContactUs = SpannableString(troubleMessage)
+        val span3 = object : ClickableSpan(){
+            override fun onClick(p0: View) {
+                val intent = Intent(Intent.ACTION_SENDTO).apply {
+                    data = Uri.parse("mailto:")
+                    putExtra(Intent.EXTRA_EMAIL, arrayOf("lalbiharipandeyg@gmail.com")) // recipients
+                    putExtra(Intent.EXTRA_SUBJECT, "Trouble in Signing In")
+                }
+                try {
+                    startActivity(intent)
+                } catch (e: ActivityNotFoundException) {
+                    Toast.makeText(this@SignUpActivity, "No email app found.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        spannableContactUs.setSpan(span3, 30, 40, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE )
+        val tvContact = findViewById<TextView>(R.id.tvContact)
+        tvContact.movementMethod = LinkMovementMethod.getInstance()
+        tvContact.text = spannableContactUs
 
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
