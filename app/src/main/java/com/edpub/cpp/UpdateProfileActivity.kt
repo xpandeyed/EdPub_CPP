@@ -21,15 +21,11 @@ import com.google.firebase.ktx.Firebase
 
 class UpdateProfileActivity : AppCompatActivity() {
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_profile)
         setSupportActionBar(findViewById(R.id.tbUpdateProfileToolBar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-
 
         findViewById<Button>(R.id.bLogOut).setOnClickListener {
             Firebase.auth.signOut()
