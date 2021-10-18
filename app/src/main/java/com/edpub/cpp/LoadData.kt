@@ -45,6 +45,7 @@ class LoadData : ViewModel() {
                         }
                         ObjectsCollection.isDataLoaded = true
                         areChaptersLoaded.value = true
+                        ObjectsCollection.filteredChaptersList.clear()
                         ObjectsCollection.filteredChaptersList.addAll(ObjectsCollection.chaptersList)
                         ObjectsCollection.adapterChapters.notifyDataSetChanged()
                     }
@@ -73,8 +74,11 @@ class LoadData : ViewModel() {
                         for(example in snapshot.children){
                             val currExample = example.getValue(Chapter::class.java)
                             ObjectsCollection.examplesList.add(currExample!!)
-                            ObjectsCollection.adapterExamples.notifyItemInserted(ObjectsCollection.examplesList.size-1)
+                            //ObjectsCollection.adapterExamples.notifyItemInserted(ObjectsCollection.examplesList.size-1)
                         }
+                        ObjectsCollection.filteredExamplesList.clear()
+                        ObjectsCollection.filteredExamplesList.addAll(ObjectsCollection.examplesList)
+                        ObjectsCollection.adapterExamples.notifyDataSetChanged()
                         ObjectsCollection.isDataLoaded = true
                         areExamplesLoaded.value = true
                     }

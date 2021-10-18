@@ -81,6 +81,13 @@ class ChaptersFragment : Fragment() {
             }
         })
 
+        svChapters.setOnCloseListener {
+            ObjectsCollection.filteredChaptersList.clear()
+            ObjectsCollection.filteredChaptersList.addAll(ObjectsCollection.chaptersList)
+            ObjectsCollection.adapterChapters.notifyDataSetChanged()
+            true
+        }
+
 
 
 

@@ -48,7 +48,7 @@ object ObjectsCollection {
     var adapterCurrentExample = CurrentChapter(currentExample)
 
     var adapterChapters = ChapterRVAdapter(filteredChaptersList)
-    var adapterExamples = ChapterRVAdapter(examplesList)
+    var adapterExamples = ChapterRVAdapter(filteredExamplesList)
 
 
     fun sortMutableStringSet(set: MutableSet<String>):MutableSet<String>{
