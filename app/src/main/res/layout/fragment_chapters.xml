@@ -7,28 +7,20 @@
     android:layout_height="match_parent"
     tools:context=".ChaptersFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.appcompat.widget.SearchView
         android:layout_width="match_parent"
-        android:id="@+id/ablChapters"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:background="@color/white"
-            app:title="Chapters Index"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            app:titleTextAppearance="@style/title_default"
-            android:id="@+id/tbChapters"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.appbar.AppBarLayout>
+        android:layout_height="60dp"
+        android:background="@color/white"
+        app:queryHint="Search by title"
+        app:iconifiedByDefault="false"
+        android:id="@+id/svChapters"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/pbChaptersProgress"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/svChapters"
         android:indeterminate="true"
         app:trackCornerRadius="2dp"
         app:indicatorColor="@color/primaryColor"
@@ -41,6 +33,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ablChapters"/>
+        app:layout_constraintTop_toBottomOf="@+id/svChapters"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

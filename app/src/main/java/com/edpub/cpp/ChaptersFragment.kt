@@ -21,13 +21,17 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import android.text.TextUtils
+
+
+
 
 
 class ChaptersFragment : Fragment() {
 
     private lateinit var rvChapters : RecyclerView
     private lateinit var pbChaptersProgress : CircularProgressIndicator
-    private lateinit var tbChapters : Toolbar
+    private lateinit var svChapters : androidx.appcompat.widget.SearchView
 
     private lateinit var loadData: LoadData
 
@@ -43,7 +47,46 @@ class ChaptersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         pbChaptersProgress = view.findViewById(R.id.pbChaptersProgress)
-        tbChapters = view.findViewById(R.id.tbChapters)
+        svChapters = view.findViewById(R.id.svChapters)
+
+        svChapters.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(newText: String?): Boolean {
+                ObjectsCollection.filteredChaptersList.clear()
+                if(newText.isNullOrEmpty()){
+                    ObjectsCollection.filteredChaptersList.addAll(ObjectsCollection.chaptersList)
+                }else{
+                    for(chapter in ObjectsCollection.chaptersList){
+                        if(chapter.TITLE!!.lowercase().contains(newText.lowercase())){
+                            ObjectsCollection.filteredChaptersList.add(chapter)
+                        }
+                    }
+                }
+                ObjectsCollection.adapterChapters.notifyDataSetChanged()
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                ObjectsCollection.filteredChaptersList.clear()
+                if(newText.isNullOrEmpty()){
+                    ObjectsCollection.filteredChaptersList.addAll(ObjectsCollection.chaptersList)
+                }else{
+                    for(chapter in ObjectsCollection.chaptersList){
+                        if(chapter.TITLE!!.lowercase().contains(newText.lowercase())){
+                            ObjectsCollection.filteredChaptersList.add(chapter)
+                        }
+                    }
+                }
+                ObjectsCollection.adapterChapters.notifyDataSetChanged()
+                return false
+            }
+        })
+
+
+
+
+
+
+
 
         rvChapters = view.findViewById(R.id.rvChapters)
         rvChapters.layoutManager = LinearLayoutManager(activity)

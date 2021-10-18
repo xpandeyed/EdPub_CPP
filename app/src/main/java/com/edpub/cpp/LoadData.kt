@@ -41,10 +41,12 @@ class LoadData : ViewModel() {
                         for(chapter in snapshot.children){
                             val currChapter = chapter.getValue(Chapter::class.java)
                             ObjectsCollection.chaptersList.add(currChapter!!)
-                            ObjectsCollection.adapterChapters.notifyItemInserted(ObjectsCollection.chaptersList.size-1)
+                            //ObjectsCollection.adapterChapters.notifyItemInserted(ObjectsCollection.chaptersList.size-1)
                         }
                         ObjectsCollection.isDataLoaded = true
                         areChaptersLoaded.value = true
+                        ObjectsCollection.filteredChaptersList.addAll(ObjectsCollection.chaptersList)
+                        ObjectsCollection.adapterChapters.notifyDataSetChanged()
                     }
                     if(Firebase.auth.currentUser!=null){
                         loadFavouriteChapterKeys()

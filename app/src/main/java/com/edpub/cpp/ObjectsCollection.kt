@@ -23,6 +23,9 @@ object ObjectsCollection {
     var chaptersList = mutableListOf<Chapter>()
     var examplesList = mutableListOf<Chapter>()
 
+    var filteredChaptersList = mutableListOf<Chapter>()
+    var filteredExamplesList = mutableListOf<Chapter>()
+
     var favouriteChapterKeysList = mutableSetOf<String>()
     var favouriteExampleKeysList = mutableSetOf<String>()
 
@@ -44,7 +47,7 @@ object ObjectsCollection {
     var adapterCurrentChapter = CurrentChapter(currentChapter)
     var adapterCurrentExample = CurrentChapter(currentExample)
 
-    var adapterChapters = ChapterRVAdapter(chaptersList)
+    var adapterChapters = ChapterRVAdapter(filteredChaptersList)
     var adapterExamples = ChapterRVAdapter(examplesList)
 
 
