@@ -33,11 +33,6 @@ class UpdateProfileActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.bLogOut).setOnClickListener {
             Firebase.auth.signOut()
-            /*as soon as the user signs out we must clear the favourites list
-            * because if there are some elements in list and users logs in immediately
-            * the previously fetched data will be there and new data will be added
-            * this will cause trouble*/
-            //hope this makes the lists empty
             ObjectsCollection.favouriteChapters.clear()
             ObjectsCollection.favouriteChapterKeysList.clear()
             ObjectsCollection.favouriteExampleKeysList.clear()

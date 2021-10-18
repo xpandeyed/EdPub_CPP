@@ -10,15 +10,24 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class HomeActivity : AppCompatActivity() {
 
-
-    private lateinit var loadData: LoadData
+    private lateinit var loadData : LoadData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if(Firebase.auth.currentUser==null) {
+            val intent = Intent(this@HomeActivity, SignUpActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+            startActivity(intent)
+        }
+
         setContentView(R.layout.activity_home)
         setSupportActionBar(findViewById(R.id.tbHomeToolBar))
 

@@ -57,23 +57,19 @@
         </activity>
         <activity
             android:name=".HomeActivity"
-            android:exported="true" />
-        <activity
-            android:name=".SignUpActivity"
-            android:clearTaskOnLaunch="true"
-            android:exported="true"
-            android:noHistory="true" />
-        <activity
-            android:name=".LauncherActivity"
-            android:clearTaskOnLaunch="true"
-            android:exported="true"
-            android:noHistory="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+        <activity
+            android:name=".SignUpActivity"
+            android:clearTaskOnLaunch="true"
+            android:exported="true"
+            android:noHistory="true" />
     </application>
 
 </manifest>
