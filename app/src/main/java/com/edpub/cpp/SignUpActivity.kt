@@ -145,6 +145,7 @@ class SignUpActivity : AppCompatActivity() {
                             firebaseDatabase.child(uid).child("CURR_EXAM").setValue("E111AAA")
                         }
                         val intent = Intent(this@SignUpActivity, HomeActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                     }
                 } else {
