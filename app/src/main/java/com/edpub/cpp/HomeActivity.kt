@@ -19,14 +19,14 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var loadData : LoadData
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+
 
         if(Firebase.auth.currentUser==null) {
             val intent = Intent(this@HomeActivity, SignUpActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+            intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
         }
+        super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_home)
         setSupportActionBar(findViewById(R.id.tbHomeToolBar))
