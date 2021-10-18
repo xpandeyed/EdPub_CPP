@@ -1,31 +1,17 @@
 package com.edpub.cpp
 
-import android.content.Context
+
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
-import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.progressindicator.CircularProgressIndicator
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import android.text.TextUtils
-
-
-
-
 
 class ChaptersFragment : Fragment() {
 
@@ -88,13 +74,6 @@ class ChaptersFragment : Fragment() {
             true
         }
 
-
-
-
-
-
-
-
         rvChapters = view.findViewById(R.id.rvChapters)
         rvChapters.layoutManager = LinearLayoutManager(activity)
         rvChapters.adapter = ObjectsCollection.adapterChapters
@@ -102,7 +81,8 @@ class ChaptersFragment : Fragment() {
         ObjectsCollection.adapterChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
                 val intent = Intent(activity, ChapterActivity::class.java).apply {
-                    putExtra("POSITION", position)
+                    val currChapterPosition = ObjectsCollection.chaptersList.indexOf(ObjectsCollection.filteredChaptersList[position])
+                    putExtra("POSITION", currChapterPosition)
                     putExtra("INVOKER", "fromChapter")
                 }
                 startActivity(intent)
@@ -116,7 +96,5 @@ class ChaptersFragment : Fragment() {
                 pbChaptersProgress.visibility = View.GONE
             }
         })
-
-
     }
 }

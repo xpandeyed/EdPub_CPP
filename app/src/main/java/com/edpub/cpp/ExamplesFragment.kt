@@ -83,7 +83,8 @@ class ExamplesFragment : Fragment() {
         ObjectsCollection.adapterExamples.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
                 val intent = Intent(activity, ExampleActivity::class.java).apply {
-                    putExtra("POSITION", position)
+                    val currExamplePosition = ObjectsCollection.examplesList.indexOf(ObjectsCollection.filteredExamplesList[position])
+                    putExtra("POSITION", currExamplePosition)
                     putExtra("INVOKER", "fromExample")
                 }
                 startActivity(intent)
