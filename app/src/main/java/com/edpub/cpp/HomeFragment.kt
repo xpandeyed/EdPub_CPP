@@ -10,10 +10,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,6 +31,8 @@ class HomeFragment : Fragment() {
     private lateinit var rvCurrentChapter: RecyclerView
     private lateinit var rvCurrentExample: RecyclerView
 
+    private lateinit var tbHome : Toolbar
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,9 +41,20 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        tbHome = view.findViewById(R.id.tbHome)
+        tbHome.inflateMenu(R.menu.home_activity_appbar)
+        tbHome.setOnMenuItemClickListener {
+            when(it.itemId){
+                R.id.miProfile->{
+                    val intent = Intent(activity, ProfileActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+            true
+        }
 
         rvCurrentChapter = view.findViewById(R.id.rvCurrentChapter)
         rvCurrentChapter.layoutManager = LinearLayoutManager(activity)
