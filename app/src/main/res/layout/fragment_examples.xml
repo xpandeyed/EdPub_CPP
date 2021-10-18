@@ -6,6 +6,24 @@
     android:background="#f2f6f7"
     android:layout_height="match_parent"
     tools:context=".ExamplesFragment">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:id="@+id/ablExamples"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            app:title="Examples Index"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            app:titleTextAppearance="@style/title_default"
+            android:id="@+id/tbExamples"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:layout_width="wrap_content"
@@ -23,6 +41,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvExamples"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        app:layout_constraintTop_toBottomOf="@id/ablExamples"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

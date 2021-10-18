@@ -1,10 +1,7 @@
 package com.edpub.cpp
 
 import android.content.Intent
-import android.graphics.Paint
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,12 +13,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import org.w3c.dom.Text
 
 
 class HomeFragment : Fragment() {
@@ -45,7 +36,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         tbHome = view.findViewById(R.id.tbHome)
-        tbHome.inflateMenu(R.menu.home_activity_appbar)
+        tbHome.inflateMenu(R.menu.home_fragment_appbar)
         tbHome.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.miProfile->{
