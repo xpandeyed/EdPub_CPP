@@ -1,11 +1,15 @@
 package com.edpub.cpp
 
+import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.android.material.progressindicator.LinearProgressIndicator
 
 class WebActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,19 +17,23 @@ class WebActivity : AppCompatActivity() {
         setContentView(R.layout.activity_web)
 
         val wbMyWebView = findViewById<WebView>(R.id.wbMyWebView)
-        val pbWebPageProgress = findViewById<CircularProgressIndicator>(R.id.pbWebPageProgress)
+        val lpiWebPageProgress = findViewById<LinearProgressIndicator>(R.id.lpiWebPageProgress)
+
+        wbMyWebView.settings.javaScriptEnabled = true
 
         val url = intent.getStringExtra("URL")
-        if(url!=null){
-            wbMyWebView.settings.javaScriptEnabled = true
-            wbMyWebView.webViewClient = object : WebViewClient(){
-                override fun onPageFinished(view: WebView?, url: String?) {
-                    super.onPageFinished(view, url)
-                    wbMyWebView.visibility = View.VISIBLE
-                    pbWebPageProgress.visibility = View.GONE
+        wbMyWebView.webViewClient = object : WebViewClient(){}
+        wbMyWebView.loadUrl(url!!)
+        lpiWebPageProgress.progress = 0
+        wbMyWebView.webChromeClient = object : WebChromeClient(){
+            override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                //lpiWebPageProgress.progress=newProgress
+                super.onProgressChanged(view, newProgress)
+                if(newProgress==100){
+                    lpiWebPageProgress.visibility = View.INVISIBLE
                 }
             }
         }
-        wbMyWebView.loadUrl(url!!)
+
     }
 }
