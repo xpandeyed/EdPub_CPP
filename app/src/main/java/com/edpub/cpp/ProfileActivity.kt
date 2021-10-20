@@ -61,15 +61,20 @@ class ProfileActivity : AppCompatActivity() {
         }
         findViewById<TextView>(R.id.tvShare).setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
-            intent.putExtra(Intent.EXTRA_TEXT, "Download EdPub")
+            intent.putExtra(Intent.EXTRA_TEXT, "I have been learning C++ from this amazing app, EdPub C++.\n\nI recommend you to download it from Play Store.\n\n https://play.google.com/store/apps/details?id=${applicationContext.packageName}")
             intent.type = "text/plain"
             startActivity(intent)
         }
         findViewById<TextView>(R.id.tvRateUs).setOnClickListener {
-            Toast.makeText(this, "Rate Us", Toast.LENGTH_SHORT).show()
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse(
+                    "https://play.google.com/store/apps/details?id=com.edpub.cpp")
+                setPackage("com.android.vending")
+            }
+            startActivity(intent)
         }
         findViewById<TextView>(R.id.tvVersion).setOnClickListener {
-            Toast.makeText(this, "Version", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Version 1.0.0", Toast.LENGTH_SHORT).show()
         }
         findViewById<TextView>(R.id.tvAboutUs).setOnClickListener {
             val url = "https://edpubweb.blogspot.com/2021/09/about-us.html"

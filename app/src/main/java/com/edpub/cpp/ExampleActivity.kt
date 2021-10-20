@@ -118,7 +118,7 @@ class ExampleActivity : AppCompatActivity() {
 
         ivShare.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
-            intent.putExtra(Intent.EXTRA_TEXT, "Download EdPub")
+            intent.putExtra(Intent.EXTRA_TEXT, "I have been learning C++ from this amazing app, EdPub C++.\n\nI recommend you to download it from Play Store.\n\n https://play.google.com/store/apps/details?id=${applicationContext.packageName}")
             intent.type = "text/plain"
             startActivity(intent)
         }
