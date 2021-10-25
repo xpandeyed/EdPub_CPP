@@ -29,7 +29,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-//private const val RC_SIGN_IN = 0
+
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -101,12 +101,12 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-
-
-
     private val result = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        Log.i("FUCK", "2 : Register activity for result called")
         findViewById<ProgressBar>(R.id.pbSignUp).visibility = View.GONE
-        if(it.resultCode== Activity.RESULT_OK){
+            Log.i("FUCK", "3: Result code matched")
+            Log.i("FUCK", "${it.resultCode} || ${Activity.RESULT_OK}")
+            Log.i("FUCK", "3: Result code matched")
             val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
             if(task.isSuccessful){
                 try {
@@ -114,41 +114,35 @@ class SignUpActivity : AppCompatActivity() {
                     Toast.makeText(this@SignUpActivity, "Authenticating with Google.", Toast.LENGTH_SHORT).show()
                     firebaseAuthWithGoogle(account.idToken!!)
                 } catch (e: ApiException) {
+                    Log.i("FUCK", "Api Exception $e")
                     Toast.makeText(this@SignUpActivity, "${e.message}", Toast.LENGTH_SHORT).show()
                 }
             }
-        }
+
+            Log.i("FUCK", "See result codes : ${it.resultCode} || ${Activity.RESULT_OK}")
+
     }
-
-
-
-
-
-
 
     private fun signIn() {
         findViewById<ProgressBar>(R.id.pbSignUp).visibility = View.VISIBLE
         val signInIntent = googleSignInClient.signInIntent
         result.launch(signInIntent)
-
-
-
-//        val signInIntent = googleSignInClient.signInIntent
-//        startActivityForResult(signInIntent, RC_SIGN_IN)
+        Log.i("FUCK", "1 : sign in function called")
     }
 
 
 
 
     private fun firebaseAuthWithGoogle(idToken: String) {
+        Log.i("FUCK", "4: firebaseAuthWithGoogle invoked")
         CoroutineScope(Dispatchers.IO).launch {
+            Log.i("FUCK", "5: firebaseAuthWithGoogle's launch invoked")
             val credential = GoogleAuthProvider.getCredential(idToken, null)
             auth.signInWithCredential(credential)
                 .addOnCompleteListener(this@SignUpActivity){ task ->
                     if (task.isSuccessful) {
                         Toast.makeText(this@SignUpActivity,"Sign in with credential is successful",Toast.LENGTH_SHORT).show()
                         CoroutineScope(Dispatchers.IO).launch {
-                                                    //checking if it is new user
                         Log.i("FUCK", "Task is successful")
                         ObjectsCollection.isNewUser = task.result.additionalUserInfo!!.isNewUser
 
@@ -164,80 +158,14 @@ class SignUpActivity : AppCompatActivity() {
                         startActivity(intent)
                         }
                     } else {
+                        Log.i("FUCK", "Task failed")
                         Toast.makeText(this@SignUpActivity, "${task.exception}", Toast.LENGTH_SHORT).show()
                     }
                 }
+                .addOnFailureListener {
+                    Log.i("FUCK", "Task failure message")
+                }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        CoroutineScope(Dispatchers.Main).launch {
-//            findViewById<ProgressBar>(R.id.pbSignUp).visibility = View.GONE
-//            super.onActivityResult(requestCode, resultCode, data)
-//            if (requestCode == RC_SIGN_IN) {
-//                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-//                if(task.isSuccessful){
-//                    try {
-//                        val account = task.getResult(ApiException::class.java)!!
-//                        Toast.makeText(this@SignUpActivity, "Authenticating with Google.", Toast.LENGTH_SHORT).show()
-//                        firebaseAuthWithGoogle(account.idToken!!)
-//                    } catch (e: ApiException) {
-//                        Toast.makeText(this@SignUpActivity, "${e.message}", Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//    private fun firebaseAuthWithGoogle(idToken: String) {
-//        CoroutineScope(Dispatchers.IO).launch {
-//        val credential = GoogleAuthProvider.getCredential(idToken, null)
-//        auth.signInWithCredential(credential)
-//            .addOnCompleteListener(this@SignUpActivity){ task ->
-//                if (task.isSuccessful) {Toast.makeText(this@SignUpActivity,"Sign in with credential is successful",Toast.LENGTH_SHORT).show()
-//                    CoroutineScope(Dispatchers.IO).launch {
-//                        //checking if it is new user
-//                        Log.i("FUCK", "Task is successful")
-//                        ObjectsCollection.isNewUser = task.result.additionalUserInfo!!.isNewUser
-//
-//                        val user = auth.currentUser
-//                        val uid = user?.uid
-//                        val firebaseDatabase = FirebaseDatabase.getInstance().getReference("USERS")
-//
-//                        if(ObjectsCollection.isNewUser){
-//                            firebaseDatabase.child(uid!!).child("CURR_CHAP").setValue("C111AAA")
-//                            firebaseDatabase.child(uid).child("CURR_EXAM").setValue("E111AAA")
-//                        }
-//                        val intent = Intent(this@SignUpActivity, HomeActivity::class.java)
-//                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//                        startActivity(intent)
-//                    }
-//                } else {
-//                    Log.i("FUCK", "Task is unsuccessful")
-//                    Toast.makeText(this@SignUpActivity, "${task.exception}", Toast.LENGTH_SHORT)
-//                        .show()
-//                }
-//            }
-//            .addOnFailureListener {
-//                Toast.makeText(this@SignUpActivity, "${it.message}", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//    }
-
 
 }

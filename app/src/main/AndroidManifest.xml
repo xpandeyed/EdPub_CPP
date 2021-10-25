@@ -69,7 +69,8 @@
             android:name=".SignUpActivity"
             android:clearTaskOnLaunch="true"
             android:exported="true"
-            android:noHistory="true" />
+            android:noHistory="true"
+            />
     </application>
 
 </manifest>
