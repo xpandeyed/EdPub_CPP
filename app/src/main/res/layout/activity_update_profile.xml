@@ -55,11 +55,13 @@
         android:gravity="center"
         android:layout_margin="25dp"
         android:fontFamily="@font/metropolis_regular"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintTop_toBottomOf="@+id/bToDeleteAccount"
         android:textColor="@color/chapter_text"
         android:id="@+id/tvContactUs"
         android:lineSpacingExtra="5dp"
         android:textColorLink="@color/primaryColor"
-        android:text="Having trouble in managing account?\nContact Us."
+        android:text="Having trouble in managing account? Contact Us."
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 
