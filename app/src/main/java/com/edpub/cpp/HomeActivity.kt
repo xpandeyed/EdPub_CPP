@@ -17,17 +17,9 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var loadData : LoadData
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        if(Firebase.auth.currentUser==null) {
-            Log.i("FUCK", "NULL Encountered")
-            val intent = Intent(this@HomeActivity, SignUpActivity::class.java)
-            intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            startActivity(intent)
-        }
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_home)
-
 
         loadData = ViewModelProvider(this).get(LoadData::class.java)
         if(!loadData.areChaptersLoaded.value!!){

@@ -75,7 +75,7 @@ class DeleteAccountActivity : AppCompatActivity() {
                         if (task.isSuccessful){
                             Firebase.database.getReference("USERS").child(uid).setValue(null)
                             Toast.makeText(this@DeleteAccountActivity, "User Deleted Successfully.", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this@DeleteAccountActivity, SignUpActivity::class.java)
+                            val intent = Intent(this@DeleteAccountActivity, LauncherActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)
                         }

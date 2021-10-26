@@ -104,9 +104,9 @@ class SignUpActivity : AppCompatActivity() {
     private val result = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         Log.i("FUCK", "2 : Register activity for result called")
         findViewById<ProgressBar>(R.id.pbSignUp).visibility = View.GONE
+        if(it.resultCode == Activity.RESULT_OK){
             Log.i("FUCK", "3: Result code matched")
             Log.i("FUCK", "${it.resultCode} || ${Activity.RESULT_OK}")
-            Log.i("FUCK", "3: Result code matched")
             val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
             if(task.isSuccessful){
                 try {
@@ -118,9 +118,11 @@ class SignUpActivity : AppCompatActivity() {
                     Toast.makeText(this@SignUpActivity, "${e.message}", Toast.LENGTH_SHORT).show()
                 }
             }
-
-            Log.i("FUCK", "See result codes : ${it.resultCode} || ${Activity.RESULT_OK}")
-
+        }
+        else{
+            Log.i("FUCK", "3: Result code match failed")
+            Log.i("FUCK", "${it.resultCode} || ${Activity.RESULT_OK}")
+        }
     }
 
     private fun signIn() {
@@ -155,6 +157,7 @@ class SignUpActivity : AppCompatActivity() {
                             firebaseDatabase.child(uid).child("CURR_EXAM").setValue("E111AAA")
                         }
                         val intent = Intent(this@SignUpActivity, HomeActivity::class.java)
+                            intent.flags = (Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
                         }
                     } else {
@@ -167,5 +170,4 @@ class SignUpActivity : AppCompatActivity() {
                 }
         }
     }
-
 }
