@@ -5,6 +5,11 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -39,6 +44,31 @@ class DeleteAccountActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         findViewById<TextView>(R.id.tvDeleteMessage).text = "If you feel something that must be improved, let us know it. We will surely improve that as soon as possible.\n\nBut if you have made your mind to go, leaving a feedback or a report will help us to improve the app for other users."
+
+        val troubleMessage = "Having trouble in managing account? Contact Us."
+        val spannableContactUs = SpannableString(troubleMessage)
+        val span3 = object : ClickableSpan(){
+            override fun onClick(p0: View) {
+                val intent = Intent(Intent.ACTION_SENDTO).apply {
+                    data = Uri.parse("mailto:")
+                    putExtra(Intent.EXTRA_EMAIL, arrayOf("lalbiharipandeyg@gmail.com")) // recipients
+                    putExtra(Intent.EXTRA_SUBJECT, "Trouble in Managing Account")
+                }
+                try {
+                    startActivity(intent)
+                } catch (e: ActivityNotFoundException) {
+                    Toast.makeText(this@DeleteAccountActivity, "No email app found.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        spannableContactUs.setSpan(span3, 36, 46, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE )
+        val tvContactUs = findViewById<TextView>(R.id.tvContactUs)
+        tvContactUs.movementMethod = LinkMovementMethod.getInstance()
+        tvContactUs.text = spannableContactUs
+
+
+
+
 
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

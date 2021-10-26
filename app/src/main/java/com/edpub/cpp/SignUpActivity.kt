@@ -105,7 +105,7 @@ class SignUpActivity : AppCompatActivity() {
         Log.i("FUCK", "2 : Register activity for result called")
         findViewById<ProgressBar>(R.id.pbSignUp).visibility = View.GONE
         if(it.resultCode == Activity.RESULT_OK){
-            Log.i("FUCK", "3: Result code matched")
+            Log.i("FUCK", "3 : Result code matched")
             Log.i("FUCK", "${it.resultCode} || ${Activity.RESULT_OK}")
             val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
             if(task.isSuccessful){
@@ -120,7 +120,7 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
         else{
-            Log.i("FUCK", "3: Result code match failed")
+            Log.i("FUCK", "3 : Result code match failed")
             Log.i("FUCK", "${it.resultCode} || ${Activity.RESULT_OK}")
         }
     }

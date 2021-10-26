@@ -15,7 +15,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tbUpdateProfileToolBar"
             app:titleTextAppearance="@style/title_default"
-            app:title="Update Profile"
+            app:title="Manage Account"
             app:navigationIcon="@drawable/ic_back"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,6 +48,19 @@
         android:textAllCaps="false"
         app:layout_constraintTop_toBottomOf="@id/bLogOut"
         android:text="Delete Account"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="25dp"
+        android:fontFamily="@font/metropolis_regular"
+        android:textColor="@color/chapter_text"
+        android:id="@+id/tvContactUs"
+        android:lineSpacingExtra="5dp"
+        android:textColorLink="@color/primaryColor"
+        android:text="Having trouble in managing account?\nContact Us."
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 
