@@ -1,5 +1,6 @@
 package com.edpub.cpp
 
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,8 +16,11 @@ class LoadData : ViewModel() {
 
     var isNewUser = MutableLiveData<Boolean>(false)
 
-    var areChaptersLoaded = MutableLiveData<Boolean>(false)
+    //var areChaptersLoaded = MutableLiveData<Boolean>(false)
     var areExamplesLoaded = MutableLiveData<Boolean>(false)
+
+    var areChapterTitlesLoaded = MutableLiveData<Boolean>(false)
+    var areExampleTitlesLoaded = MutableLiveData<Boolean>(false)
 
     var areFavouriteChapterKeysLoaded = MutableLiveData<Boolean>(false)
     var areFavouriteExampleKeysLoaded = MutableLiveData<Boolean>(false)
@@ -31,95 +35,6 @@ class LoadData : ViewModel() {
     var areCompletedExamplesKeysLoaded = MutableLiveData<Boolean>(false)
 
 
-    fun loadChapters () {
-        CoroutineScope(Dispatchers.IO).launch{
-            val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("CHAPTERS")
-            databaseReference.addValueEventListener(object: ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if(snapshot.exists()){
-                        ObjectsCollection.chaptersList.clear()
-                        for(chapter in snapshot.children){
-                            val currChapter = chapter.getValue(Chapter::class.java)
-                            ObjectsCollection.chaptersList.add(currChapter!!)
-                            //ObjectsCollection.adapterChapters.notifyItemInserted(ObjectsCollection.chaptersList.size-1)
-                        }
-                        ObjectsCollection.isDataLoaded = true
-                        areChaptersLoaded.value = true
-                        ObjectsCollection.filteredChaptersList.clear()
-                        ObjectsCollection.filteredChaptersList.addAll(ObjectsCollection.chaptersList)
-                        ObjectsCollection.adapterChapters.notifyDataSetChanged()
-                    }
-                    if(Firebase.auth.currentUser!=null){
-                        loadFavouriteChapterKeys()
-                        loadCompletedChaptersKeys()
-                    }
-                }
-
-
-                override fun onCancelled(error: DatabaseError) {
-                    ObjectsCollection.isDataLoaded= false
-                    areChaptersLoaded.value = false
-                }
-            })
-        }
-    }
-
-    fun loadExamples () {
-        CoroutineScope(Dispatchers.IO).launch{
-            val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("EXAMPLES")
-            databaseReference.addValueEventListener(object: ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if(snapshot.exists()){
-                        ObjectsCollection.examplesList.clear()
-                        for(example in snapshot.children){
-                            val currExample = example.getValue(Chapter::class.java)
-                            ObjectsCollection.examplesList.add(currExample!!)
-                            //ObjectsCollection.adapterExamples.notifyItemInserted(ObjectsCollection.examplesList.size-1)
-                        }
-                        ObjectsCollection.filteredExamplesList.clear()
-                        ObjectsCollection.filteredExamplesList.addAll(ObjectsCollection.examplesList)
-                        ObjectsCollection.adapterExamples.notifyDataSetChanged()
-                        ObjectsCollection.isDataLoaded = true
-                        areExamplesLoaded.value = true
-                    }
-                    if(Firebase.auth.currentUser!=null){
-                        loadFavouriteExampleKeys()
-                        loadCompletedExamplesKeys()
-                    }
-
-                }
-                override fun onCancelled(error: DatabaseError) {
-                    ObjectsCollection.isDataLoaded= false
-                    areExamplesLoaded.value = false
-                }
-            })
-        }
-    }
-
-
-    fun loadFavouriteChapterKeys (){
-
-        CoroutineScope(Dispatchers.IO).launch{
-            val favChapterReference = Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP")
-            favChapterReference.addValueEventListener(object: ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if(snapshot.exists()){
-                        ObjectsCollection.favouriteChapterKeysList.clear()
-                        for(chapter in snapshot.children){
-                            val currChapter = chapter.getValue(String::class.java)
-                            ObjectsCollection.favouriteChapterKeysList.add(currChapter!!)
-                        }
-                    }
-                    ObjectsCollection.isFavouriteChapterKeysListLoaded = true
-                    areFavouriteChapterKeysLoaded.value = true
-                    loadCurrentChapterKey()
-                }
-                override fun onCancelled(error: DatabaseError) {
-
-                }
-            })
-        }
-    }
 
     fun loadFavouriteExampleKeys (){
 
@@ -136,7 +51,6 @@ class LoadData : ViewModel() {
                     }
                     ObjectsCollection.isFavouriteExampleKeysListLoaded = true
                     areFavouriteExampleKeysLoaded.value = true
-                    loadCurrentExampleKey()
                 }
                 override fun onCancelled(error: DatabaseError) {
 
@@ -145,48 +59,6 @@ class LoadData : ViewModel() {
 
         }
     }
-
-    fun loadCurrentChapterKey(){
-        Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_CHAP").get().addOnSuccessListener {
-            ObjectsCollection.currentChapterKey = it.value.toString()
-            var n = 0
-            while(n<ObjectsCollection.chaptersList.size){
-                if(ObjectsCollection.currentChapterKey == ObjectsCollection.chaptersList[n].KEY)
-                {
-                    ObjectsCollection.currentChapterPosition = n
-                    ObjectsCollection.currentChapter.clear()
-                    ObjectsCollection.currentChapter.add(ObjectsCollection.chaptersList[ObjectsCollection.currentChapterPosition])
-                    ObjectsCollection.adapterCurrentChapter.notifyItemInserted(ObjectsCollection.currentChapter.size-1)
-                    ObjectsCollection.isCurrChapterLoaded = true
-                    isCurrChapterLoaded.value = true
-                    break
-                }
-                n++
-            }
-        }
-
-    }
-
-    fun loadCurrentExampleKey(){
-        Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_EXAM").get().addOnSuccessListener {
-            ObjectsCollection.currentExampleKey = it.value.toString()
-            var n = 0
-            while(n<ObjectsCollection.examplesList.size){
-                if(ObjectsCollection.currentExampleKey == ObjectsCollection.examplesList[n].KEY)
-                {
-                    ObjectsCollection.currentExamplePosition = n
-                    ObjectsCollection.currentExample.clear()
-                    ObjectsCollection.currentExample.add(ObjectsCollection.examplesList[ObjectsCollection.currentExamplePosition])
-                    ObjectsCollection.adapterCurrentExample.notifyItemInserted(ObjectsCollection.currentExample.size-1)
-                    ObjectsCollection.isCurrExampleLoaded = true
-                    isCurrExampleLoaded.value = true
-                    break
-                }
-                n++
-            }
-        }
-    }
-
 
 
     fun loadCompletedChaptersKeys (){
@@ -234,5 +106,34 @@ class LoadData : ViewModel() {
         }
     }
 
+    fun loadChapterTitles(){
+        Log.i("FUCK", "load Chapter Titles Called")
+        CoroutineScope(Dispatchers.IO).launch{
+            val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("C_TITLES")
+            databaseReference.addValueEventListener(object: ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot.exists()){
+                        Log.i("FUCK", "Chapter titles exist")
+                        ObjectsCollection.chaptersTitlesList.clear()
+                        for(title in snapshot.children){
+                            val currTitle = title.getValue(Title::class.java)
+                            ObjectsCollection.chaptersTitlesList.add(currTitle!!)
+                        }
+                        areChapterTitlesLoaded.value = true
+                        ObjectsCollection.filteredChaptersTitlesList.clear()
+                        ObjectsCollection.filteredChaptersTitlesList.addAll(ObjectsCollection.chaptersTitlesList)
+                        ObjectsCollection.adapterChapters.notifyDataSetChanged()
 
+                        loadCompletedChaptersKeys()
+
+                    }else{
+                        Log.i("FUCK", "Chapter titles do not exist")
+                    }
+                }
+                override fun onCancelled(error: DatabaseError) {
+                    Log.i("FUCK", error.toString())
+                }
+            })
+        }
+    }
 }

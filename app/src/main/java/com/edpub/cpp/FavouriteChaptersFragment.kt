@@ -96,12 +96,12 @@ class FavouriteChaptersFragment : Fragment() {
     }
     private fun copyFavouriteChapters () {
         CoroutineScope(Dispatchers.Main).launch {
-            ObjectsCollection.favouriteChapters.clear()
+            ObjectsCollection.favouriteChaptersTitlesList.clear()
             var n = 0
-            while (n < ObjectsCollection.chaptersList.size) {
-                val index = ObjectsCollection.favouriteChapterKeysList.indexOf(ObjectsCollection.chaptersList[n].KEY)
+            while (n < ObjectsCollection.chaptersTitlesList.size) {
+                val index = ObjectsCollection.favouriteChapterKeysList.indexOf(ObjectsCollection.chaptersTitlesList[n].KEY)
                 if (index != -1) {
-                    ObjectsCollection.favouriteChapters.add(ObjectsCollection.chaptersList[n])
+                    ObjectsCollection.favouriteChaptersTitlesList.add(ObjectsCollection.chaptersTitlesList[n])
                     ObjectsCollection.adapterFavouriteChapters.notifyItemInserted(ObjectsCollection.favouriteChapters.size-1)
                 }
                 n++

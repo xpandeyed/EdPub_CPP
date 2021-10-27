@@ -21,11 +21,7 @@ class ChaptersFragment : Fragment() {
 
     private lateinit var loadData: LoadData
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_chapters, container, false)
     }
 
@@ -34,16 +30,17 @@ class ChaptersFragment : Fragment() {
 
         pbChaptersProgress = view.findViewById(R.id.pbChaptersProgress)
         svChapters = view.findViewById(R.id.svChapters)
+        rvChapters = view.findViewById(R.id.rvChapters)
 
         svChapters.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(newText: String?): Boolean {
-                ObjectsCollection.filteredChaptersList.clear()
+                ObjectsCollection.filteredChaptersTitlesList.clear()
                 if(newText.isNullOrEmpty()){
-                    ObjectsCollection.filteredChaptersList.addAll(ObjectsCollection.chaptersList)
+                    ObjectsCollection.filteredChaptersTitlesList.addAll(ObjectsCollection.chaptersTitlesList)
                 }else{
-                    for(chapter in ObjectsCollection.chaptersList){
+                    for(chapter in ObjectsCollection.chaptersTitlesList){
                         if(chapter.TITLE!!.lowercase().contains(newText.lowercase())){
-                            ObjectsCollection.filteredChaptersList.add(chapter)
+                            ObjectsCollection.filteredChaptersTitlesList.add(chapter)
                         }
                     }
                 }
@@ -52,13 +49,13 @@ class ChaptersFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                ObjectsCollection.filteredChaptersList.clear()
+                ObjectsCollection.filteredChaptersTitlesList.clear()
                 if(newText.isNullOrEmpty()){
-                    ObjectsCollection.filteredChaptersList.addAll(ObjectsCollection.chaptersList)
+                    ObjectsCollection.filteredChaptersTitlesList.addAll(ObjectsCollection.chaptersTitlesList)
                 }else{
-                    for(chapter in ObjectsCollection.chaptersList){
+                    for(chapter in ObjectsCollection.chaptersTitlesList){
                         if(chapter.TITLE!!.lowercase().contains(newText.lowercase())){
-                            ObjectsCollection.filteredChaptersList.add(chapter)
+                            ObjectsCollection.filteredChaptersTitlesList.add(chapter)
                         }
                     }
                 }
@@ -68,22 +65,22 @@ class ChaptersFragment : Fragment() {
         })
 
         svChapters.setOnCloseListener {
-            ObjectsCollection.filteredChaptersList.clear()
-            ObjectsCollection.filteredChaptersList.addAll(ObjectsCollection.chaptersList)
+            ObjectsCollection.filteredChaptersTitlesList.clear()
+            ObjectsCollection.filteredChaptersTitlesList.addAll(ObjectsCollection.chaptersTitlesList)
             ObjectsCollection.adapterChapters.notifyDataSetChanged()
             true
         }
 
-        rvChapters = view.findViewById(R.id.rvChapters)
+
         rvChapters.layoutManager = LinearLayoutManager(activity)
         rvChapters.adapter = ObjectsCollection.adapterChapters
 
         ObjectsCollection.adapterChapters.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
                 val intent = Intent(activity, ChapterActivity::class.java).apply {
-                    val currChapterPosition = ObjectsCollection.chaptersList.indexOf(ObjectsCollection.filteredChaptersList[position])
+                    val currChapterPosition = ObjectsCollection.chaptersTitlesList.indexOf(ObjectsCollection.filteredChaptersTitlesList[position])
                     putExtra("POSITION", currChapterPosition)
-                    putExtra("INVOKER", "fromChapter")
+                    putExtra("KEY", ObjectsCollection.filteredChaptersTitlesList[position].KEY)
                 }
                 startActivity(intent)
             }
@@ -91,8 +88,8 @@ class ChaptersFragment : Fragment() {
 
         loadData = ViewModelProvider(requireActivity()).get(LoadData::class.java)
 
-        loadData.areChaptersLoaded.observe(viewLifecycleOwner, Observer {
-            if(loadData.areChaptersLoaded.value!!){
+        loadData.areChapterTitlesLoaded.observe(viewLifecycleOwner, Observer {
+            if(loadData.areChapterTitlesLoaded.value!!){
                 pbChaptersProgress.visibility = View.GONE
             }
         })

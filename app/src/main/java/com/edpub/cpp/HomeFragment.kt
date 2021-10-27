@@ -19,16 +19,9 @@ class HomeFragment : Fragment() {
 
     private lateinit var loadData: LoadData
 
-    private lateinit var rvCurrentChapter: RecyclerView
-    private lateinit var rvCurrentExample: RecyclerView
-
     private lateinit var tbHome : Toolbar
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -47,54 +40,10 @@ class HomeFragment : Fragment() {
             true
         }
 
-        rvCurrentChapter = view.findViewById(R.id.rvCurrentChapter)
-        rvCurrentChapter.layoutManager = LinearLayoutManager(activity)
-        rvCurrentChapter.itemAnimator = null
-        rvCurrentChapter.adapter = ObjectsCollection.adapterCurrentChapter
-
-        rvCurrentExample = view.findViewById(R.id.rvCurrentExample)
-        rvCurrentExample.layoutManager = LinearLayoutManager(activity)
-        rvCurrentExample.itemAnimator = null
-        rvCurrentExample.adapter = ObjectsCollection.adapterCurrentExample
-
-        ObjectsCollection.adapterCurrentChapter.setOnItemClickListener(object : CurrentChapter.OnItemClickListener{
-            override fun onItemClick(position: Int) {
-                if(ObjectsCollection.isDataLoaded){
-                    val intent = Intent(activity, ChapterActivity::class.java).apply {
-                        val positionOfCurrChapter = ObjectsCollection.chaptersList.indexOf(ObjectsCollection.currentChapter[position])
-                        putExtra("POSITION", positionOfCurrChapter)
-                        putExtra("INVOKER", "fromChapter")
-                    }
-                    startActivity(intent)
-                }
-                else{
-                    Toast.makeText(activity, "Loading Data...", Toast.LENGTH_SHORT).show()
-                }
-            }
-        })
-
-        ObjectsCollection.adapterCurrentExample.setOnItemClickListener(object : CurrentChapter.OnItemClickListener{
-            override fun onItemClick(position: Int) {
-                if(ObjectsCollection.isDataLoaded){
-                    val intent = Intent(activity, ExampleActivity::class.java).apply {
-                        val positionOfCurrentExample = ObjectsCollection.examplesList.indexOf(ObjectsCollection.currentExample[position])
-                        putExtra("POSITION", positionOfCurrentExample)
-                        putExtra("INVOKER", "fromExample")
-                    }
-                    startActivity(intent)
-                }
-            }
-        })
-
-
         val bToRandomExample = view.findViewById<Button>(R.id.bToRandomExample)
         bToRandomExample.setOnClickListener {
-            if(ObjectsCollection.examplesList.size!=0){
-                val randomIndex = (0 until ObjectsCollection.examplesList.size).random()
-                val intent = Intent(activity, ExampleActivity::class.java)
-                intent.putExtra("INVOKER", "fromExample")
-                intent.putExtra("POSITION", randomIndex)
-                startActivity(intent)
+            if(ObjectsCollection.exampleTitlesList.size!=0){
+                Toast.makeText(activity, "TODO", Toast.LENGTH_SHORT).show()
             }
             else{
                 Toast.makeText(activity, "Examples not loaded yet. Wait a moment...", Toast.LENGTH_SHORT).show()
@@ -108,7 +57,7 @@ class HomeFragment : Fragment() {
             if(loadData.areCompletedChaptersKeysLoaded.value!!){
                 val pbChaptersProgress = view.findViewById<ProgressBar>(R.id.pbChaptersProgress)
                 pbChaptersProgress.isIndeterminate = false
-                pbChaptersProgress.max = ObjectsCollection.chaptersList.size
+                pbChaptersProgress.max = ObjectsCollection.chaptersTitlesList.size
                 pbChaptersProgress.progress = ObjectsCollection.completedChaptersKeysList.size
 
                 val tvCompletedChapters = view.findViewById<TextView>(R.id.tvCompletedChapters)
@@ -117,7 +66,7 @@ class HomeFragment : Fragment() {
                 tvCompletedChapters.setTextColor(resources.getColor(R.color.primaryColor))
 
                 val tvTotalChapters = view.findViewById<TextView>(R.id.tvTotalChapters)
-                tvTotalChapters.text = "/${ObjectsCollection.chaptersList.size.toString()}"
+                tvTotalChapters.text = "/${ObjectsCollection.chaptersTitlesList.size.toString()}"
 
 
             }
@@ -140,17 +89,10 @@ class HomeFragment : Fragment() {
 
 
                 val tvTotalExamples = view.findViewById<TextView>(R.id.tvTotalExamples)
-                tvTotalExamples.text = "/${ObjectsCollection.examplesList.size}"
-
-
-
+                tvTotalExamples.text = "/${ObjectsCollection.exampleTitlesList.size}"
             }
 
         })
-
-    }
-    override fun onResume() {
-        super.onResume()
 
     }
 }

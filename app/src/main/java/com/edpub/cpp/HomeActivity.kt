@@ -22,14 +22,9 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         loadData = ViewModelProvider(this).get(LoadData::class.java)
-        if(!loadData.areChaptersLoaded.value!!){
-            loadData.loadChapters()
+        if(!loadData.areChapterTitlesLoaded.value!!){
+            loadData.loadChapterTitles()
         }
-        if(!loadData.areExamplesLoaded.value!!){
-            loadData.loadExamples()
-        }
-
-
         val homeFragment = HomeFragment()
         val chaptersFragment = ChaptersFragment()
         val examplesFragment = ExamplesFragment()
@@ -66,7 +61,6 @@ class HomeActivity : AppCompatActivity() {
         else{
             bnvHomeFragmentNavigator.selectedItemId=R.id.miHome
         }
-
 
     }
 

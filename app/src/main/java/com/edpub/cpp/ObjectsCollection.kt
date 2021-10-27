@@ -3,28 +3,29 @@ package com.edpub.cpp
 object ObjectsCollection {
     var isDataLoaded = false//for chapters and examples and current chapter
 
-    var isFavouriteChapterKeysListLoaded = false //for favourite chapter keys and current chapter
-    var isFavouriteExampleKeysListLoaded = false //for favourite chapter keys and current chapter
+    var isFavouriteChapterKeysListLoaded = false
+    var isFavouriteExampleKeysListLoaded = false
 
     var areFavouriteChaptersCopied = false
     var areFavouriteExamplesCopied = false
 
-    var isCurrChapterLoaded = false
-    var isCurrExampleLoaded = false
-
     var isNewUser = false
 
-    var currentChapterPosition = 0
-    var currentChapterKey = "C111AAA"
 
     var currentExamplePosition = 0
     var currentExampleKey = "E111AAA"
 
-    var chaptersList = mutableListOf<Chapter>()
     var examplesList = mutableListOf<Chapter>()
+
+    var chaptersTitlesList = mutableListOf<Title>()
+    var exampleTitlesList = mutableListOf<Title>()
+
 
     var filteredChaptersList = mutableListOf<Chapter>()
     var filteredExamplesList = mutableListOf<Chapter>()
+
+    var filteredChaptersTitlesList = mutableListOf<Title>()
+    var filteredExamplesTitlesList = mutableListOf<Title>()
 
     var favouriteChapterKeysList = mutableSetOf<String>()
     var favouriteExampleKeysList = mutableSetOf<String>()
@@ -39,16 +40,19 @@ object ObjectsCollection {
     var favouriteChapters = mutableListOf<Chapter>()
     var favouriteExamples = mutableListOf<Chapter>()
 
+    var favouriteChaptersTitlesList = mutableListOf<Title>()
+    var favouriteExamplesTitlesList = mutableListOf<Title>()
+
     var currentChapter = mutableListOf<Chapter>()
     var currentExample = mutableListOf<Chapter>()
 
-    var adapterFavouriteChapters = ChapterRVAdapter(favouriteChapters)
-    var adapterFavouriteExamples = ChapterRVAdapter(favouriteExamples)
+    var adapterFavouriteChapters = ChapterRVAdapter(favouriteChaptersTitlesList)
+    var adapterFavouriteExamples = ChapterRVAdapter(favouriteExamplesTitlesList)
     var adapterCurrentChapter = CurrentChapter(currentChapter)
     var adapterCurrentExample = CurrentChapter(currentExample)
 
-    var adapterChapters = ChapterRVAdapter(filteredChaptersList)
-    var adapterExamples = ChapterRVAdapter(filteredExamplesList)
+    var adapterChapters = ChapterRVAdapter(filteredChaptersTitlesList)
+    var adapterExamples = ChapterRVAdapter(filteredExamplesTitlesList)
 
 
     fun sortMutableStringSet(set: MutableSet<String>):MutableSet<String>{

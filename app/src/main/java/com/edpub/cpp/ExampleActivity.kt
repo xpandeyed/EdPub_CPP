@@ -12,7 +12,6 @@ import com.google.firebase.ktx.Firebase
 import java.lang.Exception
 import androidx.core.text.HtmlCompat
 
-import android.text.Spanned
 import android.view.View
 import android.widget.*
 
@@ -71,7 +70,7 @@ class ExampleActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteExamples[position].TITLE
                 findViewById<TextView>(R.id.tvExampleText).text = spannedText
                 findViewById<TextView>(R.id.tvCode).text = spannedCode
-                findViewById<TextView>(R.id.tvExplanation).text = spannedExplanation
+                findViewById<TextView>(R.id.tvContribute).text = spannedExplanation
 
 
             } catch (exception : Exception){
@@ -109,7 +108,7 @@ class ExampleActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.examplesList[position].TITLE
             findViewById<TextView>(R.id.tvExampleText).text = spannedText
             findViewById<TextView>(R.id.tvCode).text = spannedCode
-            findViewById<TextView>(R.id.tvExplanation).text = spannedExplanation
+            findViewById<TextView>(R.id.tvContribute).text = spannedExplanation
         }
 
 
@@ -203,7 +202,7 @@ class ExampleActivity : AppCompatActivity() {
                         findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.favouriteExamples[position].TITLE
                         findViewById<TextView>(R.id.tvExampleText).text = spannedText
                         findViewById<TextView>(R.id.tvCode).text = spannedCode
-                        findViewById<TextView>(R.id.tvExplanation).text = spannedExplanation
+                        findViewById<TextView>(R.id.tvContribute).text = spannedExplanation
 
                     }catch (exception:Exception){
                         Toast.makeText(this, "${exception.message}", Toast.LENGTH_SHORT).show()
@@ -243,7 +242,7 @@ class ExampleActivity : AppCompatActivity() {
                     findViewById<TextView>(R.id.tvTitle).text = ObjectsCollection.examplesList[position].TITLE
                     findViewById<TextView>(R.id.tvExampleText).text = spannedText
                     findViewById<TextView>(R.id.tvCode).text = spannedCode
-                    findViewById<TextView>(R.id.tvExplanation).text = spannedExplanation
+                    findViewById<TextView>(R.id.tvContribute).text = spannedExplanation
                 }
             }
         }
