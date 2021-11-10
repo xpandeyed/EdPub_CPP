@@ -39,13 +39,13 @@ class ExamplesFragment : Fragment() {
         svExamples = view.findViewById(R.id.svExamples)
         svExamples.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(newText: String?): Boolean {
-                ObjectsCollection.filteredExamplesList.clear()
+                ObjectsCollection.filteredExamplesTitlesList.clear()
                 if(newText.isNullOrEmpty()){
-                    ObjectsCollection.filteredExamplesList.addAll(ObjectsCollection.examplesList)
+                    ObjectsCollection.filteredExamplesTitlesList.addAll(ObjectsCollection.exampleTitlesList)
                 }else{
-                    for(example in ObjectsCollection.examplesList){
+                    for(example in ObjectsCollection.exampleTitlesList){
                         if(example.TITLE!!.lowercase().contains(newText.lowercase())){
-                            ObjectsCollection.filteredExamplesList.add(example)
+                            ObjectsCollection.filteredExamplesTitlesList.add(example)
                         }
                     }
                 }
@@ -54,13 +54,13 @@ class ExamplesFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                ObjectsCollection.filteredExamplesList.clear()
+                ObjectsCollection.filteredExamplesTitlesList.clear()
                 if(newText.isNullOrEmpty()){
-                    ObjectsCollection.filteredExamplesList.addAll(ObjectsCollection.examplesList)
+                    ObjectsCollection.filteredExamplesTitlesList.addAll(ObjectsCollection.exampleTitlesList)
                 }else{
-                    for(example in ObjectsCollection.examplesList){
+                    for(example in ObjectsCollection.exampleTitlesList){
                         if(example.TITLE!!.lowercase().contains(newText.lowercase())){
-                            ObjectsCollection.filteredExamplesList.add(example)
+                            ObjectsCollection.filteredExamplesTitlesList.add(example)
                         }
                     }
                 }
@@ -70,8 +70,8 @@ class ExamplesFragment : Fragment() {
         })
 
         svExamples.setOnCloseListener {
-            ObjectsCollection.filteredExamplesList.clear()
-            ObjectsCollection.filteredExamplesList.addAll(ObjectsCollection.examplesList)
+            ObjectsCollection.filteredExamplesTitlesList.clear()
+            ObjectsCollection.filteredExamplesTitlesList.addAll(ObjectsCollection.exampleTitlesList)
             ObjectsCollection.adapterExamples.notifyDataSetChanged()
             true
         }
@@ -83,7 +83,7 @@ class ExamplesFragment : Fragment() {
         ObjectsCollection.adapterExamples.setOnItemClickListener(object : ChapterRVAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
                 val intent = Intent(activity, ExampleActivity::class.java).apply {
-                    val currExamplePosition = ObjectsCollection.examplesList.indexOf(ObjectsCollection.filteredExamplesList[position])
+                    val currExamplePosition = ObjectsCollection.exampleTitlesList.indexOf(ObjectsCollection.filteredExamplesTitlesList[position])
                     putExtra("POSITION", currExamplePosition)
                     putExtra("INVOKER", "fromExample")
                 }

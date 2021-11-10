@@ -83,7 +83,7 @@ class FavouriteChaptersFragment : Fragment() {
         loadData.areFavChaptersCopied.observe(viewLifecycleOwner, Observer {
             if(loadData.areFavChaptersCopied.value!!){
                 pbFavouriteChapters.visibility = View.GONE
-                if(ObjectsCollection.favouriteChapters.isEmpty()){
+                if(ObjectsCollection.favouriteChaptersTitlesList.isEmpty()){
                     ivEmptyList.visibility = View.VISIBLE
                     tvEmptyListMessage.visibility = View.VISIBLE
                 }
@@ -102,7 +102,7 @@ class FavouriteChaptersFragment : Fragment() {
                 val index = ObjectsCollection.favouriteChapterKeysList.indexOf(ObjectsCollection.chaptersTitlesList[n].KEY)
                 if (index != -1) {
                     ObjectsCollection.favouriteChaptersTitlesList.add(ObjectsCollection.chaptersTitlesList[n])
-                    ObjectsCollection.adapterFavouriteChapters.notifyItemInserted(ObjectsCollection.favouriteChapters.size-1)
+                    ObjectsCollection.adapterFavouriteChapters.notifyItemInserted(ObjectsCollection.favouriteChaptersTitlesList.size-1)
                 }
                 n++
             }

@@ -73,7 +73,7 @@ class FavouriteExamplesFragment : Fragment() {
         loadData.areFavExamplesCopied.observe(viewLifecycleOwner, Observer {
             if(loadData.areFavExamplesCopied.value!!){
                 pbExamplesProgress.visibility = View.GONE
-                if(ObjectsCollection.favouriteExamples.isEmpty()){
+                if(ObjectsCollection.favouriteExampleKeysList.isEmpty()){
                     ivEmptyList.visibility = View.VISIBLE
                     tvEmptyListMessage.visibility = View.VISIBLE
                 }
@@ -90,13 +90,13 @@ class FavouriteExamplesFragment : Fragment() {
     private fun copyFavouriteExamples () {
 
         CoroutineScope(Dispatchers.Main).launch {
-            ObjectsCollection.favouriteExamples.clear()
+            ObjectsCollection.favouriteExamplesTitlesList.clear()
             var n = 0
-            while (n < ObjectsCollection.examplesList.size) {
-                val index = ObjectsCollection.favouriteExampleKeysList.indexOf(ObjectsCollection.examplesList[n].KEY)
+            while (n < ObjectsCollection.exampleTitlesList.size) {
+                val index = ObjectsCollection.favouriteExampleKeysList.indexOf(ObjectsCollection.exampleTitlesList[n].KEY)
                 if (index != -1) {
-                    ObjectsCollection.favouriteExamples.add(ObjectsCollection.examplesList[n])
-                    ObjectsCollection.adapterFavouriteExamples.notifyItemInserted(ObjectsCollection.favouriteExamples.size-1)
+                    ObjectsCollection.favouriteExamplesTitlesList.add(ObjectsCollection.exampleTitlesList[n])
+                    ObjectsCollection.adapterFavouriteExamples.notifyItemInserted(ObjectsCollection.favouriteExamplesTitlesList.size-1)
                 }
                 n++
             }

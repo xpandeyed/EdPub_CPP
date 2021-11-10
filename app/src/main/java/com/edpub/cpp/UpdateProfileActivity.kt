@@ -28,10 +28,10 @@ class UpdateProfileActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.bLogOut).setOnClickListener {
             Firebase.auth.signOut()
-            ObjectsCollection.favouriteChapters.clear()
+            ObjectsCollection.favouriteChaptersTitlesList.clear()
             ObjectsCollection.favouriteChapterKeysList.clear()
             ObjectsCollection.favouriteExampleKeysList.clear()
-            ObjectsCollection.favouriteExamples.clear()
+            ObjectsCollection.favouriteExamplesTitlesList.clear()
             val intent = Intent(this, LauncherActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)

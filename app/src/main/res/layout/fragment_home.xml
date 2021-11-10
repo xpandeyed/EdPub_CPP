@@ -211,11 +211,14 @@
                         android:fontFamily="@font/metropolis_semi_bold"
                         android:gravity="center"
                         android:text="Loading Chapters . . ." />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvCurrentChapter"
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/bCurrChapter"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        android:background="@drawable/button_background"/>
+
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <View
@@ -256,10 +259,14 @@
                         android:gravity="center"
                         android:text="Loading Examples . . ." />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvCurrentExample"
+                    <androidx.appcompat.widget.AppCompatButton
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:id="@+id/bCurrExample"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/button_background"
+                        android:visibility="gone"
+                        />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 

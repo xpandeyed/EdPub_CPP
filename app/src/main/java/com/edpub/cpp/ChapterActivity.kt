@@ -25,12 +25,15 @@ class ChapterActivity : AppCompatActivity() {
 
     private lateinit var ivFavourites : ImageView
 
+    val database = Firebase.database
+    val myRef = database.getReference("USERS")
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chapter)
 
-        val database = Firebase.database
-        val myRef = database.getReference("USERS")
+
 
         var key = intent.getStringExtra("KEY")
         val invoker = intent.getStringExtra("INVOKER")
@@ -132,6 +135,7 @@ class ChapterActivity : AppCompatActivity() {
             wbChapterText.settings.javaScriptEnabled = true
             wbChapterText.loadUrl(it.value.toString())
             setFavIconTint(key)
+            setCurrChapter(key)
         }
     }
     private fun setFavIconTint(key: String){
@@ -140,6 +144,11 @@ class ChapterActivity : AppCompatActivity() {
         }else{
             DrawableCompat.setTint(ivFavourites.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
         }
+    }
+    private fun setCurrChapter(key: String){
+        ObjectsCollection.currentChapterKey = key
+        myRef.child(Firebase.auth.currentUser!!.uid).child("CURR_CHAP").setValue(key)
+
     }
 
 }

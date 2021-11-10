@@ -1,6 +1,7 @@
 package com.edpub.cpp
 
 import android.util.Log
+import android.webkit.WebView
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -113,7 +114,7 @@ class LoadData : ViewModel() {
             databaseReference.addValueEventListener(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if(snapshot.exists()){
-                        Log.i("FUCK", "Chapter titles exist")
+                        Log.i("YUCK", "Chapter titles exist")
                         ObjectsCollection.chaptersTitlesList.clear()
                         for(title in snapshot.children){
                             val currTitle = title.getValue(Title::class.java)
@@ -124,14 +125,15 @@ class LoadData : ViewModel() {
                         ObjectsCollection.filteredChaptersTitlesList.addAll(ObjectsCollection.chaptersTitlesList)
                         ObjectsCollection.adapterChapters.notifyDataSetChanged()
 
+                        loadCurrChapter()
                         loadCompletedChaptersKeys()
 
                     }else{
-                        Log.i("FUCK", "Chapter titles do not exist")
+                        Log.i("YUCK", "Chapter titles do not exist")
                     }
                 }
                 override fun onCancelled(error: DatabaseError) {
-                    Log.i("FUCK", error.toString())
+                    Log.i("YUCK", error.toString())
                 }
             })
         }
@@ -156,6 +158,28 @@ class LoadData : ViewModel() {
                 }
             })
 
+        }
+    }
+    fun loadCurrChapter(){
+        CoroutineScope(Dispatchers.IO).launch {
+            val currChapterReference = Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_CHAP")
+            currChapterReference.addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot.exists()){
+                        for(chapter in snapshot.children){
+                            val currChapter = chapter.getValue(String::class.java)
+                            ObjectsCollection.currentChapterKey = currChapter!!
+                            Log.i("EDP", ObjectsCollection.currentChapterKey)
+                        }
+                        isCurrChapterLoaded.value = true
+                    }
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+            })
         }
     }
 

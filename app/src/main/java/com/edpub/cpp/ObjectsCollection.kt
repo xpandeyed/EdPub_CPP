@@ -11,18 +11,8 @@ object ObjectsCollection {
 
     var isNewUser = false
 
-
-    var currentExamplePosition = 0
-    var currentExampleKey = "E111AAA"
-
-    var examplesList = mutableListOf<Chapter>()
-
     var chaptersTitlesList = mutableListOf<Title>()
     var exampleTitlesList = mutableListOf<Title>()
-
-
-    var filteredChaptersList = mutableListOf<Chapter>()
-    var filteredExamplesList = mutableListOf<Chapter>()
 
     var filteredChaptersTitlesList = mutableListOf<Title>()
     var filteredExamplesTitlesList = mutableListOf<Title>()
@@ -33,23 +23,18 @@ object ObjectsCollection {
     var isCompletedChaptersListLoaded = false
     var isCompletedExamplesListLoaded = false
 
-
     var completedChaptersKeysList = mutableSetOf<String>()
     var completedExamplesKeysList = mutableSetOf<String>()
 
-    var favouriteChapters = mutableListOf<Chapter>()
-    var favouriteExamples = mutableListOf<Chapter>()
 
     var favouriteChaptersTitlesList = mutableListOf<Title>()
     var favouriteExamplesTitlesList = mutableListOf<Title>()
 
-    var currentChapter = mutableListOf<Chapter>()
-    var currentExample = mutableListOf<Chapter>()
+    var currentChapterKey = "C111AAA"
+    var currentExampleKey = "E111AAA"
 
     var adapterFavouriteChapters = ChapterRVAdapter(favouriteChaptersTitlesList)
     var adapterFavouriteExamples = ChapterRVAdapter(favouriteExamplesTitlesList)
-    var adapterCurrentChapter = CurrentChapter(currentChapter)
-    var adapterCurrentExample = CurrentChapter(currentExample)
 
     var adapterChapters = ChapterRVAdapter(filteredChaptersTitlesList)
     var adapterExamples = ChapterRVAdapter(filteredExamplesTitlesList)
