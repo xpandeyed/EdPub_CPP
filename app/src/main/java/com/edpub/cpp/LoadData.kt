@@ -37,7 +37,6 @@ class LoadData : ViewModel() {
 
 
     fun loadFavouriteExampleKeys (){
-
         CoroutineScope(Dispatchers.IO).launch{
             val favExampleReference = Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("FAV_EXAM")
             favExampleReference.addValueEventListener(object: ValueEventListener {
@@ -72,6 +71,7 @@ class LoadData : ViewModel() {
                             val currChapter = chapter.getValue(String::class.java)
                             ObjectsCollection.completedChaptersKeysList.add(currChapter!!)
                         }
+                        loadFavouriteChapterKeys()
                     }
                     ObjectsCollection.isCompletedChaptersListLoaded = true
                     areCompletedChaptersKeysLoaded.value = true
@@ -136,4 +136,27 @@ class LoadData : ViewModel() {
             })
         }
     }
+    fun loadFavouriteChapterKeys (){
+        CoroutineScope(Dispatchers.IO).launch{
+            val favChapterReference = Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP")
+            favChapterReference.addValueEventListener(object: ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot.exists()){
+                        ObjectsCollection.favouriteChapterKeysList.clear()
+                        for(chapter in snapshot.children){
+                            val currChapter = chapter.getValue(String::class.java)
+                            ObjectsCollection.favouriteChapterKeysList.add(currChapter!!)
+                        }
+                    }
+                    ObjectsCollection.isFavouriteChapterKeysListLoaded = true
+                    areFavouriteChapterKeysLoaded.value = true
+                }
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+            })
+
+        }
+    }
+
 }

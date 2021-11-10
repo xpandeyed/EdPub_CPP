@@ -108,6 +108,7 @@ class SignUpActivity : AppCompatActivity() {
             Log.i("FUCK", "3 : Result code matched")
             Log.i("FUCK", "${it.resultCode} || ${Activity.RESULT_OK}")
             val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
+
             if(task.isSuccessful){
                 try {
                     val account = task.getResult(ApiException::class.java)!!
@@ -131,8 +132,6 @@ class SignUpActivity : AppCompatActivity() {
         result.launch(signInIntent)
         Log.i("FUCK", "1 : sign in function called")
     }
-
-
 
 
     private fun firebaseAuthWithGoogle(idToken: String) {

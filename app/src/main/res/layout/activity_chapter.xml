@@ -21,32 +21,15 @@
             android:paddingBottom="20dp"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tvTitle"
+            <WebView
+                android:id="@+id/wbChapterText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="25dp"
-                android:fontFamily="@font/metropolis_semi_bold"
-                android:hint="Chapter Title"
-                android:textColor="#2d3e50"
-                android:textSize="32sp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvChapterText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="25dp"
-                android:fontFamily="@font/metropolis_regular"
-                android:hint="Chapter Text is loading."
-                android:lineSpacingExtra="12dp"
-                android:textColor="@color/grey_text"
-                android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_height="wrap_content"/>
 
             <View
                 android:id="@+id/vSeparator"
-                app:layout_constraintTop_toBottomOf="@+id/tvChapterText"
+                app:layout_constraintTop_toBottomOf="@+id/wbChapterText"
                 android:layout_width="match_parent"
                 android:layout_marginRight="25dp"
                 android:layout_marginLeft="25dp"
@@ -110,7 +93,7 @@
                 android:id="@+id/ivFavourite"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="5dp"
                 android:clickable="true"
                 android:contentDescription="Favourite"
                 android:foreground="?android:attr/selectableItemBackground"
@@ -124,7 +107,7 @@
                 android:id="@+id/ivDone"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="5dp"
                 android:clickable="true"
                 android:contentDescription="Mark as done"
                 android:padding="18dp"
@@ -134,21 +117,35 @@
                 app:layout_constraintLeft_toRightOf="@+id/ivFavourite"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/bToNextChapter"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/button_background"
-                android:fontFamily="@font/metropolis_regular"
-                android:text="Next"
-                android:textAllCaps="false"
-                android:textColor="@color/primaryColor"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+            <ImageView
+                android:id="@+id/ivToNextChapter"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="5dp"
+                android:clickable="true"
+                android:contentDescription="Mark as done"
+                android:padding="18dp"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="TouchTargetSizeCheck" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginRight="30dp"
+                app:layout_constraintRight_toRightOf="parent"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_baseline_navigate_next_24"/>
+
+            <ImageView
+                android:id="@+id/ivToPreviousChapter"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="5dp"
+                android:clickable="true"
+                android:contentDescription="Mark as done"
+                android:padding="18dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginRight="10dp"
+                app:layout_constraintRight_toLeftOf="@id/ivToNextChapter"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_baseline_navigate_before_24"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
