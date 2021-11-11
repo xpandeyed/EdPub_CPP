@@ -11,10 +11,12 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.View
+import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
@@ -150,6 +152,16 @@ class ChapterActivity : AppCompatActivity() {
             val wbChapterText = findViewById<WebView>(R.id.wbChapterText)
             wbChapterText.settings.javaScriptEnabled = true
             wbChapterText.loadUrl(it.value.toString())
+            wbChapterText.webChromeClient = object : WebChromeClient(){
+                override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                    super.onProgressChanged(view, newProgress)
+                    if(newProgress==100){
+                        findViewById<ScrollView>(R.id.svContainer).visibility = View.VISIBLE
+                        findViewById<CircularProgressIndicator>(R.id.pbLoading).visibility = View.GONE
+                    }
+                }
+            }
+
             setFavIconTint(key)
             setCurrChapter(key)
         }

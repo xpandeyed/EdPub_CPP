@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
+import java.lang.Math.random
 
 
 class HomeFragment : Fragment() {
@@ -80,7 +81,7 @@ class HomeFragment : Fragment() {
         val bToRandomExample = view.findViewById<Button>(R.id.bToRandomExample)
         bToRandomExample.setOnClickListener {
             if(ObjectsCollection.exampleTitlesList.size!=0){
-                Toast.makeText(activity, "TODO", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "todo", Toast.LENGTH_SHORT).show()
             }
             else{
                 Toast.makeText(activity, "Examples not loaded yet. Wait a moment...", Toast.LENGTH_SHORT).show()
@@ -167,7 +168,7 @@ class HomeFragment : Fragment() {
         if(loadData.isCurrExampleLoaded.value!!){
             Log.i("XPND", ObjectsCollection.currentExampleKey)
             bCurrExample.visibility = View.VISIBLE
-            FirebaseDatabase.getInstance().getReference("E_TITLES").child(ObjectsCollection.currentChapterKey).child("TITLE").get().addOnSuccessListener {
+            FirebaseDatabase.getInstance().getReference("E_TITLES").child(ObjectsCollection.currentExampleKey).child("TITLE").get().addOnSuccessListener {
                 Log.i("XPND", it.value.toString())
                 bCurrExample.text = it.value.toString()
             }
