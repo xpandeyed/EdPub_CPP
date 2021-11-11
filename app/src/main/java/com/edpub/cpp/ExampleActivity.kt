@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase
 class ExampleActivity : AppCompatActivity() {
 
     private lateinit var ivFavourites : ImageView
+    private lateinit var ivDone : ImageView
     private val database = Firebase.database
     private val myRef = database.getReference("USERS")
     private var invoker = "EXAM"
@@ -41,7 +42,7 @@ class ExampleActivity : AppCompatActivity() {
 
         val ivShare = findViewById<ImageView>(R.id.ivShare)
         ivFavourites = findViewById(R.id.ivFavourite)
-        val ivDone = findViewById<ImageView>(R.id.ivDone)
+        ivDone = findViewById<ImageView>(R.id.ivDone)
 
         var key = intent.getStringExtra("KEY")
 
@@ -73,6 +74,18 @@ class ExampleActivity : AppCompatActivity() {
                 myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_EXAM").child(key.toString()).setValue(key)
                 ObjectsCollection.favouriteExampleKeysList.add(key.toString())
                 setFavIconTint(key.toString())
+            }
+        }
+
+        ivDone.setOnClickListener {
+            if(ObjectsCollection.completedExamplesKeysList.indexOf(key)!=-1){
+                myRef.child(Firebase.auth.currentUser!!.uid).child("COMP_EXAM").child(key!!).setValue(null)
+                ObjectsCollection.completedExamplesKeysList.remove(key)
+                setDoneIconTint(key.toString())
+            }else{
+                myRef.child(Firebase.auth.currentUser!!.uid).child("COMP_EXAM").child(key!!).setValue(key)
+                ObjectsCollection.completedExamplesKeysList.add(key.toString())
+                setDoneIconTint(key.toString())
             }
         }
 
@@ -163,6 +176,7 @@ class ExampleActivity : AppCompatActivity() {
                 }
             }
             setFavIconTint(key)
+            setDoneIconTint(key)
             setCurrExample(key)
         }
     }
@@ -179,6 +193,13 @@ class ExampleActivity : AppCompatActivity() {
         }
         ObjectsCollection.currentExampleKey = key
         myRef.child(Firebase.auth.currentUser!!.uid).child("CURR_EXAM").setValue(key)
+    }
+    private fun setDoneIconTint(key: String){
+        if(ObjectsCollection.completedExamplesKeysList.indexOf(key)!=-1){
+            DrawableCompat.setTint(ivDone.drawable, ContextCompat.getColor(this, R.color.slight_neon_green))
+        }else{
+            DrawableCompat.setTint(ivDone.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
+        }
     }
 
     override fun onBackPressed() {

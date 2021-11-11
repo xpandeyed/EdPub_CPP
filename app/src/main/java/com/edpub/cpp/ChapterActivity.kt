@@ -29,6 +29,7 @@ import kotlinx.coroutines.launch
 class ChapterActivity : AppCompatActivity() {
 
     private lateinit var ivFavourites : ImageView
+    private lateinit var ivDone : ImageView
     private val database = Firebase.database
     private val myRef = database.getReference("USERS")
     private var invoker = "CHAP"
@@ -45,7 +46,7 @@ class ChapterActivity : AppCompatActivity() {
 
         val ivShare = findViewById<ImageView>(R.id.ivShare)
         ivFavourites = findViewById(R.id.ivFavourite)
-        val ivDone = findViewById<ImageView>(R.id.ivDone)
+        ivDone = findViewById<ImageView>(R.id.ivDone)
 
         var key = intent.getStringExtra("KEY")
 
@@ -80,7 +81,17 @@ class ChapterActivity : AppCompatActivity() {
                 setFavIconTint(key.toString())
             }
         }
-
+        ivDone.setOnClickListener {
+            if(ObjectsCollection.completedChaptersKeysList.indexOf(key)!=-1){
+                myRef.child(Firebase.auth.currentUser!!.uid).child("COMP_CHAP").child(key!!).setValue(null)
+                ObjectsCollection.completedChaptersKeysList.remove(key)
+                setDoneIconTint(key.toString())
+            }else{
+                myRef.child(Firebase.auth.currentUser!!.uid).child("COMP_CHAP").child(key!!).setValue(key)
+                ObjectsCollection.completedChaptersKeysList.add(key.toString())
+                setDoneIconTint(key.toString())
+            }
+        }
 
         val ivToNextChapter = findViewById<ImageView>(R.id.ivToNextChapter)
         ivToNextChapter.setOnClickListener {
@@ -88,6 +99,8 @@ class ChapterActivity : AppCompatActivity() {
                 if(position>=ObjectsCollection.favouriteChaptersTitlesList.size-1){
                     Snackbar.make(ivToNextChapter, "No more favourite chapters found", Snackbar.LENGTH_SHORT).show()
                 }else{
+                    findViewById<ScrollView>(R.id.svContainer).visibility = View.GONE
+                    findViewById<CircularProgressIndicator>(R.id.pbLoading).visibility = View.VISIBLE
                     position++
                     key = ObjectsCollection.chaptersTitlesList[position].KEY
                     setText(key!!)
@@ -97,6 +110,8 @@ class ChapterActivity : AppCompatActivity() {
                 if(position>=ObjectsCollection.chaptersTitlesList.size-1){
                     Snackbar.make(ivToNextChapter, "No more chapters found", Snackbar.LENGTH_SHORT).show()
                 }else{
+                    findViewById<ScrollView>(R.id.svContainer).visibility = View.GONE
+                    findViewById<CircularProgressIndicator>(R.id.pbLoading).visibility = View.VISIBLE
                     position++
                     key = ObjectsCollection.chaptersTitlesList[position].KEY
                     setText((key!!))
@@ -111,6 +126,8 @@ class ChapterActivity : AppCompatActivity() {
                 if(position<=0){
                     Snackbar.make(ivToNextChapter, "No more favourite chapters found", Snackbar.LENGTH_SHORT).show()
                 }else{
+                    findViewById<ScrollView>(R.id.svContainer).visibility = View.GONE
+                    findViewById<CircularProgressIndicator>(R.id.pbLoading).visibility = View.VISIBLE
                     position--
                     key = ObjectsCollection.chaptersTitlesList[position].KEY
                     setText(key!!)
@@ -120,6 +137,8 @@ class ChapterActivity : AppCompatActivity() {
                 if(position<=0){
                     Snackbar.make(ivToNextChapter, "No more chapters found", Snackbar.LENGTH_SHORT).show()
                 }else{
+                    findViewById<ScrollView>(R.id.svContainer).visibility = View.GONE
+                    findViewById<CircularProgressIndicator>(R.id.pbLoading).visibility = View.VISIBLE
                     position--
                     key = ObjectsCollection.chaptersTitlesList[position].KEY
                     setText((key!!))
@@ -163,6 +182,7 @@ class ChapterActivity : AppCompatActivity() {
             }
 
             setFavIconTint(key)
+            setDoneIconTint(key)
             setCurrChapter(key)
         }
     }
@@ -179,6 +199,13 @@ class ChapterActivity : AppCompatActivity() {
         }
         ObjectsCollection.currentChapterKey = key
         myRef.child(Firebase.auth.currentUser!!.uid).child("CURR_CHAP").setValue(key)
+    }
+    private fun setDoneIconTint(key: String){
+        if(ObjectsCollection.completedChaptersKeysList.indexOf(key)!=-1){
+            DrawableCompat.setTint(ivDone.drawable, ContextCompat.getColor(this, R.color.slight_neon_green))
+        }else{
+            DrawableCompat.setTint(ivDone.drawable, ContextCompat.getColor(this, R.color.icon_inactive))
+        }
     }
 
     override fun onBackPressed() {
