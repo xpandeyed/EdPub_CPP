@@ -25,6 +25,9 @@ class HomeActivity : AppCompatActivity() {
         if(!loadData.areChapterTitlesLoaded.value!!){
             loadData.loadChapterTitles()
         }
+        if(!loadData.areExampleTitlesLoaded.value!!){
+            loadData.loadExampleTitles()
+        }
         val homeFragment = HomeFragment()
         val chaptersFragment = ChaptersFragment()
         val examplesFragment = ExamplesFragment()

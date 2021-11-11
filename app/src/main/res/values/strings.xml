@@ -2,4 +2,8 @@
     <string name="app_name">EdPub C++</string>
     <string name="web_client_id">122811210408-k5pi6eq0tmjc7mtu6f36rjkh5533b3k2.apps.googleusercontent.com</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="share">I have been learning C++ from this amazing app, EdPub C++.
+        I recommend you to download it from Play Store.
+        https://play.google.com/store/apps/details?id=${applicationContext.packageName}</string>
+    <string name="contribute_message">Want to share more information about the topic, rewrite the article on same topic or write an article on different topic. See How you can contribute and help other learners.</string>
 </resources>

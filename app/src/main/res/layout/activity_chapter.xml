@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     android:background="#f2f6f7"
     tools:context=".ChapterActivity">
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pbLoading"
+        app:layout_constraintTop_toTopOf="parent"
+        android:indeterminate="true"
+        app:trackCornerRadius="2dp"
+        app:indicatorColor="@color/primaryColor"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ScrollView
         android:id="@+id/svContainer"
@@ -13,7 +24,7 @@
         android:layout_height="0dp"
         android:fillViewport="true"
         android:scrollbars="none"
-        app:layout_constraintBottom_toTopOf="@id/cvBottomItems"
+        app:layout_constraintBottom_toTopOf="@id/clBottomItems"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,16 +56,43 @@
                 android:textColorLink="@color/primaryColor"
                 android:fontFamily="@font/metropolis_regular"
                 android:lineSpacingExtra="12dp"
-                android:textColor="@color/grey_text"
+                android:textColor="@color/chapter_title"
                 android:textSize="20sp"
                 app:layout_constraintTop_toBottomOf="@id/vSeparator"/>
 
             <View
+                android:id="@+id/vContribute"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#2d3e50"
-                android:layout_margin="25dp"
                 app:layout_constraintTop_toBottomOf="@id/tvContribute"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="25dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vContribute">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/metropolis_semi_bold"
+                    android:text="Brought to you by "
+                    android:textColor="@color/chapter_title"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sirin_stencil_regular"
+                    android:text="EdPub"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -71,18 +109,14 @@
         android:layout_height="28dp"
         android:src="@drawable/ic_baseline_close_24"/>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvBottomItems"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        app:cardBackgroundColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="60dp"
+            android:id="@+id/clBottomItems"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/ivShare"
@@ -159,6 +193,5 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

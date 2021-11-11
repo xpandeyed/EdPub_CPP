@@ -20,13 +20,15 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ChapterActivity : AppCompatActivity() {
 
     private lateinit var ivFavourites : ImageView
-
-    val database = Firebase.database
-    val myRef = database.getReference("USERS")
+    private val database = Firebase.database
+    private val myRef = database.getReference("USERS")
     private var invoker = "CHAP"
 
 
@@ -40,7 +42,7 @@ class ChapterActivity : AppCompatActivity() {
         }
 
         val ivShare = findViewById<ImageView>(R.id.ivShare)
-        ivFavourites = findViewById<ImageView>(R.id.ivFavourite)
+        ivFavourites = findViewById(R.id.ivFavourite)
         val ivDone = findViewById<ImageView>(R.id.ivDone)
 
         var key = intent.getStringExtra("KEY")
@@ -52,7 +54,6 @@ class ChapterActivity : AppCompatActivity() {
 
         setText(key!!)
 
-
         if(invoker=="FAV"){
             ivFavourites.visibility = View.GONE
             ivDone.visibility = View.GONE
@@ -60,19 +61,19 @@ class ChapterActivity : AppCompatActivity() {
 
         ivShare.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
-            intent.putExtra(Intent.EXTRA_TEXT, "I have been learning C++ from this amazing app, EdPub C++.\n\nI recommend you to download it from Play Store.\n\n https://play.google.com/store/apps/details?id=${applicationContext.packageName}")
+            intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share))
             intent.type = "text/plain"
             startActivity(intent)
         }
 
         ivFavourites.setOnClickListener {
             if(ObjectsCollection.favouriteChapterKeysList.indexOf(key)!=-1){
-                myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_EXAM").child(key!!).setValue(null)
+                myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP").child(key!!).setValue(null)
                 ObjectsCollection.favouriteChapterKeysList.remove(key)
                 setFavIconTint(key.toString())
             }
             else{
-                myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_EXAM").child(key.toString()).setValue(key)
+                myRef.child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP").child(key.toString()).setValue(key)
                 ObjectsCollection.favouriteChapterKeysList.add(key.toString())
                 setFavIconTint(key.toString())
             }
@@ -124,9 +125,8 @@ class ChapterActivity : AppCompatActivity() {
             }
         }
 
-
         val tvContribute = findViewById<TextView>(R.id.tvContribute)
-        val contributeMessage = "Want to share more information about the topic, rewrite the article on same topic or write an article on different topic. See How you can contribute and help other learners."
+        val contributeMessage = getString(R.string.contribute_message)
         val spannableContributeUs = SpannableString(contributeMessage)
         val span = object  : ClickableSpan(){
             override fun onClick(p0: View) {
@@ -142,6 +142,9 @@ class ChapterActivity : AppCompatActivity() {
     }
 
     private fun setText(key: String){
+        CoroutineScope(Dispatchers.Main).launch {
+
+        }
         FirebaseDatabase.getInstance().getReference("C_TITLES").child(key).child("URL").get().addOnSuccessListener {
             Log.i("XPND", it.toString())
             val wbChapterText = findViewById<WebView>(R.id.wbChapterText)

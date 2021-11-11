@@ -85,15 +85,15 @@ class ExamplesFragment : Fragment() {
                 val intent = Intent(activity, ExampleActivity::class.java).apply {
                     val currExamplePosition = ObjectsCollection.exampleTitlesList.indexOf(ObjectsCollection.filteredExamplesTitlesList[position])
                     putExtra("POSITION", currExamplePosition)
-                    putExtra("INVOKER", "fromExample")
+                    putExtra("KEY", ObjectsCollection.filteredExamplesTitlesList[position].KEY)
                 }
                 startActivity(intent)
             }
         })
 
         loadData = ViewModelProvider(requireActivity()).get(LoadData::class.java)
-        loadData.areExamplesLoaded.observe(viewLifecycleOwner, Observer {
-            if(loadData.areExamplesLoaded.value!!){
+        loadData.areExampleTitlesLoaded.observe(viewLifecycleOwner, Observer {
+            if(loadData.areExampleTitlesLoaded.value!!){
                 pbExamplesProgress.visibility = View.GONE
             }
         })
