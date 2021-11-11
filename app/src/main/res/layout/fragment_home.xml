@@ -8,38 +8,44 @@
     tools:context=".HomeFragment">
 
     <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/ablHome"
+        android:id="@+id/ablHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tbHome"
+
             android:layout_width="match_parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_height="wrap_content">
-            <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                app:title="C++"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:id="@+id/tbHome"
-                android:background="@color/white"
-                app:titleTextAppearance="@style/cpp_title"
-                android:layout_height="wrap_content"/>
-        </com.google.android.material.appbar.AppBarLayout>
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            app:title="C++"
+            app:titleTextAppearance="@style/cpp_title" />
+    </com.google.android.material.appbar.AppBarLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@id/ablHome"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ablHome">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ablHome">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clProgressContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/white_corner_background"
                 android:layout_margin="25dp"
+                android:background="@drawable/white_corner_background"
                 app:layout_constraintTop_toTopOf="parent">
+
                 <TextView
                     android:id="@+id/tvCompletedChapters"
                     android:layout_width="wrap_content"
@@ -90,6 +96,7 @@
                     app:layout_constraintLeft_toLeftOf="@id/pbExamplesProgress"
                     app:layout_constraintRight_toRightOf="@id/pbExamplesProgress"
                     app:layout_constraintTop_toTopOf="@id/pbExamplesProgress" />
+
                 <TextView
                     android:id="@+id/tvTotalExamples"
                     android:layout_width="wrap_content"
@@ -120,12 +127,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/metropolis_semi_bold"
                     android:gravity="center"
                     android:text="Chapters\nCompleted"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="10dp"
                     android:textColor="#2d3e50"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/pbChaptersProgress"
                     app:layout_constraintRight_toRightOf="@id/pbChaptersProgress"
                     app:layout_constraintTop_toBottomOf="@id/pbChaptersProgress" />
@@ -135,12 +142,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/metropolis_semi_bold"
                     android:gravity="center"
                     android:text="Examples\nCompleted"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="10dp"
                     android:textColor="#2d3e50"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/pbExamplesProgress"
                     app:layout_constraintRight_toRightOf="@id/pbExamplesProgress"
                     app:layout_constraintTop_toBottomOf="@id/pbExamplesProgress" />
@@ -211,16 +218,17 @@
                         android:fontFamily="@font/metropolis_semi_bold"
                         android:gravity="center"
                         android:text="Loading Chapters . . ." />
+
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/bCurrChapter"
                         android:layout_width="match_parent"
-                        android:textSize="20sp"
-                        android:textAllCaps="false"
                         android:layout_height="match_parent"
+                        android:background="@drawable/button_background"
                         android:fontFamily="@font/metropolis_semi_bold"
+                        android:textAllCaps="false"
                         android:textColor="@color/primaryColor"
-                        android:visibility="gone"
-                        android:background="@drawable/button_background"/>
+                        android:textSize="20sp"
+                        android:visibility="gone" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -264,12 +272,15 @@
                         android:text="Loading Examples . . ." />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="match_parent"
                         android:id="@+id/bCurrExample"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/button_background"
-                        android:visibility="gone"
-                        />
+                        android:fontFamily="@font/metropolis_semi_bold"
+                        android:textAllCaps="false"
+                        android:textColor="@color/primaryColor"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -278,9 +289,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="25dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:background="@drawable/white_corner_background"
                 android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/clBookmarkContainer">
 
                 <TextView

@@ -34,6 +34,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         bCurrChapter = view.findViewById(R.id.bCurrChapter)
+        bCurrExample = view.findViewById(R.id.bCurrExample)
 
         tbHome = view.findViewById(R.id.tbHome)
         tbHome.inflateMenu(R.menu.home_fragment_appbar)
@@ -61,6 +62,20 @@ class HomeFragment : Fragment() {
             }
             startActivity(intent)
         }
+        bCurrExample.setOnClickListener {
+            var position = 0
+            for(example in ObjectsCollection.exampleTitlesList){
+                if(example.KEY == ObjectsCollection.currentExampleKey){
+                    break
+                }
+                position++
+            }
+            val intent = Intent(activity, ExampleActivity::class.java).apply {
+                putExtra("POSITION", position)
+                putExtra("KEY", ObjectsCollection.currentExampleKey)
+            }
+            startActivity(intent)
+        }
 
         val bToRandomExample = view.findViewById<Button>(R.id.bToRandomExample)
         bToRandomExample.setOnClickListener {
@@ -84,6 +99,15 @@ class HomeFragment : Fragment() {
                     bCurrChapter.text = it.value.toString()
                 }
 
+            }
+        })
+        loadData.isCurrExampleLoaded.observe(viewLifecycleOwner, Observer {
+            if(loadData.isCurrExampleLoaded.value!!){
+                bCurrExample.visibility = View.VISIBLE
+                FirebaseDatabase.getInstance().getReference("E_TITLES").child(ObjectsCollection.currentExampleKey).child("TITLE").get().addOnSuccessListener {
+                    Log.i("EDP", ObjectsCollection.currentChapterKey)
+                    bCurrExample.text = it.value.toString()
+                }
             }
         })
 
@@ -136,8 +160,16 @@ class HomeFragment : Fragment() {
             Log.i("EDP", ObjectsCollection.currentChapterKey)
             bCurrChapter.visibility = View.VISIBLE
             FirebaseDatabase.getInstance().getReference("C_TITLES").child(ObjectsCollection.currentChapterKey).child("TITLE").get().addOnSuccessListener {
-                Log.i("EDP", ObjectsCollection.currentChapterKey)
+                Log.i("EDP", it.value.toString())
                 bCurrChapter.text = it.value.toString()
+            }
+        }
+        if(loadData.isCurrExampleLoaded.value!!){
+            Log.i("XPND", ObjectsCollection.currentExampleKey)
+            bCurrExample.visibility = View.VISIBLE
+            FirebaseDatabase.getInstance().getReference("E_TITLES").child(ObjectsCollection.currentChapterKey).child("TITLE").get().addOnSuccessListener {
+                Log.i("XPND", it.value.toString())
+                bCurrExample.text = it.value.toString()
             }
         }
         super.onResume()
