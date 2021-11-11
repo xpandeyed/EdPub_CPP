@@ -59,7 +59,17 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
+    <ImageView
+        android:id="@+id/ivClose"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="25dp"
+        android:padding="6dp"
+        android:background="@drawable/circle_background"
+        android:layout_width="28dp"
+        android:elevation="10dp"
+        android:layout_height="28dp"
+        android:src="@drawable/ic_baseline_close_24"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvBottomItems"

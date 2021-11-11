@@ -214,7 +214,11 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/bCurrChapter"
                         android:layout_width="match_parent"
+                        android:textSize="20sp"
+                        android:textAllCaps="false"
                         android:layout_height="match_parent"
+                        android:fontFamily="@font/metropolis_semi_bold"
+                        android:textColor="@color/primaryColor"
                         android:visibility="gone"
                         android:background="@drawable/button_background"/>
 

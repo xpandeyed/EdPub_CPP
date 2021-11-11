@@ -102,11 +102,11 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private val result = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-        Log.i("FUCK", "2 : Register activity for result called")
+        Log.i("XPND", "2 : Register activity for result called")
         findViewById<ProgressBar>(R.id.pbSignUp).visibility = View.GONE
         if(it.resultCode == Activity.RESULT_OK){
-            Log.i("FUCK", "3 : Result code matched")
-            Log.i("FUCK", "${it.resultCode} || ${Activity.RESULT_OK}")
+            Log.i("XPND", "3 : Result code matched")
+            Log.i("XPND", "${it.resultCode} || ${Activity.RESULT_OK}")
             val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
 
             if(task.isSuccessful){
@@ -115,14 +115,14 @@ class SignUpActivity : AppCompatActivity() {
                     Toast.makeText(this@SignUpActivity, "Authenticating with Google.", Toast.LENGTH_SHORT).show()
                     firebaseAuthWithGoogle(account.idToken!!)
                 } catch (e: ApiException) {
-                    Log.i("FUCK", "Api Exception $e")
+                    Log.i("XPND", "Api Exception $e")
                     Toast.makeText(this@SignUpActivity, "${e.message}", Toast.LENGTH_SHORT).show()
                 }
             }
         }
         else{
-            Log.i("FUCK", "3 : Result code match failed")
-            Log.i("FUCK", "${it.resultCode} || ${Activity.RESULT_OK}")
+            Log.i("XPND", "3 : Result code match failed")
+            Log.i("XPND", "${it.resultCode} || ${Activity.RESULT_OK}")
         }
     }
 
@@ -130,21 +130,21 @@ class SignUpActivity : AppCompatActivity() {
         findViewById<ProgressBar>(R.id.pbSignUp).visibility = View.VISIBLE
         val signInIntent = googleSignInClient.signInIntent
         result.launch(signInIntent)
-        Log.i("FUCK", "1 : sign in function called")
+        Log.i("XPND", "1 : sign in function called")
     }
 
 
     private fun firebaseAuthWithGoogle(idToken: String) {
-        Log.i("FUCK", "4: firebaseAuthWithGoogle invoked")
+        Log.i("XPND", "4: firebaseAuthWithGoogle invoked")
         CoroutineScope(Dispatchers.IO).launch {
-            Log.i("FUCK", "5: firebaseAuthWithGoogle's launch invoked")
+            Log.i("XPND", "5: firebaseAuthWithGoogle's launch invoked")
             val credential = GoogleAuthProvider.getCredential(idToken, null)
             auth.signInWithCredential(credential)
                 .addOnCompleteListener(this@SignUpActivity){ task ->
                     if (task.isSuccessful) {
                         Toast.makeText(this@SignUpActivity,"Sign in with credential is successful",Toast.LENGTH_SHORT).show()
                         CoroutineScope(Dispatchers.IO).launch {
-                        Log.i("FUCK", "Task is successful")
+                        Log.i("XPND", "Task is successful")
                         ObjectsCollection.isNewUser = task.result.additionalUserInfo!!.isNewUser
 
                         val user = auth.currentUser
@@ -160,12 +160,12 @@ class SignUpActivity : AppCompatActivity() {
                         startActivity(intent)
                         }
                     } else {
-                        Log.i("FUCK", "Task failed")
+                        Log.i("XPND", "Task failed")
                         Toast.makeText(this@SignUpActivity, "${task.exception}", Toast.LENGTH_SHORT).show()
                     }
                 }
                 .addOnFailureListener {
-                    Log.i("FUCK", "Task failure message")
+                    Log.i("XPND", "Task failure message")
                 }
         }
     }

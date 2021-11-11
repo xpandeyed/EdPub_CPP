@@ -27,23 +27,36 @@ class ChapterActivity : AppCompatActivity() {
 
     val database = Firebase.database
     val myRef = database.getReference("USERS")
+    private var invoker = "CHAP"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chapter)
 
-
-
-        var key = intent.getStringExtra("KEY")
-        val invoker = intent.getStringExtra("INVOKER")
-        var position = intent.getIntExtra("POSITION", 0)
-
-        setText(key!!)
+        val ivClose = findViewById<ImageView>(R.id.ivClose)
+        ivClose.setOnClickListener {
+            onBackPressed()
+        }
 
         val ivShare = findViewById<ImageView>(R.id.ivShare)
         ivFavourites = findViewById<ImageView>(R.id.ivFavourite)
         val ivDone = findViewById<ImageView>(R.id.ivDone)
+
+        var key = intent.getStringExtra("KEY")
+
+        if(intent.getStringExtra("INVOKER")!=null){
+            invoker = intent.getStringExtra("INVOKER")!!
+        }
+        var position = intent.getIntExtra("POSITION", 0)
+
+        setText(key!!)
+
+
+        if(invoker=="FAV"){
+            ivFavourites.visibility = View.GONE
+            ivDone.visibility = View.GONE
+        }
 
         ivShare.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
@@ -130,7 +143,7 @@ class ChapterActivity : AppCompatActivity() {
 
     private fun setText(key: String){
         FirebaseDatabase.getInstance().getReference("C_TITLES").child(key).child("URL").get().addOnSuccessListener {
-            Log.i("FUCK", it.toString())
+            Log.i("XPND", it.toString())
             val wbChapterText = findViewById<WebView>(R.id.wbChapterText)
             wbChapterText.settings.javaScriptEnabled = true
             wbChapterText.loadUrl(it.value.toString())
@@ -146,9 +159,15 @@ class ChapterActivity : AppCompatActivity() {
         }
     }
     private fun setCurrChapter(key: String){
+        if(invoker=="FAV"){
+            return
+        }
         ObjectsCollection.currentChapterKey = key
         myRef.child(Firebase.auth.currentUser!!.uid).child("CURR_CHAP").setValue(key)
+    }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 
 }

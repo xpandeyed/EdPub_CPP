@@ -65,7 +65,8 @@ class FavouriteChaptersFragment : Fragment() {
             override fun onItemClick(position: Int) {
                 val intent = Intent(activity, ChapterActivity::class.java).apply {
                     putExtra("POSITION", position)
-                    putExtra("INVOKER", "fromFav")
+                    putExtra("KEY", ObjectsCollection.favouriteChaptersTitlesList[position].KEY)
+                    putExtra("INVOKER", "FAV")
                 }
                 startActivity(intent)
             }

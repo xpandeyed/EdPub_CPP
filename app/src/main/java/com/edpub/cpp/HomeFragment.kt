@@ -47,6 +47,21 @@ class HomeFragment : Fragment() {
             true
         }
 
+        bCurrChapter.setOnClickListener {
+            var position = 0
+            for(chapter in ObjectsCollection.chaptersTitlesList){
+                if(chapter.KEY==ObjectsCollection.currentChapterKey){
+                    break
+                }
+                position++
+            }
+            val intent = Intent(activity, ChapterActivity::class.java).apply {
+                putExtra("POSITION", position)
+                putExtra("KEY", ObjectsCollection.currentChapterKey)
+            }
+            startActivity(intent)
+        }
+
         val bToRandomExample = view.findViewById<Button>(R.id.bToRandomExample)
         bToRandomExample.setOnClickListener {
             if(ObjectsCollection.exampleTitlesList.size!=0){

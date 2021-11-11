@@ -108,13 +108,13 @@ class LoadData : ViewModel() {
     }
 
     fun loadChapterTitles(){
-        Log.i("FUCK", "load Chapter Titles Called")
+        Log.i("XPND", "load Chapter Titles Called")
         CoroutineScope(Dispatchers.IO).launch{
             val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("C_TITLES")
             databaseReference.addValueEventListener(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if(snapshot.exists()){
-                        Log.i("YUCK", "Chapter titles exist")
+                        Log.i("XPND", "Chapter titles exist")
                         ObjectsCollection.chaptersTitlesList.clear()
                         for(title in snapshot.children){
                             val currTitle = title.getValue(Title::class.java)
@@ -129,11 +129,11 @@ class LoadData : ViewModel() {
                         loadCompletedChaptersKeys()
 
                     }else{
-                        Log.i("YUCK", "Chapter titles do not exist")
+                        Log.i("XPND", "Chapter titles do not exist")
                     }
                 }
                 override fun onCancelled(error: DatabaseError) {
-                    Log.i("YUCK", error.toString())
+                    Log.i("XPND", error.toString())
                 }
             })
         }
@@ -162,24 +162,11 @@ class LoadData : ViewModel() {
     }
     fun loadCurrChapter(){
         CoroutineScope(Dispatchers.IO).launch {
-            val currChapterReference = Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_CHAP")
-            currChapterReference.addValueEventListener(object : ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if(snapshot.exists()){
-                        for(chapter in snapshot.children){
-                            val currChapter = chapter.getValue(String::class.java)
-                            ObjectsCollection.currentChapterKey = currChapter!!
-                            Log.i("EDP", ObjectsCollection.currentChapterKey)
-                        }
-                        isCurrChapterLoaded.value = true
-                    }
-
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-
-                }
-            })
+            FirebaseDatabase.getInstance().getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("CURR_CHAP").get().addOnSuccessListener {
+                Log.i("EDP", it.toString())
+                ObjectsCollection.currentChapterKey = it.value.toString()
+                isCurrChapterLoaded.value = true
+            }
         }
     }
 
