@@ -147,20 +147,6 @@ class ChapterActivity : AppCompatActivity() {
             }
         }
 
-        val tvContribute = findViewById<TextView>(R.id.tvContribute)
-        val contributeMessage = getString(R.string.contribute_message)
-        val spannableContributeUs = SpannableString(contributeMessage)
-        val span = object  : ClickableSpan(){
-            override fun onClick(p0: View) {
-                val url = "https://edpubweb.blogspot.com/2021/09/Privacy%20Policy.html"
-                val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = Uri.parse(url)
-                startActivity(intent)
-            }
-        }
-        spannableContributeUs.setSpan(span, contributeMessage.length-35, contributeMessage.length-1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        tvContribute.movementMethod = LinkMovementMethod.getInstance()
-        tvContribute.text = spannableContributeUs
     }
 
     private fun setText(key: String){
