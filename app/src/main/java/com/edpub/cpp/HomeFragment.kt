@@ -81,7 +81,12 @@ class HomeFragment : Fragment() {
         val bToRandomExample = view.findViewById<Button>(R.id.bToRandomExample)
         bToRandomExample.setOnClickListener {
             if(ObjectsCollection.exampleTitlesList.size!=0){
-                Toast.makeText(activity, "todo", Toast.LENGTH_SHORT).show()
+                val position = (0 until ObjectsCollection.exampleTitlesList.size).random()
+                val intent = Intent(activity, ExampleActivity::class.java).apply{
+                    putExtra("POSITION", position)
+                    putExtra("KEY", ObjectsCollection.exampleTitlesList[position].KEY)
+                }
+                startActivity(intent)
             }
             else{
                 Toast.makeText(activity, "Examples not loaded yet. Wait a moment...", Toast.LENGTH_SHORT).show()
