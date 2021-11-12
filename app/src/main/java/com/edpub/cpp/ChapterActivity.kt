@@ -49,6 +49,7 @@ class ChapterActivity : AppCompatActivity() {
         ivDone = findViewById<ImageView>(R.id.ivDone)
 
         var key = intent.getStringExtra("KEY")
+        Log.i("XPND", key.toString())
 
         if(intent.getStringExtra("INVOKER")!=null){
             invoker = intent.getStringExtra("INVOKER")!!
@@ -163,6 +164,7 @@ class ChapterActivity : AppCompatActivity() {
     }
 
     private fun setText(key: String){
+        Log.i("XPND", "set text : $key" )
         CoroutineScope(Dispatchers.Main).launch {
 
         }
