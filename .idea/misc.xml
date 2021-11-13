@@ -28,6 +28,7 @@
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_c_doc.xml" value="0.22864583333333333" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_close_24.xml" value="0.171484375" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_code_example.xml" value="0.18888888888888888" />
+        <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_contribute.xml" value="0.15625" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_edpub.xml" value="0.171484375" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_edpub_c___internal_logo_dark.xml" value="0.1" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/drawable/ic_edpub_cpp_internal_logo_dark.xml" value="0.1" />
@@ -82,7 +83,7 @@
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/fragment_favourite_chapters.xml" value="0.159375" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/fragment_favourite_examples.xml" value="0.148828125" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/fragment_favourites.xml" value="0.1" />
-        <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/fragment_home.xml" value="0.17" />
+        <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/fragment_home.xml" value="0.18" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/layout/recycler_view_item.xml" value="0.2" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/menu/home_activity_appbar.xml" value="0.2125" />
         <entry key="..\:/Users/lalbi/Desktop/CFundamentals/app/src/main/res/menu/home_activity_bnv.xml" value="0.15" />
