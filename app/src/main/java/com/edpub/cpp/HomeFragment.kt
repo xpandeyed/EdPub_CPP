@@ -1,6 +1,7 @@
 package com.edpub.cpp
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
@@ -10,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.ktx.auth
@@ -24,6 +26,8 @@ class HomeFragment : Fragment() {
 
     private lateinit var tbHome : Toolbar
 
+    private lateinit var clContribute : ConstraintLayout
+
     private lateinit var bCurrChapter : Button
     private lateinit var bCurrExample : Button
 
@@ -36,6 +40,15 @@ class HomeFragment : Fragment() {
 
         bCurrChapter = view.findViewById(R.id.bCurrChapter)
         bCurrExample = view.findViewById(R.id.bCurrExample)
+
+        clContribute = view.findViewById(R.id.clContribute)
+
+        clContribute.setOnClickListener {
+            val url = "https://xpandeyed.github.io/EdPubCPPWeb/Contribute.html"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
 
         tbHome = view.findViewById(R.id.tbHome)
         tbHome.inflateMenu(R.menu.home_fragment_appbar)
