@@ -102,6 +102,7 @@ class LoadData : ViewModel() {
             val favExampleReference = Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("FAV_EXAM")
             favExampleReference.addValueEventListener(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
+                    areFavouriteExampleKeysLoaded.value = false
                     if(snapshot.exists()){
                         ObjectsCollection.favouriteExampleKeysList.clear()
                         for(example in snapshot.children){
@@ -169,7 +170,7 @@ class LoadData : ViewModel() {
     }
 
     fun loadFavouriteChapterKeys (){
-        Log.i("XPND", "load fav chap")
+
         CoroutineScope(Dispatchers.IO).launch{
             val favChapterReference = Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP")
             favChapterReference.addValueEventListener(object: ValueEventListener {

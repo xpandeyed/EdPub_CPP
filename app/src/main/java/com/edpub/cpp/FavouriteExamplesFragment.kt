@@ -2,6 +2,7 @@ package com.edpub.cpp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -39,7 +40,6 @@ class FavouriteExamplesFragment : Fragment() {
 
 
         rvFavouriteExamples = view.findViewById(R.id.rvFavouriteExamples)
-
         rvFavouriteExamples.layoutManager = LinearLayoutManager(activity)
         rvFavouriteExamples.itemAnimator = null
 
@@ -75,6 +75,8 @@ class FavouriteExamplesFragment : Fragment() {
         })
         loadData.areFavExamplesCopied.observe(viewLifecycleOwner, Observer {
             if(loadData.areFavExamplesCopied.value!!){
+                Log.i("XPND", "fav examples copied")
+                Log.i("XPND", ObjectsCollection.favouriteExampleKeysList.toString())
                 pbExamplesProgress.visibility = View.GONE
                 if(ObjectsCollection.favouriteExampleKeysList.isEmpty()){
                     ivEmptyList.visibility = View.VISIBLE
@@ -125,6 +127,5 @@ class FavouriteExamplesFragment : Fragment() {
             tvEmptyListMessage.visibility  = View.GONE
         }
     }
-
 
 }

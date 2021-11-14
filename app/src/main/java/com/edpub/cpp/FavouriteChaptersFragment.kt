@@ -47,9 +47,7 @@ class FavouriteChaptersFragment : Fragment() {
         rvFavouriteChapters.itemAnimator = null
 
         tvEmptyListMessage = view.findViewById(R.id.tvEmptyListMessage)
-
         ivEmptyList = view.findViewById(R.id.ivEmptyList)
-
         pbFavouriteChapters = view.findViewById(R.id.pbFavouriteChapters)
 
 
