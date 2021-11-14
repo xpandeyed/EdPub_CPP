@@ -69,6 +69,8 @@ class FavouriteExamplesFragment : Fragment() {
         loadData.areFavouriteExampleKeysLoaded.observe(viewLifecycleOwner, Observer {
             if(loadData.areFavouriteExampleKeysLoaded.value!!){
                 copyFavouriteExamples()
+            }else{
+                pbExamplesProgress.visibility =View.VISIBLE
             }
         })
         loadData.areFavExamplesCopied.observe(viewLifecycleOwner, Observer {
@@ -105,6 +107,23 @@ class FavouriteExamplesFragment : Fragment() {
             loadData.areFavExamplesCopied.value = true
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(ObjectsCollection.areFavouriteExamplesCopied && loadData.areFavouriteExampleKeysLoaded.value!!){
+            pbExamplesProgress.visibility = View.GONE
+            if(ObjectsCollection.favouriteExampleKeysList.isEmpty()){
+                ivEmptyList.visibility = View.VISIBLE
+                tvEmptyListMessage.visibility = View.VISIBLE
+            }else{
+                rvFavouriteExamples.visibility = View.VISIBLE
+            }
+        }else{
+            pbExamplesProgress.visibility = View.VISIBLE
+            ivEmptyList.visibility = View.GONE
+            tvEmptyListMessage.visibility  = View.GONE
+        }
     }
 
 

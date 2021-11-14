@@ -15,8 +15,6 @@ import kotlinx.coroutines.launch
 
 class LoadData : ViewModel() {
 
-
-
     var areChapterTitlesLoaded = MutableLiveData<Boolean>(false)
     var areExampleTitlesLoaded = MutableLiveData<Boolean>(false)
 
@@ -133,8 +131,9 @@ class LoadData : ViewModel() {
                             val currChapter = chapter.getValue(String::class.java)
                             ObjectsCollection.completedChaptersKeysList.add(currChapter!!)
                         }
-                        loadFavouriteChapterKeys()
+
                     }
+                    loadFavouriteChapterKeys()
                     ObjectsCollection.isCompletedChaptersListLoaded = true
                     areCompletedChaptersKeysLoaded.value = true
                 }
@@ -144,8 +143,6 @@ class LoadData : ViewModel() {
             })
         }
     }
-
-
 
     fun loadCompletedExamplesKeys (){
         CoroutineScope(Dispatchers.IO).launch{
@@ -158,8 +155,9 @@ class LoadData : ViewModel() {
                             val currExample = example.getValue(String::class.java)
                             ObjectsCollection.completedExamplesKeysList.add(currExample!!)
                         }
-                        loadFavouriteExampleKeys()
+
                     }
+                    loadFavouriteExampleKeys()
                     ObjectsCollection.isCompletedExamplesListLoaded = true
                     areCompletedExamplesKeysLoaded.value = true
                 }
@@ -171,16 +169,19 @@ class LoadData : ViewModel() {
     }
 
     fun loadFavouriteChapterKeys (){
+        Log.i("XPND", "load fav chap")
         CoroutineScope(Dispatchers.IO).launch{
             val favChapterReference = Firebase.database.getReference("USERS").child(Firebase.auth.currentUser!!.uid).child("FAV_CHAP")
             favChapterReference.addValueEventListener(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
+                    areFavouriteChapterKeysLoaded.value =false
                     if(snapshot.exists()){
                         ObjectsCollection.favouriteChapterKeysList.clear()
                         for(chapter in snapshot.children){
                             val currChapter = chapter.getValue(String::class.java)
                             ObjectsCollection.favouriteChapterKeysList.add(currChapter!!)
                         }
+
                     }
                     ObjectsCollection.isFavouriteChapterKeysListLoaded = true
                     areFavouriteChapterKeysLoaded.value = true

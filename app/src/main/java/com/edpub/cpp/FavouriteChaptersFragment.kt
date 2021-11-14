@@ -39,10 +39,7 @@ class FavouriteChaptersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
-
         val bnvHomeFragmentNavigator = requireActivity().findViewById<BottomNavigationView>(R.id.bnvHomeFragmentNavigator)
-
 
 
         rvFavouriteChapters = view.findViewById(R.id.rvFavouriteChapters)
@@ -78,13 +75,15 @@ class FavouriteChaptersFragment : Fragment() {
         loadData.areFavouriteChapterKeysLoaded.observe(viewLifecycleOwner, Observer {
             if(loadData.areFavouriteChapterKeysLoaded.value!!){
                 copyFavouriteChapters()
+            }else{
+                pbFavouriteChapters.visibility =View.VISIBLE
             }
         })
 
         loadData.areFavChaptersCopied.observe(viewLifecycleOwner, Observer {
             if(loadData.areFavChaptersCopied.value!!){
                 pbFavouriteChapters.visibility = View.GONE
-                if(ObjectsCollection.favouriteChaptersTitlesList.isEmpty()){
+                if(ObjectsCollection.favouriteChapterKeysList.isEmpty()){
                     ivEmptyList.visibility = View.VISIBLE
                     tvEmptyListMessage.visibility = View.VISIBLE
                 }
@@ -111,5 +110,23 @@ class FavouriteChaptersFragment : Fragment() {
             loadData.areFavChaptersCopied.value = true
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        if(ObjectsCollection.areFavouriteChaptersCopied && loadData.areFavouriteChapterKeysLoaded.value!!){
+            pbFavouriteChapters.visibility = View.GONE
+            if(ObjectsCollection.favouriteChapterKeysList.isEmpty()){
+                ivEmptyList.visibility = View.VISIBLE
+                tvEmptyListMessage.visibility = View.VISIBLE
+            }else{
+                rvFavouriteChapters.visibility = View.VISIBLE
+            }
+        }else{
+            pbFavouriteChapters.visibility = View.VISIBLE
+            ivEmptyList.visibility = View.GONE
+            tvEmptyListMessage.visibility  = View.GONE
+        }
+    }
+
 
 }
