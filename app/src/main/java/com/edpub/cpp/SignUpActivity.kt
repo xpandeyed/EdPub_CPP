@@ -44,7 +44,7 @@ class SignUpActivity : AppCompatActivity() {
         val spannable = SpannableString(privacyPolicyMessage)
         val span1 = object : ClickableSpan(){
             override fun onClick(p0: View) {
-                val url = "https://edpubweb.blogspot.com/2021/09/Terms%20And%20Conditions.html"
+                val url = "https://xpandeyed.github.io/EdPubCPPWeb/TermsAndConditions.html"
                 val intent = Intent(Intent.ACTION_VIEW)
                 intent.data = Uri.parse(url)
                 startActivity(intent)
@@ -52,7 +52,7 @@ class SignUpActivity : AppCompatActivity() {
         }
         val span2 = object : ClickableSpan(){
             override fun onClick(p0: View) {
-                val url = "https://edpubweb.blogspot.com/2021/09/Privacy%20Policy.html"
+                val url = "https://xpandeyed.github.io/EdPubCPPWeb/PrivacyPolicy.html"
                 val intent = Intent(Intent.ACTION_VIEW)
                 intent.data = Uri.parse(url)
                 startActivity(intent)

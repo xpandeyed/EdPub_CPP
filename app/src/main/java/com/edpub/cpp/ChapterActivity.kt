@@ -14,6 +14,8 @@ import android.view.View
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.google.android.material.progressindicator.CircularProgressIndicator
@@ -38,6 +40,8 @@ class ChapterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chapter)
+
+        val clBottomItems = findViewById<ConstraintLayout>(R.id.clBottomItems)
 
         val ivClose = findViewById<ImageView>(R.id.ivClose)
         ivClose.setOnClickListener {

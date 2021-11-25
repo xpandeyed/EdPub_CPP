@@ -31,14 +31,14 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         findViewById<TextView>(R.id.tvTermsConditions).setOnClickListener {
-            val url = "https://edpubweb.blogspot.com/2021/09/Terms%20And%20Conditions.html"
+            val url = "https://xpandeyed.github.io/EdPubCPPWeb/TermsAndConditions.html"
             val intent = Intent(this, WebActivity::class.java).apply {
                 putExtra("URL", url)
             }
             startActivity(intent)
         }
         findViewById<TextView>(R.id.tvPrivacyPolicy).setOnClickListener {
-            val url = "https://edpubweb.blogspot.com/2021/09/Privacy%20Policy.html"
+            val url = "https://xpandeyed.github.io/EdPubCPPWeb/PrivacyPolicy.html"
             val intent = Intent(this, WebActivity::class.java).apply {
                 putExtra("URL", url)
             }
@@ -61,7 +61,7 @@ class ProfileActivity : AppCompatActivity() {
         }
         findViewById<TextView>(R.id.tvShare).setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
-            intent.putExtra(Intent.EXTRA_TEXT, "I have been learning C++ from this amazing app, EdPub C++.\n\nI recommend you to download it from Play Store.\n\n https://play.google.com/store/apps/details?id=${applicationContext.packageName}")
+            intent.putExtra(Intent.EXTRA_TEXT, R.string.share)
             intent.type = "text/plain"
             startActivity(intent)
         }
